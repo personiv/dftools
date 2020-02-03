@@ -1,33 +1,76 @@
 @extends('layouts.app')
-@section('title', 'Login')
+@section('title', 'DF Tools — Login')
 @section('css', URL::asset('css/index.css'))
 @section('js', URL::asset('js/index.js'))
 
 @section('content')
-<div id="login-modal" class="container">
-    <div class="row">
-        <div id="login-modal-image" class="col-sm-12 col-md-6 col-lg-6"><div></div></div>
-        <div id="login-modal-content" class="col-sm-12 col-md-6 col-lg-6">
-            <h1>Webnotes</h1>
-            @if (session("msg") != null)
-                @if (session("msg-mood") != null)
-                    <div class="{{ 'message-box ' . session('msg-mood') }}">
-                @else
-                    <div class="message-box">
-                @endif
-                    {{ session("msg") }}
+<div class="wrapper">
+    <div class="container-fluid">
+        <div class="row main-container">
+
+            <!-- Login wrapper here -->
+            <div class="col-md-7 intro-one flex-column">
+
+                <!-- Brand name here -->
+                <div class="brand-name">
+                    <span>DF Scorecard & Coaching System</span>
                 </div>
-            @endif
-            <form action="#" method="POST" autocomplete="off">
-                {{ csrf_field() }}
-                <label for="user-id">Username</label>
-                <input type="text" name="user-id" id="user-id" required>
-                <label for="user-pass">Password</label>
-                <input type="password" name="user-pass" id="user-pass" required>
-                <p id="login-modal-forgot"><a href="#">Forgot password?</a></p>
-                <input type="submit" value="Login">
-            </form>
-            <p id="login-modal-new">New to Webnotes? <a href="#">Create new account</a></p>
+
+                <!-- Greetings intro here -->
+                <div class="greetings mt-5 mb-4">
+
+                    <!-- day, night, afternoon here -->
+                    <div class="day-greeting">
+                        <span>Good morning!</span>
+                    </div>
+
+                    <!-- Greetings slogan here -->
+                    <div class="slogan-greeting">
+                        <span>This day will be great.</span>
+                    </div>
+                </div>
+
+                <!-- Login form here -->
+                <div class="login-container">
+
+                    <!-- Default form login -->
+                    <form method="POST" action="{{ action('LoginController@login') }}">
+                        {{ csrf_field() }}
+
+                        <!-- Email -->
+                        <label for="defaultLoginFormEmail">Username</label>
+                        <input type="text" id="defaultLoginFormEmail" name="user-id" class="form-control mb-4" required>
+
+                        <!-- Password -->
+                        <label for="defaultLoginFormPassword">Password</label>
+                        <input type="password" id="defaultLoginFormPassword" name="user-pass" class="form-control mb-4" required>
+
+                            
+                        <!-- Remember me -->
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            <label class="custom-control-label" for="defaultLoginFormRemember">Remember Me</label>
+                        </div>
+
+                        <!-- Sign in button -->
+                        <button type="submit" class="btn btn-info custom-btn my-4">Sign In</button>
+
+                    </form>
+                    <!-- Default form login -->
+
+                </div>
+
+            </div>
+
+            <!-- Graphic brand name and slogan here -->
+            <div class="col-md-5 intro-two flex-column">
+                <div class="graphic-brname"> 
+                    DF Scorecard & Coaching System
+                </div>
+                <div class="graphic-slogan">
+                    <span>A new way to understand and motivate your teams</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

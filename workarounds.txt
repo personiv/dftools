@@ -1,0 +1,6 @@
+Deploying                       Duplicate ".env.example" file then rename to ".env"
+                                Run "php artisan key:generate"
+                                Run "composer update"
+                                Add DB_DATABASE "dftools" in ".env" file
+                                
+419 Error / Page Expired        Add {{ csrf_field() }} to forms
