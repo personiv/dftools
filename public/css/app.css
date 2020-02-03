@@ -1,0 +1,96 @@
+@import "core.css";
+
+body, html {
+    height: 100%;
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+body {
+    background: url("../images/bg_login.jpg") no-repeat center center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    backdrop-filter: blur(8px);
+}
+
+h1 {
+    letter-spacing: 2px;
+    color: var(--primary-color);
+    font-family: 'Carter One';
+}
+
+a {
+    color: var(--link-color);
+    background: -webkit-linear-gradient(0deg, var(--link-color), var(--tertiary-color));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+}
+
+a:hover {
+    color: var(--primary-color) !important;
+    text-decoration: none !important;
+    background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background: none;
+}
+
+form > input, form > label {
+    display: block;
+}
+
+form > label {
+    margin-top: 40px;
+}
+
+form > input[type=text], form > input[type=password] {
+    border-style: solid;
+    background-color: var(--light-color-50p);
+    backdrop-filter: blur(15px);
+    margin-bottom: 15px;
+    border-width: 1px 1px 3px 1px;
+    border-color: var(--primary-color);
+    padding: 8px;
+    width: 100%;
+    transition-duration: 0.4s;
+}
+
+form > input[type=text]:hover, form > input[type=password]:hover {
+    border-color: var(--tertiary-color);
+}
+
+form > input[type=text]:focus, form > input[type=password]:focus {
+    animation: input-color-change 2s ease alternate infinite;
+    outline: none;
+}
+
+form > input[type=submit], button {
+    background-color: var(--light-color-50p);
+    backdrop-filter: blur(15px);
+    margin-top: 30px;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 20px 8px 20px;
+    transition-duration: 0.4s;
+}
+
+form > input[type=submit]:hover, button:hover {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+@keyframes input-color-change {
+    0% {
+        border-color: var(--link-color);
+    }
+    100% {
+        border-color: var(--tertiary-color);
+    }
+}
