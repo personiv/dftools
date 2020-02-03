@@ -18,7 +18,7 @@ class CreateManagersTable extends Migration
             $table->string('manager_first', 64);
             $table->string('manager_middle', 64);
             $table->string('manager_last', 64);
-            $table->integer('manager_head');
+            $table->integer('manager_head')->unsigned();
             $table->foreign('manager_head')->references('head_id')->on('heads');
             $table->timestamps();
         });

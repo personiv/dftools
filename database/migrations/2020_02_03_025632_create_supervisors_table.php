@@ -18,7 +18,7 @@ class CreateSupervisorsTable extends Migration
             $table->string('supervisor_first', 64);
             $table->string('supervisor_middle', 64);
             $table->string('supervisor_last', 64);
-            $table->integer('supervisor_manager');
+            $table->integer('supervisor_manager')->unsigned();
             $table->foreign('supervisor_manager')->references('manager_id')->on('managers');
             $table->timestamps();
         });

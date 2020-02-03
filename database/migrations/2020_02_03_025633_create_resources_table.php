@@ -18,7 +18,7 @@ class CreateResourcesTable extends Migration
             $table->string('resource_first', 64);
             $table->string('resource_middle', 64);
             $table->string('resource_last', 64);
-            $table->integer('resource_supervisor');
+            $table->integer('resource_supervisor')->unsigned();
             $table->foreign('resource_supervisor')->references('supervisor_id')->on('supervisors');
             $table->timestamps();
         });
