@@ -1,0 +1,37 @@
+body {
+    background-image: url("../images/bg_admin.jpg");
+}
+#title {
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+}
+.subtitle {
+    margin-top: 30px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+.admin-wrapper {
+    background-color: var(--light-color-50p);
+    backdrop-filter: 15px;
+    margin: 30px;
+    box-shadow: 0px 0px 8px var(--dark-color);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+ul {
+    list-style-type: none;
+    padding: 0px;
+    text-align: center;
+}
+li {
+    margin-bottom: 8px;
+}
+.content {
+    background-color: var(--dark-color-50p);
+    padding: 30px;
+    height: 100%;
+}

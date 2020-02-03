@@ -4,30 +4,30 @@
 @section('js', URL::asset('js/admin.js'))
 
 @section('content')
-<div id="login-modal" class="container">
+<div class=" container admin-wrapper">
     <div class="row">
-        <div id="login-modal-image" class="col-sm-12 col-md-6 col-lg-6"><div></div></div>
-        <div id="login-modal-content" class="col-sm-12 col-md-6 col-lg-6">
-            <h1>Webnotes</h1>
-            @if (session("msg") != null)
-                @if (session("msg-mood") != null)
-                    <div class="{{ 'message-box ' . session('msg-mood') }}">
-                @else
-                    <div class="message-box">
-                @endif
-                    {{ session("msg") }}
-                </div>
-            @endif
-            <form action="#" method="POST" autocomplete="off">
-                {{ csrf_field() }}
-                <label for="user-id">Username</label>
-                <input type="text" name="user-id" id="user-id" required>
-                <label for="user-pass">Password</label>
-                <input type="password" name="user-pass" id="user-pass" required>
-                <p id="login-modal-forgot"><a href="#">Forgot password?</a></p>
-                <input type="submit" value="Login">
-            </form>
-            <p id="login-modal-new">New to Webnotes? <a href="#">Create new account</a></p>
+        <div class="col-md-4">
+            <div id="title">Admin Control Panel</div>
+            <div class="subtitle">Accounts</div>
+            <ul>
+                <li><a href="#"><div class="btn btn-primary">Add Credential</div></a></li>
+                <li><a href="#"><div class="btn btn-primary">Update Credential</div></a></li>
+                <li><a href="#"><div class="btn btn-primary">Delete Credential</div></a></li>
+            </ul>
+            <div class="subtitle">Data</div>
+            <ul>
+                <li><a href="#"><div class="btn btn-primary">Upload Data</div></a></li>
+                <li><a href="#"><div class="btn btn-primary">Upload Manual Data</div></a></li>
+            </ul>
+            <div class="subtitle">Values</div>
+            <ul>
+                <li><a href="#"><div class="btn btn-primary">Update Score Card Items</div></a></li>
+            </ul>
+        </div>
+        <div class="col-md-8">
+            <div class="content">
+
+            </div>
         </div>
     </div>
 </div>
