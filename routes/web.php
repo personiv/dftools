@@ -11,4 +11,5 @@
 |
 */
 
+Route::get('/admin', function() { return view('admin'); });
 Route::get('/', 'LoginController@index')->name('index');
