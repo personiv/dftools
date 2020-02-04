@@ -54,7 +54,7 @@
 
                     <!-- Default form login -->
                     <form method="POST"action="{{ action('LoginController@login') }}"> 
-                        {{ csrf_field() }}
+                    {{ csrf_field() }}
 
                         <!-- Email -->
                         <div class="field-items">
@@ -79,6 +79,7 @@
                         <button type="submit" class="btn custom-btn my-4">Sign In</button>
                     </form>
                     <!-- Default form login -->
+                    <span style="color: var(--tertiary-color);">{{ session("msg") }}</span>
                 </div>
 
             </div>
@@ -108,17 +109,17 @@
         var afternoon = "Good Afternoon!";
         var evening = "Good Evening!";
 
-        if (hours >= 0 && hours < 12) {
-            message = morning;
-            slogan = "— This day will be great.";
+            if (hours >= 0 && hours < 12) {
+                message = morning;
+                slogan = "— This day will be great.";
 
-        } else if (hours >= 12 && hours < 17) {
-            message = afternoon;
-            slogan = "— Good, better, best. Never let it rest. 'Til your good is better and your better is best. Good Afternoon.   ";
-        } else {
-            message = evening;
-            slogan = "— This day will be great.";
-        }
+            } else if (hours >= 12 && hours < 18) {
+                message = afternoon;
+                slogan = "— Good, better, best. Never let it rest. 'Til your good is better and your better is best. Good Afternoon.";
+            } else {
+                message = evening;
+                slogan = "— Welcome to night shift.";
+            }
 
         $(".day-greeting").html(message);
         $(".slogan-greeting").html(slogan);
