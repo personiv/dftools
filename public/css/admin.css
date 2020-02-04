@@ -1,5 +1,6 @@
 body {
-    background-image: url("../images/bg_admin.jpg");
+    background: url("../images/bg_admin.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 #title {
     margin-bottom: 30px;
@@ -14,9 +15,14 @@ body {
     font-weight: 700;
     font-size: 18px;
 }
+.content-title {
+    font-weight: 700;
+    font-size: 24px;
+    color: white;
+}
 .admin-wrapper {
     background-color: var(--light-color-50p);
-    backdrop-filter: 15px;
+    backdrop-filter: blur(8px);
     margin: 30px;
     box-shadow: 0px 0px 8px var(--dark-color);
     padding-top: 15px;
@@ -34,4 +40,39 @@ li {
     background-color: var(--dark-color-50p);
     padding: 30px;
     height: 100%;
+}
+
+label, input, select {
+    display: block;
+    width: 100%;
+}
+
+input, select {
+    padding: 2px;
+    font-size: 18px !important;
+}
+
+label {
+    color: white;
+    margin-top: 30px;
+}
+
+input[type=submit] {
+    margin-top: 30px !important;
+    padding: 8px;
+}
+
+.message-box {
+    margin-top: 50px;
+    color: white;
+    background-color: var(--tertiary-color);
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.good {
+    background-color: var(--secondary-color);
+    color: initial;
 }
