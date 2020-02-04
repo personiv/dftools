@@ -1,7 +1,9 @@
-Deploying                       Run "composer update"
-                                Run "php artisan key:generate"
+Deploying                       Run "git clone https://github.com/personiv/dftools.git"
+                                Run "cd dftools"
+                                Run "composer update"
                                 Duplicate ".env.example" file then rename to ".env"
                                 Add DB_DATABASE "dftools" in ".env" file
+                                Run "php artisan key:generate"
                                 Run "php artisan migrate:fresh"
                                 
 419 Error / Page Expired        Add {{ csrf_field() }} to forms
