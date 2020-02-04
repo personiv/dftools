@@ -7,19 +7,19 @@ use App\Credential;
 
 class AdminController extends Controller {
     function index(Request $r) {
-        return view('addcredential');
+        return view('admin.addcredential');
     }
 
     function addCredential(Request $r) {
-        return view('addcredential');
+        return view('admin.addcredential');
     }
 
     function updateCredential(Request $r) {
-        return view('updatecredential');
+        return view('admin.updatecredential');
     }
 
     function deleteCredential(Request $r) {
-        return view('deletecredential');
+        return view('admin.deletecredential');
     }
 
     function submitAddCredential(Request $r) {
