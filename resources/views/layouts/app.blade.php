@@ -21,6 +21,9 @@
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
 </head>
 <body>
-    @yield('content')
+    <div class="wrapper">
+        <?php include_once("header.blade.php") ?>
+        @yield('content')
+    </div>
 </body>
 </html>

@@ -3,22 +3,3 @@
 body, html {
     height: 100%;
 }
-
-body {
-    background: url("../images/bg_default.jpg") no-repeat center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    backdrop-filter: blur(8px);
-}
-
-h1 {
-    letter-spacing: 2px;
-    color: var(--primary-color);
-}
-
-a {
-    color: var(--link-color) !important;
-    text-decoration: none !important;
-}
