@@ -2,7 +2,8 @@ Deploying                       Run "git clone https://github.com/personiv/dftoo
                                 Run "cd dftools"
                                 Run "composer update"
                                 Duplicate ".env.example" file then rename to ".env"
-                                Add DB_DATABASE "dftools" in ".env" file
+                                Run "ren '.env - Copy.example' '.env'"
+                                Edit DB_DATABASE "dftools" in ".env" file
                                 Run "php artisan key:generate"
                                 Run "php artisan migrate:fresh"
                                 
