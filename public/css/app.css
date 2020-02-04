@@ -3,6 +3,7 @@
 body, html {
     height: 100%;
     font-size: 14px;
+    color: var(--dark-color-50p) !important;
 }
 
 /* Sidebar styling here */

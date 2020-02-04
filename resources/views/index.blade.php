@@ -32,20 +32,20 @@
 
                 <!-- Brand name here -->
                 <div class="brand-name">
-                    <span>d</span><span>f</span><span>Scorecard</span>
+                    <span>d</span><span>f</span><span>S</span>
                 </div>
 
                 <!-- Greetings intro here -->
-                <div class="greetings mt-5 mb-4">
+                <div class="greetings">
 
                     <!-- day, night, afternoon here -->
                     <div class="day-greeting">
-                        <span>Good morning!</span>
+
                     </div>
 
                     <!-- Greetings slogan here -->
                     <div class="slogan-greeting">
-                        <span>This day will be great.</span>
+                        
                     </div>
                 </div>
 
@@ -53,30 +53,32 @@
                 <div class="login-container">
 
                     <!-- Default form login -->
-                    <form method="POST" action="{{ action('LoginController@login') }}">
+                    <form method="POST"action="{{ action('LoginController@login') }}"> 
                         {{ csrf_field() }}
 
                         <!-- Email -->
-                        <label for="defaultLoginFormEmail">Username</label>
-                        <input type="text" id="defaultLoginFormEmail" name="user-id" class="form-control mb-4" required>
+                        <div class="field-items">
+                            <label class="item-f username" for="defaultLoginFormUsername">Username</label>
+                            <input type="text" id="defaultLoginFormUsername" name="user-id" class="form-control mb-2" required>
+                        </div>
 
                         <!-- Password -->
-                        <label for="defaultLoginFormPassword">Password</label>
-                        <input type="password" id="defaultLoginFormPassword" name="user-pass" class="form-control mb-4" required>
+                        <div class="field-items mt-4">
+                            <label class="item-f password" for="defaultLoginFormPassword">Password</label>
+                            <input type="password" id="defaultLoginFormPassword" name="user-pass" class="form-control mb-2" required>
+                        </div>
 
                             
                         <!-- Remember me -->
-                        <div class="custom-control custom-checkbox">
+                        <div class="custom-control custom-checkbox mt-4">
                             <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
                             <label class="custom-control-label" for="defaultLoginFormRemember">Remember Me</label>
                         </div>
 
                         <!-- Sign in button -->
-                        <button type="submit" class="btn btn-info custom-btn my-4">Sign In</button>
-
+                        <button type="submit" class="btn custom-btn my-4">Sign In</button>
                     </form>
                     <!-- Default form login -->
-
                 </div>
 
             </div>
@@ -84,14 +86,43 @@
             <!-- Graphic brand name and slogan here -->
             <div class="col-md-5 intro-two flex-column">
                 <div class="graphic-brname"> 
-                    DF Scorecard & Coaching System
+                    <span>df</span><span>scorecard</span>
                 </div>
                 <div class="graphic-slogan">
-                    <span>A new way to understand and motivate your teams</span>
+                    <div>A new way</div>
+                    <div>to understand</div>
+                    <div>and motivate</div>
+                    <div>your teams</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    var hours = new Date().getHours();
+        var message;
+        var slogan;
+        var morning = "Good Morning!";
+        var afternoon = "Good Afternoon!";
+        var evening = "Good Evening!";
+
+        if (hours >= 0 && hours < 12) {
+            message = morning;
+            slogan = "— This day will be great.";
+
+        } else if (hours >= 12 && hours < 17) {
+            message = afternoon;
+            slogan = "— Good, better, best. Never let it rest. 'Til your good is better and your better is best. Good Afternoon.   ";
+        } else {
+            message = evening;
+            slogan = "— This day will be great.";
+        }
+
+        $(".day-greeting").html(message);
+        $(".slogan-greeting").html(slogan);
+
+</script>
 </body>
 </html>
