@@ -32,7 +32,7 @@
 
                 <!-- Brand name here -->
                 <div class="brand-name">
-                    <span>DF Scorecard & Coaching System</span>
+                    <span>d</span><span>f</span><span>Scorecard</span>
                 </div>
 
                 <!-- Greetings intro here -->

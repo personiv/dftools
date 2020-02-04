@@ -5,9 +5,10 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    color: #595959;
+    background-image: url('../images/bg_default.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(20px);
 }
 
 .wrapper {
@@ -25,18 +26,48 @@ body {
     background-color: #fff;
 }
 
+/* First column / Login column */
 .intro-one {
-    padding: 100px 200px;
+    padding: 100px 200px !important;
     display: flex;
     justify-content: center;
 }
+
+.intro-one .brand-name {
+    font-size: 40px;
+    font-family: 'Open sans', sans-serif;
+}
+
+.intro-one .brand-name span:nth-child(1) {
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+.intro-one .brand-name span:nth-child(2) {
+    color: var(--tertiary-color);
+    font-weight: 700;
+}
+
+.intro-one .brand-name span:last-child {
+    font-family: 'Open sans', sans-serif;
+    font-weight: 300;
+    color: var(--dark-color-50p);
+    font-size: 28px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    text-transform: uppercase;
+    margin-left: 2px;
+}
+/* End of first column styling */
+
+
 
 .intro-two {
     padding: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:linear-gradient(rgba(0, 58, 93, 0.5), rgba(0, 58, 93, 0.5)), url('../images/bg_graphic.jpg');
+    background:linear-gradient(rgba(0, 58, 93, 0.5), rgba(0, 58, 93, 0.5)), url('../images/bg_default.jpg');
     background-size: cover;
     background-position: bottom center;
     color: #fff;
