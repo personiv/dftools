@@ -16,3 +16,5 @@ Route::post("/addcred", "AdminController@addCredential");
 
 Route::get('/', 'LoginController@index')->name('index');
 Route::post("/login", "LoginController@login");
+
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
