@@ -24,7 +24,8 @@
 </head>
 <body>
     <div class="wrapper">
-        <?php include_once("header.blade.php") ?>
+        <!-- Header and Sidebar code here -->
+        
         @yield('content')
     </div>
 </body>
