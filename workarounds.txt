@@ -1,10 +1,54 @@
-Deploying                       Run "git clone https://github.com/personiv/dftools.git"
-                                Run "cd dftools"
-                                Run "composer update"
-                                Duplicate ".env.example" file then rename to ".env"
-                                Run "ren '.env - Copy.example' '.env'"
+Deploying                       Run git clone https://github.com/personiv/dftools.git
+                                Run cd dftools
+                                Run composer update
+                                Duplicate ".env.example" file
+                                Run ren ".env - Copy.example" ".env"
                                 Edit DB_DATABASE "dftools" in ".env" file
-                                Run "php artisan key:generate"
-                                Run "php artisan migrate:fresh"
+                                Run php artisan key:generate
+
+                                // for back-end
+                                Go to localhost/phpmyadmin then add database "dftools"
+                                Run php artisan migrate:fresh
                                 
 419 Error / Page Expired        Add {{ csrf_field() }} to forms
+
+Exclude Unwanted File List (settings.json)
+"files.exclude": {
+    "artisan": true,
+    "package.json": true,
+    "phpunit.xml": true,
+    "vendor/": true,
+    "config/": true,
+    "bootstrap/": true,
+    "app/Console/": true,
+    "app/Exceptions/": true,
+    "app/Providers/": true,
+    "app/Http/Middleware/": true,
+    "app/Http/Kernel.php": true,
+    "app/Http/Controllers/Auth/": true,
+    "tests/": true,
+    "storage/": true,
+    "routes/api.php": true,
+    "routes/channels.php": true,
+    "routes/console.php": true,
+    "resources/js/": true,
+    "resources/lang/": true,
+    "resources/sass/": true,
+    "public/.htaccess": true,
+    "public/favicon.ico": true,
+    "public/robots.txt": true,
+    "public/index.php": true,
+    "database/factories/": true,
+    "database/seeds/": true,
+    "database/.gitignore": true,
+    ".styleci.yml": true,
+    ".gitignore": true,
+    ".editorconfig": true,
+    ".gitattributes": true,
+    "composer.json": true,
+    "composer.lock": true,
+    "package-lock.json": true,
+    "server.php": true,
+    "README.md": true,
+    "webpack.mix.js": true
+}
