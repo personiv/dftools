@@ -28,8 +28,8 @@
         <div class="row main-container">
 
             <!-- Login wrapper here -->
-            <div class="col-md-7 intro-one flex-column">
-
+            <div class="col-md-7 intro-one">
+                <div class="introOne-wrapper flex-column">
                 <!-- Brand name here -->
                 <div class="brand-name">
                     <span>d</span><span>f</span><span>S</span>
@@ -81,7 +81,7 @@
                     <!-- Default form login -->
                     <span style="color: var(--tertiary-color);">{{ session("msg") }}</span>
                 </div>
-
+                </div>
             </div>
 
             <!-- Graphic brand name and slogan here -->
