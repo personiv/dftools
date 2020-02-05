@@ -21,7 +21,7 @@ class LoginController extends Controller {
                 return back()->with("msg", "Incorrect username or password");
             }
             $r->session()->put("user", $user);
-            return redirect()->route("home");
+            return redirect()->route("dashboard");
         } else {
             return back()->with("msg", "Incorrect username or password");
         }
