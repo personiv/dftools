@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Credential;
+use App\ScoreItem;
 
 class AdminController extends Controller {
     function addCredential(Request $r) {
@@ -51,6 +52,13 @@ class AdminController extends Controller {
     }
 
     function updateScorecardItems(Request $r) {
+        // Save changes here
+    }
 
+    function filterScoreItemByRole(Request $r) {
+        // Filter scorecard items by role
+        $selectedRole = $r->input("item-role");
+        $scoreItems = ScoreItem::where('score_item_role', $selectedRole)->get();
+        return back()->with("score-items", $scoreItems);
     }
 }

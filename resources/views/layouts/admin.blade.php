@@ -4,7 +4,7 @@
 @section('js', URL::asset('js/admin.js'))
 
 @section('content')
-<div class=" container admin-wrapper">
+<div class=" container-fluid admin-wrapper">
     <div class="row">
         <div class="col-md-4">
             <div id="title">Admin Control Panel</div>
