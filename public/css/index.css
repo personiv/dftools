@@ -187,6 +187,7 @@ body {
 
 .intro-two .graphic-brname {
     font-size: 40px;
+    margin: 0 auto;
 }
 
 .intro-two .graphic-brname span:first-child {
