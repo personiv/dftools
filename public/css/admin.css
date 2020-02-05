@@ -85,3 +85,7 @@ input[type=submit] {
 td {
     white-space: pre-wrap;
 }
+
+.item-cell[contenteditable=plaintext-only] {
+    box-shadow: 0px 0px 2px var(--dark-color-50p) inset;
+}

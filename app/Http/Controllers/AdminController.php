@@ -61,4 +61,15 @@ class AdminController extends Controller {
         $scoreItems = ScoreItem::where('score_item_role', $selectedRole)->get();
         return back()->with("score-items", $scoreItems);
     }
+
+    function getLastScoreItemIndex() {
+        return "47";
+    }
+
+    function saveScoreItem(Request $r) {
+        $newItem = new ScoreItem;
+        // get JSON data and setAttribute it to $newItem
+        // TODO: code here....
+        return $newItem->getAttribute("scire_item_id");
+    }
 }
