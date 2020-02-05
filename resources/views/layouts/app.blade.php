@@ -40,9 +40,11 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-comments-o mr-3"></i><span>Feedback</span>
             </a>
+            <div class="bottom-button mb-5">
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-sign-out mr-3"></i><span>Logout</span>
             </a>
+            </div>  
         </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -83,7 +85,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid">
+        <div class="container-fluid p-5">
             @yield('content')
         </div>
 
