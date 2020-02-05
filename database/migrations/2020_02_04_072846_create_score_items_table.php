@@ -18,7 +18,8 @@ class CreateScoreItemsTable extends Migration
             $table->string('score_item_role', 24);
             $table->string('score_item_name', 64);
             $table->string('score_item_desc', 1024);
-            $table->integer('score_item_goal');
+            $table->string('score_item_goal', 64);
+            $table->integer('score_item_weight');
             $table->timestamps();
         });
     }
