@@ -2,7 +2,7 @@
 
 @section('admin-content')
 <div class="content-title">Update Credential</div>
-<form action="{{ action('AdminController@submitUpdateCredential') }}" method="post">
+<form action="{{ action('AdminController@updateCredential') }}" method="post">
     {{ csrf_field() }}
 
     <label for="user-id">Username to be updated</label>

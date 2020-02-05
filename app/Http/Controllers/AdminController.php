@@ -6,23 +6,7 @@ use Illuminate\Http\Request;
 use App\Credential;
 
 class AdminController extends Controller {
-    function index(Request $r) {
-        return view('admin.addcredential');
-    }
-
     function addCredential(Request $r) {
-        return view('admin.addcredential');
-    }
-
-    function updateCredential(Request $r) {
-        return view('admin.updatecredential');
-    }
-
-    function deleteCredential(Request $r) {
-        return view('admin.deletecredential');
-    }
-
-    function submitAddCredential(Request $r) {
         $userId = $r->input("user-id");
         $userPass = $r->input("user-pass");
         $userType = $r->input("user-type");
@@ -38,7 +22,7 @@ class AdminController extends Controller {
         }
     }
 
-    function submitUpdateCredential(Request $r) {
+    function updateCredential(Request $r) {
         $userId = $r->input("user-id");
         $userPass = $r->input("user-pass");
         $userType = $r->input("user-type");
@@ -54,7 +38,7 @@ class AdminController extends Controller {
         }
     }
 
-    function submitDeleteCredential(Request $r) {
+    function deleteCredential(Request $r) {
         $userId = $r->input("user-id");
 
         $selected = Credential::where('credential_user', $userId)->first();
@@ -64,5 +48,9 @@ class AdminController extends Controller {
         } else {
             return back()->with("msg", "Credential not registered");
         }
+    }
+
+    function updateScorecardItems(Request $r) {
+
     }
 }
