@@ -25,6 +25,7 @@ Route::post("/submit-delete-credential", "AdminController@deleteCredential");
 Route::post("/submit-upload-data", "AdminController@uploadData");
 Route::post("/submit-upload-manual-data", "AdminController@uploadManualData");
 Route::post("/submit-update-scorecard-items", "AdminController@updateScorecardItems");
+Route::post("/filter-scorecard-items-by-role", "AdminController@filterScoreItemByRole");
 
 Route::get('/', 'LoginController@index')->name('index');
 Route::post("/login", "LoginController@login");
