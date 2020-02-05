@@ -10,18 +10,18 @@
             <div id="title">Admin Control Panel</div>
             <div class="subtitle">Accounts</div>
             <ul>
-                <li><a href="{{ action('AdminController@addCredential') }}"><div class="btn btn-primary">Add Credential</div></a></li>
-                <li><a href="{{ action('AdminController@updateCredential') }}"><div class="btn btn-primary">Update Credential</div></a></li>
-                <li><a href="{{ action('AdminController@deleteCredential') }}"><div class="btn btn-primary">Delete Credential</div></a></li>
+                <li><a href="{{ route('addcredential') }}"><div class="btn btn-primary">Add Credential</div></a></li>
+                <li><a href="{{ route('updatecredential') }}"><div class="btn btn-primary">Update Credential</div></a></li>
+                <li><a href="{{ route('deletecredential') }}"><div class="btn btn-primary">Delete Credential</div></a></li>
             </ul>
             <div class="subtitle">Data</div>
             <ul>
-                <li><a href="{{ action('AdminController@uploadData') }}"><div class="btn btn-primary">Upload Data</div></a></li>
-                <li><a href="{{ action('AdminController@uploadManualData') }}"><div class="btn btn-primary">Upload Manual Data</div></a></li>
+                <li><a href="{{ route('uploaddata') }}"><div class="btn btn-primary">Upload Data</div></a></li>
+                <li><a href="{{ route('uploadmanualdata') }}"><div class="btn btn-primary">Upload Manual Data</div></a></li>
             </ul>
             <div class="subtitle">Values</div>
             <ul>
-                <li><a href="{{ action('AdminController@updateScorecardItems') }}"><div class="btn btn-primary">Update Score Card Items</div></a></li>
+                <li><a href="{{ route('updatescorecarditems') }}"><div class="btn btn-primary">Update Score Card Items</div></a></li>
             </ul>
         </div>
         <div class="col-md-8">
