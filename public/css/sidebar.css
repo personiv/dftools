@@ -12,6 +12,10 @@ body {
   background-size: cover;
   color: var(--light-color-50p);
   overflow-x: hidden;
+  top: 0%;
+  left: 0%;
+  position: fixed;
+  z-index: 1;
 }
 
 /* sidebar heading */
@@ -34,7 +38,7 @@ body {
   background: transparent !important;
   border: none;
   display: block;
-  padding: 12px 24px 12px 24px;
+  padding: 15px 24px 15px 24px;
   height: auto;
   color: var(--light-color-50p);
   transition: .2s ease-in;
@@ -68,7 +72,14 @@ body {
 }
 
 #page-content-wrapper {
-  width: 100%;
+  margin-left: 280px;
+  transition-duration: .3s;
+  transition: margin .3s ease-out;
+}
+
+/* toggled content wrapper */
+#wrapper.toggled #page-content-wrapper {
+  margin-left: 80px;
 }
 
 /* toggled wrapper */
@@ -114,8 +125,12 @@ body {
   -moz-box-shadow: 0 1px 10px var(--dark-color-50p);
     -webkit-box-shadow: 0 1px 10px var(--dark-color-50p);
     box-shadow: 0 1px 10px var(--dark-color-50p);
+    background-color: var(--light-color);
+    z-index: 1;
     padding: 5px 20px !important;
-    background: var(--light-color);
+    position: -webkit-sticky;
+    position: sticky !important;
+    top: 0px;
 }
 
 /* hamburger icon */
