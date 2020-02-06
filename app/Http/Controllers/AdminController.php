@@ -55,7 +55,7 @@ class AdminController extends Controller {
         // Filter scorecard items by role
         $selectedRole = $r->input("item-role");
         $scoreItems = ScoreItem::where('score_item_role', $selectedRole)->get();
-        return back()->with("score-items", $scoreItems);
+        return back()->with(["selected-role" => $selectedRole, "score-items" => $scoreItems]);
     }
 
     function saveScoreItem(Request $r) {
