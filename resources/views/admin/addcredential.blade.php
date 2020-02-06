@@ -5,11 +5,11 @@
 <form action="{{ action('AdminController@addCredential') }}" method="post">
     {{ csrf_field() }}
     <label for="user-id">Username</label>
-    <input type="text" name="user-id" required>
+    <input class="form-control" type="text" name="user-id" required>
     <label for="user-pass">Password</label>
-    <input type="password" name="user-pass" required>
+    <input class="form-control" type="password" name="user-pass" required>
     <label for="user-pass">Type</label>
-    <select name="user-type">
+    <select class="form-control" name="user-type">
         <option value="RSRCS" selected>Resource</option>
         <option value="SPRVR">Supervisor</option>
         <option value="MANGR">Manager</option>

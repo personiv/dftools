@@ -5,11 +5,11 @@
 <form action="{{ action('AdminController@updateCredential') }}" method="post">
     {{ csrf_field() }}
     <label for="user-id">Username to be updated</label>
-    <input type="text" name="user-id" required>
+    <input class="form-control" type="text" name="user-id" required>
     <label for="user-pass">Updated password</label>
-    <input type="password" placeholder="Leave blank for no changes" name="user-pass">
+    <input class="form-control" type="password" placeholder="Leave blank for no changes" name="user-pass">
     <label for="user-pass">Type</label>
-    <select name="user-type">
+    <select class="form-control" name="user-type">
         <option value="RSRCS" selected>Resource</option>
         <option value="SPRVR">Supervisor</option>
         <option value="MANGR">Manager</option>

@@ -5,7 +5,8 @@
 <form action="{{ action('AdminController@filterScoreItemByRole') }}" method="post">
     {{ csrf_field() }}
     <label for="item-role">Select Role</label>
-    <select id="item-role" name="item-role" required>
+    <select class="form-control" id="item-role" name="item-role" onchange="this.form.submit()" required>
+      <option value="None" selected>Click to select</option>
       @if (session("selected-role") == "Designer") <option value="Designer" selected>Designer</option>
       @else <option value="Designer">Designer</option> @endif
       @if (session("selected-role") == "WML") <option value="WML"selected>WML</option>
@@ -17,9 +18,8 @@
       @if (session("selected-role") == "PR") <option value="PR"selected>PR</option>
       @else <option value="PR">PR</option> @endif
     </select>
-    <input type="submit" value="Submit" class="btn btn-success">
 </form>
-@if (session("score-items") != null)
+@if (session("score-items") != null && session("selected-role") != "None")
 <div class="table-responsive text-nowrap">
 <table class="table table-hover table-striped">
   <thead>

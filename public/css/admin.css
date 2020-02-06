@@ -44,7 +44,7 @@ input, select {
 form > label, form > input, form > select {
     display: block;
     min-width: 300px;
-    width: auto;
+    width: auto !important;
 }
 label {
     color: white;
