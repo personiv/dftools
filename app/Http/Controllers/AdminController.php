@@ -51,10 +51,6 @@ class AdminController extends Controller {
         }
     }
 
-    function updateScorecardItems(Request $r) {
-        // Save changes here
-    }
-
     function filterScoreItemByRole(Request $r) {
         // Filter scorecard items by role
         $selectedRole = $r->input("item-role");
@@ -62,14 +58,32 @@ class AdminController extends Controller {
         return back()->with("score-items", $scoreItems);
     }
 
-    function getLastScoreItemIndex() {
-        return "47";
+    function saveScoreItem(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        $newItem = new ScoreItem;
+        $newItem->setAttribute("score_item_role", $data["role"]);
+        $newItem->setAttribute("score_item_name", $data["name"]);
+        $newItem->setAttribute("score_item_desc", $data["description"]);
+        $newItem->setAttribute("score_item_goal", $data["goal"]);
+        $newItem->setAttribute("score_item_weight", $data["weight"]);
+        $newItem->save();
+        return $newItem->getAttribute("score_item_id");
     }
 
-    function saveScoreItem(Request $r) {
-        $newItem = new ScoreItem;
-        // get JSON data and setAttribute it to $newItem
-        // TODO: code here....
-        return $newItem->getAttribute("scire_item_id");
+    function updateScoreItem(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        $id = $data["id"];
+        $columnName = $data["column"];
+        $newValue = $data["value"];
+        $rowToUpdate = ScoreItem::where("score_item_id", $id)->first();
+        $rowToUpdate->setAttribute($columnName, $newValue);
+        $rowToUpdate->save();
+    }
+
+    function deleteScoreItem(Request $r) {
+        $id = json_decode($r->getContent(), true)["id"];
+        $rowToDelete = ScoreItem::where("score_item_id", $id);
+        $json = json_encode($rowToDelete->get(), JSON_FORCE_OBJECT);
+        $rowToDelete->delete();
     }
 }

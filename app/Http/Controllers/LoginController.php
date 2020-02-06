@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Credential;
+use App\Http\Controllers\Artisan;
 
 class LoginController extends Controller {
     function index(Request $r) {
