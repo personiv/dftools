@@ -42,14 +42,16 @@ li {
     height: 100%;
 }
 
-label, input, select {
-    display: block;
-    width: 100%;
-}
-
 input, select {
     padding: 2px;
     font-size: 18px !important;
+    width: 100%;
+}
+
+form > label, form > input, form > select {
+    display: block;
+    min-width: 300px;
+    width: auto;
 }
 
 label {
