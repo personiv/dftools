@@ -5,24 +5,30 @@
 <form action="{{ action('AdminController@filterScoreItemByRole') }}" method="post">
     {{ csrf_field() }}
     <label for="item-role">Select Role</label>
-    <select id="item-role" name="item-role">
-        <option value="Designer" selected>Designer</option>
-        <option value="WML">WML</option>
-        <option value="Custom">Custom</option>
-        <option value="VQA">VQA</option>
-        <option value="PR">PR</option>
+    <select class="form-control" id="item-role" name="item-role" onchange="this.form.submit()" required>
+      <option value="None" selected>Click to select</option>
+      @if (session("selected-role") == "Designer") <option value="Designer" selected>Designer</option>
+      @else <option value="Designer">Designer</option> @endif
+      @if (session("selected-role") == "WML") <option value="WML"selected>WML</option>
+      @else <option value="WML">WML</option> @endif
+      @if (session("selected-role") == "Custom") <option value="Custom"selected>Custom</option>
+      @else <option value="Custom">Custom</option> @endif
+      @if (session("selected-role") == "VQA") <option value="VQA"selected>VQA</option>
+      @else <option value="VQA">VQA</option> @endif
+      @if (session("selected-role") == "PR") <option value="PR"selected>PR</option>
+      @else <option value="PR">PR</option> @endif
     </select>
-    <input type="submit" value="Submit" class="btn btn-success">
 </form>
-@if (session("score-items") != null)
+@if (session("score-items") != null && session("selected-role") != "None")
+<div class="table-responsive text-nowrap">
 <table class="table table-hover table-striped">
   <thead>
     <tr>
-      <th scope="col">Item</th>
-      <th scope="col">Description</th>
-      <th scope="col">Goal</th>
-      <th scope="col">Weight (%)</th>
-      <th scope="col">Action</th>
+      <th scope="col" class="w-20">Item</th>
+      <th scope="col" class="w-40">Description</th>
+      <th scope="col" class="w-15">Goal</th>
+      <th scope="col" class="w-15">Weight (%)</th>
+      <th scope="col" class="w-10">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -30,22 +36,23 @@
     @for ($i = 0; $i < $scoreItems->count(); $i++)
     <?php $cid = $scoreItems[$i]->score_item_id; ?>
       <tr>
-        <td><input disabled type="text" class="item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
-        <td><textarea disabled class="item-cell" id="{{ $cid . '-score_item_desc' }}">{{ $scoreItems[$i]->score_item_desc }}</textarea></td>
-        <td><input disabled type="text" class="item-cell" id="{{ $cid . '-score_item_goal' }}" value="{{ $scoreItems[$i]->score_item_goal }}"></td>
-        <td><input disabled type="number" class="item-cell" id="{{ $cid . '-score_item_weight' }}" value="{{ $scoreItems[$i]->score_item_weight }}" min="0" max="100"></td>
+        <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
+        <td><textarea disabled class="form-control item-cell" id="{{ $cid . '-score_item_desc' }}">{{ $scoreItems[$i]->score_item_desc }}</textarea></td>
+        <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_goal' }}" value="{{ $scoreItems[$i]->score_item_goal }}"></td>
+        <td><input disabled type="number" class="form-control item-cell" id="{{ $cid . '-score_item_weight' }}" value="{{ $scoreItems[$i]->score_item_weight }}" min="0" max="100"></td>
         <td><span class="btn btn-danger" onclick="deleteRow(this)"><i class="fa fa-trash"></i>Delete</span></td>
       </tr>
     @endfor
     <tr id="new-row">
-      <td><input type="text" id="new-score-item-name"></td>
-      <td><textarea class="input-desc" id="new-score-item-desc"></textarea></td>
-      <td><input type="text" id="new-score-item-goal"></td>
-      <td><input type="number" min="0" max="100" id="new-score-item-weight"></td>
+      <td><input class="form-control" type="text" id="new-score-item-name"></td>
+      <td><textarea class="input-desc form-control" id="new-score-item-desc"></textarea></td>
+      <td><input class="form-control" type="text" id="new-score-item-goal"></td>
+      <td><input class="form-control" type="number" min="0" max="100" id="new-score-item-weight"></td>
       <td><span class="btn btn-success" onclick="addRow()"><i class="fa fa-plus"></i>Add</span></td>
     </tr>
   </tbody>
 </table>
+</div>
 <span id="editBtn" class="btn btn-primary" onclick="toggleEdit()"><i class="fa fa-edit"></i>Edit Items</span>
 @endif
 @endsection

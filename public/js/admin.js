@@ -55,7 +55,7 @@ function addRow() {
             var isDisabled = "";
             if (!editing) isDisabled = "disabled";
             
-            $("<tr><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
+            $("<tr><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='form-control item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='form-control item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
         }
     });
 
@@ -70,14 +70,7 @@ function updateRow(row) {
     var uid = tokens[0];
     var ucolumn = tokens[1];
     var uvalue = $(row).parent()[0].children[0].value;
-    request("update-score-item", JSON.stringify({ id: uid, column: ucolumn, value: uvalue }), function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(uid);
-            console.log(ucolumn);
-            console.log(uvalue);
-        }
-        console.log(this.responseText);
-    });
+    request("update-score-item", JSON.stringify({ id: uid, column: ucolumn, value: uvalue }), null);
 }
 
 function deleteRow(element) {
