@@ -30,14 +30,14 @@
     @for ($i = 0; $i < $scoreItems->count(); $i++)
     <?php $cid = $scoreItems[$i]->score_item_id; ?>
       <tr>
-        <td id="{{ $cid . '-Name' }}" contenteditable>{{ $scoreItems[$i]->score_item_name }}</td>
-        <td id="{{ $cid . '-Description' }}" contenteditable>{{ $scoreItems[$i]->score_item_desc }}</td>
-        <td id="{{ $cid . '-Goal' }}" contenteditable>{{ $scoreItems[$i]->score_item_goal }}</td>
-        <td id="{{ $cid . '-Weight' }}" contenteditable>{{ $scoreItems[$i]->score_item_weight }}%</td>
+        <td class="item-cell" id="{{ $cid . '-Name' }}">{{ $scoreItems[$i]->score_item_name }}</td>
+        <td class="item-cell" id="{{ $cid . '-Description' }}">{{ $scoreItems[$i]->score_item_desc }}</td>
+        <td class="item-cell" id="{{ $cid . '-Goal' }}">{{ $scoreItems[$i]->score_item_goal }}</td>
+        <td class="item-cell" id="{{ $cid . '-Weight' }}">{{ $scoreItems[$i]->score_item_weight }}%</td>
         <td><span class="btn btn-danger" onclick="deleteRow(this)">Delete</span></td>
       </tr>
     @endfor
-    <tr class="new-row">
+    <tr id="new-row">
       <td class="new-input"><input type="text" name="new-score-item-name" id="new-score-item-name"></td>
       <td class="new-input"><input type="text" name="new-score-item-desc" id="new-score-item-desc"></td>
       <td class="new-input"><input type="text" name="new-score-item-goal" id="new-score-item-goal"></td>
@@ -46,6 +46,6 @@
     </tr>
   </tbody>
 </table>
-<span class="btn btn-primary" onclick="startEdit()">Edit Items</span>
+<span id="editBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Items</span>
 @endif
 @endsection

@@ -1,5 +1,13 @@
-function saveItems() {
-
+function toggleEdit() {
+    var editableCells = $("td.item-cell[contenteditable]");
+    if (editableCells.length > 0) {
+        $(".item-cell").removeAttr("contenteditable");
+        $("#editBtn").html("Edit Items");
+    } else {
+        $(".item-cell").attr("contenteditable", "plaintext-only");
+        $("#editBtn").html("Lock Items");
+    }
+        
 }
 
 function deleteRow(element) {
@@ -25,12 +33,23 @@ function addRow() {
     }
 
     var newRow = document.createElement("tr");
-    var newRowId = document.createElement("td");
     var newRowItem = document.createElement("td");
     var newRowDesc = document.createElement("td");
     var newRowGoal = document.createElement("td");
     var newRowWeight = document.createElement("td");
     var newRowAction = document.createElement("td");
+
+    newRowItem.setAttribute("class", "item-cell");
+    newRowDesc.setAttribute("class", "item-cell");
+    newRowGoal.setAttribute("class", "item-cell");
+    newRowWeight.setAttribute("class", "item-cell");
+
+    if ($("#editBtn").html() == "Lock Items") {
+        newRowItem.setAttribute("contenteditable", "plaintext-only");
+        newRowDesc.setAttribute("contenteditable", "plaintext-only");
+        newRowGoal.setAttribute("contenteditable", "plaintext-only");
+        newRowWeight.setAttribute("contenteditable", "plaintext-only");
+    }
 
     newRowItem.innerHTML = newItemName;
     newRowDesc.innerHTML = newItemDesc;
@@ -38,15 +57,31 @@ function addRow() {
     newRowWeight.innerHTML = newItemWeight + '%';
     newRowAction.innerHTML = "<span class='btn btn-danger' onclick='deleteRow(this)'>Delete</span>";
 
-    newRow.appendChild(newRowId);
     newRow.appendChild(newRowItem);
     newRow.appendChild(newRowDesc);
     newRow.appendChild(newRowGoal);
     newRow.appendChild(newRowWeight);
     newRow.appendChild(newRowAction);
 
-    var nr = document.getElementsByClassName("new-row")[0];
-    nr.parentElement.insertBefore(newRow, nr);
+    // Request the added item's id to server
+    // To be added as tr's id for updating purpose
+    // Format: score_card_item_id-score_card_item_name (1-Item), (1-Description)
+    request("save-score-item", {
+        newItem: newItemName,
+        newDesc: newItemDesc,
+        newGoal: newItemGoal,
+        newWeight: newItemWeight,
+    }, function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var newRowId = parseInt(this.responseText) + 1;
+            newRowItem.id = newRowId + "-Name";
+            newRowDesc.id = newRowId + "-Description";
+            newRowGoal.id = newRowId + "-Goal";
+            newRowWeight.id = newRowId + "-Weight";
+            var nr = document.getElementById("new-row");
+            nr.parentElement.insertBefore(newRow, nr);
+        }
+    });
 
     $("#new-score-item-name").val("");
     $("#new-score-item-desc").val("");

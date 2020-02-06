@@ -26,6 +26,8 @@ Route::post("/submit-upload-data", "AdminController@uploadData");
 Route::post("/submit-upload-manual-data", "AdminController@uploadManualData");
 Route::post("/submit-update-scorecard-items", "AdminController@updateScorecardItems");
 Route::post("/filter-scorecard-items-by-role", "AdminController@filterScoreItemByRole");
+Route::post("/get-last-score-item-index", "AdminController@getLastScoreItemIndex");
+Route::post("/save-score-item", "AdminController@saveScoreItem");
 
 Route::get('/', 'LoginController@index')->name('index');
 Route::post("/login", "LoginController@login");
