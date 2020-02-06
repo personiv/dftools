@@ -30,7 +30,7 @@ body {
 }
 
 /* sidebar a.link */
-#sidebar-wrapper .list-group-item {
+#sidebar-wrapper .list-group-item, #sidebar-wrapper .list-group-itemX {
   background: transparent !important;
   border: none;
   display: block;
@@ -46,23 +46,25 @@ body {
   bottom: 0;
 }
 
-/* sidebar a.link:hover */
-#sidebar-wrapper .list-group-item:hover:not(:last-child), #sidebar-wrapper .list-group-item:active:not(:last-child), #sidebar-wrapper .list-group-item:focus:not(:last-child) {
+/* sidebar a.link:hover,,active,focus */
+#sidebar-wrapper .list-group-item:hover, #sidebar-wrapper .list-group-item:active, #sidebar-wrapper .list-group-item:focus {
   background: var(--primary-color) !important;
   color: var(--secondary-color) !important;
 }
 
-#sidebar-wrapper .bottom-button .list-group:hover, #sidebar-wrapper .bottom-button .list-group:active, #sidebar-wrapper .bottom-button .list-group:focus{
+/* sidebar a.logout:hover,active,focus */
+#sidebar-wrapper .list-group-itemX:hover, #sidebar-wrapper .list-group-itemX:active, #sidebar-wrapper .list-group-itemX:focus {
   background: transparent !important;
   color: var(--secondary-color) !important;
 }
 
 /* sidebar title icon */
-#sidebar-wrapper .list-group-item .fa {
+#sidebar-wrapper .list-group-item .fa, #sidebar-wrapper .list-group-itemX .fa {
   width: 34px;
   height: auto;
   text-align: center;
   font-size: 1.5rem;
+  margin-left: -5px !important;
 }
 
 #page-content-wrapper {
@@ -84,7 +86,7 @@ body {
 }
 
 /* toggled list item */
-#wrapper.toggled .list-group-item span {
+#wrapper.toggled .list-group-item span, #wrapper.toggled .list-group-itemX span  {
   display: none;
 }
 
@@ -107,11 +109,13 @@ body {
   }
 }
 
+/* navbar */
 .navbar {
   -moz-box-shadow: 0 1px 10px var(--dark-color-50p);
     -webkit-box-shadow: 0 1px 10px var(--dark-color-50p);
     box-shadow: 0 1px 10px var(--dark-color-50p);
     padding: 5px 20px !important;
+    background: var(--light-color);
 }
 
 /* hamburger icon */
@@ -203,4 +207,11 @@ body {
   /* navbar */
   .user-container {
     display: inline-flex;
+  }
+
+  .user-container div .fa-user {
+    width: 34px;
+    height: auto;
+    text-align: center;
+    font-size: 1.5rem;
   }

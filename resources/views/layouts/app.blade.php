@@ -42,7 +42,7 @@
                 <i class="fa fa-comments-o mr-3"></i><span>Feedback</span>
             </a>
             <div class="bottom-button mb-5">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="#" class="list-group-itemX list-group-item-action">
                 <i class="fa fa-sign-out mr-3"></i><span>Logout</span>
             </a>
             </div>  
@@ -68,8 +68,8 @@
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div class="user-container">
-                                        <div><i class="fa fa-circle"></i></div>
+                                    <div class="user-container justify-content-center align-items-center">
+                                        <div><i class="fa fa-user mr-2"></i></div>
                                         <div class="d-flex flex-column">
                                             <span id="navItem-user">John Doe</span>
                                             <span id="navItem-role">Web Designer</span>
