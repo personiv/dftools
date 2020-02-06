@@ -157,7 +157,7 @@
     <!-- 2nd row -->
     <div class="row mt-5">
 
-        <!-- Exepction section -->
+        <!-- Exception section -->
         <div class="col-md-6">
             <div class="tb-container p-4">
                 <div class="dboard-text">

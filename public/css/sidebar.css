@@ -2,7 +2,16 @@ body {
   overflow-x: hidden;
   white-space: nowrap !important;
 }
-
+/*
+|--------------------------------------------------------------------------
+| Sidebar function and styling
+|--------------------------------------------------------------------------
+|
+| With full documentation.....
+|
+*/
+/* Edit starts here */
+/* Sidebar styling */
 #sidebar-wrapper {
   min-height: 100vh;
   width: 280px;
@@ -18,7 +27,7 @@ body {
   z-index: 1;
 }
 
-/* sidebar heading */
+/* Sidebar heading styling */
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 30px;
@@ -29,11 +38,12 @@ body {
   box-shadow: 0 2px 5px var(--primary-color);
 }
 
+/* Sidebar a.link container */
 #sidebar-wrapper .list-group {
   margin-top: 2.5rem !important;
 }
 
-/* sidebar a.link */
+/* Sidebar a.link */
 #sidebar-wrapper .list-group-item, #sidebar-wrapper .list-group-itemX {
   background: transparent !important;
   border: none;
@@ -44,67 +54,70 @@ body {
   transition: .2s ease-in;
 }
 
-/* button bottom */
+/* Sidebar a.link button bottom / logout */
 .bottom-button {
   position: absolute;
   bottom: 0;
 }
 
-/* sidebar a.link:hover,,active,focus */
+/* Sidebar a.link:hover, active, focus */
 #sidebar-wrapper .list-group-item:hover, #sidebar-wrapper .list-group-item:active, #sidebar-wrapper .list-group-item:focus {
   background: var(--primary-color) !important;
   color: var(--secondary-color) !important;
 }
 
-/* sidebar a.logout:hover,active,focus */
+/* Sidebar a.link / logout:hover, active ,focus */
 #sidebar-wrapper .list-group-itemX:hover, #sidebar-wrapper .list-group-itemX:active, #sidebar-wrapper .list-group-itemX:focus {
   background: transparent !important;
   color: var(--secondary-color) !important;
 }
 
-/* sidebar title icon */
+/* Sidebar title icon */
 #sidebar-wrapper .list-group-item .fa, #sidebar-wrapper .list-group-itemX .fa {
   width: 34px;
   height: auto;
   text-align: center;
   font-size: 1.5rem;
-  margin-left: -5px !important;
 }
 
+/* Content container margin left when toggled */
 #page-content-wrapper {
   margin-left: 280px;
   transition-duration: .3s;
   transition: margin .3s ease-out;
 }
 
-/* toggled content wrapper */
+/* Toggled content wrapper / adjust with 80px margin left */
 #wrapper.toggled #page-content-wrapper {
   margin-left: 80px;
 }
 
-/* toggled wrapper */
+/* Toggled sidebar / resize the width with 80px */
 #wrapper.toggled #sidebar-wrapper {
   width: 80px;
 }
 
-/* toggled heading */
+/* Toggled heading / center the heading if it's toggled */
 #wrapper.toggled .sidebar-heading {
   text-align: center;
 }
 
+/* Remove the name of business name when it's toggled */
 #wrapper.toggled .sidebar-heading span {
   display: none;
 }
 
-/* toggled list item */
+/* Toggled list item / remove the icon title */
 #wrapper.toggled .list-group-item span, #wrapper.toggled .list-group-itemX span  {
   display: none;
 }
 
+/* Center the icon when it's toggled */
 #wrapper.toggled .list-group-item .fa {
   text-align: center;
 }
 
+/* Responsiveness of sidebar */
 @media (min-width: 768px) {
   #sidebar-wrapper {
     width: 280px;
@@ -118,35 +131,36 @@ body {
   #wrapper.toggled #sidebar-wrapper {
     width: 80px
   }
-}
+} /* End of sidebar styling */
 
-/* navbar */
+/* Navbar styling starts here */
+/* Navbar */
 .navbar {
   -moz-box-shadow: 0 1px 10px var(--dark-color-50p);
-    -webkit-box-shadow: 0 1px 10px var(--dark-color-50p);
-    box-shadow: 0 1px 10px var(--dark-color-50p);
-    background-color: var(--light-color);
-    z-index: 1;
-    padding: 5px 20px !important;
-    position: -webkit-sticky;
-    position: sticky !important;
-    top: 0px;
+  -webkit-box-shadow: 0 1px 10px var(--dark-color-50p);
+  box-shadow: 0 1px 10px var(--dark-color-50p);
+  background-color: var(--light-color);
+  z-index: 1;
+  padding: 5px 20px !important;
+  position: -webkit-sticky;
+  position: sticky !important;
+  top: 0px;
 }
 
-/* hamburger icon */
-/* Icon 1 */
+/* Hamburger icon */
 .first-button {
-    padding: .25rem .75rem;
-    font-size: 1.25rem;
-    line-height: 1;
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: .25rem;
+  padding: .25rem .75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: .25rem;
 }
 
 .first-button:focus {
   outline: none !important;
 }
+
 .animated-icon1 {
   width: 30px;
   height: 20px;
@@ -161,9 +175,9 @@ body {
   -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
   cursor: pointer;
-  }
+}
   
-  .animated-icon1 span {
+.animated-icon1 span {
   display: block;
   position: absolute;
   height: 3px;
@@ -179,54 +193,101 @@ body {
   -moz-transition: .25s ease-in-out;
   -o-transition: .25s ease-in-out;
   transition: .25s ease-in-out;
-  }
+}
   
-  .animated-icon1 span {
+.animated-icon1 span {
   background: var(--primary-color);
-  }
+}
   
-  .animated-icon1 span:nth-child(1) {
+.animated-icon1 span:nth-child(1) {
   top: 0px;
-  }
+}
    
-  .animated-icon1 span:nth-child(2) {
+.animated-icon1 span:nth-child(2) {
   top: 8px;
-  }
+}
   
-  .animated-icon1 span:nth-child(3) {
+.animated-icon1 span:nth-child(3) {
   top: 16px;
-  }
+}
   
-  .animated-icon1.open span:nth-child(1) {
+.animated-icon1.open span:nth-child(1) {
   top: 8px;
   -webkit-transform: rotate(135deg);
   -moz-transform: rotate(135deg);
   -o-transform: rotate(135deg);
   transform: rotate(135deg);
-  }
-  
-  .animated-icon1.open span:nth-child(2) {
+}
+
+.animated-icon1.open span:nth-child(2) {
   opacity: 0;
   left: -40px;
-  }
+}
   
-  .animated-icon1.open span:nth-child(3) {
+.animated-icon1.open span:nth-child(3) {
   top: 8px;
   -webkit-transform: rotate(-135deg);
   -moz-transform: rotate(-135deg);
   -o-transform: rotate(-135deg);
   transform: rotate(-135deg);
-  }
+} /* End of navbar styling */
 
+/* Navbar user profile styling */
+.user-container {
+  display: inline-flex;
+}
 
-  /* navbar */
-  .user-container {
-    display: inline-flex;
-  }
+/* Navbar user icon */
+.user-container div .fa-user {
+  width: 34px;
+  height: auto;
+  text-align: center;
+  font-size: 1.5rem;
+}
 
-  .user-container div .fa-user {
-    width: 34px;
-    height: auto;
-    text-align: center;
-    font-size: 1.5rem;
+/* Dropdown menu animation */
+/* Change this breakpoint if you change the breakpoint of the navbar */
+
+@media (min-width: 992px) {
+  .animate {
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
   }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+  100% {
+    transform:translateY(0rem);
+    opacity: 1;
+  }
+  0% {
+    transform: translateY(1rem);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes slideIn {
+  0% {
+    -webkit-transform: transform;
+    -webkit-opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    -webkit-opacity: 1;
+  }
+  0% {
+    -webkit-transform: translateY(1rem);
+    -webkit-opacity: 0;
+  }
+}
+
+.slideIn {
+  -webkit-animation-name: slideIn;
+  animation-name: slideIn;
+}
