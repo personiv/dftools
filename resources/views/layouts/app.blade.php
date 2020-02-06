@@ -20,7 +20,6 @@
     <!-- Plugins -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 </head>
 <body>
 
@@ -68,13 +67,13 @@
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <div class="user-container justify-content-center align-items-center">
-                                        <div><i class="fa fa-user mr-2"></i></div>
-                                        <div class="d-flex flex-column">
-                                            <span id="navItem-user">John Doe</span>
-                                            <span id="navItem-role">Web Designer</span>
-                                        </div>
-                                    </div>
+                            <div class="user-container justify-content-center align-items-center">
+                                <div><i class="fa fa-user mr-2"></i></div>
+                                <div class="d-flex flex-column">
+                                    <span id="navItem-user">John Doe</span>
+                                    <span id="navItem-role">Web Designer</span>
+                                </div>
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Change Password</a>

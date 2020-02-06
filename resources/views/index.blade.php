@@ -18,9 +18,6 @@
     <!-- Plugins -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -100,29 +97,32 @@
     </div>
 </div>
 
+<!-- Plugins -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
 
     var hours = new Date().getHours();
-        var message;
-        var slogan;
-        var morning = "Good Morning!";
-        var afternoon = "Good Afternoon!";
-        var evening = "Good Evening!";
+    var message;
+    var slogan;
+    var morning = "Good Morning!";
+    var afternoon = "Good Afternoon!";
+    var evening = "Good Evening!";
 
-            if (hours >= 0 && hours < 12) {
-                message = morning;
-                slogan = "— This day will be great.";
+    if (hours >= 0 && hours < 12) {
+        message = morning;
+        slogan = "— This day will be great.";
+    } else if (hours >= 12 && hours < 18) {
+        message = afternoon;
+        slogan = "— Good, better, best. Never let it rest. 'Til your good is better and your better is best. Good Afternoon.";
+    } else {
+        message = evening;
+        slogan = "— Welcome to night shift.";
+    }
 
-            } else if (hours >= 12 && hours < 18) {
-                message = afternoon;
-                slogan = "— Good, better, best. Never let it rest. 'Til your good is better and your better is best. Good Afternoon.";
-            } else {
-                message = evening;
-                slogan = "— Welcome to night shift.";
-            }
-
-        $(".day-greeting").html(message);
-        $(".slogan-greeting").html(slogan);
+    $(".day-greeting").html(message);
+    $(".slogan-greeting").html(slogan);
 
 </script>
 </body>
