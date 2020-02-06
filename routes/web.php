@@ -28,6 +28,8 @@ Route::post("/submit-update-scorecard-items", "AdminController@updateScorecardIt
 Route::post("/filter-scorecard-items-by-role", "AdminController@filterScoreItemByRole");
 Route::post("/get-last-score-item-index", "AdminController@getLastScoreItemIndex");
 Route::post("/save-score-item", "AdminController@saveScoreItem");
+Route::post("/update-score-item", "AdminController@updateScoreItem");
+Route::post("/delete-score-item", "AdminController@deleteScoreItem");
 
 Route::get('/', 'LoginController@index')->name('index');
 Route::post("/login", "LoginController@login");

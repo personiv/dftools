@@ -1,17 +1,20 @@
-function toggleEdit() {
-    var editableCells = $("td.item-cell[contenteditable]");
-    if (editableCells.length > 0) {
-        $(".item-cell").removeAttr("contenteditable");
-        $("#editBtn").html("Edit Items");
-    } else {
-        $(".item-cell").attr("contenteditable", "plaintext-only");
-        $("#editBtn").html("Lock Items");
-    }
-        
+var editing = false;
+window.onload = function() {
+    $(".item-cell").on("change", function() { updateRow(this); });
 }
 
-function deleteRow(element) {
-    $(element).parent().parent().remove();
+function toggleEdit() {
+    var editableCells = $(".item-cell[disabled]");
+    if (editableCells.length > 0) {
+        editing = true;
+        $(".item-cell").removeAttr("disabled");
+        $("#editBtn").html("<i class='fa fa-edit'></i>Edit Items");
+    } else {
+        editing = false;
+        $(".item-cell").attr("disabled", "disabled");
+        $("#editBtn").html("<i class='fa fa-lock'></i>Lock Items");
+    }
+        
 }
 
 function addRow() {
@@ -31,55 +34,28 @@ function addRow() {
         alert("Please input value");
         return;
     }
-
-    var newRow = document.createElement("tr");
-    var newRowItem = document.createElement("td");
-    var newRowDesc = document.createElement("td");
-    var newRowGoal = document.createElement("td");
-    var newRowWeight = document.createElement("td");
-    var newRowAction = document.createElement("td");
-
-    newRowItem.setAttribute("class", "item-cell");
-    newRowDesc.setAttribute("class", "item-cell");
-    newRowGoal.setAttribute("class", "item-cell");
-    newRowWeight.setAttribute("class", "item-cell");
-
-    if ($("#editBtn").html() == "Lock Items") {
-        newRowItem.setAttribute("contenteditable", "plaintext-only");
-        newRowDesc.setAttribute("contenteditable", "plaintext-only");
-        newRowGoal.setAttribute("contenteditable", "plaintext-only");
-        newRowWeight.setAttribute("contenteditable", "plaintext-only");
-    }
-
-    newRowItem.innerHTML = newItemName;
-    newRowDesc.innerHTML = newItemDesc;
-    newRowGoal.innerHTML = newItemGoal;
-    newRowWeight.innerHTML = newItemWeight + '%';
-    newRowAction.innerHTML = "<span class='btn btn-danger' onclick='deleteRow(this)'>Delete</span>";
-
-    newRow.appendChild(newRowItem);
-    newRow.appendChild(newRowDesc);
-    newRow.appendChild(newRowGoal);
-    newRow.appendChild(newRowWeight);
-    newRow.appendChild(newRowAction);
-
+    
     // Request the added item's id to server
     // To be added as tr's id for updating purpose
     // Format: score_card_item_id-score_card_item_name (1-Item), (1-Description)
-    request("save-score-item", {
-        newItem: newItemName,
-        newDesc: newItemDesc,
-        newGoal: newItemGoal,
-        newWeight: newItemWeight,
-    }, function() {
+    request("save-score-item", JSON.stringify({
+        role: $("#item-role").val(),
+        name: newItemName,
+        description: newItemDesc,
+        goal: newItemGoal,
+        weight: newItemWeight,
+    }), function() {
         if (this.readyState == 4 && this.status == 200) {
-            var newRowId = parseInt(this.responseText) + 1;
-            newRowItem.id = newRowId + "-Name";
-            newRowDesc.id = newRowId + "-Description";
-            newRowGoal.id = newRowId + "-Goal";
-            newRowWeight.id = newRowId + "-Weight";
-            var nr = document.getElementById("new-row");
-            nr.parentElement.insertBefore(newRow, nr);
+            var newRowId = this.responseText;
+            var newRowItemId = newRowId + "-score_item_name";
+            var newRowDescId = newRowId + "-score_item_desc";
+            var newRowGoalId = newRowId + "-score_item_goal";
+            var newRowWeightId = newRowId + "-score_item_weight";
+
+            var isDisabled = "";
+            if (!editing) isDisabled = "disabled";
+            
+            $("<tr><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
         }
     });
 
@@ -87,4 +63,29 @@ function addRow() {
     $("#new-score-item-desc").val("");
     $("#new-score-item-goal").val("");
     $("#new-score-item-weight").val("");
+}
+
+function updateRow(row) {
+    var tokens = $(row).parent()[0].children[0].id.split('-');
+    var uid = tokens[0];
+    var ucolumn = tokens[1];
+    var uvalue = $(row).parent()[0].children[0].value;
+    request("update-score-item", JSON.stringify({ id: uid, column: ucolumn, value: uvalue }), function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(uid);
+            console.log(ucolumn);
+            console.log(uvalue);
+        }
+        console.log(this.responseText);
+    });
+}
+
+function deleteRow(element) {
+    request("delete-score-item", JSON.stringify({
+        id: $(element).parent().parent()[0].children[0].children[0].id.split('-')[0]
+    }), function() {
+        if (this.readyState == 4 && this.status == 200) {
+            $(element).parent().parent().remove();
+        }
+    });
 }

@@ -5,7 +5,7 @@
 <form action="{{ action('AdminController@filterScoreItemByRole') }}" method="post">
     {{ csrf_field() }}
     <label for="item-role">Select Role</label>
-    <select name="item-role">
+    <select id="item-role" name="item-role">
         <option value="Designer" selected>Designer</option>
         <option value="WML">WML</option>
         <option value="Custom">Custom</option>
@@ -21,7 +21,7 @@
       <th scope="col">Item</th>
       <th scope="col">Description</th>
       <th scope="col">Goal</th>
-      <th scope="col">Weight</th>
+      <th scope="col">Weight (%)</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -30,22 +30,22 @@
     @for ($i = 0; $i < $scoreItems->count(); $i++)
     <?php $cid = $scoreItems[$i]->score_item_id; ?>
       <tr>
-        <td class="item-cell" id="{{ $cid . '-Name' }}">{{ $scoreItems[$i]->score_item_name }}</td>
-        <td class="item-cell" id="{{ $cid . '-Description' }}">{{ $scoreItems[$i]->score_item_desc }}</td>
-        <td class="item-cell" id="{{ $cid . '-Goal' }}">{{ $scoreItems[$i]->score_item_goal }}</td>
-        <td class="item-cell" id="{{ $cid . '-Weight' }}">{{ $scoreItems[$i]->score_item_weight }}%</td>
-        <td><span class="btn btn-danger" onclick="deleteRow(this)">Delete</span></td>
+        <td><input disabled type="text" class="item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
+        <td><textarea disabled class="item-cell" id="{{ $cid . '-score_item_desc' }}">{{ $scoreItems[$i]->score_item_desc }}</textarea></td>
+        <td><input disabled type="text" class="item-cell" id="{{ $cid . '-score_item_goal' }}" value="{{ $scoreItems[$i]->score_item_goal }}"></td>
+        <td><input disabled type="number" class="item-cell" id="{{ $cid . '-score_item_weight' }}" value="{{ $scoreItems[$i]->score_item_weight }}" min="0" max="100"></td>
+        <td><span class="btn btn-danger" onclick="deleteRow(this)"><i class="fa fa-trash"></i>Delete</span></td>
       </tr>
     @endfor
     <tr id="new-row">
-      <td class="new-input"><input type="text" name="new-score-item-name" id="new-score-item-name"></td>
-      <td class="new-input"><input type="text" name="new-score-item-desc" id="new-score-item-desc"></td>
-      <td class="new-input"><input type="text" name="new-score-item-goal" id="new-score-item-goal"></td>
-      <td class="new-input"><input type="text" name="new-score-item-weight" id="new-score-item-weight"></td>
-      <td class="new-input"><span class="btn btn-success" onclick="addRow()">Add</span></td>
+      <td><input type="text" id="new-score-item-name"></td>
+      <td><textarea class="input-desc" id="new-score-item-desc"></textarea></td>
+      <td><input type="text" id="new-score-item-goal"></td>
+      <td><input type="number" min="0" max="100" id="new-score-item-weight"></td>
+      <td><span class="btn btn-success" onclick="addRow()"><i class="fa fa-plus"></i>Add</span></td>
     </tr>
   </tbody>
 </table>
-<span id="editBtn" class="btn btn-primary" onclick="toggleEdit()">Edit Items</span>
+<span id="editBtn" class="btn btn-primary" onclick="toggleEdit()"><i class="fa fa-edit"></i>Edit Items</span>
 @endif
 @endsection
