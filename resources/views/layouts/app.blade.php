@@ -86,7 +86,7 @@
             </div>
         </nav>
 
-        <div class="container-fluid p-5">
+        <div class="container-fluid p-5 dboard-wrapper">
             @yield('content')
         </div>
 
@@ -143,13 +143,6 @@
         }
     });
     </script>
-
-<script>
-        $(document).ready(function () {
-$('#dtBasicExample').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
 
 </body>
 </html>

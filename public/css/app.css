@@ -6,4 +6,31 @@ body, html {
     color: var(--dark-color-50p) !important;
 }
 
-/* Sidebar styling here */
+/* Dashboard styling here */
+.dboard-wrapper {
+    background-color: #f9fafb;
+}
+
+.dboard-wrapper .tb-container {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    background-color: var(--light-color);
+    height: 100%;
+}
+
+.tb-container .dboard-text {
+    text-transform: uppercase;
+}
+
+.tb-container .dboard-text .dboard-title {
+    font-size: 20px;
+    color: var(--dark-color);
+    font-weight: 700;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+.tb-container .dboard-text .dboard-othtext {
+    line-height: 12px;
+    font-size: 12px;
+}
