@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Credential;
-use App\Http\Controllers\Artisan;
 
 class LoginController extends Controller {
     function index(Request $r) {
-        $r->session()->forget("user");
+        if ($r->session()->get("user") != null)
+            return redirect()->route("dashboard");
         return view('index');
     }
 
@@ -26,5 +26,10 @@ class LoginController extends Controller {
         } else {
             return back()->with("msg", "Incorrect username or password");
         }
+    }
+
+    function logout(Request $r) {
+        $r->session()->forget("user");
+        return redirect()->route("index");
     }
 }
