@@ -1,0 +1,16 @@
+1st week (February 3, 2020 - February 7, 2020)
+
+Back-End
+Created Initial Database Design (\\172.17.0.200\dxm_web\Dexweb_public1\Team Noel\Dizon\scorecard-dbdesigner.pdf)
+Added Login and Logout feature to the web application
+Added Admin Control Panel to the web application
+Added Excel File Reader to the web application
+Added Create/Update/Delete function for accounts
+Added function for updating Scorecard Items
+
+Front-End
+Created functional Login page
+Created design for Dashboard page
+Created global design for sidebar and header
+
+Percentage: 25%
