@@ -23,7 +23,7 @@ Route::post("/submit-add-credential", "AdminController@addCredential");
 Route::post("/submit-update-credential", "AdminController@updateCredential");
 Route::post("/submit-delete-credential", "AdminController@deleteCredential");
 
-Route::post("/submit-upload-data", "AdminController@uploadData");
+Route::post("/save-data", "AdminController@saveData");
 Route::post("/save-manual-data", "AdminController@saveManualData");
 
 Route::post("/filter-scorecard-items-by-role", "AdminController@filterScoreItemByRole");
