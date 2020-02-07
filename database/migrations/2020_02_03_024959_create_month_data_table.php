@@ -18,6 +18,7 @@ class CreateMonthDataTable extends Migration
             $table->integer('month_data_year');
             $table->string('month_data_month', 3);
             $table->string('month_data_file');
+            $table->boolean('month_data_manual');
             $table->timestamps();
         });
     }

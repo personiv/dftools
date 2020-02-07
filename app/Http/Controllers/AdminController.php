@@ -92,32 +92,17 @@ class AdminController extends Controller {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
         $team = $r->input("data-team");
-        $src = $r->input("data-src");
-        $folderpath = "data/$year/$month/";
-        $filename = "$team.xlsx";
-        if (!file_exists($folderpath)) mkdir($folderpath, 0777, true);
+        $src = $r->file("data-src");
+        $manual = $r->input("data-manual");
 
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Year');
-        $sheet->setCellValue('B1', 'Month');
-        $sheet->setCellValue('C1', 'Team');
-        $sheet->setCellValue('A2', $year);
-        $sheet->setCellValue('B2', $month);
-        $sheet->setCellValue('C2', $team);
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($folderpath . $filename);
-        return back();
+        if ($manual == "manual") $path = "manual/$year/$month";
+        else $path = "actual/$year/$month";
+        if (!file_exists($path)) mkdir($path, 0777, true);
+        $filepath = $src->store($path);
+        return back()->with(["msg" => "File '$filepath' created", "msg-mood" => "good"]);
     }
 
     function readManualData(Request $r) {
-        $year = $r->input("data-year");
-        $month = $r->input("data-month");
-        $team = $r->input("data-team");
-        $src = $r->input("data-src");
-
-        $reader = new Xlsx;
-        $reader->setReadDataOnly(true);
-        return $reader->load("data/$year/$month/$team.xlsx");
+        return back();
     }
 }
