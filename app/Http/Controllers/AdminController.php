@@ -88,17 +88,24 @@ class AdminController extends Controller {
         $rowToDelete->delete();
     }
 
+    function saveData(Request $r) {
+        $year = $r->input("data-year");
+        $month = $r->input("data-month");
+        $team = $r->input("data-team");
+        $src = $r->file("data-src");
+        $ext = $src->getClientOriginalExtension();
+        $filepath = $src->storeAs("public/actual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Actual data file 'storage/app/public/$filepath' created", "msg-mood" => "good"]);
+    }
+
     function saveManualData(Request $r) {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
         $team = $r->input("data-team");
         $src = $r->file("data-src");
-
-        if ($manual == "manual") $path = "public/manual/$year/$month";
-        else $path = "public/actual/$year/$month";
-        if (!file_exists($path)) mkdir($path, 0777, true);
-        $filepath = $src->store($path);
-        return back()->with(["msg" => "File '$filepath' created", "msg-mood" => "good"]);
+        $ext = $src->getClientOriginalExtension();
+        $filepath = $src->storeAs("public/manual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Actual data file 'storage/app/public/$filepath' created", "msg-mood" => "good"]);
     }
 
     function readManualData(Request $r) {
