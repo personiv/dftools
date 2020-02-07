@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use App\Credential;
 use App\ScoreItem;
 
@@ -83,7 +85,39 @@ class AdminController extends Controller {
     function deleteScoreItem(Request $r) {
         $id = json_decode($r->getContent(), true)["id"];
         $rowToDelete = ScoreItem::where("score_item_id", $id);
-        $json = json_encode($rowToDelete->get(), JSON_FORCE_OBJECT);
         $rowToDelete->delete();
+    }
+
+    function saveManualData(Request $r) {
+        $year = $r->input("data-year");
+        $month = $r->input("data-month");
+        $team = $r->input("data-team");
+        $src = $r->input("data-src");
+        $folderpath = "data/$year/$month/";
+        $filename = "$team.xlsx";
+        if (!file_exists($folderpath)) mkdir($folderpath, 0777, true);
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Year');
+        $sheet->setCellValue('B1', 'Month');
+        $sheet->setCellValue('C1', 'Team');
+        $sheet->setCellValue('A2', $year);
+        $sheet->setCellValue('B2', $month);
+        $sheet->setCellValue('C2', $team);
+        $writer = new Xlsx($spreadsheet);
+        $writer->save($folderpath . $filename);
+        return back();
+    }
+
+    function readManualData(Request $r) {
+        $year = $r->input("data-year");
+        $month = $r->input("data-month");
+        $team = $r->input("data-team");
+        $src = $r->input("data-src");
+
+        $reader = new Xlsx;
+        $reader->setReadDataOnly(true);
+        return $reader->load("data/$year/$month/$team.xlsx");
     }
 }
