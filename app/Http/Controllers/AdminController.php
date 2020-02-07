@@ -93,10 +93,9 @@ class AdminController extends Controller {
         $month = $r->input("data-month");
         $team = $r->input("data-team");
         $src = $r->file("data-src");
-        $manual = $r->input("data-manual");
 
-        if ($manual == "manual") $path = "manual/$year/$month";
-        else $path = "actual/$year/$month";
+        if ($manual == "manual") $path = "public/manual/$year/$month";
+        else $path = "public/actual/$year/$month";
         if (!file_exists($path)) mkdir($path, 0777, true);
         $filepath = $src->store($path);
         return back()->with(["msg" => "File '$filepath' created", "msg-mood" => "good"]);

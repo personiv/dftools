@@ -25,7 +25,6 @@
     <input class="form-control" type="text" name="data-team" required>
     <label for="data-src">Data</label>
     <input class="form-control" type="file" name="data-src" required>
-    <input type="hidden" name="data-manual" value="manual">
     <input type="submit" value="Submit" class="btn btn-success">
 </form>
 @endsection
