@@ -90,48 +90,34 @@
                     <div class="dboard-title">Top Resource</div>
                     <div class="dboard-othtext">for the month of June</div>
                 </div>
-                <div class="table-responsive tb-1strow-2">
-                    <table class="table table-borderless">
-                        <thead>
-                        <tr>
-                            <th scope="col">Employee ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="top-resource-container py-4">
+                    <div><span>Name:</span>&nbsp;<span>John Doe</span></div>
+                    <div><span>Role:</span>&nbsp;<span>Web Designer</span></div>
                 </div>
                 <div class="row">
                     <div class="col-8">
                         <div class="eachScore-container">
-                            <div class="score-title">Productivity</div>
+                            <div class="score-title">Productivity&nbsp;<span>90%</span></div>
                             <div class="progress">
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
-                            <div class="score-title">Quality</div>
+                            <div class="score-title">Quality&nbsp;<span>90%</span></div>
                             <div class="progress mt-1">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             
-                            <div class="score-title">Churn</div>
+                            <div class="score-title">Churn&nbsp;<span>90%</span></div>
                             <div class="progress mt-1">
                                 <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
-                            <div class="score-title">Product Knowledge Test</div>
+                            <div class="score-title">Product Knowledge Test&nbsp;<span>90%</span></div>
                             <div class="progress mt-1">
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
-                            <div class="score-title">Attendance</div>
+                            <div class="score-title">Attendance&nbsp;<span>90%</span></div>
                             <div class="progress mt-1">
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
