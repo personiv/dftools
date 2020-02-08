@@ -9,7 +9,7 @@ class HomeController extends Controller {
         if ($r->session()->get("user") != null) {
             return view('dashboard');
         } else {
-            return back()->with("msg", "Please login again to continue");
+            return redirect()->route("index")->with("msg", "Please login again to continue");
         }
     }
 }

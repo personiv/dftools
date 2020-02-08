@@ -19,12 +19,12 @@ class LoginController extends Controller {
             $account = Credential::where("credential_user", $userId)->first();
             $user = $account->getAttribute("credential_user");
             if ($account->getAttribute("credential_pass") != $userPass) {
-                return back()->with("msg", "Incorrect username or password");
+                return redirect()->route("index")->with("msg", "Incorrect username or password");
             }
             $r->session()->put("user", $user);
             return redirect()->route("dashboard");
         } else {
-            return back()->with("msg", "Incorrect username or password");
+            return redirect()->route("index")->with("msg", "Incorrect username or password");
         }
     }
 
