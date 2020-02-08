@@ -88,6 +88,16 @@ class AdminController extends Controller {
         $rowToDelete->delete();
     }
 
+    function viewSaveData() {
+        $supervisors = Credential::where("credential_type", "SPRVR")->get();
+        return view("admin.uploaddata")->with(["supervisors" => $supervisors]);
+    }
+
+    function viewSaveManualData() {
+        $supervisors = Credential::where("credential_type", "SPRVR")->get();
+        return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
+    }
+
     function saveData(Request $r) {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
