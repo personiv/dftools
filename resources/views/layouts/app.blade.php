@@ -29,12 +29,14 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">dfs<span>dfscorecard</span></div>
+        <div class="sidebar-heading">dfs<span> dfscorecard</span></div>
         <div class="list-group list-group-flush">
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-dashboard mr-3"></i><span>Dashboard</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <!-- Modal style menu -->
+            <!-- Button trigger modal -->
+            <a class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa fa-folder mr-3"></i><span>Create Session</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
@@ -91,9 +93,55 @@
         <div class="container-fluid p-5 dboard-wrapper">
             @yield('content')
         </div>
-
         <!-- /#page-content-wrapper -->
         </div>
+
+        <!-- Modal / Create Session -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+            <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">title here...</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Resource</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Resource</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">Whole Month Scorecard</option>
+                                <option value="2">Coaching</option>
+                                <option value="3">Triad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <!-- End of main wrapper -->
     </div>
 
     <!-- Plugins -->
@@ -145,6 +193,12 @@
             $('.animated-icon1').toggleClass('open');
         }
     });
+    </script>
+
+    <script>    
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus')
+    })
     </script>
 
 </body>
