@@ -16,7 +16,7 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('session_id');
             $table->string('session_type', 5);
-            $table->integer('session_resource')->unsigned();
+            $table->string('session_resource', 24);
             $table->boolean('session_manual');
             $table->date('session_date');
             $table->string('session_notes');
@@ -24,7 +24,6 @@ class CreateSessionsTable extends Migration
             $table->boolean('session_supervisor_sign');
             $table->boolean('session_manager_sign');
             $table->boolean('session_head_sign');
-            $table->foreign('session_resource')->references('resource_id')->on('resources');
             $table->timestamps();
         });
     }
