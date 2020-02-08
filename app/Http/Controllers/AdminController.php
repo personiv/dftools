@@ -94,8 +94,8 @@ class AdminController extends Controller {
         $team = $r->input("data-team");
         $src = $r->file("data-src");
         $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("public/actual/$year/$month/", $team . '.' . $ext);
-        return back()->with(["msg" => "Actual data file 'storage/app/public/$filepath' created", "msg-mood" => "good"]);
+        $filepath = $src->storeAs("data/actual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
     function saveManualData(Request $r) {
@@ -104,8 +104,8 @@ class AdminController extends Controller {
         $team = $r->input("data-team");
         $src = $r->file("data-src");
         $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("public/manual/$year/$month/", $team . '.' . $ext);
-        return back()->with(["msg" => "Actual data file 'storage/app/public/$filepath' created", "msg-mood" => "good"]);
+        $filepath = $src->storeAs("data/manual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Manual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
     function readManualData(Request $r) {
