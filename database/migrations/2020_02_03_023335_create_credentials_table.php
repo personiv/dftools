@@ -15,7 +15,7 @@ class CreateCredentialsTable extends Migration
     {
         Schema::create('credentials', function (Blueprint $table) {
             $table->increments('credential_id');
-            $table->string('credential_user', 24);
+            $table->string('credential_user', 24)->unique();
             $table->string('credential_pass', 24);
             $table->string('credential_type', 5);
             $table->string('credential_first', 64);
@@ -24,46 +24,36 @@ class CreateCredentialsTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('credentials')->insert(array(
-            'credential_user' => 'admin',
-            'credential_pass' => 'admin',
-            'credential_type' => 'ADMIN',
-            'credential_first' => 'Admin',
-            'credential_last' => 'Admin',
-            'credential_up' => 'admin'
-        ));
-        DB::table('credentials')->insert(array(
-            'credential_user' => '10072397',
-            'credential_pass' => 'password',
-            'credential_type' => 'HEAD',
-            'credential_first' => 'Mike',
-            'credential_last' => 'Ventanilla',
-            'credential_up' => 'admin'
-        ));
-        DB::table('credentials')->insert(array(
-            'credential_user' => '7010609',
-            'credential_pass' => 'password',
-            'credential_type' => 'MANGR',
-            'credential_first' => 'Daryl',
-            'credential_last' => 'Taguilaso',
-            'credential_up' => '10072397'
-        ));
-        DB::table('credentials')->insert(array(
-            'credential_user' => '10071937',
-            'credential_pass' => 'password',
-            'credential_type' => 'MANGR',
-            'credential_first' => 'Ryan',
-            'credential_last' => 'Pasquin',
-            'credential_up' => '10072397'
-        ));
-        DB::table('credentials')->insert(array(
-            'credential_user' => '10072003',
-            'credential_pass' => 'password',
-            'credential_type' => 'MANGR',
-            'credential_first' => 'Carlo',
-            'credential_last' => 'Mendoza',
-            'credential_up' => '10072397'
-        ));
+        function addEmployee($eid, $role, $first, $last, $up, $password = 'password') {
+            DB::table('credentials')->insert(array(
+                'credential_user' => $eid,
+                'credential_pass' => $password,
+                'credential_type' => $role,
+                'credential_first' => $first,
+                'credential_last' => $last,
+                'credential_up' => $up
+            ));
+        }
+
+        addEmployee('admin', 'ADMIN', 'Admin', 'Admin', 'admin', 'admin');
+        addEmployee('10072397', 'HEAD', 'Mike', 'Ventanilla', 'admin');
+
+        addEmployee('7010609', 'MANGR', 'Daryl', 'Taguilaso', '10072397');
+            addEmployee('10071099', 'SPRVR', 'Karleen', 'Cedeno', '7010609');
+            addEmployee('10071309', 'SPRVR', 'Noel', 'Cruz', '7010609');
+            addEmployee('10072501', 'SPRVR', 'Richard', 'De Los Santos', '7010609');
+
+        addEmployee('10071937', 'MANGR', 'Ryan', 'Pasquin', '10072397');
+            addEmployee('10071256', 'SPRVR', 'Renell', 'Barrios', '10071937');
+            addEmployee('10071492', 'SPRVR', 'Katherine', 'Arpon', '10071937');
+            addEmployee('10070828', 'SPRVR', 'Apple', 'Remulla', '10071937');
+            addEmployee('10071280', 'SPRVR', 'Joshua', 'Sabio', '10071937');
+            addEmployee('10071245', 'SPRVR', 'Reymark', 'Regencia', '10071937');
+
+        addEmployee('10072003', 'MANGR', 'Carlo', 'Mendoza', '10072397');
+            addEmployee('10070715', 'SPRVR', 'Franklin', 'Jayawon', '10072003');
+            addEmployee('10072502', 'SPRVR', 'Mark Anthony', 'Lapastora', '10072003');
+            addEmployee('10072072', 'SPRVR', 'Emmanuel', 'Flores', '10072003');
     }
 
     /**
