@@ -216,28 +216,34 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
+                            <th scope="col">Role</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>1</td>
                             <td>John Doe</td>
+                            <td>Web Designer</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>John Doe</td>
+                            <td>Logo Designer</td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>John Doe</td>
+                            <td>Banner Designer</td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>John Doe</td>
+                            <td>Custom Designer</td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>John Doe</td>
+                            <td>Web Designer</td>
                         </tr>
                         </tbody>
                     </table>
