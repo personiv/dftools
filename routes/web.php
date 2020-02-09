@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/admin', function() { return view('admin.addcredential'); })->name('admin');
+Route::get('/admin', "AdminController@viewAddCredential")->name('admin');
 Route::get("/add-credential", "AdminController@viewAddCredential")->name('addcredential');
 Route::get("/update-credential", "AdminController@viewUpdateCredential")->name('updatecredential');
 Route::get("/delete-credential", function() { return view("admin.deletecredential"); })->name('deletecredential');
@@ -34,5 +34,5 @@ Route::get('/', 'LoginController@index')->name('index');
 Route::post("/login", "LoginController@login");
 Route::get("/logout", "LoginController@logout");
 
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/session', 'HomeController@session')->name('session');
+Route::get('/dashboard', function() { return view('dashboard'); })->middleware('granted')->name('dashboard');
+Route::get('/session', 'HomeController@session')->middleware('granted')->name('session');
