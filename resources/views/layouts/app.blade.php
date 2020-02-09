@@ -29,7 +29,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">dfs<span> dfscorecard</span></div>
+        <div class="sidebar-heading">dfs<span>corecard</span></div>
         <div class="list-group list-group-flush">
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-dashboard mr-3"></i><span>Dashboard</span>

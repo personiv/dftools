@@ -5,7 +5,7 @@
 }
 
 body {
-    background-image: url('../images/bg_default.jpg');
+    background-image: url('../images/bg_index-default.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(20px);
@@ -174,10 +174,15 @@ body {
 
 /* Second column styling */
 .intro-two {
-    background:linear-gradient(rgba(0, 58, 93, 0.8), rgba(0, 58, 93, 0.8)), url('../images/bg_default.jpg');
+    background:linear-gradient(rgba(0, 58, 93, 0.8), rgba(0, 58, 93, 0.8)), url('../images/bg_index.jpg');
     background-size: cover;
     background-position: bottom center;
     color: var(--light-color);
+    padding: 0 !important;
+}
+
+.intro-two #particles-js {
+    height: calc(100vh - 100px);
 }
 
 .intro-two .graphic-brname, .intro-two .graphic-slogan {
@@ -192,6 +197,7 @@ body {
 .intro-two .graphic-brname {
     font-size: 40px;
     margin: 0 auto;
+    cursor: default;
 }
 
 .intro-two .graphic-brname span:first-child {
@@ -209,17 +215,24 @@ body {
 
 .intro-two .graphic-slogan {
     display: block;
-    text-align: right;
-    float: right;
+    float: none;
     width: 70%;
     margin: 200px auto 0;
     font-family: 'Open sans', sans-serif;
+    color: var(--light-color);
+    cursor: default;
+    background-color: #666666;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 3px 15px;
 }
 
 .intro-two .graphic-slogan div{
-    font-size: 40px;
-    line-height: 50px;
-    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 300;
     letter-spacing: 4px;
     word-spacing: 7px;
     text-transform: uppercase;
