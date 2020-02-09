@@ -7,15 +7,13 @@ use App\ScoreItem;
 
 class HomeController extends Controller {
     function session(Request $r) {
-        $role = "DESGN";
-        $type = "SCORE";
-        $mode = "manual";
+        $scoreitems = ScoreItem::where("score_item_role", "DESGN")->get();
         return view('session')->with([
-            "role" => $role,
-            "type" => $type,
-            "mode" => $mode,
+            "role" => "DESGN",
+            "type" => "SCORE",
+            "mode" => "manual",
             "week" => date("W"),
-            "scoreitems" => ScoreItem::where("score_item_role", $role)->get()
+            "scoreitems" => $scoreitems
         ]);
     }
 }
