@@ -8,7 +8,14 @@ use App\Credential;
 class LoginController extends Controller {
     function index(Request $r) {
         if ($r->session()->get("user") != null)
-            return redirect()->route("dashboard");
+            if ($r->session()->get("user") != "admin") {
+                if ($r->session()->get("user-type") != null)
+                    if ($r->session()->get("user-type") != "ADMIN")
+                        return redirect()->route("dashboard");
+            } else {
+                return redirect()->route("admin");
+            }
+        
         return view('index');
     }
 

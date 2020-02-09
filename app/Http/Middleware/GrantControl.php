@@ -16,7 +16,14 @@ class GrantControl
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if ($request->session()->get("user") != null) return $next($request);
+        if ($request->session()->get("user") != null)
+            if ($request->session()->get("user") != "admin") {
+                if ($request->session()->get("user-type") != "ADMIN")
+                    return $next($request);
+            } else {
+                return redirect()->route("admin");
+            }
+
         return redirect()->route("index")->with(["msg" => "Please login again to continue"]);
     }
 }
