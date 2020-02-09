@@ -9,15 +9,28 @@ use App\Credential;
 use App\ScoreItem;
 
 class AdminController extends Controller {
+    function viewAddCredential() {
+        $leaders = Credential::where("credential_type", "HEAD")
+            ->orWhere("credential_type", "MANGR")
+            ->orWhere("credential_type", "SPRVR")->get();
+        return view("admin.addcredential")->with(["leaders" => $leaders]);
+    }
+
     function addCredential(Request $r) {
         $userId = $r->input("user-id");
         $userPass = $r->input("user-pass");
+        $userFirst = $r->input("user-first");
+        $userLast = $r->input("user-last");
         $userType = $r->input("user-type");
+        $userUp = $r->input("user-up");
         if (Credential::where("credential_user", $userId)->count() < 1) {
             $account = new Credential;
             $account->setAttribute("credential_user", $userId);
             $account->setAttribute("credential_pass", $userPass);
+            $account->setAttribute("credential_first", $userFirst);
+            $account->setAttribute("credential_last", $userLast);
             $account->setAttribute("credential_type", $userType);
+            $account->setAttribute("credential_up", $userUp);
             $account->save();
             return back()->with(["msg" => "Credential created", "msg-mood" => "good"]);
         } else {
@@ -25,15 +38,28 @@ class AdminController extends Controller {
         }
     }
 
+    function viewUpdateCredential() {
+        $leaders = Credential::where("credential_type", "HEAD")
+            ->orWhere("credential_type", "MANGR")
+            ->orWhere("credential_type", "SPRVR")->get();
+        return view("admin.updatecredential")->with(["leaders" => $leaders]);
+    }
+
     function updateCredential(Request $r) {
         $userId = $r->input("user-id");
         $userPass = $r->input("user-pass");
+        $userFirst = $r->input("user-first");
+        $userLast = $r->input("user-last");
         $userType = $r->input("user-type");
+        $userUp = $r->input("user-up");
 
         $selected = Credential::where('credential_user', $userId)->first();
         if ($selected != null) {
             if ($userPass != "") $selected->setAttribute("credential_pass", $userPass);
-            $selected->setAttribute("credential_type", $userType);
+            if ($userFirst != "") $selected->setAttribute("credential_first", $userFirst);
+            if ($userLast != "") $selected->setAttribute("credential_last", $userLast);
+            if ($userType != "NONE") $selected->setAttribute("credential_type", $userType);
+            if ($userUp != "NONE") $selected->setAttribute("credential_up", $userUp);
             $selected->save();
             return back()->with(["msg" => "Credential updated", "msg-mood" => "good"]);
         } else {
@@ -58,11 +84,6 @@ class AdminController extends Controller {
         return view("admin.uploaddata")->with(["supervisors" => $supervisors]);
     }
 
-    function viewSaveManualData() {
-        $supervisors = Credential::where("credential_type", "SPRVR")->get();
-        return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
-    }
-
     function saveData(Request $r) {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
@@ -73,6 +94,11 @@ class AdminController extends Controller {
         return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
+    function viewSaveManualData() {
+        $supervisors = Credential::where("credential_type", "SPRVR")->get();
+        return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
+    }
+
     function saveManualData(Request $r) {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
@@ -81,10 +107,6 @@ class AdminController extends Controller {
         $ext = $src->getClientOriginalExtension();
         $filepath = $src->storeAs("data/manual/$year/$month/", $team . '.' . $ext);
         return back()->with(["msg" => "Manual data file 'public/$filepath' created", "msg-mood" => "good"]);
-    }
-
-    function readManualData(Request $r) {
-        return back();
     }
 
     function filterScoreItemByRole(Request $r) {

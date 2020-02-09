@@ -12,8 +12,8 @@
 */
 
 Route::get('/admin', function() { return view('admin.addcredential'); })->name('admin');
-Route::get("/add-credential", function() { return view("admin.addcredential"); })->name('addcredential');
-Route::get("/update-credential", function() { return view("admin.updatecredential"); })->name('updatecredential');
+Route::get("/add-credential", "AdminController@viewAddCredential")->name('addcredential');
+Route::get("/update-credential", "AdminController@viewUpdateCredential")->name('updatecredential');
 Route::get("/delete-credential", function() { return view("admin.deletecredential"); })->name('deletecredential');
 Route::get("/upload-data", "AdminController@viewSaveData")->name('uploaddata');
 Route::get("/upload-manual-data", "AdminController@viewSaveManualData")->name('uploadmanualdata');
