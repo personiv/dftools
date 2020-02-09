@@ -9,7 +9,7 @@ use App\Credential;
 use App\ScoreItem;
 
 class AdminController extends Controller {
-    function viewAddCredential() {
+    function viewAddCredential(Request $r) {
         $leaders = Credential::where("credential_type", "HEAD")
             ->orWhere("credential_type", "MANGR")
             ->orWhere("credential_type", "SPRVR")->get();
@@ -38,7 +38,7 @@ class AdminController extends Controller {
         }
     }
 
-    function viewUpdateCredential() {
+    function viewUpdateCredential(Request $r) {
         $leaders = Credential::where("credential_type", "HEAD")
             ->orWhere("credential_type", "MANGR")
             ->orWhere("credential_type", "SPRVR")->get();
@@ -79,7 +79,7 @@ class AdminController extends Controller {
         }
     }
 
-    function viewSaveData() {
+    function viewSaveData(Request $r) {
         $supervisors = Credential::where("credential_type", "SPRVR")->get();
         return view("admin.uploaddata")->with(["supervisors" => $supervisors]);
     }
@@ -94,7 +94,7 @@ class AdminController extends Controller {
         return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
-    function viewSaveManualData() {
+    function viewSaveManualData(Request $r) {
         $supervisors = Credential::where("credential_type", "SPRVR")->get();
         return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
     }
