@@ -35,3 +35,4 @@ Route::post("/login", "LoginController@login");
 Route::get("/logout", "LoginController@logout");
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/session', 'HomeController@session')->name('session');

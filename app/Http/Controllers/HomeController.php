@@ -12,4 +12,8 @@ class HomeController extends Controller {
             return redirect()->route("index")->with(["msg" => "Please login again to continue"]);
         }
     }
+
+    function session(Request $r) {
+        
+    }
 }
