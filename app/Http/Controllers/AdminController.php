@@ -120,6 +120,7 @@ class AdminController extends Controller {
         $data = json_decode($r->getContent(), true);
         $newItem = new ScoreItem;
         $newItem->setAttribute("score_item_role", $data["role"]);
+        $newItem->setAttribute("score_item_class", $data["class"]);
         $newItem->setAttribute("score_item_name", $data["name"]);
         $newItem->setAttribute("score_item_desc", $data["description"]);
         $newItem->setAttribute("score_item_goal", $data["goal"]);

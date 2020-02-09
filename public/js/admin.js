@@ -19,12 +19,14 @@ function toggleEdit() {
 
 function addRow() {
     // Input values
+    var newItemClass = $("#new-score-item-class").val();
     var newItemName = $("#new-score-item-name").val();
     var newItemDesc = $("#new-score-item-desc").val();
     var newItemGoal = $("#new-score-item-goal").val();
     var newItemWeight = $("#new-score-item-weight").val();
 
     var hasBlankInput = false;
+    if (newItemClass == "") hasBlankInput = true;
     if (newItemName == "") hasBlankInput = true;
     if (newItemDesc == "") hasBlankInput = true;
     if (newItemGoal == "") hasBlankInput = true;
@@ -40,6 +42,7 @@ function addRow() {
     // Format: score_card_item_id-score_card_item_name (1-Item), (1-Description)
     request("save-score-item", JSON.stringify({
         role: $("#item-role").val(),
+        class: newItemClass,
         name: newItemName,
         description: newItemDesc,
         goal: newItemGoal,
@@ -47,6 +50,7 @@ function addRow() {
     }), function() {
         if (this.readyState == 4 && this.status == 200) {
             var newRowId = this.responseText;
+            var newRowClassId = newRowId + "-score_item_class";
             var newRowItemId = newRowId + "-score_item_name";
             var newRowDescId = newRowId + "-score_item_desc";
             var newRowGoalId = newRowId + "-score_item_goal";
@@ -55,10 +59,11 @@ function addRow() {
             var isDisabled = "";
             if (!editing) isDisabled = "disabled";
             
-            $("<tr><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='form-control item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='form-control item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
+            $("<tr><td><input id='" + newRowClassId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemClass + "'></td><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='form-control item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='form-control item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
         }
     });
 
+    $("#new-score-item-class").val("");
     $("#new-score-item-name").val("");
     $("#new-score-item-desc").val("");
     $("#new-score-item-goal").val("");

@@ -16,7 +16,7 @@ class CreateScoreItemsTable extends Migration
         Schema::create('score_items', function (Blueprint $table) {
             $table->increments('score_item_id');
             $table->string('score_item_role', 5);
-            $table->string('score_item_class', 4);
+            $table->string('score_item_class', 64);
             $table->string('score_item_name', 64);
             $table->string('score_item_desc', 1024);
             $table->string('score_item_goal', 64);

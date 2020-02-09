@@ -25,6 +25,7 @@
 <table class="table table-hover table-striped">
   <thead>
     <tr>
+      <th scope="col" class="w-20">Class</th>
       <th scope="col" class="w-20">Item</th>
       <th scope="col" class="w-40">Description</th>
       <th scope="col" class="w-15">Goal</th>
@@ -37,6 +38,7 @@
     @for ($i = 0; $i < $scoreItems->count(); $i++)
     <?php $cid = $scoreItems[$i]->score_item_id; ?>
       <tr>
+      <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_class' }}" value="{{ $scoreItems[$i]->score_item_class }}"></td>
         <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
         <td><textarea disabled class="form-control item-cell" id="{{ $cid . '-score_item_desc' }}">{{ $scoreItems[$i]->score_item_desc }}</textarea></td>
         <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_goal' }}" value="{{ $scoreItems[$i]->score_item_goal }}"></td>
@@ -45,6 +47,7 @@
       </tr>
     @endfor
     <tr id="new-row">
+      <td><input class="form-control" type="text" id="new-score-item-class"></td>
       <td><input class="form-control" type="text" id="new-score-item-name"></td>
       <td><textarea class="input-desc form-control" id="new-score-item-desc"></textarea></td>
       <td><input class="form-control" type="text" id="new-score-item-goal"></td>
