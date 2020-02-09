@@ -5,9 +5,9 @@
 <form action="{{ action('AdminController@saveManualData') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <label for="data-year">Year</label>
-    <input class="form-control" type="number" name="data-year" required>
+    <input class="form-control" type="number" id="data-year" name="data-year" required>
     <label for="data-month">Month</label>
-    <select class="form-control" name="data-month" required>
+    <select class="form-control" id="data-month" name="data-month" required>
         <option value="JAN">January</option>
         <option value="FEB">February</option>
         <option value="MAR">March</option>
@@ -22,7 +22,7 @@
         <option value="DEC">December</option>
     </select>
     <label for="data-team">Team</label>
-    <select class="form-control" name="data-team" required>
+    <select class="form-control" id="data-team" name="data-team" required>
         @for($i = 0; $i < $supervisors->count(); $i++)
 <?php
                 $supervisor = $supervisors[$i];
@@ -33,7 +33,7 @@
         @endfor
     </select>
     <label for="data-src">Data</label>
-    <input class="form-control" type="file" name="data-src" required>
+    <input class="form-control" type="file" id="data-src" name="data-src" required>
     <input type="submit" value="Submit" class="btn btn-success">
 </form>
 @endsection
