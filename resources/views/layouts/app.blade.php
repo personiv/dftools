@@ -31,6 +31,7 @@
         <div class="border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">dfs<span>corecard</span></div>
         <div class="list-group list-group-flush">
+            @if (session("user-type") != "ADMIN")
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-dashboard mr-3"></i><span>Dashboard</span>
             </a>
@@ -45,6 +46,26 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-comments-o mr-3"></i><span>Feedback</span>
             </a>
+            @else
+            <a href="add-credential" class="list-group-item list-group-item-action">
+                <i class="fa fa-plus mr-3"></i><span>Add Credential</span>
+            </a>
+            <a href="update-credential" class="list-group-item list-group-item-action">
+                <i class="fa fa-edit mr-3"></i><span>Update Credential</span>
+            </a>
+            <a href="delete-credential" class="list-group-item list-group-item-action">
+                <i class="fa fa-trash mr-3"></i><span>Delete Credential</span>
+            </a>
+            <a href="upload-data" class="list-group-item list-group-item-action">
+                <i class="fa fa-upload mr-3"></i><span>Upload Data</span>
+            </a>
+            <a href="upload-manual-data" class="list-group-item list-group-item-action">
+                <i class="fa fa-upload mr-3"></i><span>Upload Manual Data</span>
+            </a>
+            <a href="update-scorecard-items" class="list-group-item list-group-item-action">
+                <i class="fa fa-table mr-3"></i><span>Update Scorecard Items</span>
+            </a>
+            @endif
             <div class="bottom-button mb-5">
             <a href="logout" class="list-group-itemX list-group-item-action">
                 <i class="fa fa-sign-out mr-3"></i><span>Logout</span>

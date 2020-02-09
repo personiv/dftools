@@ -8,7 +8,14 @@ use App\Credential;
 class LoginController extends Controller {
     function index(Request $r) {
         if ($r->session()->get("user") != null)
-            return redirect()->route("dashboard");
+            if ($r->session()->get("user") != "admin") {
+                if ($r->session()->get("user-type") != null)
+                    if ($r->session()->get("user-type") != "ADMIN")
+                        return redirect()->route("dashboard");
+            } else {
+                return redirect()->route("admin");
+            }
+        
         return view('index');
     }
 
@@ -22,7 +29,9 @@ class LoginController extends Controller {
                 return redirect()->route("index")->with(["msg" => "Incorrect username or password"]);
             }
             $r->session()->put("user", $user);
-            return redirect()->route("dashboard");
+            $r->session()->put("user-type", $account->getAttribute("credential_type"));
+            if ($account->getAttribute("credential_type") != "ADMIN") return redirect()->route("dashboard");
+            else return redirect()->route("admin");
         } else {
             return redirect()->route("index")->with(["msg" => "Incorrect username or password"]);
         }
@@ -30,6 +39,7 @@ class LoginController extends Controller {
 
     function logout(Request $r) {
         $r->session()->forget("user");
+        $r->session()->forget("user-type");
         return redirect()->route("index");
     }
 }

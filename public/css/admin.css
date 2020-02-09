@@ -14,7 +14,6 @@
 .content-title {
     font-weight: 700;
     font-size: 24px;
-    color: white;
 }
 .admin-wrapper {
     background-color: var(--light-color-50p);
@@ -47,7 +46,6 @@ form > label, form > input, form > select {
     width: auto !important;
 }
 label {
-    color: white;
     margin-top: 30px;
 }
 input[type=submit] {
@@ -56,7 +54,6 @@ input[type=submit] {
 }
 .message-box {
     margin-top: 50px;
-    color: white;
     background-color: var(--tertiary-color);
     border-radius: 8px;
     padding: 8px;

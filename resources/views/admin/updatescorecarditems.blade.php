@@ -22,7 +22,7 @@
 </form>
 @if (session("score-items") != null && session("selected-role") != "NONE")
 <div class="table-responsive text-nowrap">
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-bordered">
   <thead>
     <tr>
       <th scope="col" class="w-20">Class</th>

@@ -2,11 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
-
 use Closure;
 
-class GrantControl
+class AdminControl
 {
     /**
      * Handle an incoming request.
@@ -17,13 +15,12 @@ class GrantControl
      */
     public function handle($request, Closure $next) {
         if ($request->session()->get("user") != null)
-            if ($request->session()->get("user") != "admin") {
-                if ($request->session()->get("user-type") != "ADMIN")
+            if ($request->session()->get("user") == "admin") {
+                if ($request->session()->get("user-type") == "ADMIN")
                     return $next($request);
             } else {
-                return redirect()->route("admin");
+                redirect()->route("dashboard");
             }
-
-        return redirect()->route("index")->with(["msg" => "Please login again to continue"]);
+        return redirect()->route("index")->with(["msg" => "Access denied"]);
     }
 }
