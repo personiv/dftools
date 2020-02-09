@@ -6,20 +6,21 @@
     {{ csrf_field() }}
     <label for="item-role">Select Role</label>
     <select class="form-control" id="item-role" name="item-role" onchange="this.form.submit()" required>
-      <option value="None" selected>Click to select</option>
-      @if (session("selected-role") == "Designer") <option value="Designer" selected>Designer</option>
-      @else <option value="Designer">Designer</option> @endif
+      @if (session("selected-role") == "NONE")<option value="NONE" selected>Click to select</option>
+      @else <option value="NONE">Click to select</option> @endif
+      @if (session("selected-role") == "DESGN") <option value="DESGN" selected>Designer</option>
+      @else <option value="DESGN">Designer</option> @endif
       @if (session("selected-role") == "WML") <option value="WML"selected>WML</option>
       @else <option value="WML">WML</option> @endif
-      @if (session("selected-role") == "Custom") <option value="Custom"selected>Custom</option>
-      @else <option value="Custom">Custom</option> @endif
+      @if (session("selected-role") == "CUSTM") <option value="CUSTM"selected>Custom</option>
+      @else <option value="CUSTM">Custom</option> @endif
       @if (session("selected-role") == "VQA") <option value="VQA"selected>VQA</option>
       @else <option value="VQA">VQA</option> @endif
       @if (session("selected-role") == "PR") <option value="PR"selected>PR</option>
       @else <option value="PR">PR</option> @endif
     </select>
 </form>
-@if (session("score-items") != null && session("selected-role") != "None")
+@if (session("score-items") != null && session("selected-role") != "NONE")
 <div class="table-responsive text-nowrap">
 <table class="table table-hover table-striped">
   <thead>

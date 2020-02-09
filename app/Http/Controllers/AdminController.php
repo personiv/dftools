@@ -21,7 +21,7 @@ class AdminController extends Controller {
             $account->save();
             return back()->with(["msg" => "Credential created", "msg-mood" => "good"]);
         } else {
-            return back()->with("msg", "Credential already exists");
+            return back()->with(["msg" => "Credential already exists"]);
         }
     }
 
@@ -37,7 +37,7 @@ class AdminController extends Controller {
             $selected->save();
             return back()->with(["msg" => "Credential updated", "msg-mood" => "good"]);
         } else {
-            return back()->with("msg", "Credential not registered");
+            return back()->with(["msg" => "Credential not registered"]);
         }
     }
 
@@ -49,8 +49,42 @@ class AdminController extends Controller {
             $selected->delete();
             return back()->with(["msg" => "Credential deleted", "msg-mood" => "good"]);
         } else {
-            return back()->with("msg", "Credential not registered");
+            return back()->with(["msg" => "Credential not registered"]);
         }
+    }
+
+    function viewSaveData() {
+        $supervisors = Credential::where("credential_type", "SPRVR")->get();
+        return view("admin.uploaddata")->with(["supervisors" => $supervisors]);
+    }
+
+    function viewSaveManualData() {
+        $supervisors = Credential::where("credential_type", "SPRVR")->get();
+        return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
+    }
+
+    function saveData(Request $r) {
+        $year = $r->input("data-year");
+        $month = $r->input("data-month");
+        $team = $r->input("data-team");
+        $src = $r->file("data-src");
+        $ext = $src->getClientOriginalExtension();
+        $filepath = $src->storeAs("data/actual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
+    }
+
+    function saveManualData(Request $r) {
+        $year = $r->input("data-year");
+        $month = $r->input("data-month");
+        $team = $r->input("data-team");
+        $src = $r->file("data-src");
+        $ext = $src->getClientOriginalExtension();
+        $filepath = $src->storeAs("data/manual/$year/$month/", $team . '.' . $ext);
+        return back()->with(["msg" => "Manual data file 'public/$filepath' created", "msg-mood" => "good"]);
+    }
+
+    function readManualData(Request $r) {
+        return back();
     }
 
     function filterScoreItemByRole(Request $r) {
@@ -86,39 +120,5 @@ class AdminController extends Controller {
         $id = json_decode($r->getContent(), true)["id"];
         $rowToDelete = ScoreItem::where("score_item_id", $id);
         $rowToDelete->delete();
-    }
-
-    function viewSaveData() {
-        $supervisors = Credential::where("credential_type", "SPRVR")->get();
-        return view("admin.uploaddata")->with(["supervisors" => $supervisors]);
-    }
-
-    function viewSaveManualData() {
-        $supervisors = Credential::where("credential_type", "SPRVR")->get();
-        return view("admin.uploadmanualdata")->with(["supervisors" => $supervisors]);
-    }
-
-    function saveData(Request $r) {
-        $year = $r->input("data-year");
-        $month = $r->input("data-month");
-        $team = $r->input("data-team");
-        $src = $r->file("data-src");
-        $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("data/actual/$year/$month/", $team . '.' . $ext);
-        return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
-    }
-
-    function saveManualData(Request $r) {
-        $year = $r->input("data-year");
-        $month = $r->input("data-month");
-        $team = $r->input("data-team");
-        $src = $r->file("data-src");
-        $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("data/manual/$year/$month/", $team . '.' . $ext);
-        return back()->with(["msg" => "Manual data file 'public/$filepath' created", "msg-mood" => "good"]);
-    }
-
-    function readManualData(Request $r) {
-        return back();
     }
 }
