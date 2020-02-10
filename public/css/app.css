@@ -64,6 +64,11 @@ body, html {
 |
 */
 /* Top resource image, name and role */
+.top-resource-container .tr-section-container {
+    display: flex;
+    height: 100%;
+}
+
 .top-resource-container .tr-section1 {
     display: inline-flex;
     justify-content: left;
@@ -111,32 +116,22 @@ body, html {
     font-size: 2rem;
     text-align: left;
     color: var(--btemp-success);
-} /* end */
-
-/* Progress bar and score & */
-.eachScore-container .progress:not(last-child){
-    margin-bottom: 15px;
 }
 
-.eachScore-container span {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    word-spacing: 2px;
-    text-align: left;
-}
-
-#count-example {
-    font-size: 10px;
+/* title-scorecard-container */
+.title-scorecard-container {
     font-weight: 400;
-}
-
-.progress {
-    height: 2em !important;
-}
-.progress .progress-bar {
-    padding-left: 10px;
-    transition: width 0.3s ease-in;
+    letter-spacing: 2px;
+    font-family: 'Open sans', sans-serif;
+    font-size: 12px;
+    width: 80%;
+    height: auto;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius:50px;
+    padding: 5px 10px 5px 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 5px 5px 10px #f4f4f4;
 }
 
 /* Total score */
@@ -150,19 +145,63 @@ body, html {
 
 .totalScore-container .total-heading {
     font-family: 'Open sans', sans-serif;
-    font-size: 18px;
+    font-size: 14px;
     letter-spacing: 1px;
     word-spacing: 2px;
 }
 
 .totalScore-container .total-score {
     font-family: 'Open sans', sans-serif;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: 700;
-    line-height: 42px;
+    line-height: 20px;
     letter-spacing: 1px;
     word-spacing: 2px;
+} /* end */
+
+/* Remove the padding right and left */
+.remove-padding .remove-p-right {
+    padding-right: 0;
 }
+.remove-padding .remove-p-left {
+    padding-left: 0;
+}
+
+/* Progress bar and score */
+.eachScore-container .progress{
+    margin-bottom: 15px;
+}
+
+.eachScore-container .progress:last-child{
+    margin-bottom: 0px;
+}
+
+.eachScore-container span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    text-align: left;
+}
+
+#count-example {
+    font-size: 10px;
+    font-weight: 400;
+    text-shadow: 1px 1px 2px var(--dark-color);
+    z-index: 99;
+}
+
+.progress {
+    height: 2em !important;
+    border-radius: 50px !important;
+}
+.progress .progress-bar {
+    padding-left: 10px;
+    transition: width 0.3s ease-in;
+    overflow: visible;
+}
+
+
 /*
 |———————————————————————————————————————————————————————————————
 | 2nd row 1st column / summary, function...
@@ -217,7 +256,7 @@ body, html {
 | Here, you can edit the style of each action for the summary 
 */
 /* Action button default style */
-.dboard-wrapper table td span#action-btn {
+.dboard-wrapper table td #action-btn {
     padding: 5px 10px !important;
     font-size: 12px;
     font-weight: 700;
