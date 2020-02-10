@@ -2,6 +2,10 @@
 
 @section('admin-content')
 <div class="content-title">Upload Manual Data</div>
+<div class="note-box">
+<p>Note: Data to be uploaded must follow a template. Download the template below:</p>
+<a href="download-template"><button class="btn btn-primary">Download Template</button></a>
+</div>
 <form action="{{ action('AdminController@saveManualData') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <label for="data-year">Year</label>
