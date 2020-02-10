@@ -11,6 +11,7 @@
 {{ "Type: " . $type }}<br>
 {{ "Mode: " . $mode }}<br>
 {{ "Week Number: " . $week }}
+<div class="table-responsive">
 <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
 <thead class="thead-dark">
     <tr>
@@ -31,12 +32,20 @@
         <td><pre>{{ $scoreitems[$i]->getAttribute('score_item_desc') }}</pre></td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_goal') }}</td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_weight') }}%</td>
-        <td class="align-middle">{{ $scorevalues[$columnindex + 1][$i + 1] }}%</td>
-        @if ($i == 0)
-            <td class="align-middle" rowspan="{{ count($scoreitems) }}">{{ $scorevalues[$columnindex + 1][count($scoreitems) + 1] }}%</td>
+        @if ($scorevalues != null)
+            <td class="align-middle">{{ $scorevalues[$columnindex + 1][$i + 1] }}%</td>
+            @if ($i == 0)
+                <td class="align-middle" rowspan="{{ count($scoreitems) }}">{{ $scorevalues[$columnindex + 1][count($scoreitems) + 1] }}%</td>
+            @endif
+        @else
+            <td class="align-middle">NaN</td>
+            @if ($i == 0)
+                <td class="align-middle" rowspan="{{ count($scoreitems) }}">NaN</td>
+            @endif
         @endif
     </tr>
 @endfor
 </tbody>
 </table>
+</div>
 @endsection

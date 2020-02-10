@@ -18,21 +18,26 @@ class HomeController extends Controller {
         $year = date("Y");
         $month = strtoupper(date("M"));
         $scoreitems = ScoreItem::where("score_item_role", $role)->get();
+        $colIndex = -1;
 
-        $reader = new Xlsx;
-        $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load("data/$mode/$year/$month/$lead.xlsx");
-        $spreadsheet->setActiveSheetIndex(1);
-        $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-
-        $colIndex = 0;
-        for ($i = 0; $i < count($scorevalues); $i++) { 
-            if ($scorevalues[$i] == $agent) {
-                $colIndex = $i;
-                break;
+        if (file_exists("data/$mode/$year/$month/$lead.xlsx")) {
+            $reader = new Xlsx;
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load("data/$mode/$year/$month/$lead.xlsx");
+            $spreadsheet->setActiveSheetIndex(1);
+            $scorevalues = $spreadsheet->getActiveSheet()->toArray();
+        
+            for ($i = 0; $i < count($scorevalues); $i++) { 
+                if ($scorevalues[$i] == $agent) {
+                    $colIndex = $i;
+                    break;
+                }
             }
+            if ($colIndex == -1) $scorevalues = null;
+        } else {
+            $scorevalues = null;
         }
-
+        
         return view('session')->with([
             "lead" => $lead,
             "agent" => $agent,
