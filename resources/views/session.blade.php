@@ -5,10 +5,11 @@
 @section('js', 'js/session.js')
 
 @section('content')
+{{ "Lead: " . $lead }}<br>
+{{ "Agent: " . $agent }}<br>
 {{ "Role: " . $role }}<br>
 {{ "Type: " . $type }}<br>
 {{ "Mode: " . $mode }}<br>
-{{ "Agent: " . session('user') }}<br>
 {{ "Week Number: " . $week }}
 <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
 <thead class="thead-dark">
@@ -19,6 +20,7 @@
         <th>Goal</th>
         <th>Weight</th>
         <th>Actual</th>
+        <th>Overall</th>
     </tr>
 </thead>
 <tbody>
@@ -29,7 +31,10 @@
         <td ><pre>{{ $scoreitems[$i]->getAttribute('score_item_desc') }}</pre></td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_goal') }}</td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_weight') }}%</td>
-        <td></td>
+        <td>100%</td>
+        @if ($i == 0)
+            <td class="align-middle" rowspan="{{ count($scoreitems) }}">100%</td>
+        @endif
     </tr>
 @endfor
 </tbody>
