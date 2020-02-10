@@ -35,11 +35,13 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-dashboard mr-3"></i><span>Dashboard</span>
             </a>
+            @if (session("user-type") == "SPRVR")
             <!-- Modal style menu -->
             <!-- Button trigger modal -->
             <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa fa-folder mr-3"></i><span>Create Session</span>
             </a>
+            @endif
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-history mr-3"></i><span>History</span>
             </a>
@@ -116,7 +118,7 @@
             </div>
         <!-- /#page-content-wrapper -->
         </div>
-
+        @if (session("user-type") == "SPRVR")
         <!-- Modal / Create Session -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
@@ -161,7 +163,7 @@
                 </div>
             </div>
         </div>
-    
+        @endif
     <!-- End of main wrapper -->
     </div>
 

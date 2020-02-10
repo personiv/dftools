@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
+use App\Credential;
 use App\ScoreItem;
 
 class HomeController extends Controller {
     function session(Request $r) {
-        $lead = "10071309";
-        $agent = $r->session()->get("user");
-        $role = $r->session()->get("user-type");
-        $type = "SCORE";
-        $mode = "manual";
+        $lead = $r->session()->get("user");
+        $agent = ScoreItem::where("score_item_role", $r->input("session-agent"))->first();
+        $role = $agent->getAttribute("credential_type");
+        $type = $r->input("session-type");
+        $mode = $r->input("session-mode");
         $week = date("W");
         $year = date("Y");
         $month = strtoupper(date("M"));
