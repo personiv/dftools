@@ -4,6 +4,18 @@
     font-weight: 700;
     font-size: 24px;
 }
+.note-box {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px var(--dark-color-50p);
+    max-width: 350px;
+    margin-top: 20px;
+    background-color: white;
+}
+
+.note-box p {
+    white-space: normal;
+}
 .subtitle {
     margin-top: 30px;
     margin-bottom: 8px;
@@ -15,7 +27,7 @@
     font-weight: 700;
     font-size: 24px;
 }
-.admin-wrapper {
+.wrapper-ni-manic {
     background-color: var(--light-color-50p);
     backdrop-filter: blur(8px);
     margin: 30px;
