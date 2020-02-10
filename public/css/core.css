@@ -6,7 +6,26 @@
     --tertiary-color: #E62E12;
     --link-color: #FFC700;
     --light-color: #ffffff;
-    --light-color-50p: rgba(255, 255, 255, 0.6);
+    --light-color-50p: rgba(255, 255, 255, 0.7);
     --dark-color: #595959;
-    --dark-color-50p: rgba(89,89,89, 0.6);
+    --dark-color-50p: rgba(89,89,89, 0.7);
+    --font-color: #72777a;
+
+    /* Status custom bootstrap 4 color */
+    --for-coaching: #d9534f;
+    --for-coaching-transparent: #d9534f1A;
+    --pending: #f0ad4e;
+    --pending-transparent: #f0ad4e1A;
+    --completed: #5cb85c;
+    --completed-transparent: #5cb85c1A;
+
+    /* Bootstrap 4 color */
+    --btemp-primary: #0275d8;
+    --btemp-success: #5cb85c;
+    --btemp-info: #5bc0de;
+    --btemp-warning: #f0ad4e;
+    --btemp-danger: #d9534f;
+    --btemp-inverse: #292b2c;
+    --btemp-faded: #f7f7f7;
 }
+

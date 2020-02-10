@@ -11,6 +11,23 @@ body, html {
     background-color: #f9fafb;
 }
 
+.dboard-wrapper table {
+    color: var(--dark-color-50p);
+}
+
+.dboard-wrapper table th, .dboard-wrapper table td {
+    padding: 1em;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f4f4f4 !important;
+}
+
+.table-hover tbody tr:hover {
+    color: var(--dark-color-50p) !important;
+    background-color: #f4f4f4 !important;
+}
+
 .dboard-wrapper .tb-container {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius: 3px;
@@ -35,4 +52,83 @@ body, html {
 .tb-container .dboard-text .dboard-othtext {
     line-height: 12px;
     font-size: 12px;
+    color: var(--dark-color-50p);
 }
+
+/*
+|———————————————————————————————————————————————————————————————
+| 1st row 1st column / summary, function...
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the style of each status for the summary
+|
+*/
+/* Status default style */
+.dboard-wrapper table td span{
+    padding: 5px 0;
+    font-size: 12px;
+    border-radius: 3px;
+    float: left;
+    width: 100%;
+}
+
+/* Status — For Coaching */
+.dboard-wrapper table td span.stats-for-coaching {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--for-coaching-transparent);
+    color: var(--for-coaching);
+    cursor: default;
+    width: auto;
+    white-space: nowrap;
+
+}
+
+/* Status — Pending */
+.dboard-wrapper table td span.stats-pending {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--pending-transparent);
+    color: var(--pending);
+    cursor: default;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* Status — Completed */
+.dboard-wrapper table td span.stats-completed {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--completed-transparent);
+    color: var(--completed);
+    width: auto;
+    white-space: nowrap;
+} /* Status default style end/ */
+
+/*
+| Here, you can edit the style of each action for the summary 
+*/
+/* Action button default style */
+.dboard-wrapper table td span#action-btn {
+    padding: 5px 10px !important;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    max-width: 120px;
+    width: 100%;
+}
+
+.action-btn-crsession {
+    background-color: var(--info);
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-btn-crsession:hover, .action-btn-crsession:focus, .action-btn-crsession:active  {
+    background-color: #4898b0;
+    box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
+} /* Action button default style end/ */
+
