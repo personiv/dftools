@@ -1,6 +1,7 @@
 window.onload = function() {
     mergeColumn(0);
     mergeColumn(1);
+    $("#scorecard").css("visibility", "visible");
 }
 
 function mergeColumn(columnIndex) {

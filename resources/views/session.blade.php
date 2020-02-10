@@ -10,7 +10,7 @@
 {{ "Mode: " . $mode }}<br>
 {{ "Agent: " . session('user') }}<br>
 {{ "Week Number: " . $week }}
-<table id="scorecard" class="table table-bordered">
+<table id="scorecard" class="table table-bordered" style="visibility: hidden;">
 <thead class="thead-dark">
     <tr>
         <th>Classification</th>
