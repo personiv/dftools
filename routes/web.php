@@ -18,6 +18,7 @@ Route::get("/delete-credential", function() { return view("admin.deletecredentia
 Route::get("/upload-data", "AdminController@viewSaveData")->middleware('admin')->name('uploaddata');
 Route::get("/upload-manual-data", "AdminController@viewSaveManualData")->middleware('admin')->name('uploadmanualdata');
 Route::get("/update-scorecard-items", function() { return view("admin.updatescorecarditems"); })->middleware('admin')->name('updatescorecarditems');
+Route::get("/download-template", function() { return Storage::download('data/ManualTemplate.xlsx'); })->middleware('admin');
 
 Route::post("/submit-add-credential", "AdminController@addCredential")->middleware('admin');
 Route::post("/submit-update-credential", "AdminController@updateCredential")->middleware('admin');
