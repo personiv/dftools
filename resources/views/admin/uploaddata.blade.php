@@ -21,17 +21,6 @@
         <option value="NOV">November</option>
         <option value="DEC">December</option>
     </select>
-    <label for="data-team">Team</label>
-    <select class="form-control" id="data-team" name="data-team" required>
-        @for($i = 0; $i < $supervisors->count(); $i++)
-<?php
-                $supervisor = $supervisors[$i];
-                $supervisor_user = $supervisor->getAttribute('credential_user');
-                $supervisor_first = $supervisor->getAttribute('credential_first');
-?>
-            <option value='{{ $supervisor_user }}'>{{ $supervisor_first }}</option>
-        @endfor
-    </select>
     <label for="data-src">Data</label>
     <input class="form-control" type="file" id="data-src" name="data-src" required>
     <input type="submit" value="Submit" class="btn btn-success">

@@ -12,7 +12,7 @@
     <input class="form-control" type="text" placeholder="Leave blank for no changes" id="user-first" name="user-first">
     <label for="user-last">Last Name</label>
     <input class="form-control" type="text" placeholder="Leave blank for no changes" id="user-last" name="user-last">
-    <label for="user-up">Reporting To</label>
+    <label for="user-up">Reporting to</label>
     <select class="form-control" id="user-up" name="user-up" required>
             <option value="NONE" selected>No changes</option>
         @for($i = 0; $i < $leaders->count(); $i++)

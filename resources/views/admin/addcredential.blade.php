@@ -12,7 +12,7 @@
     <input class="form-control" type="text" id="user-first" name="user-first" required>
     <label for="user-last">Last Name</label>
     <input class="form-control" type="text" id="user-last" name="user-last" required>
-    <label for="user-up">Reporting To</label>
+    <label for="user-up">Reporting to</label>
     <select class="form-control" id="user-up" name="user-up" required>
         @for($i = 0; $i < $leaders->count(); $i++)
             <option value="{{ $leaders[$i]->getAttribute('credential_user') }}">{{ $leaders[$i]->getAttribute('credential_first') . ' ' . $leaders[$i]->getAttribute('credential_last') }}</option>

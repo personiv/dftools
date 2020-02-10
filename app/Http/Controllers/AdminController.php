@@ -87,10 +87,9 @@ class AdminController extends Controller {
     function saveData(Request $r) {
         $year = $r->input("data-year");
         $month = $r->input("data-month");
-        $team = $r->input("data-team");
         $src = $r->file("data-src");
         $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("data/actual/$year/$month/", $team . '.' . $ext);
+        $filepath = $src->storeAs("data/actual/$year", $month . '.' . $ext);
         return back()->with(["msg" => "Actual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
@@ -105,7 +104,7 @@ class AdminController extends Controller {
         $team = $r->input("data-team");
         $src = $r->file("data-src");
         $ext = $src->getClientOriginalExtension();
-        $filepath = $src->storeAs("data/manual/$year/$month/", $team . '.' . $ext);
+        $filepath = $src->storeAs("data/manual/$year/$month", $team . '.' . $ext);
         return back()->with(["msg" => "Manual data file 'public/$filepath' created", "msg-mood" => "good"]);
     }
 
