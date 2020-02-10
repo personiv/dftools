@@ -37,7 +37,7 @@
             </a>
             <!-- Modal style menu -->
             <!-- Button trigger modal -->
-            <a class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModalCenter">
+            <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa fa-folder mr-3"></i><span>Create Session</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
@@ -111,9 +111,9 @@
             </div>
         </nav>
 
-        <div class="container-fluid p-5 dboard-wrapper">
-            @yield('content')
-        </div>
+            <div class="container-fluid p-5 dboard-wrapper">
+                @yield('content')
+            </div>
         <!-- /#page-content-wrapper -->
         </div>
 
@@ -169,6 +169,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/progressbar.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -204,22 +205,52 @@
     <!-- Hamburger Script -->
     <script>
     // animated menu / hamburger 
-    $(document).ready(function () {
-        $('.first-button').on('click', function() {
-            $('.animated-icon1').toggleClass('open');
+        $(document).ready(function () {
+            $('.first-button').on('click', function() {
+                $('.animated-icon1').toggleClass('open');
+            });
+            if (getCookie("toggled") == "NaN") document.cookie = "toggled=1";
+            if (isToggled() < 0) {
+                $("#wrapper").toggleClass("toggled");
+                $('.animated-icon1').toggleClass('open');
+            }
         });
-        if (getCookie("toggled") == "NaN") document.cookie = "toggled=1";
-        if (isToggled() < 0) {
-            $("#wrapper").toggleClass("toggled");
-            $('.animated-icon1').toggleClass('open');
-        }
-    });
     </script>
 
-    <script>    
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
+    <!-- Progress bar in dashboard -->
+    <script>
+        // progressbar.js
+        var bar = new ProgressBar.Circle(total-score, {
+        color: '#aaa',
+        // This has to be the same size as the maximum width to
+        // prevent clipping
+        strokeWidth: 4,
+        trailWidth: 1,
+        easing: 'easeInOut',
+        duration: 1400,
+        text: {
+        autoStyleContainer: false
+        },
+        from: { color: '#aaa', width: 1 },
+        to: { color: '#333', width: 4 },
+        // Set default step function for all animate calls
+        step: function(state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+        var value = Math.round(circle.value() * 95);
+        if (value === 0) {
+        circle.setText('');
+        } else {
+        circle.setText(value);
+        }
+
+        }
+        });
+        bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+        bar.text.style.fontSize = '2rem';
+
+        bar.animate(1.0);  // Number from 0.0 to 1.0
     </script>
 
 </body>
