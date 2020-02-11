@@ -18,6 +18,8 @@
     --pending-transparent: #f0ad4e1A;
     --completed: #5cb85c;
     --completed-transparent: #5cb85c1A;
+    --info: #5bc0de;
+    --info-transparent: #5bc0de1A;
 
     /* Bootstrap 4 color */
     --btemp-primary: #0275d8;
