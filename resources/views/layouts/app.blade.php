@@ -11,9 +11,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     
-    <!-- Global Style and Script -->
+    <!-- Global Style -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
-    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 
     <!-- Page Style and Script -->
     <link rel="stylesheet" href="@yield('sidebar')">
@@ -179,88 +178,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/progressbar.js"></script>
-
-    <!-- Menu Toggle Script -->
-    <script>
-        // collapse menu / sidebar
-        $("#menu-toggle").click(function(e) {
-            var currentToggle = isToggled();
-            document.cookie = "toggled=" + (currentToggle * -1).toString();
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-
-        function getCookie(cname) {
-          var name = cname + "=";
-          var decodedCookie = decodeURIComponent(document.cookie);
-          var ca = decodedCookie.split(';');
-          for(var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-              c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-              return c.substring(name.length, c.length);
-            }
-          }
-          return "";
-        }
-
-        function isToggled() {
-            return parseInt(getCookie("toggled"));
-        }
-    </script>
-
-    <!-- Hamburger Script -->
-    <script>
-    // animated menu / hamburger 
-        $(document).ready(function () {
-            $('.first-button').on('click', function() {
-                $('.animated-icon1').toggleClass('open');
-            });
-            if (getCookie("toggled") == "NaN") document.cookie = "toggled=1";
-            if (isToggled() < 0) {
-                $("#wrapper").toggleClass("toggled");
-                $('.animated-icon1').toggleClass('open');
-            }
-        });
-    </script>
-
-    <!-- Progress bar in dashboard -->
-    <script>
-        // progressbar.js
-        var bar = new ProgressBar.Circle(total-score, {
-        color: '#aaa',
-        // This has to be the same size as the maximum width to
-        // prevent clipping
-        strokeWidth: 4,
-        trailWidth: 1,
-        easing: 'easeInOut',
-        duration: 1400,
-        text: {
-        autoStyleContainer: false
-        },
-        from: { color: '#aaa', width: 1 },
-        to: { color: '#333', width: 4 },
-        // Set default step function for all animate calls
-        step: function(state, circle) {
-        circle.path.setAttribute('stroke', state.color);
-        circle.path.setAttribute('stroke-width', state.width);
-
-        var value = Math.round(circle.value() * 95);
-        if (value === 0) {
-        circle.setText('');
-        } else {
-        circle.setText(value);
-        }
-
-        }
-        });
-        bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-        bar.text.style.fontSize = '2rem';
-
-        bar.animate(1.0);  // Number from 0.0 to 1.0
-    </script>
-
+    <!-- Global Script -->
+    <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 </html>
