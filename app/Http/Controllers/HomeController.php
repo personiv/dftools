@@ -19,11 +19,12 @@ class HomeController extends Controller {
         $month = strtoupper(date("M"));
         $scoreitems = ScoreItem::where("score_item_role", $role)->get();
         $colIndex = -1;
+        $path = "data/$mode/$year/$month/$lead.xlsx";
 
-        if (file_exists("data/$mode/$year/$month/$lead.xlsx")) {
+        if (file_exists($path)) {
             $reader = new Xlsx;
             $reader->setReadDataOnly(true);
-            $spreadsheet = $reader->load("data/$mode/$year/$month/$lead.xlsx");
+            $spreadsheet = $reader->load($path);
             $spreadsheet->setActiveSheetIndex(1);
             $scorevalues = $spreadsheet->getActiveSheet()->toArray();
         
