@@ -29,7 +29,7 @@
     <tr>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_class') }}</td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_name') }}</td>
-        <td><pre>{{ $scoreitems[$i]->getAttribute('score_item_desc') }}</pre></td>
+        <td style="max-width: 350px;"><pre>{{ $scoreitems[$i]->getAttribute('score_item_desc') }}</pre></td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_goal') }}</td>
         <td class="align-middle">{{ $scoreitems[$i]->getAttribute('score_item_weight') }}%</td>
         @if ($scorevalues != null)
