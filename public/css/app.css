@@ -39,14 +39,14 @@ body, html {
 .tb-container .dboard-text {
     text-transform: uppercase;
     font-family: 'Open sans', sans-serif;
+    letter-spacing: 1px;
+    word-spacing: 2px;
 }
 
 .tb-container .dboard-text .dboard-title {
     font-size: 20px;
     color: var(--dark-color);
     font-weight: 700;
-    letter-spacing: 1px;
-    word-spacing: 2px;
 }
 
 .tb-container .dboard-text .dboard-othtext {
@@ -57,10 +57,157 @@ body, html {
 
 /*
 |———————————————————————————————————————————————————————————————
-| 1st row 1st column / summary, function...
+| 1st row 1st column / top resource, function...
 |———————————————————————————————————————————————————————————————
 |
-| Here, you can edit the style of each status for the summary
+| Here, you can edit the style of top resource, ranking, etc.
+|
+*/
+/* Top resource image, name and role */
+.top-resource-container .tr-section-container {
+    display: flex;
+    height: 100%;
+}
+
+.top-resource-container .tr-section1 {
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+
+.top-resource-container div.r-name {
+    font-size: 20px;
+    line-height: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+.top-resource-container div.r-role {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+} 
+
+.top-resource-container .tr-section2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-resource-container .tr-section2 span {
+    font-size: 20px;
+    font-weight: 700;
+    padding: 15px 25px;
+    border-radius:100%;
+}
+
+.top-resource-container .fa {
+    width: 40px;
+    height: auto;
+    text-align: center;
+    font-size: 2rem;
+    text-align: left;
+    color: var(--btemp-success);
+}
+
+/* title-scorecard-container */
+.title-scorecard-container {
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-family: 'Open sans', sans-serif;
+    font-size: 12px;
+    width: 80%;
+    height: auto;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius:50px;
+    padding: 5px 10px 5px 5px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 5px 5px 10px #f4f4f4;
+}
+
+/* Total score */
+.totalScore-container {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+    height: 100%;
+}
+
+.totalScore-container .total-heading {
+    font-family: 'Open sans', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+}
+
+.totalScore-container .total-score {
+    font-family: 'Open sans', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+} /* end */
+
+/* Remove the padding right and left */
+.remove-padding .remove-p-right {
+    padding-right: 0;
+}
+.remove-padding .remove-p-left {
+    padding-left: 0;
+}
+
+/* Progress bar and score */
+.eachScore-container .progress{
+    margin-bottom: 15px;
+}
+
+.eachScore-container .progress:last-child{
+    margin-bottom: 0px;
+}
+
+.eachScore-container span {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    text-align: left;
+}
+
+#count-example {
+    font-size: 10px;
+    font-weight: 400;
+    text-shadow: 1px 1px 2px var(--dark-color);
+    z-index: 99;
+}
+
+.progress {
+    height: 2em !important;
+    border-radius: 50px !important;
+}
+.progress .progress-bar {
+    padding-left: 10px;
+    transition: width 0.3s ease-in;
+    overflow: visible;
+}
+
+
+/*
+|———————————————————————————————————————————————————————————————
+| 2nd row 1st column / summary, function...
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the style of each status for the summary and exception
 |
 */
 /* Status default style */
@@ -109,7 +256,7 @@ body, html {
 | Here, you can edit the style of each action for the summary 
 */
 /* Action button default style */
-.dboard-wrapper table td span#action-btn {
+.dboard-wrapper table td #action-btn {
     padding: 5px 10px !important;
     font-size: 12px;
     font-weight: 700;
@@ -120,6 +267,7 @@ body, html {
     width: 100%;
 }
 
+/* Action button / Create session */
 .action-btn-crsession {
     background-color: var(--info);
     color: var(--light-color);
@@ -130,5 +278,20 @@ body, html {
 .action-btn-crsession:hover, .action-btn-crsession:focus, .action-btn-crsession:active  {
     background-color: #4898b0;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
-} /* Action button default style end/ */
+} 
+
+/* Action button / Retake session */
+.action-btn-rtsession {
+    background-color: var(--btemp-danger);
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-btn-rtsession:hover, .action-btn-rtsession:focus, .action-btn-rtsession:active  {
+    background-color: #bf4845;
+    box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
+} 
+/* Action button default style end/ */
+
 

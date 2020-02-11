@@ -55,6 +55,10 @@ body {
   transition: .2s ease-in;
 }
 
+/* Modal nav item */
+#sidebar-wrapper .list-item-modal {
+  cursor: pointer;
+}
 /* Sidebar a.link button bottom / logout */
 .bottom-button {
   position: absolute;

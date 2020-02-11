@@ -163,6 +163,7 @@ body {
     width: 30%;
     height: 50px;
     color: var(--light-color) !important;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .custom-btn:hover, .custom-btn:focus, .custom-btn:active  {

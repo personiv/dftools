@@ -6,9 +6,9 @@
     --tertiary-color: #E62E12;
     --link-color: #FFC700;
     --light-color: #ffffff;
-    --light-color-50p: rgba(255, 255, 255, 0.7);
+    --light-color-50p: rgba(255, 255, 255, 0.8);
     --dark-color: #595959;
-    --dark-color-50p: rgba(89,89,89, 0.7);
+    --dark-color-50p: rgba(89,89,89, 0.8);
     --font-color: #72777a;
 
     /* Status custom bootstrap 4 color */
