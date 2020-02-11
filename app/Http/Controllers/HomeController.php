@@ -11,8 +11,8 @@ use App\ScoreItem;
 class HomeController extends Controller {
     function session(Request $r) {
         $lead = $r->session()->get("user");
-        $agent = ScoreItem::where("score_item_role", $r->input("session-agent"))->first();
-        $role = $agent->getAttribute("credential_type");
+        $agent = $r->input("session-agent");
+        $role = Credential::where("credential_user", $agent)->first()->getAttribute("credential_type");
         $type = $r->input("session-type");
         $mode = $r->input("session-mode");
         $week = date("W");
@@ -45,7 +45,7 @@ class HomeController extends Controller {
             "agent" => $agent,
             "role" => $role,
             "type" => $type,
-            "mode" => $mode,
+            "mode" => $mode != "" ? "manual" : "actual",
             "week" => $week,
             "scoreitems" => $scoreitems,
             "scorevalues" => $scorevalues,
