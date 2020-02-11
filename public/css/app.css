@@ -125,6 +125,34 @@ body, html {
     }
   } /* end */
 
+/* Add and Edit button for exception */
+.excp-btn #edit-btn, 
+.excp-btn #add-btn {
+    padding: 5px 10px !important;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    max-width: 120px;
+    width: 100%;
+}
+
+/* Action button / Create session */
+.action-btn-edit,
+.action-btn-add {
+    background-color: var(--info);
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
+.action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active  {
+    background-color: #4898b0;
+    box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
+}
+
 .dboard-wrapper {
     background-color: #f9fafb;
 }

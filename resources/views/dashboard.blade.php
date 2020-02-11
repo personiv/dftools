@@ -13,13 +13,13 @@
         <div class="col-md">
             <div class="ov-container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-6">
                         <div class="overview-txt ov-completed d-flex flex-column">
                             <div class="ov-title">Overview</div>
-                            <div class="ov-oth-txt">of Coaching Completed</div>
+                            <div class="ov-oth-txt">Coaching Completed</div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-6">
                         <div class="overview-prcnt">
                             <div id="ovTotal1" class="ov-total">
                                 <div class="sr-only">
@@ -39,7 +39,7 @@
                     <div class="col-6">
                         <div class="overview-txt ov-pending d-flex flex-column">
                             <div class="ov-title">Overview</div>
-                            <div class="ov-oth-txt">of Coaching Pending</div>
+                            <div class="ov-oth-txt">Coaching Pending</div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -62,7 +62,7 @@
                     <div class="col-6">
                         <div class="overview-txt ov-exception d-flex flex-column">
                             <div class="ov-title">Overview</div>
-                            <div class="ov-oth-txt">of Coaching Exception</div>
+                            <div class="ov-oth-txt">Coaching Exception</div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -111,7 +111,7 @@
                             <td>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#exampleModalCenter">
-                                    <span id="action-btn" class="action-btn-crsession">Create Session</span>
+                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
                                 </a>
                             </td>
                         </tr>
@@ -123,7 +123,7 @@
                             <td>
                                 <!-- Button trigger modal -->
                                 <a data-toggle="modal" data-target="#exampleModalCenter">
-                                    <span id="action-btn" class="action-btn-crsession">Create Session</span>
+                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
                                 </a>
                             </td>
                         </tr>
@@ -176,9 +176,19 @@
          <!-- Exception section -->
          <div class="col-md">
             <div class="tb-container">
-                <div class="dboard-text px-4 pt-4 pb-3">
-                    <div class="dboard-title">Exception</div>
-                    <div class="dboard-othtext">with valid reason</div>
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="dboard-text px-4 pt-4 pb-3">
+                            <div class="dboard-title">Exception</div>
+                            <div class="dboard-othtext">with valid reason</div>
+                        </div>
+                    </div>
+                    <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
+                        <div class="excp-btn d-inline-flex">
+                            <div type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</div>
+                            <div type="button" id="add-btn" class="action-btn-add"><i class="fa fa-plus mr-2"></i>Add</div>
+                        </div>
+                    </div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="table-responsive px-4 pt-0 pb-4">
@@ -198,14 +208,14 @@
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td><span class="stats-for-coaching">For Coaching</span></td>
-                            <td><span id="action-btn" class="action-btn-crsession">Create Session</span></td>
+                            <td><span id="action-btn" class="action-btn-crsession"><i class="fa fa-trash mr-2"></i>Delete</span></td>
                         </tr>
                         <tr>
                             <td>10021002</td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td><span class="stats-for-coaching">For Coaching</span></td>
-                            <td><span id="action-btn" class="action-btn-crsession">Create Session</span></td>
+                            <td><span id="action-btn" class="action-btn-crsession"><i class="fa fa-trash mr-2"></i>Delete</span></td>
                         </tr>
                         </tbody>
                     </table>

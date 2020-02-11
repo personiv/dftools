@@ -32,20 +32,20 @@
         <div class="list-group list-group-flush">
             @if (session("user-type") != "ADMIN")
             <a href="#" class="list-group-item list-group-item-action">
-                <i class="fa fa-dashboard mr-3"></i><span>Dashboard</span>
+                <i class="fa fa-pie-chart mr-3"></i><span>Dashboard</span>
             </a>
             @if (session("user-type") == "SPRVR")
             <!-- Modal style menu -->
             <!-- Button trigger modal -->
             <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
-                <i class="fa fa-folder mr-3"></i><span>Create Session</span>
+                <i class="fa fa-file-text mr-3"></i><span>Create Session</span>
             </a>
             @endif
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-history mr-3"></i><span>History</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-                <i class="fa fa-comments-o mr-3"></i><span>Feedback</span>
+                <i class="fa fa-weixin mr-3"></i><span>Feedback</span>
             </a>
             @else
             <a href="add-credential" class="list-group-item list-group-item-action">
