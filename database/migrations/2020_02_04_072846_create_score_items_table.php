@@ -23,6 +23,24 @@ class CreateScoreItemsTable extends Migration
             $table->integer('score_item_weight');
             $table->timestamps();
         });
+
+        function addItem($role, $class, $name, $desc, $goal, $weight) {
+            DB::table('score_items')->insert(array(
+                'score_item_role' => $role,
+                'score_item_class' => $class,
+                'score_item_name' => $name,
+                'score_item_desc' => $desc,
+                'score_item_goal' => $goal,
+                'score_item_weight' => $weight
+            ));
+        }
+
+        addItem("DESGN", "Quantitative Measure (95%)", "Productivity Rate", "Productivity Score (BAU, MODs, etc)", "10 pts per day", 25);
+        addItem("DESGN", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "80%", 10);
+        addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Design Churn", "Refer to Tier", 25);
+        addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "95%", 15);
+        addItem("DESGN", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "80%", 20);
+        addItem("DESGN", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Met 1", 5);
     }
 
     /**
