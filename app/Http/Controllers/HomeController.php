@@ -40,8 +40,7 @@ class HomeController extends Controller {
         } else {
             $scorevalues = array();
         }
-        
-        return view('session')->with([
+        $sessiondata = [
             "lead" => $lead,
             "agent" => $agent,
             "role" => $role,
@@ -50,7 +49,19 @@ class HomeController extends Controller {
             "week" => $week,
             "scoreitems" => $scoreitems,
             "scorevalues" => $scorevalues,
-            "columnindex" => $colIndex
-        ]);
+            "columnindex" => $colIndex,
+            "agent_sign" => false,
+            "supervisor_sign" => false,
+            "manager_sign" => false,
+            "head_sign" => false
+        ];
+
+        // Save to week number folder
+        $sessionpath = "data/sessions/$year/$month/$week/";
+        $sessionfile = "$agent.json";
+        if (!file_exists($sessionpath)) mkdir($sessionpath, 0777, true);
+        file_put_contents($sessionpath . $sessionfile, json_encode($sessiondata));
+
+        return view('session')->with($sessiondata);
     }
 }
