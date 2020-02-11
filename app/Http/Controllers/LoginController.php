@@ -30,6 +30,7 @@ class LoginController extends Controller {
             }
             $r->session()->put("user", $user);
             $r->session()->put("user-type", $account->getAttribute("credential_type"));
+            $r->session()->put("user-team", Credential::where("credential_up", $user)->get() ?? []);
             if ($account->getAttribute("credential_type") != "ADMIN") return redirect()->route("dashboard");
             else return redirect()->route("admin");
         } else {

@@ -130,39 +130,40 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="session">
+                    <form action="session" method="post">
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Resource</label>
+                                    <label class="input-group-text" for="session-agent">Resource</label>
                                 </div>
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                <select class="custom-select" id="session-agent" name="session-agent" required>
+                                    @for ($i = 0; $i < count(session("user-team")); $i++)
+                                        <?php $member = session("user-team")[$i]; ?>
+                                        <option value="{{ $member->getAttribute('credential_user') }}">{{ $member->getAttribute('credential_first') . ' ' . $member->getAttribute('credential_last') }}</option>
+                                    @endfor
                                 </select>
                             </div>
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <label class="input-group-text" for="inputGroupSelect01">Session Type</label>
+                                    <label class="input-group-text" for="session-type">Session Type</label>
                                 </div>
-                                <select class="custom-select" id="inputGroupSelect01">
-                                    <option selected>Choose...</option>
-                                    <option value="1">Whole Month Scorecard</option>
-                                    <option value="2">Coaching</option>
-                                    <option value="3">Triad</option>
+                                <select class="custom-select" id="session-type" name="session-type" required>
+                                    <option value="SCORE">Scorecard</option>
+                                    <option value="COACH">Coaching</option>
+                                    <option value="TRIAD">Triad</option>
+                                    <option value="GOAL">Goal Setting</option>
                                 </select>
                             </div>
                             <div class="custom-control custom-checkbox mt-4">
-                                <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                                <label class="custom-control-label" for="defaultLoginFormRemember">Manual Mode (Please note that this checkbox is rfor Scorecard only!</label>
+                                <input type="checkbox" class="custom-control-input" id="session-mode" name="session-mode" value="MANUAL">
+                                <label class="custom-control-label" for="session-mode">Manual Mode (Please note that this checkbox is for scorecard only!</label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class="btn btn-primary">Save changes</button>
+                            <button type="submit" class="btn btn-primary">Start</button>
                         </div>
                     </form>
                 </div>

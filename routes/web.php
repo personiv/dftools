@@ -19,7 +19,6 @@ Route::get("/upload-data", "AdminController@viewSaveData")->middleware('admin')-
 Route::get("/upload-manual-data", "AdminController@viewSaveManualData")->middleware('admin')->name('uploadmanualdata');
 Route::get("/update-scorecard-items", function() { return view("admin.updatescorecarditems"); })->middleware('admin')->name('updatescorecarditems');
 Route::get("/download-template", function() { return Storage::download('data/ManualTemplate.xlsx'); })->middleware('admin');
-
 Route::post("/submit-add-credential", "AdminController@addCredential")->middleware('admin');
 Route::post("/submit-update-credential", "AdminController@updateCredential")->middleware('admin');
 Route::post("/submit-delete-credential", "AdminController@deleteCredential")->middleware('admin');
@@ -32,8 +31,8 @@ Route::post("/update-score-item", "AdminController@updateScoreItem")->middleware
 Route::post("/delete-score-item", "AdminController@deleteScoreItem")->middleware('admin');
 
 Route::get('/', 'LoginController@index')->name('index');
-Route::post("/login", "LoginController@login");
 Route::get("/logout", "LoginController@logout");
+Route::post("/login", "LoginController@login");
 
 Route::get('/dashboard', function() { return view('dashboard'); })->middleware('granted')->name('dashboard');
-Route::get('/session', 'HomeController@session')->middleware('supervisor')->name('session');
+Route::post('/session', 'HomeController@session')->middleware('supervisor');
