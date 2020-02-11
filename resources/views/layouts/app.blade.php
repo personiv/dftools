@@ -126,7 +126,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">title here...</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Here, you can manually Create Session</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -146,7 +146,7 @@
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Resource</label>
+                                <label class="input-group-text" for="inputGroupSelect01">Session Type</label>
                             </div>
                             <select class="custom-select" id="inputGroupSelect01">
                                 <option selected>Choose...</option>
@@ -154,6 +154,10 @@
                                 <option value="2">Coaching</option>
                                 <option value="3">Triad</option>
                             </select>
+                        </div>
+                        <div class="custom-control custom-checkbox mt-4">
+                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                            <label class="custom-control-label" for="defaultLoginFormRemember">Manual Mode (Please note that this checkbox is rfor Scorecard only!</label>
                         </div>
                     </div>
                     <div class="modal-footer">
