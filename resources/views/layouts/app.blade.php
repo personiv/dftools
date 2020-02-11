@@ -131,7 +131,8 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="create-session" method="post">
+                    <form action="session" method="post">
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
