@@ -14,6 +14,7 @@
     $role = $agent->getAttribute('credential_type');
     $type = $data->getAttribute('session_type');
     $mode = $data->getAttribute('session_mode');
+    $status = $agent->getAttribute('credential_status') != null ? $agent->getAttribute('credential_status') : "N/A";
     $date = $data->getAttribute('created_at');
 ?>
 
@@ -25,7 +26,7 @@
             <div><span class="font-weight-bold">First Name:</span> {{ $agent->getAttribute('credential_first') }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Status:</span> Regular</div>
+            <div><span class="font-weight-bold">Status:</span> {{ $status }}</div>
             <div><span class="font-weight-bold">Process:</span> {{ $process }}</div>
         </div>
         <div class="col-4">

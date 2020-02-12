@@ -21,6 +21,8 @@ class AdminController extends Controller {
         $userLast = $r->input("user-last");
         $userType = $r->input("user-type");
         $userUp = $r->input("user-up");
+        $userHireDate = $r->input("user-hire-date");
+        $userStatus = $r->input("user-status");
         if (Credential::where("credential_user", $userId)->count() < 1) {
             $account = new Credential;
             $account->setAttribute("credential_user", $userId);
@@ -29,6 +31,8 @@ class AdminController extends Controller {
             $account->setAttribute("credential_last", $userLast);
             $account->setAttribute("credential_type", $userType);
             $account->setAttribute("credential_up", $userUp);
+            $account->setAttribute("credential_hire_date", $userHireDate);
+            $account->setAttribute("credential_status", $userStatus);
             $account->save();
             return back()->with(["msg" => "Credential created", "msg-mood" => "good"]);
         } else {
