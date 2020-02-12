@@ -59,13 +59,13 @@
                         <!-- Email -->
                         <div class="field-items">
                             <label class="item-f username" for="user-id">Username</label>
-                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $rememberedUser }}" required>
+                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required>
                         </div>
 
                         <!-- Password -->
                         <div class="field-items mt-4">
                             <label class="item-f password" for="user-pass">Password</label>
-                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $rememberedPass }}" required>
+                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required>
                         </div>
                         
                         <!-- Remember me -->
