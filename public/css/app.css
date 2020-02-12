@@ -275,6 +275,29 @@ body, html {
     background-color: #bf4845;
     box-shadow: 0 0 0 0.2rem rgba(191, 72, 69,.25);
 } 
+
+/* Scrollbar for table */
+.scrollbar {
+    height: 400px !important;
+    width: 100%;
+    overflow-y: scroll !important;
+    margin-bottom: 10px;
+}
+
+.scrollbar-primary::-webkit-scrollbar {
+    width: 7px !important;
+    background-color: #F4f4f4 !important; 
+}
+
+.scrollbar-primary::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-color: var(--primary-color) !important; 
+}
+
+.scrollbar-primary {
+    scrollbar-color: var(--primary-color) #F4f4f4 !important;
+}
 /* Action button default style end/ */ /*end */
 
 
@@ -289,7 +312,8 @@ body, html {
 /* Add and Edit button for exception */
 .excp-btn #edit-btn, 
 .excp-btn #add-btn,
-#btn-delete {
+#btn-delete,
+#btn-edit {
     padding: 5px 10px !important;
     font-size: 12px;
     font-weight: 700;
@@ -464,12 +488,12 @@ body, html {
     font-size: 10px;
     font-weight: 400;
     text-shadow: 1px 1px 2px var(--dark-color);
-    z-index: 99;
 }
 
 .progress {
     height: 2em !important;
     border-radius: 50px !important;
+    background-color: var(--dark-color-50p);
 }
 .progress .progress-bar {
     padding-left: 10px;
@@ -542,7 +566,7 @@ body, html {
     font-weight: 700;
 }
 
-.custom-control-label {
+.modal-body .custom-control-label {
     font-weight: 700;
 }
 
@@ -619,31 +643,5 @@ body, html {
 } /* end */
 
 
+  
 
-    /*
-    .scrollbar {
-        float: left;
-        height: 300px;
-        width: 100%;
-        background: #fff;
-        overflow-y: scroll;
-    }
-
-    .force-overflow {
-        min-height: 500px;
-    }
-
-    .scrollbar-primary::-webkit-scrollbar {
-        width: 7px;
-        background-color: #F4f4f4; 
-    }
-
-    .scrollbar-primary::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-        background-color: var(--primary-color); 
-    }
-
-    .scrollbar-primary {
-    scrollbar-color: var(--primary-color) #F4f4f4;
-    } */

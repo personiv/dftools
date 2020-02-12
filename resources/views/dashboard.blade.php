@@ -92,7 +92,6 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="scrollbar scrollbar-primary">
-                <div class="force-overflow">
                 <div class="table-responsive px-4 pt-0 pb-4">
                     <table class="table table-striped table-borderless">
                         <thead>
@@ -105,68 +104,109 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-for-coaching">For Coaching</span></td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#exampleModalCenter">
-                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-for-coaching">For Coaching</span></td>
-                            <td>
-                                <!-- Button trigger modal -->
-                                <a data-toggle="modal" data-target="#exampleModalCenter">
-                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-pending">Pending</span></td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-pending">Pending</span></td>
-                            <td>N/A</td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-completed">Completed</span></td>
-                            <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-completed">Completed</span></td>
-                            <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td><span class="stats-completed">Completed</span></td>
-                            <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                        </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-for-coaching">For Coaching</span></td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <a data-toggle="modal" data-target="#exampleModalCenter">
+                                        <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-for-coaching">For Coaching</span></td>
+                                <td>
+                                    <!-- Button trigger modal -->
+                                    <a data-toggle="modal" data-target="#exampleModalCenter">
+                                        <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-pending">Pending</span></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-pending">Pending</span></td>
+                                <td>N/A</td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
+                            <tr>
+                                <td>10021002</td>
+                                <td>John Doe</td>
+                                <td>Web Designer</td>
+                                <td><span class="stats-completed">Completed</span></td>
+                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                            </tr>
                         </tbody>
                     </table>
-                </div>
                 </div>
                 </div>
             </div>
@@ -189,8 +229,7 @@
                     </div>
                     <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
                         <div class="excp-btn d-inline-flex">
-                            <span type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
-                            <span type="button" id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
+                            <span id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
                         </div>
                     </div>
                 </div>
@@ -212,14 +251,20 @@
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td>For Coaching</td>
-                            <td><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></td>
+                            <td>
+                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
+                                <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>10021002</td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td>For Coaching</td>
-                            <td><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></td>
+                            <td>
+                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
+                                <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -276,7 +321,7 @@
 
                 <!-- Progress bar, categories score, and total score -->
                 <div class="row mt-1">
-                    <div class="col">
+                    <div class="col-sm">
                         <div class="eachScore-container px-4 pt-3">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
@@ -296,10 +341,15 @@
                                 <span id="count-example">Churn: 90%</span></div>
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="eachScore-container px-4 pt-3">
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Product Knowledge Test: 85%</span></div>
+                                <span id="count-example">PKT: 85%</span></div>
                             </div>
 
                             <!-- Attendance score -->
@@ -313,7 +363,6 @@
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Bonus: 5%</span></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -353,16 +402,6 @@
                             <td>John Doe</td>
                             <td>Web Designer</td>
                         </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>John Doe</td>
-                            <td>Logo Designer</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>John Doe</td>
-                            <td>Banner Designer</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -370,5 +409,6 @@
         </div>
         
     </div>
+
 
 @endsection
