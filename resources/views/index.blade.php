@@ -54,25 +54,24 @@
 
                     <!-- Default form login -->
                     <form method="POST"action="{{ action('LoginController@login') }}"> 
-                    {{ csrf_field() }}
+                        {{ csrf_field() }}
 
                         <!-- Email -->
                         <div class="field-items">
-                            <label class="item-f username" for="defaultLoginFormUsername">Username</label>
-                            <input type="text" id="defaultLoginFormUsername" name="user-id" class="form-control mb-2" required>
+                            <label class="item-f username" for="user-id">Username</label>
+                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $rememberedUser }}" required>
                         </div>
 
                         <!-- Password -->
                         <div class="field-items mt-4">
-                            <label class="item-f password" for="defaultLoginFormPassword">Password</label>
-                            <input type="password" id="defaultLoginFormPassword" name="user-pass" class="form-control mb-2" required>
+                            <label class="item-f password" for="user-pass">Password</label>
+                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $rememberedPass }}" required>
                         </div>
-
-                            
+                        
                         <!-- Remember me -->
                         <div class="custom-control custom-checkbox mt-4">
-                            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-                            <label class="custom-control-label" for="defaultLoginFormRemember">Remember Me</label>
+                            <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember" value="remembered">
+                            <label class="custom-control-label" for="user-remember">Remember Me</label>
                         </div>
 
                         <!-- Sign in button -->
