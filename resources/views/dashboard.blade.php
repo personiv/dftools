@@ -91,6 +91,8 @@
                     <div class="dboard-othtext">of <span class="stats-for-coaching">For Coaching</span>, pending and completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
+                <div class="scrollbar scrollbar-primary">
+                <div class="force-overflow">
                 <div class="table-responsive px-4 pt-0 pb-4">
                     <table class="table table-striped table-borderless">
                         <thead>
@@ -165,6 +167,8 @@
                         </tbody>
                     </table>
                 </div>
+                </div>
+                </div>
             </div>
         </div>
 
@@ -185,8 +189,8 @@
                     </div>
                     <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
                         <div class="excp-btn d-inline-flex">
-                            <a type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</a>
-                            <a type="button" id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</a>
+                            <span type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
+                            <span type="button" id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
                         </div>
                     </div>
                 </div>
@@ -208,14 +212,14 @@
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td>For Coaching</td>
-                            <td><span id="action-btn" class="action-btn-rtsession"><i class="fa fa-trash mr-2"></i>Delete</span></td>
+                            <td><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></td>
                         </tr>
                         <tr>
                             <td>10021002</td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
                             <td>For Coaching</td>
-                            <td><span id="action-btn" class="action-btn-rtsession"><i class="fa fa-trash mr-2"></i>Delete</span></td>
+                            <td><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></td>
                         </tr>
                         </tbody>
                     </table>

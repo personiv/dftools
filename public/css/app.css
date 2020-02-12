@@ -7,8 +7,59 @@ body, html {
 }
 
 /* Dashboard styling here */
+/* Dashboard / styling all dashboard title categories / global */
 .dboard-wrapper {
+    background-color: #f9fafb;
     white-space: nowrap;
+}
+
+.dboard-wrapper table {
+    color: var(--dark-color-50p);
+}
+
+.dboard-wrapper table th, .dboard-wrapper table td {
+    padding: 1em;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f4f4f4 !important;
+}
+
+.table-hover tbody tr:hover {
+    color: var(--dark-color-50p) !important;
+    background-color: #f4f4f4 !important;
+}
+
+.dboard-wrapper .tb-container {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    background-color: var(--light-color);
+    height: 100%;
+}
+
+.tb-container .dboard-text {
+    text-transform: uppercase;
+    font-family: 'Open sans', sans-serif;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    background-color: #f4f4f4;
+    width: 50px;
+}
+
+.tb-container .dropdown-divider {
+    margin-top: 0 !important;
+}
+
+.tb-container .dboard-text .dboard-title {
+    font-size: 22px;
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+.tb-container .dboard-text .dboard-othtext {
+    line-height: 20px;
+    font-size: 12px;
+    color: var(--dark-color-50p);
 }
 
 .dboard-wrapper .ov-container {
@@ -19,6 +70,14 @@ body, html {
     height: 100%;
 }
 
+
+/*
+|———————————————————————————————————————————————————————————————
+| 1st row/ overview, function...
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the style of overview
+*/
 /* Overview title and other text container */
 .overview-txt {
     justify-content: center;
@@ -125,9 +184,62 @@ body, html {
     }
   } /* end */
 
-/* Add and Edit button for exception */
-.excp-btn #edit-btn, 
-.excp-btn #add-btn {
+
+/*
+|———————————————————————————————————————————————————————————————
+| 2nd row 1st column / summary, function...
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the style of each status for the summary and exception
+|
+*/
+/* Status default style */
+.dboard-wrapper table td span{
+    padding: 5px 0;
+    font-size: 12px;
+    border-radius: 3px;
+    float: left;
+    width: 100%;
+}
+
+/* Status — For Coaching */
+.dboard-wrapper table td span.stats-for-coaching {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--for-coaching-transparent);
+    color: var(--for-coaching);
+    cursor: default;
+    width: auto;
+    white-space: nowrap;
+
+}
+
+/* Status — Pending */
+.dboard-wrapper table td span.stats-pending {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--pending-transparent);
+    color: var(--pending);
+    cursor: default;
+    width: auto;
+    white-space: nowrap;
+}
+
+/* Status — Completed */
+.dboard-wrapper table td span.stats-completed {
+    padding: 5px 10px;
+    font-weight: 700;
+    background-color: var(--completed-transparent);
+    color: var(--completed);
+    width: auto;
+    white-space: nowrap;
+} /* Status default style end/ */
+
+/*
+| Here, you can edit the style of each action for the summary 
+*/
+/* Action button default style */
+.dboard-wrapper table td #action-btn {
     padding: 5px 10px !important;
     font-size: 12px;
     font-weight: 700;
@@ -139,6 +251,56 @@ body, html {
 }
 
 /* Action button / Create session */
+.action-btn-crsession {
+    background-color: var(--info);
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-btn-crsession:hover, .action-btn-crsession:focus, .action-btn-crsession:active  {
+    background-color: #4898b0;
+    box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
+} 
+
+/* Action button / Retake session */
+.action-btn-rtsession {
+    background-color: var(--btemp-danger);
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.action-btn-rtsession:hover, .action-btn-rtsession:focus, .action-btn-rtsession:active  {
+    background-color: #bf4845;
+    box-shadow: 0 0 0 0.2rem rgba(191, 72, 69,.25);
+} 
+/* Action button default style end/ */ /*end */
+
+
+/*
+|———————————————————————————————————————————————————————————————
+| 3rd row / exception, function...
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the style of exception
+|
+*/
+/* Add and Edit button for exception */
+.excp-btn #edit-btn, 
+.excp-btn #add-btn,
+#btn-delete {
+    padding: 5px 10px !important;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    max-width: 80px;
+    width: 100%;
+} 
+
+/* Action button / Create session */
 .action-btn-edit,
 .action-btn-add {
     background-color: var(--info) !important;
@@ -146,7 +308,6 @@ body, html {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     border: none !important;
-    color: var(--light-color) !important;
 }
 
 .action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
@@ -155,63 +316,24 @@ body, html {
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
 
-.dboard-wrapper {
-    background-color: #f9fafb;
-}
-
-.dboard-wrapper table {
-    color: var(--dark-color-50p);
-}
-
-.dboard-wrapper table th, .dboard-wrapper table td {
-    padding: 1em;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background-color: #f4f4f4 !important;
-}
-
-.table-hover tbody tr:hover {
-    color: var(--dark-color-50p) !important;
-    background-color: #f4f4f4 !important;
-}
-
-.dboard-wrapper .tb-container {
+/* Action button / Retake session */
+.action-btn-delete {
+    background-color: var(--btemp-danger);
+    color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    border-radius: 3px;
-    background-color: var(--light-color);
-    height: 100%;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-/* Dashboard / styling all dashboard title categories / global */
-.tb-container .dboard-text {
-    text-transform: uppercase;
-    font-family: 'Open sans', sans-serif;
-    letter-spacing: 1px;
-    word-spacing: 2px;
-    background-color: #f4f4f4;
-    width: 50px;
+.action-btn-delete:hover, .action-btn-delete:focus, .action-btn-delete:active  {
+    background-color: #bf4845;
+    box-shadow: 0 0 0 0.2rem rgba(191, 72, 69,.25);
 }
+/* end */
 
-.tb-container .dropdown-divider {
-    margin-top: 0 !important;
-}
-
-.tb-container .dboard-text .dboard-title {
-    font-size: 22px;
-    color: var(--dark-color);
-    font-weight: 700;
-}
-
-.tb-container .dboard-text .dboard-othtext {
-    line-height: 20px;
-    font-size: 12px;
-    color: var(--dark-color-50p);
-}
 
 /*
 |———————————————————————————————————————————————————————————————
-| 1st row 1st column / top resource, function...
+| 4th row 1st column / top resource, function...
 |———————————————————————————————————————————————————————————————
 |
 | Here, you can edit the style of top resource, ranking, etc.
@@ -358,94 +480,170 @@ body, html {
 
 /*
 |———————————————————————————————————————————————————————————————
-| 2nd row 1st column / summary, function...
+| Modal styling
 |———————————————————————————————————————————————————————————————
 |
-| Here, you can edit the style of each status for the summary and exception
+| Here, you can edit the style of the modal element
 |
 */
-/* Status default style */
-.dboard-wrapper table td span{
-    padding: 5px 0;
-    font-size: 12px;
+/* Global styling for modal */
+@media (min-width: 576px) {
+    .modal-dialog {
+        /* Modal container width set to 600px */
+        max-width: 600px !important;
+        margin: 1.75rem auto;
+    }
+}
+
+/* Header */
+.modal-header {
+    background-color: var(--primary-color) !important;
+    padding: 1em 3em 1em !important;
+}
+
+/* Title */
+.modal-header .modal-title {
+    font-size: 16px;
+    font-family: 'Open sans', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    color: var(--light-color);
+}
+
+/* Close/X icon */
+.close {
+    color: #fff !important;
+    text-shadow: 0 1px 0 #242424;
+    transition: opacity 0.3s ease-out;
+}
+
+.close:hover {
+    color: #fff !important;
+}
+
+.close:not(:disabled):not(.disabled):focus, 
+.close:not(:disabled):not(.disabled):hover {
+    opacity: 0.8;
+}
+
+/* Modal body */
+.modal-body {
+    padding: 3rem !important;
+}
+
+/* Modal field name */
+.custom-label {
+    width: 20%;
+    font-family: 'Open sans', sans-serif;
+    margin-bottom: 0px;
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.custom-control-label {
+    font-weight: 700;
+}
+
+.custom-control-label span {
+    font-weight: 400;
+    letter-spacing: .5px;
+}
+
+/* Modal input fields */
+.custom-select {
+    font-family: 'Open sans', sans-serif;
+}
+
+/* Modal dropdown option cannot add styling
+.custom-select .modal-option {
+    font-family: 'Open sans', sans-serif !important;
+    min-height: 1.5em !important;
+    padding: 2px 4px !important;
+} */
+
+.note-style {
+    padding: 5px 10px;
     border-radius: 3px;
-    float: left;
-    width: 100%;
-}
-
-/* Status — For Coaching */
-.dboard-wrapper table td span.stats-for-coaching {
-    padding: 5px 10px;
-    font-weight: 700;
-    background-color: var(--for-coaching-transparent);
-    color: var(--for-coaching);
-    cursor: default;
-    width: auto;
-    white-space: nowrap;
-
-}
-
-/* Status — Pending */
-.dboard-wrapper table td span.stats-pending {
-    padding: 5px 10px;
-    font-weight: 700;
     background-color: var(--pending-transparent);
     color: var(--pending);
-    cursor: default;
-    width: auto;
-    white-space: nowrap;
 }
 
-/* Status — Completed */
-.dboard-wrapper table td span.stats-completed {
-    padding: 5px 10px;
-    font-weight: 700;
-    background-color: var(--completed-transparent);
-    color: var(--completed);
-    width: auto;
-    white-space: nowrap;
-} /* Status default style end/ */
+/* Modal footer */
+.modal-footer {
+    border-top: none !important;
+    background-color: #f4f4f4;
+    padding: 1em 3em 1em !important;
+}
 
-/*
-| Here, you can edit the style of each action for the summary 
-*/
-/* Action button default style */
-.dboard-wrapper table td #action-btn {
-    padding: 5px 10px !important;
-    font-size: 12px;
+/* Modal global button */
+.modal-btn {
+    border: none;
+    outline: none;
+    padding: 10px !important;
+    font-size: 14px;
     font-weight: 700;
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
-    max-width: 120px;
+    max-width: 70px;
     width: 100%;
 }
 
-/* Action button / Create session */
-.action-btn-crsession {
-    background-color: var(--info);
+/* Modal buttong styling / close && start */
+.btn-close {
+    background-color: var(--btemp-inverse) !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border: none !important;
 }
 
-.action-btn-crsession:hover, .action-btn-crsession:focus, .action-btn-crsession:active  {
-    background-color: #4898b0;
+.btn-close:hover, .btn-close:focus, .btn-close:active {
+    background-color: #151617 !important;
+    box-shadow: 0 0 0 0.2rem rgba(21, 22, 23, 0.25);
+}
+
+.btn-start {
+    background-color: var(--info) !important;
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border: none !important;
+}
+
+.btn-start:hover, .btn-start:focus, .btn-start:active {
+    background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
-} 
-
-/* Action button / Retake session */
-.action-btn-rtsession {
-    background-color: var(--btemp-danger);
-    color: var(--light-color);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-
-.action-btn-rtsession:hover, .action-btn-rtsession:focus, .action-btn-rtsession:active  {
-    background-color: #bf4845;
-    box-shadow: 0 0 0 0.2rem rgba(191, 72, 69,.25);
-} 
-/* Action button default style end/ */
+} /* end */
 
 
+
+    /*
+    .scrollbar {
+        float: left;
+        height: 300px;
+        width: 100%;
+        background: #fff;
+        overflow-y: scroll;
+    }
+
+    .force-overflow {
+        min-height: 500px;
+    }
+
+    .scrollbar-primary::-webkit-scrollbar {
+        width: 7px;
+        background-color: #F4f4f4; 
+    }
+
+    .scrollbar-primary::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+        background-color: var(--primary-color); 
+    }
+
+    .scrollbar-primary {
+    scrollbar-color: var(--primary-color) #F4f4f4;
+    } */

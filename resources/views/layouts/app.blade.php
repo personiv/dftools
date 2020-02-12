@@ -121,29 +121,26 @@
         <!--
         <
         <
-        <   Small Modal / Create Session
+        <   Create Session
         <
         <
         -->
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
-            <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Here, you can manually Create Session</h5>
+                        <div class="modal-title" id="exampleModalLongTitle">Create Session</div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form action="session" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="session-agent">Resource</label>
-                                </div>
+                            <div class="input-group mb-4">
+                                    <label class="custom-label" for="session-agent">Resource:</label>
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
                                     @for ($i = 0; $i < count(session("user-team")); $i++)
                                         <?php $member = session("user-team")[$i]; ?>
@@ -151,26 +148,23 @@
                                     @endfor
                                 </select>
                             </div>
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <label class="input-group-text" for="session-type">Session Type</label>
-                                </div>
+                            <div class="input-group mb-4">
+                                    <label class="custom-label" for="session-type">Session Type:</label>
                                 <select class="custom-select" id="session-type" name="session-type" required>
-                                    <option value="SCORE">Scorecard</option>
-                                    <option value="COACH">Coaching</option>
-                                    <option value="TRIAD">Triad</option>
-                                    <option value="GOAL">Goal Setting</option>
+                                    <option class="modal-option" value="SCORE">Scorecard</option>
+                                    <option class="modal-option" value="COACH">Coaching</option>
+                                    <option class="modal-option" value="TRIAD">Triad</option>
+                                    <option class="modal-option" value="GOAL">Goal Setting</option>
                                 </select>
                             </div>
-                            <div class="custom-control custom-checkbox mt-4">
+                            <div class="custom-control custom-checkbox mt-5">
                                 <input type="checkbox" class="custom-control-input" id="session-mode" name="session-mode" value="MANUAL">
-                                <label class="custom-control-label" for="session-mode">Manual Mode (Please note that this checkbox is for scorecard only!</label>
+                                <label class="custom-control-label" for="session-mode">Manual Mode <span class="note-style">(Please note that this checkbox is for scorecard only!)</span></label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Start</button>
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Start</button>
                         </div>
                     </form>
                 </div>
@@ -179,27 +173,43 @@
         <!--
         <
         <
-        <   Large Modal / Add exception data
+        <   Add exception data
         <
         <
         -->
         <!-- Modal -->
         <div class="modal fade" id="exceptionModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exceptionModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Exception Resource</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="session" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="input-group mb-4">
+                                    <label class="custom-label" for="session-agent">Resource:</label>
+                                <select class="custom-select" id="session-agent" name="session-agent" required>
+                                    @for ($i = 0; $i < count(session("user-team")); $i++)
+                                        <?php $member = session("user-team")[$i]; ?>
+                                        <option value="{{ $member->getAttribute('credential_user') }}">{{ $member->getAttribute('credential_first') . ' ' . $member->getAttribute('credential_last') }}</option>
+                                    @endfor
+                                </select>
+                            </div>
+
+                            <div class="input-group">
+                                    <label class="custom-label" for="FormControlTextarea">Reason:</label>
+                                    <textarea class="form-control" id="FormControlTextarea" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Start</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
