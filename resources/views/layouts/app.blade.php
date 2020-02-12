@@ -31,10 +31,10 @@
         <div class="sidebar-heading">dfs<span>corecard</span></div>
         <div class="list-group list-group-flush">
             @if (session("user-type") != "ADMIN")
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="dashboard" class="list-group-item list-group-item-action">
                 <i class="fa fa-pie-chart mr-3"></i><span>Dashboard</span>
             </a>
-            @if (session("user-type") == "SPRVR")
+            @if (session("user-type") == "MANGR" || session("user-type") == "SPRVR")
             <!-- Modal style menu -->
             <!-- Button trigger modal -->
             <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
@@ -117,7 +117,7 @@
             </div>
         <!-- /#page-content-wrapper -->
         </div>
-        @if (session("user-type") == "SPRVR")
+        @if (session("user-type") == "MANGR" || session("user-type") == "SPRVR")
         <!--
         <
         <
