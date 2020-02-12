@@ -16,14 +16,18 @@ class CreateSessionsTable extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->increments('session_id');
             $table->string('session_type', 5);
-            $table->string('session_resource', 24);
-            $table->boolean('session_manual');
-            $table->date('session_date');
-            $table->string('session_notes');
-            $table->boolean('session_resource_sign');
-            $table->boolean('session_supervisor_sign');
-            $table->boolean('session_manager_sign');
-            $table->boolean('session_head_sign');
+            $table->string('session_agent', 24);
+            $table->string('session_mode', 6);
+            $table->integer('session_year');
+            $table->string('session_month', 4);
+            $table->integer('session_day');
+            $table->integer('session_week');
+            $table->json('session_data');
+            $table->string('session_notes')->nullable();
+            $table->boolean('session_resource_sign')->default(false);
+            $table->boolean('session_supervisor_sign')->default(false);
+            $table->boolean('session_manager_sign')->default(false);
+            $table->boolean('session_head_sign')->default(false);
             $table->timestamps();
         });
     }

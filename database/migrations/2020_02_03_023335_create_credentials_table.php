@@ -21,6 +21,7 @@ class CreateCredentialsTable extends Migration
             $table->string('credential_first', 64);
             $table->string('credential_last', 64);
             $table->string('credential_up', 24);
+            $table->date('credential_hire_date')->nullable();
             $table->timestamps();
         });
 
@@ -49,7 +50,6 @@ class CreateCredentialsTable extends Migration
             addEmployee('10071256', 'SPRVR', 'Renell', 'Barrios', '10071937');
             addEmployee('10071492', 'SPRVR', 'Katherine', 'Arpon', '10071937');
             addEmployee('10070828', 'SPRVR', 'Apple', 'Remulla', '10071937');
-            addEmployee('10071280', 'SPRVR', 'Joshua', 'Sabio', '10071937');
             addEmployee('10071245', 'SPRVR', 'Reymark', 'Regencia', '10071937');
 
         addEmployee('10072003', 'MANGR', 'Carlo', 'Mendoza', '10072397');
