@@ -185,8 +185,8 @@
                     </div>
                     <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
                         <div class="excp-btn d-inline-flex">
-                            <div type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</div>
-                            <div type="button" id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</div>
+                            <a type="button" id="edit-btn" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</a>
+                            <a type="button" id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</a>
                         </div>
                     </div>
                 </div>
