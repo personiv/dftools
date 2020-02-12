@@ -54,7 +54,8 @@ class AdminController extends Controller {
         $userLast = $r->input("user-last");
         $userType = $r->input("user-type");
         $userUp = $r->input("user-up");
-
+        $userHireDate = $r->input("user-hire-date");
+        $userStatus = $r->input("user-status");
         $selected = Credential::where('credential_user', $userId)->first();
         if ($selected != null) {
             if ($userPass != "") $selected->setAttribute("credential_pass", $userPass);
@@ -62,6 +63,8 @@ class AdminController extends Controller {
             if ($userLast != "") $selected->setAttribute("credential_last", $userLast);
             if ($userType != "NONE") $selected->setAttribute("credential_type", $userType);
             if ($userUp != "NONE") $selected->setAttribute("credential_up", $userUp);
+            if ($userHireDate != "") $selected->setAttribute("credential_hire_date", $userHireDate);
+            if ($userStatus != "NONE") $selected->setAttribute("credential_status", $userStatus);
             $selected->save();
             return back()->with(["msg" => "Credential updated", "msg-mood" => "good"]);
         } else {
