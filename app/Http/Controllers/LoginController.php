@@ -30,6 +30,8 @@ class LoginController extends Controller {
             }
             $r->session()->put("user", $user);
             $r->session()->put("user-type", $account->getAttribute("credential_type"));
+            $r->session()->put("user-fullname", $account->getAttribute("credential_first") . ' ' . $account->getAttribute("credential_last"));
+            $r->session()->put("user-role", $account->getAttribute("credential_type"));
             $r->session()->put("user-team", Credential::where("credential_up", $user)->get() ?? []);
             if ($account->getAttribute("credential_type") != "ADMIN") return redirect()->route("dashboard");
             else return redirect()->route("admin");
@@ -41,6 +43,9 @@ class LoginController extends Controller {
     function logout(Request $r) {
         $r->session()->forget("user");
         $r->session()->forget("user-type");
+        $r->session()->forget("user-fullname");
+        $r->session()->forget("user-role");
+        $r->session()->forget("user-team");
         return redirect()->route("index");
     }
 }

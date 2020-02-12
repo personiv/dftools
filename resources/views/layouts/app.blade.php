@@ -97,8 +97,8 @@
                             <div class="user-container justify-content-center align-items-center">
                                 <div><i class="fa fa-user mr-2"></i></div>
                                 <div class="d-flex flex-column">
-                                    <span id="navItem-user">John Doe</span>
-                                    <span id="navItem-role">Web Designer</span>
+                                    <span id="navItem-user">{{ session("user-fullname") }}</span>
+                                    <span id="navItem-role">{{ session("user-role") }}</span>
                                 </div>
                             </div>
                         </a>
