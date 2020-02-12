@@ -45,7 +45,7 @@
                 <i class="fa fa-history mr-3"></i><span>History</span>
             </a>
             <a href="#" class="list-group-item list-group-item-action">
-                <i class="fa fa-weixin mr-3"></i><span>Feedback</span>
+                <i class="fa fa-commenting mr-3"></i><span>Feedback</span>
             </a>
             @else
             <a href="add-credential" class="list-group-item list-group-item-action">
@@ -118,7 +118,14 @@
         <!-- /#page-content-wrapper -->
         </div>
         @if (session("user-type") == "SPRVR")
-        <!-- Modal / Create Session -->
+        <!--
+        <
+        <
+        <   Small Modal / Create Session
+        <
+        <
+        -->
+        <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
             <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
@@ -166,6 +173,33 @@
                             <button type="submit" class="btn btn-primary">Start</button>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <!--
+        <
+        <
+        <   Large Modal / Add exception data
+        <
+        <
+        -->
+        <!-- Modal -->
+        <div class="modal fade" id="exceptionModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exceptionModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
                 </div>
             </div>
         </div>
