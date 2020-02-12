@@ -193,6 +193,8 @@ body {
     right: 0;
     text-align: center;
     float: none;
+    user-select: none;
+    pointer-events: none;
 }
 
 .intro-two .graphic-brname {
