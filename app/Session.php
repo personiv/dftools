@@ -13,6 +13,7 @@ class Session extends Model
     protected $primaryKey = 'session_id';
     protected $casts = ['session_compatible_data' => 'array'];
 
+    function SessionID() { return $this->getAttribute("session_id"); }
     function DateCreated() { return $this->getAttribute("created_at"); }
     function AgentID() { return $this->getAttribute("session_agent"); }
     function AgentRole() { return $this->Agent()->getAttribute("credential_type"); }
