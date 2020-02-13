@@ -53,29 +53,29 @@
                 <div class="login-container">
 
                     <!-- Default form login -->
-                    <form method="POST"action="{{ action('LoginController@login') }}"> 
+                    <form id="main-login-form" method="POST"action="{{ action('LoginController@login') }}"> 
                         {{ csrf_field() }}
 
                         <!-- Email -->
                         <div class="field-items">
                             <label class="item-f username" for="user-id">Username</label>
-                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required>
+                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
                         </div>
 
                         <!-- Password -->
                         <div class="field-items mt-4">
                             <label class="item-f password" for="user-pass">Password</label>
-                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required>
+                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
                         </div>
                         
                         <!-- Remember me -->
                         <div class="custom-control custom-checkbox mt-4">
-                            <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember" value="remembered">
+                            <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
                             <label class="custom-control-label" for="user-remember">Remember Me</label>
                         </div>
 
                         <!-- Sign in button -->
-                        <button type="submit" class="btn custom-btn my-4">Sign In</button>
+                        <button class="btn custom-btn my-4" onclick="submitLoginForm()">Sign In</button>
                     </form>
                     <!-- Default form login -->
                     <span style="color: var(--tertiary-color);">{{ session("msg") }}</span>
