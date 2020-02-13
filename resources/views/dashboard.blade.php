@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'DFTools — Dashboard')
-@section('sidebar', 'css/sidebar.css')
-@section('css', 'css/dashboard.css')
-@section('js', 'js/dashboard.js')
+@section('sidebar', URL::asset('css/sidebar.css'))
+@section('css', URL::asset('css/dashboard.css'))
+@section('js', URL::asset('js/dashboard.js'))
 
 @section('content')
 
@@ -292,7 +292,7 @@
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">John Doe</div>
                                         <div class="r-role">Web Designer</div>

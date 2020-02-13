@@ -33,7 +33,7 @@
         <div class="sidebar-heading">dfs<span>corecard</span></div>
         <div class="list-group list-group-flush">
             @if (session("user-type") != "ADMIN")
-            <a href="dashboard" class="list-group-item list-group-item-action">
+            <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-pie-chart mr-3"></i><span>Dashboard</span>
             </a>
             @if (session("user-type") == "MANGR" || session("user-type") == "SPRVR")
@@ -50,27 +50,27 @@
                 <i class="fa fa-commenting mr-3"></i><span>Feedback</span>
             </a>
             @else
-            <a href="add-credential" class="list-group-item list-group-item-action">
+            <a href="{{ route('addcredential') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-plus mr-3"></i><span>Add Credential</span>
             </a>
-            <a href="update-credential" class="list-group-item list-group-item-action">
+            <a href="{{ route('updatecredential') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-edit mr-3"></i><span>Update Credential</span>
             </a>
-            <a href="delete-credential" class="list-group-item list-group-item-action">
+            <a href="{{ route('deletecredential') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-trash mr-3"></i><span>Delete Credential</span>
             </a>
-            <a href="upload-data" class="list-group-item list-group-item-action">
+            <a href="{{ route('uploaddata') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-upload mr-3"></i><span>Upload Data</span>
             </a>
-            <a href="upload-manual-data" class="list-group-item list-group-item-action">
+            <a href="{{ route('uploadmanualdata') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-upload mr-3"></i><span>Upload Manual Data</span>
             </a>
-            <a href="update-scorecard-items" class="list-group-item list-group-item-action">
+            <a href="{{ route('updatescorecarditems') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-table mr-3"></i><span>Update Scorecard Items</span>
             </a>
             @endif
             <div class="bottom-button mb-5">
-            <a href="logout" class="list-group-itemX list-group-item-action">
+            <a href="{{ action('LoginController@logout') }}" class="list-group-itemX list-group-item-action">
                 <i class="fas fa-sign-out-alt mr-3"></i><span>Logout</span>
             </a>
             </div>  
@@ -97,7 +97,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="user-container justify-content-center align-items-center">
-                            <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                            <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ session('user-fullname') }}" width="40" height="40"> 
                                 <div class="d-flex flex-column ml-3">
                                     <span id="navItem-user">{{ session("user-fullname") }}</span>
                                     <span id="navItem-role">{{ session("user-role") }}</span>
@@ -107,7 +107,7 @@
                         <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Change Password</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout">Logout</a>
+                            <a class="dropdown-item" href="{{ action('LoginController@logout') }}">Logout</a>
                         </div>
                     </li>
                 </ul>
@@ -151,7 +151,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="session" method="post">
+                    <form action="{{ action('HomeController@createSession') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
@@ -202,7 +202,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="session" method="post">
+                    <form action="#" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
@@ -236,7 +236,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/progressbar.js"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/progressbar.js') }}"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     <script>
