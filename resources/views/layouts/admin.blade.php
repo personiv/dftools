@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Admin Control Panel')
-@section('sidebar', 'css/sidebar.css')
+@section('sidebar', URL::asset('css/sidebar.css'))
 @section('css', URL::asset('css/admin.css'))
 @section('js', URL::asset('js/admin.js'))
 

@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('title', 'DFTools — Session')
-@section('sidebar', 'css/sidebar.css')
-@section('css', 'css/session.css')
-@section('js', 'js/session.js')
+@section('sidebar', URL::asset('css/sidebar.css'))
+@section('css', URL::asset('css/session.css'))
+@section('js', URL::asset('js/session.js'))
 
 <?php
-    $data = $session->Data();
+    $data = $session->CompatibleData();
     $items = $data["items"];
     $values = $data["values"];
     $supervisor = $session->Agent()->TeamLeader();

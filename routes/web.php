@@ -35,4 +35,5 @@ Route::get("/logout", "LoginController@logout");
 Route::post("/login", "LoginController@login");
 
 Route::get('/dashboard', function() { return view('dashboard'); })->middleware('granted')->name('dashboard');
-Route::post('/session', 'HomeController@session')->middleware('supervisor');
+Route::post('/create-session', 'HomeController@createSession')->middleware('supervisor');
+Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');
