@@ -273,13 +273,14 @@
         </div>
     </div>
 
+    <!-- 4th row dashboard -->
     <div class="row mt-5">
 
         <!-- Top Resource section -->
         <div class="col-md">
-            <div class="tb-container pb-4">
+            <div class="tb-container pb-2">
                 <div class="dboard-text  px-4 pt-4 pb-3">
-                    <div class="dboard-title">Top Resource</div>
+                    <div class="dboard-title">Overall Top Resource</div>
                     <div class="dboard-othtext">for the month of June</div>
                 </div>
                 <div class="dropdown-divider"></div>
@@ -290,15 +291,16 @@
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                    <i class="fa fa-user my-auto"></i>
-                                    <div class="tr-name-role">
+                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                    <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">John Doe</div>
                                         <div class="r-role">Web Designer</div>
                                     </div>
                                 </div>
                                 <div class="title-scorecard-container">
-                                    <div class="title-scc">
-                                        Scorecard
+                                    <div class="title-scc d-inline-flex justify-content-center align-items-center">
+                                       <div class="mr-2">Scorecard</div>
+                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall scorecard of the resource for the month of June"><i class="fa fa-question-circle"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +314,7 @@
                                     TOTAL
                                 </div>
                                 <div class="total-score">
-                                    95%
+                                    95<sup>%</sup>
                                 </div>
                             </div>
                         </div>
@@ -322,22 +324,22 @@
                 <!-- Progress bar, categories score, and total score -->
                 <div class="row mt-1">
                     <div class="col-sm">
-                        <div class="eachScore-container px-4 pt-3">
+                        <div class="eachScore-container px-4 py-4">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Productivity: 89%</span></div>
                             </div>
 
                             <!-- Quality score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-info" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Quality: 99.4%</span></div>
                             </div>
 
                             <!-- Churn score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Churn: 90%</span></div>
                             </div>
 
@@ -348,19 +350,19 @@
                         <div class="eachScore-container px-4 pt-3">
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">PKT: 85%</span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Attendance: 100%</span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span id="count-example">Bonus: 5%</span></div>
                             </div>
                         </div>
@@ -373,7 +375,7 @@
         <div class="col-md">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
-                    <div class="dboard-title">Resource Ranking</div>
+                    <div class="dboard-title">Top 3 Resource</div>
                     <div class="dboard-othtext">for the month of june</div>
                 </div>
                 <div class="dropdown-divider"></div>
@@ -388,17 +390,32 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
+                            <td>
+                                <div class="tr-3 tr-topOne d-inline-flex justify-content-center align-items-center">
+                                    <span class="mr-2">1</span>
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                            </td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td>
+                                <div class="tr-3 tr-topTwo d-inline-flex justify-content-center align-items-center">
+                                    <span class="mr-2">2</span>
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                            </td>
                             <td>John Doe</td>
                             <td>Custom Designer</td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td>
+                                <div class="tr-3 tr-topThree d-inline-flex justify-content-center align-items-center">
+                                    <span class="mr-2">3</span>
+                                    <i class="fas fa-award"></i>
+                                </div>
+                            </td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
                         </tr>
@@ -409,6 +426,5 @@
         </div>
         
     </div>
-
-
+    
 @endsection

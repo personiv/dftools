@@ -22,6 +22,8 @@
     <!-- Plugins -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    
 </head>
 <body>
 
@@ -69,7 +71,7 @@
             @endif
             <div class="bottom-button mb-5">
             <a href="logout" class="list-group-itemX list-group-item-action">
-                <i class="fa fa-sign-out mr-3"></i><span>Logout</span>
+                <i class="fas fa-sign-out-alt mr-3"></i><span>Logout</span>
             </a>
             </div>  
         </div>
@@ -95,8 +97,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="user-container justify-content-center align-items-center">
-                                <div><i class="fa fa-user mr-2"></i></div>
-                                <div class="d-flex flex-column">
+                            <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                <div class="d-flex flex-column ml-3">
                                     <span id="navItem-user">{{ session("user-fullname") }}</span>
                                     <span id="navItem-role">{{ session("user-role") }}</span>
                                 </div>
@@ -114,6 +116,19 @@
 
             <div class="container-fluid p-5 dboard-wrapper">
                 @yield('content')
+                
+                
+
+            <!-- Footer  area here -->
+            <footer>
+                    <div class="row">
+                        <div class="col pt-5">
+                            <div class="copyright-index d-flex justify-content-center">
+                            Copyright © 2020 | DFScorecard All rights reserved.
+                            </div>
+                        </div>
+                    </div>
+            </footer>
             </div>
         <!-- /#page-content-wrapper -->
         </div>
@@ -224,5 +239,10 @@
     <script type="text/javascript" src="js/progressbar.js"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+    <script>
+        $('.popover-dismiss').popover({
+            trigger: 'focus'
+        })
+    </script>
 </body>
 </html>

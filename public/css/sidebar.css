@@ -78,7 +78,7 @@ body {
 }
 
 /* Sidebar title icon */
-#sidebar-wrapper .list-group-item .fa, #sidebar-wrapper .list-group-itemX .fa {
+#sidebar-wrapper .list-group-item .fa, #sidebar-wrapper .list-group-itemX .fas {
   width: 34px;
   height: auto;
   text-align: center;
@@ -88,7 +88,7 @@ body {
 }
 
 /* Sidebar title icon when toggled */
-#wrapper.toggled #sidebar-wrapper .list-group-item .fa, #wrapper.toggled #sidebar-wrapper .list-group-itemX .fa {
+#wrapper.toggled #sidebar-wrapper .list-group-item .fa, #wrapper.toggled #sidebar-wrapper .list-group-itemX .fas {
   width: 34px;
   height: auto;
   text-align: center;

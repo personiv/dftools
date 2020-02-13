@@ -336,7 +336,7 @@ body, html {
 
 .action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
 .action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active  {
-    background-color: #4898b0;
+    background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
 
@@ -377,6 +377,12 @@ body, html {
     width: 100%;
 }
 
+.tr-name-role {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .top-resource-container div.r-name {
     font-size: 20px;
@@ -409,29 +415,29 @@ body, html {
     border-radius:100%;
 }
 
-.top-resource-container .fa {
-    width: 40px;
+.title-scc .fa {
+    width: auto;
     height: auto;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-align: left;
-    color: var(--btemp-success);
+    cursor: pointer;
+    color: var(--btemp-primary);
+}
+
+.title-scc .popover-dismiss:focus {
+    outline: none !important;
 }
 
 /* title-scorecard-container */
 .title-scorecard-container {
-    font-weight: 400;
-    letter-spacing: 2px;
     font-family: 'Open sans', sans-serif;
     font-size: 12px;
-    width: 80%;
+    font-weight: 700;
+    letter-spacing: 1px;
     height: auto;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius:50px;
-    padding: 5px 10px 5px 5px;
-    background-color: #fff;
-    text-align: center;
-    box-shadow: 5px 5px 10px #f4f4f4;
+    text-align: left;
+    padding-left: 25px;
 }
 
 /* Total score */
@@ -450,11 +456,15 @@ body, html {
     word-spacing: 2px;
 }
 
+.totalScore-container .total-score sup {
+    font-size: 30px;
+} 
+
 .totalScore-container .total-score {
     font-family: 'Open sans', sans-serif;
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 700;
-    line-height: 20px;
+    line-height: 40px;
     letter-spacing: 1px;
     word-spacing: 2px;
 } /* end */
@@ -500,6 +510,77 @@ body, html {
     transition: width 0.3s ease-in;
     overflow: visible;
 }
+
+/* Progress bar color */
+.pb-bgmain {
+    background: rgb(0,58,93);
+    background: linear-gradient(90deg, rgba(0,58,93,1) 0%, rgba(91,192,222,1) 100%);
+}
+
+.btemp-primary {
+    background-color: var(--btemp-primary) !important;
+}
+
+.btemp-success {
+    background-color: var(--btemp-success) !important;
+}
+
+.btemp-info {
+    background-color: var(--btemp-info) !important;
+}
+
+.btemp-warning {
+    background-color: var(--btemp-warning) !important;
+}
+
+.btemp-danger {
+    background-color: var(--btemp-danger) !important;
+} 
+
+/* Top 3 resource section */
+/* default styling */
+.tr-3 {
+    font-weight: 700;
+}
+
+.dboard-wrapper table td .tr-3 span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-align: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+}
+
+.dboard-wrapper table td .tr-3 .fas {
+    font-size: 24px;
+    text-align: center;
+    width: 40px;
+}
+
+/* Each number and icon styling */
+/* 1 with icon */
+.tr-topOne span {
+}
+
+.tr-topOne .fas {
+}
+
+/* 2 with icon */
+.tr-topTwo span {
+}
+
+.tr-topTwo .fas {
+}
+
+/* 3 with icon */
+.tr-topThree span {
+}
+
+.tr-topThree .fas {
+} /* end */
 
 
 /*
