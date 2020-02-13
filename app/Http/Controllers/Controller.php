@@ -10,17 +10,6 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function getFunctionName($role) {
-        switch ($role) {
-            case "DESGN": return "Web Designer";
-            case "WML": return "Web Mods Line";
-            case "VQA": return "Voice Quality Assurance";
-            case "CUSTM": return "Senior Web Designer";
-            case "PR": return "Website Proofreader";
-            default: return "N/A";
-        }
-    }
-
     function getProficiency($date) {
         if ($date == null) return "N/A";
         $hireDate = date_create($date);
