@@ -11,9 +11,9 @@
                         <div class="col-6">
                             {{ csrf_field() }}
                             <label for="user-id">Username to be updated</label>
-                            <input class="form-control" type="text" id="user-id" name="user-id" required>
+                            <input class="form-control" type="text" id="user-id" name="user-id" required pattern="^[a-zA-Z0-9]*$">
                             <label for="user-pass">New password</label>
-                            <input class="form-control" type="password" placeholder="Leave blank for no changes"  id="user-pass" name="user-pass">
+                            <input class="form-control" type="password" placeholder="Leave blank for no changes"  id="user-pass" name="user-pass" pattern="^[a-zA-Z0-9]*$">
                             <label for="user-first">First Name</label>
                             <input class="form-control" type="text" placeholder="Leave blank for no changes" id="user-first" name="user-first">
                             <label for="user-last">Last Name</label>
