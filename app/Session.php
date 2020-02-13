@@ -63,4 +63,8 @@ class Session extends Model
         // Check if this session is a duplicated session this week
         return Session::where("session_agent", $this->AgentID())->where("session_week", $this->Week())->count() > 1;
     }
+
+    function ExistingSession() {
+        return Session::where("session_agent", $this->AgentID())->where("session_week", $this->Week())->first();
+    }
 }

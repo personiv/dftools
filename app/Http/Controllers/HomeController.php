@@ -29,8 +29,8 @@ class HomeController extends Controller {
         $session->setAttribute("session_compatible_data", $session->Data());
         $session->save();
         
-        // Don't continue if the session already exists this week
-        if ($session->ExistsThisWeek()) return redirect()->route("dashboard")->with(["msg" => "Agent has pending session"]);
+        // Display the same session as it is already exists this week
+        if ($session->ExistsThisWeek()) return redirect()->route('session', [$session->ExistingSession()->SessionID()]);
         return redirect()->route('session', [$session->SessionID()]);
     }
 }
