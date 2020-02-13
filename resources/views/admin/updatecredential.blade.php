@@ -24,7 +24,7 @@
                             <select class="form-control" id="user-up" name="user-up" required>
                                 <option value="NONE" selected>No changes</option>
                                 @for($i = 0; $i < $leaders->count(); $i++)
-                                    <option value="{{ $leaders[$i]->getAttribute('credential_user') }}">{{ $leaders[$i]->getAttribute('credential_first') . ' ' . $leaders[$i]->getAttribute('credential_last') }}</option>
+                                    <option value="{{ $leaders[$i]->EmployeeID() }}">{{ $leaders[$i]->FullName() }}</option>
                                 @endfor
                             </select>
                             <label for="user-type">Type</label>

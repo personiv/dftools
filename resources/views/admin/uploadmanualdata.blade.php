@@ -28,12 +28,8 @@
     <label for="data-team">Team</label>
     <select class="form-control" id="data-team" name="data-team" required>
         @for($i = 0; $i < $supervisors->count(); $i++)
-<?php
-                $supervisor = $supervisors[$i];
-                $supervisor_user = $supervisor->getAttribute('credential_user');
-                $supervisor_first = $supervisor->getAttribute('credential_first');
-?>
-            <option value='{{ $supervisor_user }}'>{{ $supervisor_first }}</option>
+            <?php $supervisor = $supervisors[$i]; ?>
+            <option value='{{ $supervisor->EmployeeID() }}'>{{ $supervisor->FirstName() }}</option>
         @endfor
     </select>
     <label for="data-src">Data</label>

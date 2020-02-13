@@ -23,7 +23,7 @@
                             <label for="user-up">Reporting to</label>
                             <select class="form-control" id="user-up" name="user-up" required>
                                 @for($i = 0; $i < $leaders->count(); $i++)
-                                    <option value="{{ $leaders[$i]->getAttribute('credential_user') }}">{{ $leaders[$i]->getAttribute('credential_first') . ' ' . $leaders[$i]->getAttribute('credential_last') }}</option>
+                                    <option value="{{ $leaders[$i]->EmployeeID() }}">{{ $leaders[$i]->FullName() }}</option>
                                 @endfor
                             </select>
                             <label for="user-type">Type</label>
