@@ -56,27 +56,7 @@ class HomeController extends Controller {
         $session->setAttribute("session_week", $week);
         $session->setAttribute("session_data", $sessiondata);
         $session->save();
-    
-        $agentInfo = Credential::where("credential_user", $agent)->first();
-        $supervisorInfo = Credential::where("credential_user", $supervisor)->first();
-        $managerInfo = Credential::where("credential_user", $supervisorInfo->getAttribute("credential_up"))->first();
-        $headInfo = Credential::where("credential_user", $managerInfo->getAttribute("credential_up"))->first();
-        return view('session')->with([
-            "agent" => $agentInfo,
-            "supervisor" => $supervisorInfo,
-            "manager" => $managerInfo,
-            "head" => $headInfo,
-            "data" => $session,
-            "process" => $this->getFunctionName($role),
-            "proficiency" => $this->getProficiency($agentInfo->getAttribute("credential_hire_date"))
-        ]);
-    }
-
-    function getWeeklyPendingSessions(Request $r) {
-        $data = json_decode($r->getContent(), true);
-        $year = $data["year"];
-        $week = $data["week"];
-        $supervisor = $data["supervisor"];
-        // TODO: code here....
+        
+        return view('session')->with(["agent" => Credential::where("credential_user", $agent)->first(), "data" => $session]);
     }
 }

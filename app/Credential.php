@@ -8,6 +8,15 @@ class Credential extends Model
 {
     protected $primaryKey = 'credential_id';
 
+    function EmployeeID() { return $this->getAttribute("credential_user"); }
+    function Password() { return $this->getAttribute("credential_pass"); }
+    function FirstName() { return $this->getAttribute("credential_first"); }
+    function LastName() { return $this->getAttribute("credential_last"); }
+    function FullName() { return $this->getAttribute("credential_first") . ' ' . $this->getAttribute("credential_last"); }
+    function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get() ?? []; }
+    function TeamLeader() { return Credential::where("credential_user", $this->getAttribute("credential_up"))->first(); }
+    function Status() { return $this->getAttribute('credential_status') != null ? $agent->getAttribute('credential_status') : "N/A"; }
+
     function JobPosition() {
         switch ($this->getAttribute("credential_type")) {
             case "DESGN": return "Web Designer";
@@ -37,4 +46,6 @@ class Credential extends Model
             return "Experienced (> 6 mos)";
         }
     }
+
+    function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
 }
