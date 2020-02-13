@@ -6,8 +6,11 @@
 
 @section('content')
 
+
+<!-- Supervisor Dashboard -->    
 @if (session('user-role') == 'Supervisor')
-    <!-- 1st row dashboard -->
+
+    <!-- 1st row supervisor dashboard -->
     <div class="row">
 
         <!-- Overview of coaching completed -->
@@ -81,7 +84,7 @@
         
     </div>
 
-    <!-- 2nd row dashboard -->
+    <!-- 2nd row supervisor dashboard -->
     <div class="row mt-5">
 
         <!-- Summary section -->
@@ -215,7 +218,7 @@
 
     </div>
 
-    <!-- 3rd row dashboard -->
+    <!-- 3rd row supervisor dashboard -->
     <div class="row mt-5">
 
          <!-- Exception section -->
@@ -274,7 +277,7 @@
         </div>
     </div>
 
-    <!-- 4th row dashboard -->
+    <!-- 4th row supervisor dashboard -->
     <div class="row mt-5">
 
         <!-- Top Resource section -->
@@ -329,19 +332,19 @@
                             <!-- Productivity score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Productivity: 89%</span></div>
+                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div>
                             </div>
 
                             <!-- Quality score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Quality: 99.4%</span></div>
+                                <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
                             </div>
 
                             <!-- Churn score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Churn: 90%</span></div>
+                                <span class="progress-title">Churn: <span class="progress-score">90%</span></span></div>
                             </div>
 
                         </div>
@@ -352,19 +355,19 @@
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">PKT: 85%</span></div>
+                                <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Attendance: 100%</span></div>
+                                <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
                                 <div class="progress-bar pb-bgmain" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span id="count-example">Bonus: 5%</span></div>
+                                <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
                             </div>
                         </div>
                     </div>
@@ -428,9 +431,138 @@
         
     </div>
 
+
+<!-- Agent Dashboard -->    
 @elseif (session('user-role') == 'Web Designer')
 
+    <!-- 1st row designer dashboard -->
+    <div class="row">
 
+        <!-- Resource Scorecard Status Section -->
+        <div class="col-md">
+            <div class="tb-container pb-2">
+                <div class="dboard-text  px-4 pt-4 pb-3">
+                    <div class="dboard-title">My Scorecard Status</div>
+                    <div class="dboard-othtext">for the month of June</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="top-resource-container">
+                    <div class="row remove-padding">
+                        <div class="col-7">
+
+                        <!-- Name, role, scorecard title, top 1 -->
+                            <div class="tr-section-container flex-column pt-4">
+                                <div class="tr-section1 px-4 mb-4">
+                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                    <div class="tr-name-role flex-column ml-3">
+                                        <div class="r-name">John Doe</div>
+                                        <div class="r-role">Web Designer</div>
+                                    </div>
+                                </div>
+                                <div class="title-scorecard-container">
+                                    <div class="title-scc d-inline-flex justify-content-center align-items-center">
+                                       <div class="mr-2">Scorecard</div>
+                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall scorecard of the resource for the month of June"><i class="fa fa-question-circle"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Total score -->
+                        <div class="col-5 remove-p-left">
+                            <div class="totalScore-container flex-column p-4">
+                                <div class="total-heading">
+                                    TOTAL
+                                </div>
+                                <div class="total-score">
+                                    95<sup>%</sup>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress bar, categories score, and total score -->
+                <div class="row mt-1">
+                    <div class="col-sm">
+                        <div class="eachScore-container px-4 py-4">
+                            <!-- Productivity score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div>
+                            </div>
+
+                            <!-- Quality score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
+                            </div>
+
+                            <!-- Churn score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Churn: <span class="progress-score">90%</span></span></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <div class="eachScore-container px-4 pt-3">
+                            <!-- Product Knowledge Test score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
+                            </div>
+
+                            <!-- Attendance score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
+                            </div>
+
+                            <!-- Attendance score -->
+                            <div class="progress mt-1">
+                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ranking of resource section -->
+        <div class="col-md">
+            <div class="tb-container">
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">Room For Improvement</div>
+                    <div class="dboard-othtext">for the month of june</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 1st row designer dashboard -->
+    <div class="row mt-5">
+
+        <!-- Room for improvement section -->
+        <div class="col-md">
+            <div class="tb-container">
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">Pending Session</div>
+                    <div class="dboard-othtext">Of Scorecard And/Or Coaching Session</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                
+            </div>
+        </div>
+
+    </div>
 
 @endif
 

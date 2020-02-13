@@ -4,6 +4,7 @@ body, html {
     height: 100%;
     font-size: 14px;
     color: var(--dark-color-50p) !important;
+    background-color: #F9FAFB !important;
 }
 
 /* Dashboard styling here */
@@ -494,7 +495,7 @@ body, html {
     text-align: left;
 }
 
-#count-example {
+.progress-bar span, .progress-title .progress-score{
     font-size: 10px;
     font-weight: 400;
     text-shadow: 1px 1px 2px var(--dark-color);
