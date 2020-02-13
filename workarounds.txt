@@ -12,6 +12,11 @@ Deploying                       Run git clone https://github.com/personiv/dftool
                                 
 419 Error / Page Expired        Add {{ csrf_field() }} to forms
 
+Assets Links                    All links in href, src, action must be handled by blade template engine to function properly
+                                Hardcoded links may cause links to fail as it will refer relatively
+                                Example Scenario:
+                                When accessing http://localhost/dftools/public/session/47, the document will fetch files one up (in 'session' folder not 'public') but all files are in 'public' folder
+
 Exclude Unwanted File List (settings.json)
 "files.exclude": {
     "artisan": true,
