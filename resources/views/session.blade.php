@@ -5,33 +5,56 @@
 @section('js', 'js/session.js')
 
 <?php
-    $items = $data->getAttribute('session_data')["scoreitems"];
-    $values = $data->getAttribute('session_data')["scorevalues"];
-    $agentFullName = $agent->getAttribute('credential_first') . ' ' . $agent->getAttribute('credential_last');
-    $supervisorFullName = $supervisor->getAttribute('credential_first') . ' ' . $supervisor->getAttribute('credential_last');
-    $managerFullName = $manager->getAttribute('credential_first') . ' ' . $manager->getAttribute('credential_last');
-    $headFullName = $head->getAttribute('credential_first') . ' ' . $head->getAttribute('credential_last');
-    $role = $agent->getAttribute('credential_type');
-    $type = $data->getAttribute('session_type');
-    $mode = $data->getAttribute('session_mode');
-    $status = $agent->getAttribute('credential_status') != null ? $agent->getAttribute('credential_status') : "N/A";
-    $date = $data->getAttribute('created_at');
+    $data = $session->Data();
+    $items = $data["items"];
+    $values = $data["values"];
+    $supervisor = $session->Agent()->TeamLeader();
+    $manager = $supervisor->TeamLeader();
+    $head = $manager->TeamLeader();
+    $pendingLevel = $session->PendingLevel();
+
+    $agentMods = "";
+    $supervisorMods = "";
+    $managerMods = "";
+    $headMods = "";
+    switch ($pendingLevel) {
+        case 1:
+            $supervisorMods = "disabled";
+            $managerMods = "disabled";
+            $headMods = "disabled";
+            break;
+        case 2:
+            $agentMods = "done";
+            $supervisorMods = "";
+            break;
+        case 3:
+            $supervisorMods = "done";
+            $managerMods = "";
+            break;
+        case 4:
+            $managerMods = "done";
+            $headMods = "";
+            break;
+        case 4:
+            $headMods = "done";
+            break;
+    }
 ?>
 
 @section('content')
 <div class="container mb-4">
     <div class="row">
         <div class="col-4">
-            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->getAttribute('credential_last') }}</div>
-            <div><span class="font-weight-bold">First Name:</span> {{ $agent->getAttribute('credential_first') }}</div>
+            <div><span class="font-weight-bold">Last Name:</span> {{ $session->Agent()->FirstName() }}</div>
+            <div><span class="font-weight-bold">First Name:</span> {{ $session->Agent()->LastName() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Status:</span> {{ $status }}</div>
-            <div><span class="font-weight-bold">Process:</span> {{ $process }}</div>
+            <div><span class="font-weight-bold">Status:</span> {{ $session->Agent()->Status() }}</div>
+            <div><span class="font-weight-bold">Process:</span> {{ $session->Agent()->JobPosition() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Proficiency:</span> {{ $proficiency }}</div>
-            <div><span class="font-weight-bold">Period Covered:</span> {{ $date->format('Y-m-d') }}</div>
+            <div><span class="font-weight-bold">Proficiency:</span> {{ $session->Agent()->ProficiencyDetail() }}</div>
+            <div><span class="font-weight-bold">Period Covered:</span> {{ $session->DateCreated()->format('Y-m-d') }}</div>
         </div>
     </div>
 </div>
@@ -76,33 +99,41 @@
     <div class="row">
         <div class="col-3">
             <div class="font-weight-bold">Agent:</div>
-            <div class="mb-3">{{ $agentFullName }}</div>
+            <div class="mb-3">{{ $session->Agent()->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="agent-sign">
+                @if ($agentMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="agent-sign" {{ $agentMods }}>
+                @endif
                 <label class="custom-control-label" for="agent-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
         <div class="col-3">
             <div class="font-weight-bold">Supervisor:</div>
-            <div class="mb-3">{{ $supervisorFullName }}</div>
+            <div class="mb-3">{{ $supervisor->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="supervisor-sign">
+                @if ($supervisorMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="supervisor-sign" {{ $supervisorMods }}>
+                @endif
                 <label class="custom-control-label" for="supervisor-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
         <div class="col-3">
             <div class="font-weight-bold">Operation Manager:</div>
-            <div class="mb-3">{{ $managerFullName }}</div>
+            <div class="mb-3">{{ $manager->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="manager-sign">
+                @if ($managerMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="manager-sign" {{ $managerMods }}>
+                @endif
                 <label class="custom-control-label" for="manager-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
         <div class="col-3">
             <div class="font-weight-bold">Operation Head:</div>
-            <div class="mb-3">{{ $headFullName }}</div>
+            <div class="mb-3">{{ $head->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="head-sign">
+                @if ($headMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="head-sign" {{ $headMods }}>
+                @endif
                 <label class="custom-control-label" for="head-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>

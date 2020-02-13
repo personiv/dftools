@@ -22,9 +22,9 @@ class CreateSessionsTable extends Migration
             $table->string('session_month', 4);
             $table->integer('session_day');
             $table->integer('session_week');
-            $table->json('session_data');
-            $table->string('session_notes')->nullable();
-            $table->boolean('session_resource_sign')->default(false);
+            $table->json('session_compatible_data');
+            $table->string('session_notes')->default("");
+            $table->boolean('session_agent_sign')->default(false);
             $table->boolean('session_supervisor_sign')->default(false);
             $table->boolean('session_manager_sign')->default(false);
             $table->boolean('session_head_sign')->default(false);

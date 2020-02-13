@@ -159,7 +159,7 @@
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
                                     @for ($i = 0; $i < count(session("user-team")); $i++)
                                         <?php $member = session("user-team")[$i]; ?>
-                                        <option value="{{ $member->getAttribute('credential_user') }}">{{ $member->getAttribute('credential_first') . ' ' . $member->getAttribute('credential_last') }}</option>
+                                        <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
                                     @endfor
                                 </select>
                             </div>
@@ -210,7 +210,7 @@
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
                                     @for ($i = 0; $i < count(session("user-team")); $i++)
                                         <?php $member = session("user-team")[$i]; ?>
-                                        <option value="{{ $member->getAttribute('credential_user') }}">{{ $member->getAttribute('credential_first') . ' ' . $member->getAttribute('credential_last') }}</option>
+                                        <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
                                     @endfor
                                 </select>
                             </div>

@@ -24,16 +24,16 @@ class LoginController extends Controller {
         $userPass = $r->input("user-pass");
         if (Credential::where("credential_user", $userId)->count() > 0) {
             $account = Credential::where("credential_user", $userId)->first();
-            $user = $account->getAttribute("credential_user");
-            if ($account->getAttribute("credential_pass") != $userPass) {
+            $user = $account->EmployeeID();
+            if ($account->Password() != $userPass) {
                 return redirect()->route("index")->with(["msg" => "Incorrect username or password"]);
             }
             $r->session()->put("user", $user);
             $r->session()->put("user-type", $account->getAttribute("credential_type"));
-            $r->session()->put("user-fullname", $account->getAttribute("credential_first") . ' ' . $account->getAttribute("credential_last"));
-            $r->session()->put("user-role", $account->getAttribute("credential_type"));
-            $r->session()->put("user-team", Credential::where("credential_up", $user)->get() ?? []);
-            if ($account->getAttribute("credential_type") != "ADMIN") return redirect()->route("dashboard");
+            $r->session()->put("user-fullname", $account->FullName());
+            $r->session()->put("user-role", $account->JobPosition());
+            $r->session()->put("user-team", $account->TeamMembers());
+            if (!$account->IsAdmin()) return redirect()->route("dashboard");
             else return redirect()->route("admin");
         } else {
             return redirect()->route("index")->with(["msg" => "Incorrect username or password"]);
