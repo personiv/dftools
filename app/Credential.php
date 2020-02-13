@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Session;
 
 class Credential extends Model
 {
@@ -10,6 +11,7 @@ class Credential extends Model
 
     function EmployeeID() { return $this->getAttribute("credential_user"); }
     function Password() { return $this->getAttribute("credential_pass"); }
+    function AccountType() { return $this->getAttribute("credential_type"); }
     function FirstName() { return $this->getAttribute("credential_first"); }
     function LastName() { return $this->getAttribute("credential_last"); }
     function FullName() { return $this->getAttribute("credential_first") . ' ' . $this->getAttribute("credential_last"); }
@@ -48,4 +50,54 @@ class Credential extends Model
     }
 
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
+
+    // Supervisor Methods
+    function SessionsThisWeek() {
+        $sessions = array();
+        $weeksessions = Session::where("session_week", (int)date("W"))->get();
+        for ($i=0; $i < count($weeksessions); $i++) { 
+            if ($weeksessions[$i]->Agent()->TeamLeader()->EmployeeID() != $this->EmployeeID()) {
+                array_push($sessions, $weeksessions[$i]);
+            }
+        }
+        return $sessions;
+    }
+
+    function PendingCoachingThisWeek() {
+        $sessions = array();
+        $weeksessions = $this->SessionsThisWeek();
+        for ($i=0; $i < count($weeksessions); $i++) {
+            switch ($this->AccountType()) {
+                case "SPRVR":
+                    if ($weeksessions[$i]->PendingLevel() < 3) array_push($sessions, $weeksessions[$i]);
+                    break;
+                case "MANGR":
+                    if ($weeksessions[$i]->PendingLevel() < 4) array_push($sessions, $weeksessions[$i]);
+                    break;
+                case "HEAD":
+                    if ($weeksessions[$i]->PendingLevel() < 5) array_push($sessions, $weeksessions[$i]);
+                    break;
+            }
+        }
+        return $sessions;
+    }
+
+    function CompletedCoachingThisWeek() {
+        $sessions = array();
+        $weeksessions = $this->SessionsThisWeek();
+        for ($i=0; $i < count($weeksessions); $i++) {
+            switch ($this->AccountType()) {
+                case "SPRVR":
+                    if ($weeksessions[$i]->PendingLevel() > 2) array_push($sessions, $weeksessions[$i]);
+                    break;
+                case "MANGR":
+                    if ($weeksessions[$i]->PendingLevel() > 3) array_push($sessions, $weeksessions[$i]);
+                    break;
+                case "HEAD":
+                    if ($weeksessions[$i]->PendingLevel() > 4) array_push($sessions, $weeksessions[$i]);
+                    break;
+            }
+        }
+        return $sessions;
+    }
 }
