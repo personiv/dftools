@@ -11,6 +11,34 @@
     $supervisor = $session->Agent()->TeamLeader();
     $manager = $supervisor->TeamLeader();
     $head = $manager->TeamLeader();
+    $pendingLevel = $session->PendingLevel();
+
+    $agentMods = "";
+    $supervisorMods = "";
+    $managerMods = "";
+    $headMods = "";
+    switch ($pendingLevel) {
+        case 1:
+            $supervisorMods = "disabled";
+            $managerMods = "disabled";
+            $headMods = "disabled";
+            break;
+        case 2:
+            $agentMods = "done";
+            $supervisorMods = "";
+            break;
+        case 3:
+            $supervisorMods = "done";
+            $managerMods = "";
+            break;
+        case 4:
+            $managerMods = "done";
+            $headMods = "";
+            break;
+        case 4:
+            $headMods = "done";
+            break;
+    }
 ?>
 
 @section('content')
@@ -73,7 +101,9 @@
             <div class="font-weight-bold">Agent:</div>
             <div class="mb-3">{{ $session->Agent()->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="agent-sign">
+                @if ($agentMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="agent-sign" {{ $agentMods }}>
+                @endif
                 <label class="custom-control-label" for="agent-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
@@ -81,7 +111,9 @@
             <div class="font-weight-bold">Supervisor:</div>
             <div class="mb-3">{{ $supervisor->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="supervisor-sign">
+                @if ($supervisorMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="supervisor-sign" {{ $supervisorMods }}>
+                @endif
                 <label class="custom-control-label" for="supervisor-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
@@ -89,7 +121,9 @@
             <div class="font-weight-bold">Operation Manager:</div>
             <div class="mb-3">{{ $manager->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="manager-sign">
+                @if ($managerMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="manager-sign" {{ $managerMods }}>
+                @endif
                 <label class="custom-control-label" for="manager-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
@@ -97,7 +131,9 @@
             <div class="font-weight-bold">Operation Head:</div>
             <div class="mb-3">{{ $head->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
-                <input type="checkbox" class="custom-control-input" id="head-sign">
+                @if ($headMods != "done")
+                    <input type="checkbox" class="custom-control-input" id="head-sign" {{ $headMods }}>
+                @endif
                 <label class="custom-control-label" for="head-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
         </div>
