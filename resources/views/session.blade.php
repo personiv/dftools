@@ -5,31 +5,28 @@
 @section('js', 'js/session.js')
 
 <?php
-    $items = $data->getAttribute('session_data')["scoreitems"];
-    $values = $data->getAttribute('session_data')["scorevalues"];
-    $supervisor = $agent->TeamLeader();
+    $data = $session->Data();
+    $items = $data["items"];
+    $values = $data["values"];
+    $supervisor = $session->Agent()->TeamLeader();
     $manager = $supervisor->TeamLeader();
     $head = $manager->TeamLeader();
-    $role = $agent->getAttribute('credential_type');
-    $type = $data->getAttribute('session_type');
-    $mode = $data->getAttribute('session_mode');
-    $date = $data->getAttribute('created_at');
 ?>
 
 @section('content')
 <div class="container mb-4">
     <div class="row">
         <div class="col-4">
-            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->FirstName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span> {{ $agent->LastName() }}</div>
+            <div><span class="font-weight-bold">Last Name:</span> {{ $session->Agent()->FirstName() }}</div>
+            <div><span class="font-weight-bold">First Name:</span> {{ $session->Agent()->LastName() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Status:</span> {{ $agent->Status() }}</div>
-            <div><span class="font-weight-bold">Process:</span> {{ $agent->JobPosition() }}</div>
+            <div><span class="font-weight-bold">Status:</span> {{ $session->Agent()->Status() }}</div>
+            <div><span class="font-weight-bold">Process:</span> {{ $session->Agent()->JobPosition() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Proficiency:</span> {{ $agent->ProficiencyDetail() }}</div>
-            <div><span class="font-weight-bold">Period Covered:</span> {{ $date->format('Y-m-d') }}</div>
+            <div><span class="font-weight-bold">Proficiency:</span> {{ $session->Agent()->ProficiencyDetail() }}</div>
+            <div><span class="font-weight-bold">Period Covered:</span> {{ $session->DateCreated()->format('Y-m-d') }}</div>
         </div>
     </div>
 </div>
@@ -74,7 +71,7 @@
     <div class="row">
         <div class="col-3">
             <div class="font-weight-bold">Agent:</div>
-            <div class="mb-3">{{ $agent->FullName() }}</div>
+            <div class="mb-3">{{ $session->Agent()->FullName() }}</div>
             <div class="custom-control custom-checkbox mt-4">
                 <input type="checkbox" class="custom-control-input" id="agent-sign">
                 <label class="custom-control-label" for="agent-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
