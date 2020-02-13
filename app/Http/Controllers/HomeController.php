@@ -8,7 +8,13 @@ use App\ScoreItem;
 use App\Session;
 
 class HomeController extends Controller {
-    function session(Request $r) {
+    function session($sid) {
+        $session = Session::where("session_id", $sid)->first();
+        if ($session == null) redirect()->route("dashboard")->with(["msg" => "Session with ID '$sid' does not exists"]);
+        return view('session')->with(["session" => $session]);
+    }
+
+    function createSession(Request $r) {
         $date = explode("/", date("M/d/Y/W"));
 
         // Save to database as AGENT level pending session
@@ -24,7 +30,7 @@ class HomeController extends Controller {
         $session->save();
         
         // Don't continue if the session already exists this week
-        if ($session->ExistsThisWeek()) return redirect()->route("dashboard")->with(["Agent has pending session"]);
-        return view('session')->with(["session" => $session]);
+        if ($session->ExistsThisWeek()) return redirect()->route("dashboard")->with(["msg" => "Agent has pending session"]);
+        return redirect()->route('session', [$session->SessionID()]);
     }
 }
