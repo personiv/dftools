@@ -37,7 +37,7 @@ class CreateCredentialsTable extends Migration
             ));
         }
 
-        addEmployee('admin', 'ADMIN', 'Admin', 'Admin', 'admin', 'admin');
+        addEmployee('admin', 'ADMIN', 'John', 'Doe', 'admin', 'admin');
         addEmployee('10072397', 'HEAD', 'Mike', 'Ventanilla', 'admin');
 
         addEmployee('7010609', 'MANGR', 'Daryl', 'Taguilaso', '10072397');
