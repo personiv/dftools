@@ -10,7 +10,7 @@ use App\Session;
 class HomeController extends Controller {
     function session($sid) {
         $session = Session::where("session_id", $sid)->first();
-        if ($session == null) redirect()->route("dashboard")->with(["msg" => "Session with ID '$sid' does not exists"]);
+        if ($session == null) return redirect()->route("dashboard")->with(["msg" => "Session with ID '$sid' does not exists"]);
         return view('session')->with(["session" => $session]);
     }
 
