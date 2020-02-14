@@ -27,10 +27,19 @@ class HomeController extends Controller {
         $session->setAttribute("session_day", $date[1]);
         $session->setAttribute("session_week", $date[3]);
         $session->setAttribute("session_compatible_data", $session->Data());
-        $session->save();
         
-        // Display the same session as it is already exists this week
-        if ($session->ExistsThisWeek()) return redirect()->route('session', [$session->ExistingSession()->SessionID()]);
-        return redirect()->route('session', [$session->SessionID()]);
+        if ($session->ExistsThisWeek()) {
+            // Display the same session as it is already exists this week
+            return redirect()->route('session', [$session->ExistingSession()->SessionID()]);
+        } else {
+            $session->save();
+            return redirect()->route('session', [$session->SessionID()]);
+        }
+    }
+
+    function movePendingLevel(Request $r) {
+        $session = Session::where("session_id", $r->input("pending-sid"))->first();
+        $session->MovePendingLevel($r);
+        return redirect()->route('dashboard');
     }
 }
