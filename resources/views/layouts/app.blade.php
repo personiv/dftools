@@ -208,8 +208,8 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="session-agent">Resource:</label>
-                                <select class="custom-select" id="session-agent" name="session-agent" required>
+                                    <label class="custom-label" for="exception-agent">Resource:</label>
+                                <select class="custom-select" id="exception-agent" name="exception-agent" required>
                                     <?php $members = $user->TeamMembers(); ?>
                                     @for ($i = 0; $i < count($members); $i++)
                                         <?php $member = $members[$i]; ?>
