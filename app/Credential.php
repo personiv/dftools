@@ -56,7 +56,7 @@ class Credential extends Model
         $sessions = array();
         $weeksessions = Session::where("session_week", (int)date("W"))->get();
         for ($i=0; $i < count($weeksessions); $i++) { 
-            if ($weeksessions[$i]->Agent()->TeamLeader()->EmployeeID() != $this->EmployeeID()) {
+            if ($weeksessions[$i]->Agent()->TeamLeader()->EmployeeID() == $this->EmployeeID()) {
                 array_push($sessions, $weeksessions[$i]);
             }
         }
@@ -89,15 +89,16 @@ class Credential extends Model
         $sessions = array();
         $weeksessions = $this->SessionsThisWeek();
         for ($i=0; $i < count($weeksessions); $i++) {
+            $weeksession = $weeksessions[$i];
             switch ($this->AccountType()) {
                 case "SPRVR":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::SUPERVISORLEVEL) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksession::SUPERVISORLEVEL) array_push($sessions, $weeksession);
                     break;
                 case "MANGR":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::MANAGERLEVEL) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksession::MANAGERLEVEL) array_push($sessions, $weeksession);
                     break;
                 case "HEAD":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::HEADLEVEL) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksession::HEADLEVEL) array_push($sessions, $weeksession);
                     break;
             }
         }
