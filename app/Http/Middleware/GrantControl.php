@@ -16,9 +16,10 @@ class GrantControl
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if ($request->session()->get("user") != null)
-            if ($request->session()->get("user") != "admin") {
-                if ($request->session()->get("user-type") != "ADMIN")
+        $user = $request->session()->get("user");
+        if ($user != null)
+            if ($user->EmployeeID() != "admin") {
+                if ($user->AccountType() != "ADMIN")
                     return $next($request);
             } else {
                 return redirect()->route("admin");

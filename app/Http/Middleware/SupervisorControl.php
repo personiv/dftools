@@ -14,8 +14,9 @@ class SupervisorControl
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        if ($request->session()->get("user") != null)
-            if ($request->session()->get("user-type") == "SPRVR") {
+        $user = $request->session()->get("user");
+        if ($user != null)
+            if ($user->AccountType() == "SPRVR") {
                 return $next($request);
             } else {
                 redirect()->route("dashboard");
