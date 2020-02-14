@@ -45,21 +45,22 @@ class Session extends Model
     }
 
     function MovePendingLevel(Request $r) {
+        $user = $r->session()->get("user");
         switch($this->PendingLevel()) {
             case self::AGENTLEVEL:
-                if ($r->session()->get("user") != $this->Agent()->EmployeeID()) return;
+                if ($user->EmployeeID() != $this->Agent()->EmployeeID()) return;
                 $this->setAttribute("session_agent_sign", true);
                 break;
             case self::SUPERVISORLEVEL:
-                if ($r->session()->get("user") != $this->Supervisor()->EmployeeID()) return;
+                if ($user->EmployeeID() != $this->Supervisor()->EmployeeID()) return;
                 $this->setAttribute("session_supervisor_sign", true);
                 break;
             case self::MANAGERLEVEL:
-                if ($r->session()->get("user") != $this->Manager()->EmployeeID()) return;
+                if ($user->EmployeeID() != $this->Manager()->EmployeeID()) return;
                 $this->setAttribute("session_manager_sign", true);
                 break;
             case self::HEADLEVEL:
-                if ($r->session()->get("user") != $this->Head()->EmployeeID()) return;
+                if ($user->EmployeeID() != $this->Head()->EmployeeID()) return;
                 $this->setAttribute("session_head_sign", true);
                 break;
         }

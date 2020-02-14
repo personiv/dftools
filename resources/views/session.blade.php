@@ -5,6 +5,7 @@
 @section('js', URL::asset('js/session.js'))
 
 <?php
+    $user = session("user");
     $data = $session->CompatibleData();
     $items = $data["items"];
     $values = $data["values"];
@@ -76,7 +77,7 @@
             <div class="col-3">
                 <div class="font-weight-bold">{{ $signees[$i]->JobPosition() }}</div>
                 <div class="mb-3">{{ $signees[$i]->FullName() }}</div>
-                @if ($signees[$i]->EmployeeID() == session("user"))
+                @if ($signees[$i]->EmployeeID() == $user->EmployeeID())
                     @if ($session->PendingLevel() == $i)
                         <form id="pending-form" action="{{ action('HomeController@movePendingLevel') }}" method="post">
                             {{ csrf_field() }}
