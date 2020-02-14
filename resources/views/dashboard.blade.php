@@ -4,11 +4,24 @@
 @section('css', URL::asset('css/dashboard.css'))
 @section('js', URL::asset('js/dashboard.js'))
 
+@php
+    $user = session("user");
+    $userTeam = $user->TeamMembers();
+@endphp
+
+@section('bladescript')
+<script type="text/javascript">
+createCircle("ovTotal1", "#5cb85c", "#5cb85c", 18, {{ $userTeam->count() }});
+createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", 2, 21);
+createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 21);
+</script>
+@endsection
+
 @section('content')
 
 
 <!-- Supervisor Dashboard -->    
-@if (session('user-role') == 'Supervisor')
+@if ($user->AccountType() == "SPRVR")
 
     <!-- 1st row supervisor dashboard -->
     <div class="row">
@@ -433,7 +446,7 @@
 
 
 <!-- Agent Dashboard -->    
-@elseif (session('user-role') == 'Web Designer')
+@elseif ($user->AccountType() == "DESGN")
 
     <!-- 1st row designer dashboard -->
     <div class="row">
