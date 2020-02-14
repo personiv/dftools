@@ -8,52 +8,27 @@
     $data = $session->CompatibleData();
     $items = $data["items"];
     $values = $data["values"];
-    $supervisor = $session->Agent()->TeamLeader();
+    $agent = $session->Agent();
+    $supervisor = $agent->TeamLeader();
     $manager = $supervisor->TeamLeader();
     $head = $manager->TeamLeader();
+    $signees = [$agent, $supervisor, $manager, $head];
     $pendingLevel = $session->PendingLevel();
-
-    $agentMods = "";
-    $supervisorMods = "";
-    $managerMods = "";
-    $headMods = "";
-    switch ($pendingLevel) {
-        case 1:
-            $supervisorMods = "disabled";
-            $managerMods = "disabled";
-            $headMods = "disabled";
-            break;
-        case 2:
-            $agentMods = "done";
-            $supervisorMods = "";
-            break;
-        case 3:
-            $supervisorMods = "done";
-            $managerMods = "";
-            break;
-        case 4:
-            $managerMods = "done";
-            $headMods = "";
-            break;
-        case 4:
-            $headMods = "done";
-            break;
-    }
 ?>
 
 @section('content')
 <div class="container mb-4">
     <div class="row">
         <div class="col-4">
-            <div><span class="font-weight-bold">Last Name:</span> {{ $session->Agent()->FirstName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span> {{ $session->Agent()->LastName() }}</div>
+            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->FirstName() }}</div>
+            <div><span class="font-weight-bold">First Name:</span> {{ $agent->LastName() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Status:</span> {{ $session->Agent()->Status() }}</div>
-            <div><span class="font-weight-bold">Process:</span> {{ $session->Agent()->JobPosition() }}</div>
+            <div><span class="font-weight-bold">Status:</span> {{ $agent->Status() }}</div>
+            <div><span class="font-weight-bold">Process:</span> {{ $agent->JobPosition() }}</div>
         </div>
         <div class="col-4">
-            <div><span class="font-weight-bold">Proficiency:</span> {{ $session->Agent()->ProficiencyDetail() }}</div>
+            <div><span class="font-weight-bold">Proficiency:</span> {{ $agent->ProficiencyDetail() }}</div>
             <div><span class="font-weight-bold">Period Covered:</span> {{ $session->DateCreated()->format('Y-m-d') }}</div>
         </div>
     </div>
@@ -97,46 +72,28 @@
 </div>
 <div class="container mt-4">
     <div class="row">
-        <div class="col-3">
-            <div class="font-weight-bold">Agent:</div>
-            <div class="mb-3">{{ $session->Agent()->FullName() }}</div>
-            <div class="custom-control custom-checkbox mt-4">
-                @if ($agentMods != "done")
-                    <input type="checkbox" class="custom-control-input" id="agent-sign" {{ $agentMods }}>
+        @for ($i = 0; $i < count($signees); $i++)
+            <div class="col-3">
+                <div class="font-weight-bold">{{ $signees[$i]->JobPosition() }}</div>
+                <div class="mb-3">{{ $signees[$i]->FullName() }}</div>
+                @if ($signees[$i]->EmployeeID() == session("user"))
+                    @if ($session->PendingLevel() == $i)
+                        <form id="pending-form" action="{{ action('HomeController@movePendingLevel') }}" method="post">
+                            {{ csrf_field() }}
+                            <div class="custom-control custom-checkbox mt-4">
+                                <input type="checkbox" class="custom-control-input" id="pending-signee" name="pending-signee" onclick="document.querySelector('#pending-form').submit()">
+                                <label class="custom-control-label" for="pending-signee">{{ $session::SIGNVERBIAGE }}</label>
+                            </div>
+                            <input type="hidden" id="pending-sid" name="pending-sid" value="{{ $session->SessionID() }}">
+                        </form>
+                    @elseif ($session->PendingLevel() > $i)
+                        <label>{{ $session::SIGNVERBIAGE }}</label>
+                    @endif
+                @elseif ($session->PendingLevel() > $i)
+                    <label>{{ $session::SIGNVERBIAGE }}</label>
                 @endif
-                <label class="custom-control-label" for="agent-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
             </div>
-        </div>
-        <div class="col-3">
-            <div class="font-weight-bold">Supervisor:</div>
-            <div class="mb-3">{{ $supervisor->FullName() }}</div>
-            <div class="custom-control custom-checkbox mt-4">
-                @if ($supervisorMods != "done")
-                    <input type="checkbox" class="custom-control-input" id="supervisor-sign" {{ $supervisorMods }}>
-                @endif
-                <label class="custom-control-label" for="supervisor-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="font-weight-bold">Operation Manager:</div>
-            <div class="mb-3">{{ $manager->FullName() }}</div>
-            <div class="custom-control custom-checkbox mt-4">
-                @if ($managerMods != "done")
-                    <input type="checkbox" class="custom-control-input" id="manager-sign" {{ $managerMods }}>
-                @endif
-                <label class="custom-control-label" for="manager-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
-            </div>
-        </div>
-        <div class="col-3">
-            <div class="font-weight-bold">Operation Head:</div>
-            <div class="mb-3">{{ $head->FullName() }}</div>
-            <div class="custom-control custom-checkbox mt-4">
-                @if ($headMods != "done")
-                    <input type="checkbox" class="custom-control-input" id="head-sign" {{ $headMods }}>
-                @endif
-                <label class="custom-control-label" for="head-sign">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</label>
-            </div>
-        </div>
+        @endfor
     </div>
 </div>
 @endsection
