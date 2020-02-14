@@ -109,8 +109,4 @@ function isToggled() {
     // end
   }
 
-  createCircle("ovTotal1", "#5cb85c", "#5cb85c", 18, 21);
-  createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", 2, 21);
-  createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 21);
-
   
