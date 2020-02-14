@@ -1,3 +1,4 @@
+<?php $user = session("user") ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,11 +33,11 @@
         <div class="border-right" id="sidebar-wrapper">
         <div class="sidebar-heading">dfs<span>corecard</span></div>
         <div class="list-group list-group-flush">
-            @if (session("user-type") != "ADMIN")
+            @if ($user->AccountType() != "ADMIN")
             <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-pie-chart mr-3"></i><span>Dashboard</span>
             </a>
-            @if (session("user-type") == "MANGR" || session("user-type") == "SPRVR")
+            @if ($user->IsLeader())
             <!-- Modal style menu -->
             <!-- Button trigger modal -->
             <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
@@ -97,10 +98,10 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="user-container justify-content-center align-items-center">
-                            <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ session('user-fullname') }}" width="40" height="40"> 
+                            <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                 <div class="d-flex flex-column ml-3">
-                                    <span id="navItem-user">{{ session("user-fullname") }}</span>
-                                    <span id="navItem-role">{{ session("user-role") }}</span>
+                                    <span id="navItem-user">{{ $user->FullName() }}</span>
+                                    <span id="navItem-role">{{ $user->JobPosition() }}</span>
                                 </div>
                             </div>
                         </a>
@@ -132,7 +133,7 @@
             </div>
         <!-- /#page-content-wrapper -->
         </div>
-        @if (session("user-type") == "MANGR" || session("user-type") == "SPRVR")
+        @if ($user->IsLeader())
         <!--
         <
         <
@@ -157,8 +158,9 @@
                             <div class="input-group mb-4">
                                     <label class="custom-label" for="session-agent">Resource:</label>
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
-                                    @for ($i = 0; $i < count(session("user-team")); $i++)
-                                        <?php $member = session("user-team")[$i]; ?>
+                                    <?php $members = $user->TeamMembers(); ?>
+                                    @for ($i = 0; $i < count($members); $i++)
+                                        <?php $member = $members[$i]; ?>
                                         <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
                                     @endfor
                                 </select>
@@ -208,8 +210,9 @@
                             <div class="input-group mb-4">
                                     <label class="custom-label" for="session-agent">Resource:</label>
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
-                                    @for ($i = 0; $i < count(session("user-team")); $i++)
-                                        <?php $member = session("user-team")[$i]; ?>
+                                    <?php $members = $user->TeamMembers(); ?>
+                                    @for ($i = 0; $i < count($members); $i++)
+                                        <?php $member = $members[$i]; ?>
                                         <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
                                     @endfor
                                 </select>
@@ -239,6 +242,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/progressbar.js') }}"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+    @yield('bladescript')
     <script>
         $('.popover-dismiss').popover({
             trigger: 'focus'
