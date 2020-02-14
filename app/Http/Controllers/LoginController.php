@@ -28,11 +28,7 @@ class LoginController extends Controller {
             if ($account->Password() != $userPass) {
                 return redirect()->route("index")->with(["msg" => "Incorrect username or password"]);
             }
-            $r->session()->put("user", $user);
-            $r->session()->put("user-type", $account->getAttribute("credential_type"));
-            $r->session()->put("user-fullname", $account->FullName());
-            $r->session()->put("user-role", $account->JobPosition());
-            $r->session()->put("user-team", $account->TeamMembers());
+            $r->session()->put("user", $account);
             if (!$account->IsAdmin()) return redirect()->route("dashboard");
             else return redirect()->route("admin");
         } else {
@@ -42,10 +38,6 @@ class LoginController extends Controller {
 
     function logout(Request $r) {
         $r->session()->forget("user");
-        $r->session()->forget("user-type");
-        $r->session()->forget("user-fullname");
-        $r->session()->forget("user-role");
-        $r->session()->forget("user-team");
         return redirect()->route("index");
     }
 }
