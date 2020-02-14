@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
@@ -13,11 +14,21 @@ class Session extends Model
     protected $primaryKey = 'session_id';
     protected $casts = ['session_compatible_data' => 'array'];
 
+    const AGENTLEVEL = 0;
+    const SUPERVISORLEVEL = 1;
+    const MANAGERLEVEL = 2;
+    const HEADLEVEL = 3;
+    const DONELEVEL = 4;
+    const SIGNVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+
     function SessionID() { return $this->getAttribute("session_id"); }
     function DateCreated() { return $this->getAttribute("created_at"); }
     function AgentID() { return $this->getAttribute("session_agent"); }
     function AgentRole() { return $this->Agent()->getAttribute("credential_type"); }
     function Agent() { return Credential::where("credential_user", $this->getAttribute("session_agent"))->first(); }
+    function Supervisor() { return $this->Agent()->TeamLeader(); }
+    function Manager() { return $this->Supervisor()->TeamLeader(); }
+    function Head() { return $this->Manager()->TeamLeader(); }
     function Type() { return $this->getAttribute("session_type"); }
     function Mode() { return $this->getAttribute("session_mode"); }
     function Year() { return $this->getAttribute("session_year"); }
@@ -26,11 +37,33 @@ class Session extends Model
     function Week() { return $this->getAttribute("session_week"); }
 
     function PendingLevel() {
-        if ($this->getAttribute("session_agent_sign") == false || $this->getAttribute("session_notes") == "") return 1;
-        else if ($this->getAttribute("session_supervisor_sign") == false) return 2;
-        else if ($this->getAttribute("session_manager_sign") == false) return 3;
-        else if ($this->getAttribute("session_head_sign") == false) return 4;
-        else return 5;
+        if ($this->getAttribute("session_agent_sign") == false) return self::AGENTLEVEL;
+        else if ($this->getAttribute("session_supervisor_sign") == false) return self::SUPERVISORLEVEL;
+        else if ($this->getAttribute("session_manager_sign") == false) return self::MANAGERLEVEL;
+        else if ($this->getAttribute("session_head_sign") == false) return self::HEADLEVEL;
+        else return self::DONELEVEL;
+    }
+
+    function MovePendingLevel(Request $r) {
+        switch($this->PendingLevel()) {
+            case self::AGENTLEVEL:
+                if ($r->session()->get("user") != $this->Agent()->EmployeeID()) return;
+                $this->setAttribute("session_agent_sign", true);
+                break;
+            case self::SUPERVISORLEVEL:
+                if ($r->session()->get("user") != $this->Supervisor()->EmployeeID()) return;
+                $this->setAttribute("session_supervisor_sign", true);
+                break;
+            case self::MANAGERLEVEL:
+                if ($r->session()->get("user") != $this->Manager()->EmployeeID()) return;
+                $this->setAttribute("session_manager_sign", true);
+                break;
+            case self::HEADLEVEL:
+                if ($r->session()->get("user") != $this->Head()->EmployeeID()) return;
+                $this->setAttribute("session_head_sign", true);
+                break;
+        }
+        $this->save();
     }
 
     function CompatibleData() {
@@ -59,12 +92,12 @@ class Session extends Model
         return ["items" => ScoreItem::where("score_item_role", $this->Agent()->getAttribute("credential_type"))->get(), "values" => $agentvalues];
     }
 
-    function ExistsThisWeek() {
-        // Check if this session is a duplicated session this week
-        return Session::where("session_agent", $this->AgentID())->where("session_week", $this->Week())->count() > 1;
-    }
-
     function ExistingSession() {
         return Session::where("session_agent", $this->AgentID())->where("session_week", $this->Week())->first();
+    }
+
+    function ExistsThisWeek() {
+        // Check if this session is a duplicated session this week
+        return $this->ExistingSession() != null;
     }
 }
