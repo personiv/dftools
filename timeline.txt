@@ -14,3 +14,22 @@ Created design for Dashboard page
 Created global design for sidebar and header
 
 Percentage: 25%
+
+----------
+
+2nd week (February 10, 2020 - February 14, 2020)
+
+Back-End
+Revised Database Design (\\172.17.0.200\dxm_web\Dexweb_public1\Team Noel\Dizon\scorecard v2-dbdesigner.pdf)
+Completed Admin Control Panel
+Data is now binded and updating in Scorecard view (for manual view only)
+Team Member data is now binded to Team Leaders
+Partially done integrating data for Supervisor's Dashboard
+
+Front-End
+Done designing Supervisor's Dashboard (\\172.17.0.200\dxm_web\Dexweb_public1\Team Noel\Dizon\screencapture-localhost-dftools-public-dashboard-2020-02-14-17_26_10.png)
+Partially done designing Web Designer's Dashboard
+Redesign and optimized base layout of whole site
+Added animation and graphical plugins to Dashboards
+
+Percentage: 50%
