@@ -18,6 +18,8 @@ class Credential extends Model
     function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get() ?? []; }
     function TeamLeader() { return Credential::where("credential_user", $this->getAttribute("credential_up"))->first(); }
     function Status() { return $this->getAttribute('credential_status') != null ? $this->getAttribute('credential_status') : "N/A"; }
+    function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
+    function IsLeader() { return $this->TeamMembers() != []; }
 
     function JobPosition() {
         switch ($this->getAttribute("credential_type")) {
@@ -49,8 +51,6 @@ class Credential extends Model
         }
     }
 
-    function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
-
     // Supervisor Methods
     function SessionsThisWeek() {
         $sessions = array();
@@ -68,14 +68,17 @@ class Credential extends Model
         $weeksessions = $this->SessionsThisWeek();
         for ($i=0; $i < count($weeksessions); $i++) {
             switch ($this->AccountType()) {
+                default:
+                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::SUPERVISORLEVEL) array_push($sessions, $weeksessions[$i]);
+                    break;
                 case "SPRVR":
-                    if ($weeksessions[$i]->PendingLevel() < 3) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::MANAGERLEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
                 case "MANGR":
-                    if ($weeksessions[$i]->PendingLevel() < 4) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::HEADLEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
                 case "HEAD":
-                    if ($weeksessions[$i]->PendingLevel() < 5) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::DONELEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
             }
         }
@@ -88,13 +91,13 @@ class Credential extends Model
         for ($i=0; $i < count($weeksessions); $i++) {
             switch ($this->AccountType()) {
                 case "SPRVR":
-                    if ($weeksessions[$i]->PendingLevel() > 2) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::SUPERVISORLEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
                 case "MANGR":
-                    if ($weeksessions[$i]->PendingLevel() > 3) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::MANAGERLEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
                 case "HEAD":
-                    if ($weeksessions[$i]->PendingLevel() > 4) array_push($sessions, $weeksessions[$i]);
+                    if ($weeksessions[$i]->PendingLevel() > $weeksessions[$i]::HEADLEVEL) array_push($sessions, $weeksessions[$i]);
                     break;
             }
         }
