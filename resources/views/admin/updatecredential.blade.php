@@ -30,14 +30,9 @@
                             <label for="user-type">Type</label>
                             <select class="form-control" id="user-type" name="user-type" required>
                                 <option value="NONE" selected>No changes</option>
-                                <option value="DESGN">Web Designer</option>
-                                <option value="WML">Web Mods Line</option>
-                                <option value="CUSTM">Senior Web Designer</option>
-                                <option value="VQA">Voice Quality Assurance</option>
-                                <option value="PR">Website Proofreader</option>
-                                <option value="SPRVR">Supervisor</option>
-                                <option value="MANGR">Operation Manager</option>
-                                <option value="HEAD">Operation Head</option>
+                                @for($i = 0; $i < $employeeTypes->count(); $i++)
+                                    <option value="{{ $employeeTypes[$i]->Name() }}">{{ $employeeTypes[$i]->Description() }}</option>
+                                @endfor
                             </select>
                             <label for="user-hire-date">Hire Date (No changes if no date were selected)</label>
                             <input class="form-control" type="date" id="user-hire-date" name="user-hire-date">
