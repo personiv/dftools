@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Credential;
 use App\ScoreItem;
+use App\Tag;
 
 class AdminController extends Controller {
     function viewAddCredential(Request $r) {
-        $leaders = Credential::where("credential_type", "HEAD")
-            ->orWhere("credential_type", "MANGR")
-            ->orWhere("credential_type", "SPRVR")->get();
-        return view("admin.addcredential")->with(["leaders" => $leaders]);
+        $leaders = Credential::GetAllLeaders();
+        $employeeTypes = Tag::EmployeeTypes();
+        return view("admin.addcredential")->with(["leaders" => $leaders, "employeeTypes" => $employeeTypes]);
     }
 
     function addCredential(Request $r) {
@@ -41,10 +41,9 @@ class AdminController extends Controller {
     }
 
     function viewUpdateCredential(Request $r) {
-        $leaders = Credential::where("credential_type", "HEAD")
-            ->orWhere("credential_type", "MANGR")
-            ->orWhere("credential_type", "SPRVR")->get();
-        return view("admin.updatecredential")->with(["leaders" => $leaders]);
+        $leaders = Credential::GetAllLeaders();
+        $employeeTypes = Tag::EmployeeTypes();
+        return view("admin.updatecredential")->with(["leaders" => $leaders, "employeeTypes" => $employeeTypes]);
     }
 
     function updateCredential(Request $r) {

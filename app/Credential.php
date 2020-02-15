@@ -4,10 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Session;
+use App\Tag;
 
 class Credential extends Model
 {
     protected $primaryKey = 'credential_id';
+    static function GetAllLeaders() {
+        $types = Tag::LeaderTypes();
+        for ($i = 0; $i < $types->count(); $i++) { 
+            if ($i == 0) {
+                $leaders = self::where("credential_type", $types[$i]->Name());
+            } else {
+                $leaders = $leaders->orWhere("credential_type", $types[$i]->Name());
+            }
+        }
+        return $leaders->get();
+    }
 
     function EmployeeID() { return $this->getAttribute("credential_user"); }
     function Password() { return $this->getAttribute("credential_pass"); }
