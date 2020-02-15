@@ -15,11 +15,11 @@ class Credential extends Model
     function FirstName() { return $this->getAttribute("credential_first"); }
     function LastName() { return $this->getAttribute("credential_last"); }
     function FullName() { return $this->getAttribute("credential_first") . ' ' . $this->getAttribute("credential_last"); }
-    function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get() ?? []; }
+    function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get(); }
     function TeamLeader() { return Credential::where("credential_user", $this->getAttribute("credential_up"))->first(); }
     function Status() { return $this->getAttribute('credential_status') != null ? $this->getAttribute('credential_status') : "N/A"; }
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
-    function IsLeader() { return $this->TeamMembers() != []; }
+    function IsLeader() { return $this->TeamMembers()->count() > 0; }
 
     function JobPosition() {
         switch ($this->getAttribute("credential_type")) {
