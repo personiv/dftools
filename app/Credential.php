@@ -34,18 +34,12 @@ class Credential extends Model
     function IsLeader() { return $this->TeamMembers()->count() > 0; }
 
     function JobPosition() {
-        switch ($this->getAttribute("credential_type")) {
-            case "DESGN": return "Web Designer";
-            case "WML": return "Web Mods Line";
-            case "VQA": return "Voice Quality Assurance";
-            case "CUSTM": return "Senior Web Designer";
-            case "PR": return "Website Proofreader";
-            case "SPRVR": return "Supervisor";
-            case "MANGR": return "Operation Manager";
-            case "HEAD": return "Operation Head";
-            case "ADMIN": return "Administrator";
-            default: return "N/A";
+        $employeeTypes = Tag::EmployeeTypes();
+        for ($i = 0; $i < $employeeTypes->count(); $i++) { 
+            if ($this->getAttribute("credential_type") == $employeeTypes[$i]->Name())
+                return $employeeTypes[$i]->Description();
         }
+        return "N/A";
     }
 
     function ProficiencyDetail() {
