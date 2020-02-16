@@ -108,10 +108,10 @@ class Session extends Model
             "fields" => [
                 "notes" => [
                     "title" => "Notes",
-                    "size" => 12,
+                    "size" => 12, // Bootstrap grid size
                     "value" => "",
-                    "for" => $this->Agent()->EmployeeID(),
-                    "pending" => 0
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
                 ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
