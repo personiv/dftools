@@ -32,7 +32,10 @@ class Session extends Model
     function Supervisor() { return $this->Agent()->TeamLeader(); }
     function Manager() { return $this->Supervisor()->TeamLeader(); }
     function Head() { return $this->Manager()->TeamLeader(); }
-
+    function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
+    function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }
+    function IsNextSignee($employeeID) { return array_keys($this->Data()["signatures"])[$this->PendingLevel()] == $employeeID; }
+    
     function PendingLevel() {
         $level = 0;
         $signatures = $this->Data()["signatures"];
@@ -51,8 +54,7 @@ class Session extends Model
         if ($r->session()->get("user")->Password() != $r->input("session-verify-password")) return;
 
         // Check if the userID exists in signees and if the userID is signing in proper order
-        if (!array_key_exists($userID, $data["signatures"]) ||
-            array_keys($data["signatures"])[$this->PendingLevel()] != $userID) return;
+        if (!$this->IsSignee($userID) || !$this->IsNextSignee($userID)) return;
         
         // Finally sign the user's part
         $data["signatures"][$userID] = true;
