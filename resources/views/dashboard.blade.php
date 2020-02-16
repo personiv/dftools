@@ -13,9 +13,9 @@
 
 @section('bladescript')
 <script type="text/javascript">
-createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($completedCoaching) }}, {{ $userTeam->count() }});
-createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($pendingCoaching) }}, {{ $userTeam->count() }});
-createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
+    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($completedCoaching) }}, {{ $userTeam->count() }});
+    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($pendingCoaching) }}, {{ $userTeam->count() }});
+    createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
 </script>
 @endsection
 
@@ -29,7 +29,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
     <div class="row">
 
         <!-- Overview of coaching completed -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="ov-container">
                 <div class="row">
                     <div class="col-sm-6">
@@ -52,7 +52,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
         </div>
 
         <!-- Overview of coaching pending -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="ov-container">
                 <div class="row">
                     <div class="col-6">
@@ -75,7 +75,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
         </div>
 
         <!-- Overview of coaching exception -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="ov-container">
             <div class="row">
                     <div class="col-6">
@@ -103,7 +103,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
     <div class="row mt-5">
 
         <!-- Summary section -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Summary</div>
@@ -237,7 +237,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
     <div class="row mt-5">
 
          <!-- Exception section -->
-         <div class="col-md">
+         <div class="col-lg">
             <div class="tb-container">
                 <div class="row">
                     <div class="col-sm">
@@ -247,7 +247,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                         </div>
                     </div>
                     <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
-                        <div class="excp-btn d-inline-flex">
+                        <div class="excp-btn mx-wdth d-inline-flex">
                             <span id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
                         </div>
                     </div>
@@ -290,13 +290,14 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                 </div>
             </div>
         </div>
+
     </div>
 
     <!-- 4th row supervisor dashboard -->
     <div class="row mt-5">
 
         <!-- Top Resource section -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="tb-container pb-2">
                 <div class="dboard-text  px-4 pt-4 pb-3">
                     <div class="dboard-title">Overall Top Resource</div>
@@ -391,7 +392,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
         </div>
 
         <!-- Ranking of resource section -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Top 3 Resource</div>
@@ -454,7 +455,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
     <div class="row">
 
         <!-- Resource Scorecard Status Section -->
-        <div class="col-md">
+        <div class="col-lg">
             <div class="tb-container pb-2">
                 <div class="dboard-text  px-4 pt-4 pb-3">
                     <div class="dboard-title">My Scorecard Status</div>
@@ -548,15 +549,70 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
             </div>
         </div>
 
-        <!-- Ranking of resource section -->
-        <div class="col-md">
+        <!-- Room for improvement section -->
+        <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
-                    <div class="dboard-title">Room For Improvement</div>
+                    <div class="dboard-title">Productivity Improvement</div>
                     <div class="dboard-othtext">for the month of june</div>
                 </div>
                 <div class="dropdown-divider"></div>
-                
+                <div class="row p-4">
+                    <div class="col-sm">
+
+                    <!-- Current, Target, and Deficit points starts here -->
+                        <div class="points-container">
+
+                            <!-- Current points -->
+                                <div class="current-p">
+                                    <span class="cp-span">Current Points</span>
+                                    <input type="text" value="113.63" disabled>
+                                </div>
+
+                            <!-- Target points -->
+                            <div class="target-p mt-1">
+                                <span class="tp-span">Target Points</span>
+                                <input type="text" value="152" disabled>
+                            </div>
+
+                            <!-- Deficit points -->
+                            <div class="deficit-p mt-1">
+                                <span class="dp-span">Deficit Points</span>
+                                <input type="text" value="38.37" disabled>
+                            </div>
+
+                            <!-- Average -->
+                            <div class="average-p% mt-1">
+                                <span class="dp-span">Average</span>
+                                <input type="text" value="5.165" disabled>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="days-container">
+                            
+                        <!-- Current points -->
+                        <div class="current-p">
+                                    <span class="cp-span">Current Days Passed</span>
+                                    <input type="text" value="22" disabled>
+                                </div>
+
+                            <!-- Target points -->
+                            <div class="target-p mt-1">
+                                <span class="tp-span">Current Target/Day</span>
+                                <input type="text" value="8">
+                            </div>
+
+                            <!-- Deficit points -->
+                            <div class="deficit-p mt-1">
+                                <span class="dp-span">Progress</span>
+                                <input type="text" value="74.76%" disabled>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -565,15 +621,44 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
     <!-- 1st row designer dashboard -->
     <div class="row mt-5">
 
-        <!-- Room for improvement section -->
-        <div class="col-md">
+        <!-- Pending section -->
+        <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Pending Session</div>
                     <div class="dboard-othtext">Of Scorecard And/Or Coaching Session</div>
                 </div>
                 <div class="dropdown-divider"></div>
-                
+                <div class="table-responsive px-4 pt-0 pb-4">
+                    <table class="table table-hover table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Session Type</th>
+                            <th scope="col">Send By</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>03/05/2020</td>
+                            <td>Mid Month Scorecard</td>
+                            <td>{{ $user->FullName() }}</td>
+                            <td>
+                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Start Adding Notes</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>03/05/2020</td>
+                            <td>Coaching</td>
+                            <td>{{ $user->FullName() }}</td>
+                            <td>
+                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Start Adding Notes</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 

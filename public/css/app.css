@@ -8,6 +8,34 @@ body, html {
     background-color: #F9FAFB !important;
 }
 
+#wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.table td, .table th {
+    vertical-align: middle !important;
+}
+
+/* For coaching table 
+.dboard-wrapper table th, .dboard-wrapper table td {
+    padding: 1em;
+    white-space: pre-line;
+    word-wrap: break-word !important;
+} */
+
+::-webkit-input-placeholder { /* Edge */
+    color: #bbb !important;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+    color: #bbb !important;
+}
+
+::placeholder {
+    color: #bbb !important;
+}
+
 /* Dashboard styling here */
 /* Dashboard / styling all dashboard title categories / global */
 .dboard-wrapper {
@@ -198,7 +226,8 @@ body, html {
 /* Status default style */
 .dboard-wrapper table td span{
     padding: 5px 0;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 600;
     border-radius: 3px;
     float: left;
     width: 100%;
@@ -207,7 +236,6 @@ body, html {
 /* Status — For Coaching */
 .dboard-wrapper table td span.stats-for-coaching {
     padding: 5px 10px;
-    font-weight: 700;
     background-color: var(--for-coaching-transparent);
     color: var(--for-coaching);
     cursor: default;
@@ -219,7 +247,6 @@ body, html {
 /* Status — Pending */
 .dboard-wrapper table td span.stats-pending {
     padding: 5px 10px;
-    font-weight: 700;
     background-color: var(--pending-transparent);
     color: var(--pending);
     cursor: default;
@@ -230,7 +257,6 @@ body, html {
 /* Status — Completed */
 .dboard-wrapper table td span.stats-completed {
     padding: 5px 10px;
-    font-weight: 700;
     background-color: var(--completed-transparent);
     color: var(--completed);
     width: auto;
@@ -243,12 +269,12 @@ body, html {
 /* Action button default style */
 .dboard-wrapper table td #action-btn {
     padding: 5px 10px !important;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
-    max-width: 120px;
+    max-width: 130px;
     width: 100%;
 }
 
@@ -317,14 +343,19 @@ body, html {
 #btn-delete,
 #btn-edit {
     padding: 5px 10px !important;
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 13px;
+    font-weight: 600;
     text-align: center;
     border-radius: 3px;
     cursor: pointer;
-    max-width: 80px;
+    max-width: 90px;
     width: 100%;
 } 
+
+/* For add button only */
+.mx-wdth {
+    width: 80px;
+}
 
 /* Action button / Create session */
 .action-btn-edit,
@@ -661,11 +692,11 @@ body, html {
     width: 20%;
     margin-bottom: 0px;
     margin-top: 6px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .modal-body .custom-control-label {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .custom-control-label span {
@@ -700,7 +731,7 @@ body, html {
     outline: none;
     padding: 7px 10px !important;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
     text-align: center;
     letter-spacing: .5px;
     border-radius: 3px;
@@ -709,9 +740,13 @@ body, html {
     width: 100%;
 }
 
+.custom-checkbox .fa {
+    color: var(--blue);
+}
+
 /* Modal buttong styling / close && start */
 .btn-close {
-    background-color: var(--btemp-inverse) !important;
+    background-color: #A4A4AB !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -719,8 +754,8 @@ body, html {
 }
 
 .btn-close:hover, .btn-close:focus, .btn-close:active {
-    background-color: #151617 !important;
-    box-shadow: 0 0 0 0.2rem rgba(21, 22, 23, 0.25);
+    background-color: #8e8e94 !important;
+    box-shadow: 0 0 0 0.2rem rgba(164, 164, 171, 0.25);
 }
 
 .btn-start {

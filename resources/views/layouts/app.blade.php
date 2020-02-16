@@ -39,7 +39,7 @@
             </a>
             @if ($user->IsLeader())
             <!-- Modal style menu -->
-            <!-- Button trigger modal -->
+            <!-- Button trigger modal for create session -->
             <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa fa-file-text mr-3"></i><span>Create Session</span>
             </a>
@@ -47,7 +47,9 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <i class="fa fa-history mr-3"></i><span>History</span>
             </a>
-            <a href="#" class="list-group-item list-group-item-action">
+            <!-- Modal style menu -->
+            <!-- Button trigger modal for feedback -->
+            <a href="#" class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#feedbackModal">
                 <i class="fa fa-commenting mr-3"></i><span>Feedback</span>
             </a>
             @else
@@ -88,12 +90,20 @@
                 aria-controls="navbarSupportedContent20" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="animated-icon1"><span></span><span></span><span></span></div>
             </button>
-
+            
+            <!-- 
+            / Disabled responsive button for tablet view or small screen /bootstrap
+            /
+            /
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> 
+            /
+            /
+            / Ends here
+            -->
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="navbar-collapse">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -123,21 +133,21 @@
 
             <div class="container-fluid p-5 dboard-wrapper">
                 @yield('content')
-                
-                
 
             <!-- Footer  area here -->
-            <footer>
+            </div>
+        <!-- /#page-content-wrapper -->
+            <div class="container-fluid px-5 pb-5">
+                <footer>
                     <div class="row">
-                        <div class="col pt-5">
+                        <div class="col">
                             <div class="copyright-index d-flex justify-content-center">
                             Copyright © 2020 | DFScorecard All rights reserved.
                             </div>
                         </div>
                     </div>
-            </footer>
+                </footer>
             </div>
-        <!-- /#page-content-wrapper -->
         </div>
         @if ($user->IsLeader())
         <!--
@@ -182,7 +192,10 @@
                             </div>
                             <div class="custom-control custom-checkbox mt-5">
                                 <input type="checkbox" class="custom-control-input" id="session-mode" name="session-mode" value="MANUAL">
-                                <label class="custom-control-label" for="session-mode">Manual Mode&nbsp;&nbsp;<span class="note-style">(Please note that this checkbox is for scorecard only!)</span></label>
+                                <label class="custom-control-label" for="session-mode">Manual Mode&nbsp;</label>
+                                <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Manual Scorecard" data-content="Please be informed that this checkbox is for scorecard only!">
+                                    <i class="fa fa-question-circle"></i>
+                                </a>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -205,7 +218,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Exception Resource</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Exception</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -226,7 +239,7 @@
 
                             <div class="input-group">
                                     <label class="custom-label" for="FormControlTextarea">Reason:</label>
-                                    <textarea class="form-control" id="FormControlTextarea" rows="3" required></textarea>
+                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -238,6 +251,44 @@
             </div>
         </div>
         @endif
+        <!--
+        <
+        <
+        <   Feedback
+        <
+        <
+        -->
+        <!-- Modal -->
+        <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="#" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="input-group mb-4">
+                                    <label class="custom-label" for="feedback-name">Name:</label>
+                                    <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
+                            </div>
+
+                            <div class="input-group">
+                                    <label class="custom-label" for="FormControlTextarea">Comments:</label>
+                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     <!-- End of main wrapper -->
     </div>
 

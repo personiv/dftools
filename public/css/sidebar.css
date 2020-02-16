@@ -155,6 +155,16 @@ body {
 
 /* Navbar styling starts here */
 /* Navbar */
+
+/* For tablet screen and disabled bootstrap responsive button */
+.navbar-collapse {
+  flex-basis: auto !important;
+}
+
+.navbar-collapse .navbar-nav {
+  float: right;
+} /* responsive button ends here */
+
 .navbar {
   -moz-box-shadow: 0 1px 10px var(--dark-color-50p);
   -webkit-box-shadow: 0 1px 10px var(--dark-color-50p);
