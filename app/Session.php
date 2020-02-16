@@ -13,7 +13,7 @@ class Session extends Model
 {
     protected $primaryKey = 'session_id';
     protected $casts = ['session_data' => 'array'];
-    const UNSIGNEDVERBIAGE = "Not yet signed.";
+    const UNSIGNEDVERBIAGE = "On hold.";
     const PENDINGVERBIAGE = "Unable to sign yet.";
     const SIGNEDVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
@@ -35,7 +35,7 @@ class Session extends Model
     function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
     function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }
     function IsNextSignee($employeeID) { return array_keys($this->Data()["signatures"])[$this->PendingLevel()] == $employeeID; }
-    
+
     function PendingLevel() {
         $level = 0;
         $signatures = $this->Data()["signatures"];
