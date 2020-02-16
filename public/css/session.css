@@ -17,3 +17,16 @@ label {
     white-space: normal;
     word-wrap: break-word;
 }
+.session-field {
+    width: 100%;
+    min-height: 200px;
+    border: none;
+    resize: none;
+}
+
+#session-verify-wrapper input {
+    display: block;
+    min-width: 200px;
+    padding: 4px;
+    margin-bottom: 8px;
+}

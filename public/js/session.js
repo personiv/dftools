@@ -1,6 +1,7 @@
 window.onload = function() {
     mergeColumn(0);
     mergeColumn(1);
+    mergeColumn(6);
     $("#scorecard").css("visibility", "visible");
 }
 
@@ -20,4 +21,9 @@ function mergeColumn(columnIndex) {
         else applyMergeUpTo(i);
     }
     applyMergeUpTo(cells.length);
+}
+
+function showVerify() {
+    $("#session-verify-trigger-wrapper").remove();
+    document.querySelector("#session-verify-wrapper").style.display = "block";
 }

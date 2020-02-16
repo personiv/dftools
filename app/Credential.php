@@ -57,7 +57,7 @@ class Credential extends Model
         }
     }
 
-    // Supervisor Methods
+    // Team Leader Methods
     function SessionsThisWeek() {
         $sessions = array();
         $weeksessions = Session::where("session_week", (int)date("W"))->get();
@@ -72,42 +72,20 @@ class Credential extends Model
     function PendingCoachingThisWeek() {
         $sessions = array();
         $weeksessions = $this->SessionsThisWeek();
-        for ($i=0; $i < count($weeksessions); $i++) {
-            switch ($this->AccountType()) {
-                default:
-                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::SUPERVISORLEVEL) array_push($sessions, $weeksessions[$i]);
-                    break;
-                case "SPRVR":
-                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::MANAGERLEVEL) array_push($sessions, $weeksessions[$i]);
-                    break;
-                case "MANGR":
-                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::HEADLEVEL) array_push($sessions, $weeksessions[$i]);
-                    break;
-                case "HEAD":
-                    if ($weeksessions[$i]->PendingLevel() < $weeksessions[$i]::DONELEVEL) array_push($sessions, $weeksessions[$i]);
-                    break;
-            }
-        }
+        for ($i=0; $i < count($weeksessions); $i++)
+            if ($weeksessions[$i]->IsSignee($this->EmployeeID()) && !$weeksessions[$i]->IsSigned($this->EmployeeID()))
+                array_push($sessions, $weeksessions[$i]);
+        
         return $sessions;
     }
 
     function CompletedCoachingThisWeek() {
         $sessions = array();
         $weeksessions = $this->SessionsThisWeek();
-        for ($i=0; $i < count($weeksessions); $i++) {
-            $weeksession = $weeksessions[$i];
-            switch ($this->AccountType()) {
-                case "SPRVR":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksession::SUPERVISORLEVEL) array_push($sessions, $weeksession);
-                    break;
-                case "MANGR":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksession::MANAGERLEVEL) array_push($sessions, $weeksession);
-                    break;
-                case "HEAD":
-                    if ($weeksessions[$i]->PendingLevel() > $weeksession::HEADLEVEL) array_push($sessions, $weeksession);
-                    break;
-            }
-        }
+        for ($i=0; $i < count($weeksessions); $i++)
+            if ($weeksessions[$i]->IsSignee($this->EmployeeID()) && $weeksessions[$i]->IsSigned($this->EmployeeID()))
+                array_push($sessions, $weeksessions[$i]);
+
         return $sessions;
     }
 }
