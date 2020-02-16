@@ -47,12 +47,24 @@ class Session extends Model
         $data = $this->Data();
         $userID = $r->session()->get("user")->EmployeeID();
 
+        // Verify if the sender is authorized through password validation
+        if ($r->session()->get("user")->Password() != $r->input("session-verify-password")) return;
+
         // Check if the userID exists in signees and if the userID is signing in proper order
         if (!array_key_exists($userID, $data["signatures"]) ||
             array_keys($data["signatures"])[$this->PendingLevel()] != $userID) return;
         
-        // Proceed with the update
+        // Finally sign the user's part
         $data["signatures"][$userID] = true;
+
+        // Unique Fields
+        switch ($this->Type()) {
+            case 'SCORE':
+                if ($userID == $this->AgentID())
+                    $data["fields"]["notes"]["value"] = $r->input("session-notes");
+                break;
+        }
+
         $this->setAttribute("session_data", $data);
         $this->save();
     }
@@ -68,6 +80,8 @@ class Session extends Model
         $month = $this->Month();
         $supervisorID = $this->Agent()->TeamLeader()->EmployeeID();
         $path = $this->Mode() == "manual" ? "data/manual/$year/$month/$supervisorID.xlsx" : "data/actual/$year/$month.xlsx";
+        
+        $scorecard = ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get();
         $agentvalues = array();
         if (file_exists($path)) {
             $reader = new Xlsx;
@@ -80,11 +94,25 @@ class Session extends Model
                 if ($scorevalues[$i][0] == $this->AgentID())
                     $agentvalues = $scorevalues[$i];
         }
+        for ($i = 0; $i < $scorecard->count(); $i++) {
+            if (!empty($agentvalues)) {
+                $scorecard[$i]["score_item_actual"] = $agentvalues[$i + 1];
+                $scorecard[$i]["score_item_overall"] = $agentvalues[$scorecard->count() + 1];
+            } else {
+                $scorecard[$i]["score_item_actual"] = "NaN";
+                $scorecard[$i]["score_item_overall"] = "NaN";
+            }
+        }
         return [
-            "items" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
-            "values" => $agentvalues,
+            "scorecard" => $scorecard,
             "fields" => [
-                "notes" => ""
+                "notes" => [
+                    "title" => "Notes",
+                    "size" => 12,
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(),
+                    "pending" => 0
+                ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
                 $this->Supervisor()->EmployeeID() => false,

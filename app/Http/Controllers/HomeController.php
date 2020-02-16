@@ -38,9 +38,8 @@ class HomeController extends Controller {
     }
 
     function movePendingLevel(Request $r) {
-        $session = Session::where("session_id", $r->input("pending-sid"))->first();
+        $session = Session::where("session_id", $r->input("session-id"))->first();
         $session->MovePendingLevel($r);
-        $sid = $session->SessionID();
-        return redirect()->route('dashboard')->with(["msg" => "You are not authorized to sign Session '$sid'"]);
+        return redirect()->route('dashboard');
     }
 }
