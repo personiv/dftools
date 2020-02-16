@@ -106,9 +106,15 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Change Password</a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-key"></i>
+                                <span>Change Password</span>
+                            </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ action('LoginController@logout') }}">Logout</a>
+                            <a class="dropdown-item" href="{{ action('LoginController@logout') }}">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
                         </div>
                     </li>
                 </ul>
