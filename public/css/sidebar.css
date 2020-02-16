@@ -259,6 +259,11 @@ body {
   font-size: 1.5rem;
 }
 
+.user-container div {
+  text-transform: capitalize;
+}
+
+
 /* Dropdown menu animation */
 /* Change this breakpoint if you change the breakpoint of the navbar */
 
