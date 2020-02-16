@@ -176,7 +176,7 @@
                             </div>
                             <div class="custom-control custom-checkbox mt-5">
                                 <input type="checkbox" class="custom-control-input" id="session-mode" name="session-mode" value="MANUAL">
-                                <label class="custom-control-label" for="session-mode">Manual Mode <span class="note-style">(Please note that this checkbox is for scorecard only!)</span></label>
+                                <label class="custom-control-label" for="session-mode">Manual Mode&nbsp;&nbsp;<span class="note-style">(Please note that this checkbox is for scorecard only!)</span></label>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -225,7 +225,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
-                            <button type="submit" class="modal-btn btn-start">Start</button>
+                            <button type="submit" class="modal-btn btn-start">Submit</button>
                         </div>
                     </form>
                 </div>

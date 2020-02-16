@@ -34,7 +34,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="overview-txt ov-completed d-flex flex-column">
-                            <div class="ov-title">Overview</div>
+                            <div class="ov-title">Completed</div>
                             <div class="ov-oth-txt">Coaching Completed</div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                 <div class="row">
                     <div class="col-6">
                         <div class="overview-txt ov-pending d-flex flex-column">
-                            <div class="ov-title">Overview</div>
+                            <div class="ov-title">Pending</div>
                             <div class="ov-oth-txt">Coaching Pending</div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
             <div class="row">
                     <div class="col-6">
                         <div class="overview-txt ov-exception d-flex flex-column">
-                            <div class="ov-title">Overview</div>
+                            <div class="ov-title">Exception</div>
                             <div class="ov-oth-txt">Coaching Exception</div>
                         </div>
                     </div>
@@ -269,7 +269,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                             <td>10021002</td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
-                            <td>For Coaching</td>
+                            <td>Core Leave</td>
                             <td>
                                 <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
                                 <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
@@ -279,7 +279,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                             <td>10021002</td>
                             <td>John Doe</td>
                             <td>Web Designer</td>
-                            <td>For Coaching</td>
+                            <td>Suspended</td>
                             <td>
                                 <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
                                 <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
@@ -343,45 +343,45 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                 <!-- Progress bar, categories score, and total score -->
                 <div class="row mt-1">
                     <div class="col-sm">
-                        <div class="eachScore-container px-4 py-4">
+                        <div class="eachScore-container px-4 py-3">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div>
+                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div> 
                             </div>
 
                             <!-- Quality score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
                             </div>
 
                             <!-- Churn score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Churn: <span class="progress-score">90%</span></span></div>
+                                <div class="progress-bar pb-color-f" role="progressbar" style="width: 70%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Churn: <span class="progress-score">70%</span></span></div>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="col-sm">
-                        <div class="eachScore-container px-4 pt-3">
+                        <div class="eachScore-container px-4 py-3">
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-color-bonus" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
                             </div>
                         </div>
@@ -402,7 +402,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                     <table class="table table-borderless">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">&nbsp;&nbsp;#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
                         </tr>
@@ -477,7 +477,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                                 <div class="title-scorecard-container">
                                     <div class="title-scc d-inline-flex justify-content-center align-items-center">
                                        <div class="mr-2">Scorecard</div>
-                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall scorecard of the resource for the month of June"><i class="fa fa-question-circle"></i></a>
+                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall status of your scorecard for the month of June"><i class="fa fa-question-circle"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -501,45 +501,45 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                 <!-- Progress bar, categories score, and total score -->
                 <div class="row mt-1">
                     <div class="col-sm">
-                        <div class="eachScore-container px-4 py-4">
+                        <div class="eachScore-container px-4 py-3">
                             <!-- Productivity score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div>
                             </div>
 
                             <!-- Quality score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
                             </div>
 
                             <!-- Churn score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 90%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Churn: <span class="progress-score">90%</span></span></div>
+                            <div class="progress">
+                                <div class="progress-bar pb-color-f" role="progressbar" style="width: 70%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Churn: <span class="progress-score">70%</span></span></div>
                             </div>
 
                         </div>
                     </div>
 
                     <div class="col-sm">
-                        <div class="eachScore-container px-4 pt-3">
+                        <div class="eachScore-container px-4 py-3">
                             <!-- Product Knowledge Test score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
-                            <div class="progress mt-1">
-                                <div class="progress-bar pb-bgmain" role="progressbar" style="width: 5%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar pb-color-bonus" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
                             </div>
                         </div>

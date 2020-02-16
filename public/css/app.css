@@ -1,6 +1,7 @@
 @import "core.css";
 
 body, html {
+    font-family: 'Source Sans Pro', sans-serif !important;
     height: 100%;
     font-size: 14px;
     color: var(--dark-color-50p) !important;
@@ -420,7 +421,7 @@ body, html {
     width: auto;
     height: auto;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1rem;
     text-align: left;
     cursor: pointer;
     color: var(--btemp-primary);
@@ -432,10 +433,8 @@ body, html {
 
 /* title-scorecard-container */
 .title-scorecard-container {
-    font-family: 'Open sans', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 1px;
     height: auto;
     text-align: left;
     padding-left: 25px;
@@ -480,7 +479,7 @@ body, html {
 
 /* Progress bar and score */
 .eachScore-container .progress{
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .eachScore-container .progress:last-child{
@@ -502,41 +501,38 @@ body, html {
 }
 
 .progress {
-    height: 2em !important;
+    height: auto !important;
     border-radius: 50px !important;
     background-color: var(--dark-color-50p);
+    padding: 3px;
 }
 .progress .progress-bar {
-    padding-left: 10px;
     transition: width 0.3s ease-in;
     overflow: visible;
+    border-radius: 50px;
+    padding: 2px 2px 2px 10px;
 }
 
 /* Progress bar color */
-.pb-bgmain {
-    background: rgb(0,58,93);
-    background: linear-gradient(90deg, rgba(0,58,93,1) 0%, rgba(91,192,222,1) 100%);
+.pb-color-p {
+    background: rgb(92, 184, 92);
+    background: linear-gradient(90deg, rgba(73, 145, 73,1) 0%, rgba(92, 184, 92,1) 100%);
 }
 
-.btemp-primary {
-    background-color: var(--btemp-primary) !important;
+.pb-color-sp {
+    background: rgb(240, 173, 78);
+    background: linear-gradient(90deg, rgba(204, 147, 67,1) 0%, rgba(240, 173, 78,1) 100%);
 }
 
-.btemp-success {
-    background-color: var(--btemp-success) !important;
+.pb-color-f {
+    background: rgb(217, 83, 79);
+    background: linear-gradient(90deg, rgba(173, 67, 64,1) 0%, rgba(217, 83, 79,1) 100%);
 }
 
-.btemp-info {
-    background-color: var(--btemp-info) !important;
+.pb-color-bonus {
+    background: rgb(91, 192, 222);
+    background: linear-gradient(90deg, rgba(73, 154, 179,1) 0%, rgba(91, 192, 222,1) 100%);
 }
-
-.btemp-warning {
-    background-color: var(--btemp-warning) !important;
-}
-
-.btemp-danger {
-    background-color: var(--btemp-danger) !important;
-} 
 
 /* Top 3 resource section */
 /* default styling */
@@ -548,10 +544,10 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 10px;
     text-align: center;
-    height: 25px;
-    width: 25px;
+    height: 22px;
+    width: 22px;
     border-radius: 50%;
 }
 
@@ -564,23 +560,44 @@ body, html {
 /* Each number and icon styling */
 /* 1 with icon */
 .tr-topOne span {
+    color: var(--light-color);
+    border: 2px solid #FFDC73;
+    background: rgb(166,124,0);
+    background: linear-gradient(55deg, rgba(166,124,0,1) 0%, rgba(191,155,48,1) 35%, rgba(255,191,0,1) 100%);
 }
 
 .tr-topOne .fas {
+    background: linear-gradient(55deg, rgba(166,124,0,1) 0%, rgba(191,155,48,1) 35%, rgba(255,191,0,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* 2 with icon */
 .tr-topTwo span {
+    color: var(--light-color);
+    border: 2px solid #C5C5C5;
+    background: rgb(121,121,121);
+    background: linear-gradient(55deg, rgba(121,121,121,1) 0%, rgba(206,206,206,1) 35%, rgba(229,229,229,1) 100%);
 }
 
 .tr-topTwo .fas {
+    background: linear-gradient(55deg, rgba(121,121,121,1) 0%, rgba(206,206,206,1) 35%, rgba(229,229,229,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* 3 with icon */
 .tr-topThree span {
+    color: var(--light-color);
+    border: 2px solid #6E5A4A;
+    background: rgb(121,85,72);
+    background: linear-gradient(55deg, rgba(121,85,72,1) 0%, rgba(141,110,99,1) 35%, rgba(161,136,127,1) 100%);
 }
 
 .tr-topThree .fas {
+    background: linear-gradient(55deg, rgba(121,85,72,1) 0%, rgba(141,110,99,1) 35%, rgba(161,136,127,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 } /* end */
 
 
@@ -642,7 +659,6 @@ body, html {
 /* Modal field name */
 .custom-label {
     width: 20%;
-    font-family: 'Open sans', sans-serif;
     margin-bottom: 0px;
     margin-top: 6px;
     font-weight: 700;
@@ -657,11 +673,6 @@ body, html {
     letter-spacing: .5px;
 }
 
-/* Modal input fields */
-.custom-select {
-    font-family: 'Open sans', sans-serif;
-}
-
 /* Modal dropdown option cannot add styling
 .custom-select .modal-option {
     font-family: 'Open sans', sans-serif !important;
@@ -670,7 +681,7 @@ body, html {
 } */
 
 .note-style {
-    padding: 5px 10px;
+    padding: 7px 10px;
     border-radius: 3px;
     background-color: var(--pending-transparent);
     color: var(--pending);
@@ -687,13 +698,14 @@ body, html {
 .modal-btn {
     border: none;
     outline: none;
-    padding: 10px !important;
+    padding: 7px 10px !important;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
+    letter-spacing: .5px;
     border-radius: 3px;
     cursor: pointer;
-    max-width: 70px;
+    max-width: 100px;
     width: 100%;
 }
 
