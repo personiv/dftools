@@ -11,21 +11,6 @@ $(document).ready(function () {
     }
 }); // end
 
-function progressScore() {
-
-  var scorePercentage = document.getElementsByClassName(".progress-score").innerHTML;
-
-  if (scorePercentage >= 90) {
-    $(".progress-score").css("color", "red");
-  } else if (scorePercentage <= 89 || scorePercentage >= 80) {
-    $(".progress-score").css("color", "yellow");
-  } else {
-    $(".progress-score").css("color", "black");
-  }
-}
-
-progressScore();
-
 
 // AJAX function 
 function request(action, postData, success) {
