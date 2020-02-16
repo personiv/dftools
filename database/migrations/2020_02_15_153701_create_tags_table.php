@@ -41,6 +41,9 @@ class CreateTagsTable extends Migration
         addTag("LEADER", "MANGR", "Operation Manager");
         addTag("LEADER", "HEAD", "Operation Head");
 
+        // System Accounts
+        addTag("SYSTEM", "ADMIN", "System Administrator");
+
         // Session Types
         addTag("SESSION", "SCORE", "Scorecard");
         addTag("SESSION", "GOAL", "Goal Setting");
