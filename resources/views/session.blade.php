@@ -6,17 +6,15 @@
 
 <?php
     $user = session("user");
-    $data = $session->CompatibleData();
+    $agent = $session->Agent();
+    $data = $session->Data();
     $items = $data["items"];
     $values = $data["values"];
-    $agent = $session->Agent();
-    $supervisor = $agent->TeamLeader();
-    $manager = $supervisor->TeamLeader();
-    $head = $manager->TeamLeader();
-    $signees = [$agent, $supervisor, $manager, $head];
+    $fields = $data["fields"];
+    $signees = $data["signatures"];
     $pendingLevel = $session->PendingLevel();
+    $s = 0;
 ?>
-
 @section('content')
 <div class="container mb-4">
     <div class="row">
@@ -73,28 +71,34 @@
 </div>
 <div class="container mt-4">
     <div class="row">
-        @for ($i = 0; $i < count($signees); $i++)
-            <div class="col-3">
-                <div class="font-weight-bold">{{ $signees[$i]->JobPosition() }}</div>
-                <div class="mb-3">{{ $signees[$i]->FullName() }}</div>
-                @if ($signees[$i]->EmployeeID() == $user->EmployeeID())
-                    @if ($session->PendingLevel() == $i)
+        @foreach ($signees as $employeeID => $signed)
+            <?php $employee = App\Credential::where("credential_user", $employeeID)->first() ?>
+            <div class="col">
+                <div class="font-weight-bold">{{ $employee->JobPosition() }}</div>
+                <div class="mb-3">{{ $employee->FullName() }}</div>
+                @if ($employeeID == $user->EmployeeID())
+                    @if ($pendingLevel == $s)
                         <form id="pending-form" action="{{ action('HomeController@movePendingLevel') }}" method="post">
                             {{ csrf_field() }}
                             <div class="custom-control custom-checkbox mt-4">
                                 <input type="checkbox" class="custom-control-input" id="pending-signee" name="pending-signee" onclick="document.querySelector('#pending-form').submit()">
-                                <label class="custom-control-label" for="pending-signee">{{ $session::SIGNVERBIAGE }}</label>
+                                <label class="custom-control-label" for="pending-signee">{{ $session::SIGNEDVERBIAGE }}</label>
                             </div>
                             <input type="hidden" id="pending-sid" name="pending-sid" value="{{ $session->SessionID() }}">
                         </form>
-                    @elseif ($session->PendingLevel() > $i)
-                        <label>{{ $session::SIGNVERBIAGE }}</label>
+                    @elseif ($pendingLevel > $s)
+                        <label>{{ $session::SIGNEDVERBIAGE }}</label>
+                    @else
+                        <label>{{ $session::PENDINGVERBIAGE }}</label>
                     @endif
-                @elseif ($session->PendingLevel() > $i)
-                    <label>{{ $session::SIGNVERBIAGE }}</label>
+                @elseif ($pendingLevel > $s)
+                    <label>{{ $session::SIGNEDVERBIAGE }}</label>
+                @else
+                    <label>{{ $session::UNSIGNEDVERBIAGE }}</label>
                 @endif
             </div>
-        @endfor
+            <?php $s++ ?>
+        @endforeach
     </div>
 </div>
 @endsection

@@ -12,23 +12,15 @@ use App\ScoreItem;
 class Session extends Model
 {
     protected $primaryKey = 'session_id';
-    protected $casts = ['session_compatible_data' => 'array'];
-
-    const AGENTLEVEL = 0;
-    const SUPERVISORLEVEL = 1;
-    const MANAGERLEVEL = 2;
-    const HEADLEVEL = 3;
-    const DONELEVEL = 4;
-    const SIGNVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+    protected $casts = ['session_data' => 'array'];
+    const UNSIGNEDVERBIAGE = "Not yet signed.";
+    const PENDINGVERBIAGE = "Unable to sign yet.";
+    const SIGNEDVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
 
     function SessionID() { return $this->getAttribute("session_id"); }
     function DateCreated() { return $this->getAttribute("created_at"); }
     function AgentID() { return $this->getAttribute("session_agent"); }
     function AgentRole() { return $this->Agent()->getAttribute("credential_type"); }
-    function Agent() { return Credential::where("credential_user", $this->getAttribute("session_agent"))->first(); }
-    function Supervisor() { return $this->Agent()->TeamLeader(); }
-    function Manager() { return $this->Supervisor()->TeamLeader(); }
-    function Head() { return $this->Manager()->TeamLeader(); }
     function Type() { return $this->getAttribute("session_type"); }
     function Mode() { return $this->getAttribute("session_mode"); }
     function Year() { return $this->getAttribute("session_year"); }
@@ -36,43 +28,41 @@ class Session extends Model
     function Day() { return $this->getAttribute("session_day"); }
     function Week() { return $this->getAttribute("session_week"); }
 
+    function Agent() { return Credential::where("credential_user", $this->getAttribute("session_agent"))->first(); }
+    function Supervisor() { return $this->Agent()->TeamLeader(); }
+    function Manager() { return $this->Supervisor()->TeamLeader(); }
+    function Head() { return $this->Manager()->TeamLeader(); }
+
     function PendingLevel() {
-        if ($this->getAttribute("session_agent_sign") == false) return self::AGENTLEVEL;
-        else if ($this->getAttribute("session_supervisor_sign") == false) return self::SUPERVISORLEVEL;
-        else if ($this->getAttribute("session_manager_sign") == false) return self::MANAGERLEVEL;
-        else if ($this->getAttribute("session_head_sign") == false) return self::HEADLEVEL;
-        else return self::DONELEVEL;
+        $level = 0;
+        $signatures = $this->Data()["signatures"];
+        foreach ($signatures as $employeeID => $signed) {
+            if (!$signed) break;
+            $level++;
+        }
+        return $level;
     }
 
     function MovePendingLevel(Request $r) {
-        $user = $r->session()->get("user");
-        switch($this->PendingLevel()) {
-            case self::AGENTLEVEL:
-                if ($user->EmployeeID() != $this->Agent()->EmployeeID()) return;
-                $this->setAttribute("session_agent_sign", true);
-                break;
-            case self::SUPERVISORLEVEL:
-                if ($user->EmployeeID() != $this->Supervisor()->EmployeeID()) return;
-                $this->setAttribute("session_supervisor_sign", true);
-                break;
-            case self::MANAGERLEVEL:
-                if ($user->EmployeeID() != $this->Manager()->EmployeeID()) return;
-                $this->setAttribute("session_manager_sign", true);
-                break;
-            case self::HEADLEVEL:
-                if ($user->EmployeeID() != $this->Head()->EmployeeID()) return;
-                $this->setAttribute("session_head_sign", true);
-                break;
-        }
+        $data = $this->Data();
+        $userID = $r->session()->get("user")->EmployeeID();
+
+        // Check if the userID exists in signees and if the userID is signing in proper order
+        if (!array_key_exists($userID, $data["signatures"]) ||
+            array_keys($data["signatures"])[$this->PendingLevel()] != $userID) return;
+        
+        // Proceed with the update
+        $data["signatures"][$userID] = true;
+        $this->setAttribute("session_data", $data);
         $this->save();
     }
 
-    function CompatibleData() {
+    function Data() {
         // Get JSON saved in database in array form
-        return $this->getAttribute("session_compatible_data");
+        return $this->getAttribute("session_data");
     }
 
-    function Data() {
+    function GenerateScorecardData() {
         if ($this->Agent() == null) return [ "items" => array(), "values" => array() ];
         $year = $this->Year();
         $month = $this->Month();
@@ -90,7 +80,18 @@ class Session extends Model
                 if ($scorevalues[$i][0] == $this->AgentID())
                     $agentvalues = $scorevalues[$i];
         }
-        return ["items" => ScoreItem::where("score_item_role", $this->Agent()->getAttribute("credential_type"))->get(), "values" => $agentvalues];
+        return [
+            "items" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
+            "values" => $agentvalues,
+            "fields" => [
+                "notes" => ""
+            ], "signatures" => [
+                $this->Agent()->EmployeeID() => false,
+                $this->Supervisor()->EmployeeID() => false,
+                $this->Manager()->EmployeeID() => false,
+                $this->Head()->EmployeeID() => false
+            ]
+        ];
     }
 
     function ExistingSession() {

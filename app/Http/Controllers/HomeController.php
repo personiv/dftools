@@ -26,7 +26,7 @@ class HomeController extends Controller {
         $session->setAttribute("session_month", strtoupper($date[0]));
         $session->setAttribute("session_day", $date[1]);
         $session->setAttribute("session_week", $date[3]);
-        $session->setAttribute("session_compatible_data", $session->Data());
+        $session->setAttribute("session_data", $session->GenerateScorecardData());
         
         if ($session->ExistsThisWeek()) {
             // Display the same session as it is already exists this week
@@ -40,6 +40,7 @@ class HomeController extends Controller {
     function movePendingLevel(Request $r) {
         $session = Session::where("session_id", $r->input("pending-sid"))->first();
         $session->MovePendingLevel($r);
-        return redirect()->route('dashboard');
+        $sid = $session->SessionID();
+        return redirect()->route('dashboard')->with(["msg" => "You are not authorized to sign Session '$sid'"]);
     }
 }
