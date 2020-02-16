@@ -34,7 +34,6 @@ body {
   font-size: 30px;
   text-align: center;
   font-weight: 300;
-  max-height: 66px !important;
   height: 100%;
   box-shadow: 0 2px 5px var(--primary-color);
 }
@@ -45,7 +44,8 @@ body {
 }
 
 /* Sidebar a.link */
-#sidebar-wrapper .list-group-item, #sidebar-wrapper .list-group-itemX {
+#sidebar-wrapper .list-group-item, 
+#sidebar-wrapper .list-group-itemX {
   background: transparent !important;
   border: none;
   display: block;
@@ -61,24 +61,28 @@ body {
 }
 /* Sidebar a.link button bottom / logout */
 .bottom-button {
+  width: 100%;
   position: absolute;
   bottom: 0;
 }
 
 /* Sidebar a.link:hover, active, focus */
-#sidebar-wrapper .list-group-item:hover, #sidebar-wrapper .list-group-item:active, #sidebar-wrapper .list-group-item:focus {
-  background: var(--primary-color) !important;
+#sidebar-wrapper .list-group-item:hover, 
+#sidebar-wrapper .list-group-item:active, 
+#sidebar-wrapper .list-group-item:focus {
   color: var(--secondary-color) !important;
 }
 
 /* Sidebar a.link / logout:hover, active ,focus */
-#sidebar-wrapper .list-group-itemX:hover, #sidebar-wrapper .list-group-itemX:active, #sidebar-wrapper .list-group-itemX:focus {
-  background: transparent !important;
+#sidebar-wrapper .list-group-itemX:hover, 
+#sidebar-wrapper .list-group-itemX:active, 
+#sidebar-wrapper .list-group-itemX:focus {
   color: var(--secondary-color) !important;
 }
 
 /* Sidebar title icon */
-#sidebar-wrapper .list-group-item .fa, #sidebar-wrapper .list-group-itemX .fas {
+#sidebar-wrapper .list-group-item .fa, 
+#sidebar-wrapper .list-group-itemX .fas {
   width: 34px;
   height: auto;
   text-align: center;
@@ -88,7 +92,8 @@ body {
 }
 
 /* Sidebar title icon when toggled */
-#wrapper.toggled #sidebar-wrapper .list-group-item .fa, #wrapper.toggled #sidebar-wrapper .list-group-itemX .fas {
+#wrapper.toggled #sidebar-wrapper .list-group-item .fa, 
+#wrapper.toggled #sidebar-wrapper .list-group-itemX .fas {
   width: 34px;
   height: auto;
   text-align: center;
@@ -122,7 +127,8 @@ body {
 }
 
 /* Toggled list item / remove the icon title */
-#wrapper.toggled .list-group-item span, #wrapper.toggled .list-group-itemX span  {
+#wrapper.toggled .list-group-item span, 
+#wrapper.toggled .list-group-itemX span  {
   display: none;
 }
 
@@ -261,6 +267,27 @@ body {
 
 .user-container div {
   text-transform: capitalize;
+}
+
+/* Popover item under nav profile */
+.dropdown-menu {
+  min-width: 13rem !important;
+}
+.dropdown-item {
+  padding: .5rem 1rem !important;
+  color: var(--dark-color-50p) !important;
+}
+
+.dropdown-item.active, 
+.dropdown-item:active {
+  color: var(--light-color) !important;
+  background-color: var(--primary-color) !important;
+}
+
+.dropdown-item .fas {
+    width: 20px;
+    height: auto;
+    font-size: 1rem;
 }
 
 

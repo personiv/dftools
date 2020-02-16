@@ -310,7 +310,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">John Doe</div>
                                         <div class="r-role">Web Designer</div>
@@ -346,7 +346,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                         <div class="eachScore-container px-4 py-3">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 100%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div> 
                             </div>
 
@@ -468,7 +468,7 @@ createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="Cinque Terre" width="40" height="40"> 
+                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">John Doe</div>
                                         <div class="r-role">Web Designer</div>
