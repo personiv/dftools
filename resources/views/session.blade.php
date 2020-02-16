@@ -85,7 +85,7 @@
                     @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
                         <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" required>{{ $field_value }}</textarea>
                     @else
-                        <div class="session-field">{{ $field_value }}</div>
+                        <div class="session-field"><pre>{{ $field_value }}</pre></div>
                     @endif
                 </div>
             </div>
