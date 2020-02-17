@@ -20,8 +20,8 @@
 <div class="container mb-4">
     <div class="row">
         <div class="col-4">
-            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->FirstName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span> {{ $agent->LastName() }}</div>
+            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->LastName() }}</div>
+            <div><span class="font-weight-bold">First Name:</span> {{ $agent->FirstName() }}</div>
         </div>
         <div class="col-4">
             <div><span class="font-weight-bold">Status:</span> {{ $agent->Status() }}</div>
