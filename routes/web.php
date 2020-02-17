@@ -36,6 +36,7 @@ Route::post("/login", "LoginController@login");
 
 Route::get('/dashboard', function() { return view('dashboard'); })->middleware('granted')->name('dashboard');
 Route::post('/add-exception', 'HomeController@addException')->middleware('supervisor');
+Route::get('/delete-exception/{eid}', 'HomeController@deleteException')->middleware('supervisor')->name("deleteexception");
 Route::post('/create-session', 'HomeController@createSession')->middleware('supervisor');
 Route::post('/move-pending-level', 'HomeController@movePendingLevel')->middleware('granted');
 Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');
