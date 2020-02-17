@@ -43,9 +43,21 @@ class CreateCredentialsTable extends Migration
         addEmployee('7010609', 'MANGR', 'Daryl', 'Taguilaso', '10072397');
             addEmployee('10071099', 'SPRVR', 'Karleen', 'Cedeno', '7010609');
             addEmployee('10071309', 'SPRVR', 'Noel', 'Cruz', '7010609');
+                addEmployee('10072244', 'DESGN', 'Jinky', 'Cantal', '10071309');
+                addEmployee('10072449', 'DESGN', 'Jack Thomson', 'Guden', '10071309');
+                addEmployee('10071692', 'DESGN', 'Paul Alexius', 'Manalo', '10071309');
+                addEmployee('10072180', 'DESGN', 'Christian Mari', 'Roque', '10071309');
+                addEmployee('10072198', 'DESGN', 'Edwin', 'Allingag', '10071309');
                 addEmployee('10072444', 'DESGN', 'Justin Ivan', 'Dizon', '10071309');
+                addEmployee('10071306', 'DESGN', 'Jean Erika', 'Macorol', '10071309');
+                addEmployee('10072517', 'DESGN', 'Kristian Jay', 'Maniclang', '10071309');
+                addEmployee('10072204', 'DESGN', 'Jayveneil', 'Monterey', '10071309');
+                addEmployee('10072445', 'DESGN', 'Marijun', 'Villareal', '10071309');
+                addEmployee('10071728', 'DESGN', 'Kim Lawrenze', 'Lumaban', '10071309');
                 addEmployee('10072438', 'DESGN', 'Jerome', 'Arcabos', '10071309');
                 addEmployee('10072073', 'DESGN', 'John Anthony', 'Rosete', '10071309');
+                addEmployee('10071592', 'DESGN', 'Angelica', 'Macalalad', '10071309');
+                addEmployee('10072228', 'DESGN', 'Anica Jahna', 'Malimban', '10071309');
             addEmployee('10072501', 'SPRVR', 'Richard', 'De Los Santos', '7010609');
 
         addEmployee('10071937', 'MANGR', 'Ryan', 'Pasquin', '10072397');
