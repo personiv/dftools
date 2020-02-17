@@ -76,8 +76,8 @@ class Session extends Model
         return $this->getAttribute("session_data");
     }
 
-    function GenerateScorecardData() {
-        if ($this->Agent() == null) return [ "items" => array(), "values" => array() ];
+    protected function GenerateScorecardData() {
+        if ($this->Agent() == null) return null;
         $year = $this->Year();
         $month = $this->Month();
         $supervisorID = $this->Agent()->TeamLeader()->EmployeeID();
@@ -161,6 +161,40 @@ class Session extends Model
                 $this->Head()->EmployeeID() => false
             ]
         ];
+    }
+
+    protected function GenerateGoalSettingData() {
+        if ($this->Agent() == null) return null;
+        return [
+            "scorecard_goal" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
+            "fields" => [
+                "notes" => [
+                    "title" => "Notes",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ]
+            ], "signatures" => [
+                $this->Agent()->EmployeeID() => false,
+                $this->Supervisor()->EmployeeID() => false,
+                $this->Manager()->EmployeeID() => false,
+                $this->Head()->EmployeeID() => false
+            ]
+        ];
+    }
+
+    function GenerateData() {
+        $data = array();
+        switch ($this->Type()) {
+            case 'SCORE':
+                $data = $session->GenerateScorecardData();
+                break;
+            case 'GOAL':
+                $data = $session->GenerateGoalSettingData();
+                break;
+        }
+        return $data;
     }
 
     function ExistingSession() {
