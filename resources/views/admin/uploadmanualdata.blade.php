@@ -3,8 +3,8 @@
 @section('admin-content')
 <div class="content-title">Upload Manual Data</div>
 <div class="note-box">
-<p>Note: Data to be uploaded must follow a template. Download the template below:</p>
-<a href="download-template"><button class="btn btn-primary">Download Template</button></a>
+<p class="mb-3"><span class="font-weight-bold">Note:</span> Data to be uploaded must follow a template. Download the template below:</p>
+<a href="{{ route('downloadmanualtemplate') }}"><button class="btn btn-primary">Download Template</button></a>
 </div>
 <form action="{{ action('AdminController@saveManualData') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
@@ -33,7 +33,7 @@
         @endfor
     </select>
     <label for="data-src">Data</label>
-    <input class="form-control" type="file" id="data-src" name="data-src" required>
+    <input class="form-control" type="file" id="data-src" name="data-src" accept=".xls,.xlsx" required>
     <input type="submit" value="Submit" class="btn btn-success">
 </form>
 @endsection
