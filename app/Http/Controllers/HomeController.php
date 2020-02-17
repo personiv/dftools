@@ -26,7 +26,7 @@ class HomeController extends Controller {
         $session->setAttribute("session_month", strtoupper($date[0]));
         $session->setAttribute("session_day", $date[1]);
         $session->setAttribute("session_week", $date[3]);
-        $session->setAttribute("session_data", $session->GenerateScorecardData());
+        $session->setAttribute("session_data", $session->GenerateData());
         
         if ($session->ExistsThisWeek()) {
             // Display the same session as it is already exists this week
