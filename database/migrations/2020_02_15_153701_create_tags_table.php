@@ -38,8 +38,8 @@ class CreateTagsTable extends Migration
 
         // Team Leaders
         addTag("LEADER", "SPRVR", "Supervisor");
-        addTag("LEADER", "MANGR", "Operation Manager");
-        addTag("LEADER", "HEAD", "Operation Head");
+        addTag("LEADER", "MANGR", "Operations Manager");
+        addTag("LEADER", "HEAD", "Operations Head");
 
         // System Accounts
         addTag("SYSTEM", "ADMIN", "System Administrator");
