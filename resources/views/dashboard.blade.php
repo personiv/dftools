@@ -8,13 +8,14 @@
     $user = session("user");
     $userTeam = $user->TeamMembers();
     $coachingSummary = $user->CoachingSummaryThisWeek();
+    $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
 @endphp
 
 @section('bladescript')
 <script type="text/javascript">
-    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $userTeam->count() }});
-    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $userTeam->count() }});
-    createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
+    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
+    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
+    createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, {{ $totalCoaching }});
 </script>
 @endsection
 
@@ -143,7 +144,7 @@
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
-                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-rtsession">Complete Session</span></a></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-rtsession">Confirm Session</span></a></td>
                                         </tr>
                                     @elseif ($summaryStatus == "Completed")
                                         <tr>
