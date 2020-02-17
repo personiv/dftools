@@ -89,20 +89,59 @@ class Session extends Model
             $reader = new Xlsx;
             $reader->setReadDataOnly(true);
             $spreadsheet = $reader->load($path);
-            $spreadsheet->setActiveSheetIndexByName($this->AgentRole());
-            $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-        
-            for ($i = 0; $i < count($scorevalues); $i++) 
-                if ($scorevalues[$i][0] == $this->AgentID())
-                    $agentvalues = $scorevalues[$i];
-        }
-        for ($i = 0; $i < $scorecard->count(); $i++) {
-            if (!empty($agentvalues)) {
-                $scorecard[$i]["score_item_actual"] = $agentvalues[$i + 1];
-                $scorecard[$i]["score_item_overall"] = $agentvalues[$scorecard->count() + 1];
-            } else {
-                $scorecard[$i]["score_item_actual"] = "NaN";
-                $scorecard[$i]["score_item_overall"] = "NaN";
+
+            switch ($this->Mode()) {
+                case 'manual':
+                    $spreadsheet->setActiveSheetIndexByName($this->AgentRole());
+                    $scorevalues = $spreadsheet->getActiveSheet()->toArray();
+
+                    for ($i = 0; $i < count($scorevalues); $i++) 
+                        if ($scorevalues[$i][0] == $this->AgentID())
+                            $agentvalues = $scorevalues[$i];
+
+                    for ($i = 0; $i < $scorecard->count(); $i++) {
+                        if (!empty($agentvalues)) {
+                            $scorecard[$i]["score_item_actual"] = $agentvalues[$i + 1];
+                            $scorecard[$i]["score_item_overall"] = $agentvalues[$scorecard->count() + 1];
+                        } else {
+                            $scorecard[$i]["score_item_actual"] = "NaN";
+                            $scorecard[$i]["score_item_overall"] = "NaN";
+                        }
+                    }
+                    break;
+                case 'actual':
+                    $spreadsheet->setActiveSheetIndexByName("RESOURCES");
+                    $scorevalues = $spreadsheet->getActiveSheet()->toArray();
+
+                    for ($i = 0; $i < count($scorevalues); $i++)
+                        if ($scorevalues[$i][2] == $this->AgentID())
+                            $agentvalues = $scorevalues[$i];
+                    
+                    function IndexOfCell($columnName) {
+                        $columnName = strtoupper($columnName);
+                        $value = 0;
+                        for ($i = 0; $i < strlen($columnName); $i++) {
+                            $delta = ord($columnName[$i]) - 64;
+                            $value = $value * 26 + $delta;
+                        }
+                        return $value - 1;
+                    }
+
+                    $links = ["W", "Y", "X", "AB", "AC", "AF"];
+                    for ($i = 0; $i < $scorecard->count(); $i++) {
+                        if (!empty($agentvalues)) {
+                            $actual = $agentvalues[IndexOfCell($links[$i])];
+                            $overall = $agentvalues[IndexOfCell("AG")];
+                            if (is_numeric($actual)) $actual = round($actual * 100, 2);
+                            if (is_numeric($overall)) $overall = round($overall * 100, 2);
+                            $scorecard[$i]["score_item_actual"] = $actual;
+                            $scorecard[$i]["score_item_overall"] = $overall;
+                        } else {
+                            $scorecard[$i]["score_item_actual"] = "NaN";
+                            $scorecard[$i]["score_item_overall"] = "NaN";
+                        }
+                    }
+                    break;
             }
         }
         return [
