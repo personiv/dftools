@@ -166,7 +166,7 @@ class Session extends Model
     protected function GenerateGoalSettingData() {
         if ($this->Agent() == null) return null;
         return [
-            "scorecard_goal" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
+            "scorecardGoal" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
             "fields" => [
                 "notes" => [
                     "title" => "Notes",
@@ -188,10 +188,18 @@ class Session extends Model
         $data = array();
         switch ($this->Type()) {
             case 'SCORE':
-                $data = $session->GenerateScorecardData();
+                $data = $this->GenerateScorecardData();
                 break;
             case 'GOAL':
-                $data = $session->GenerateGoalSettingData();
+                $data = $this->GenerateGoalSettingData();
+                break;
+            default:
+                $data = [
+                    "signatures" => [
+                        $this->Agent()->EmployeeID() => false,
+                        $this->Supervisor()->EmployeeID() => false
+                    ]
+                ];
                 break;
         }
         return $data;
