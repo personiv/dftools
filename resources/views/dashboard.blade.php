@@ -405,8 +405,8 @@
                                 <div class="tr-section1 px-4 mb-4">
                                 <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
-                                        <div class="r-name">John Doe</div>
-                                        <div class="r-role">Web Designer</div>
+                                        <div class="r-name">{{ $user->FullName() }}</div>
+                                        <div class="r-role">{{ $user->JobPosition() }}</div>
                                     </div>
                                 </div>
                                 <div class="title-scorecard-container">
@@ -494,54 +494,56 @@
                 <div class="row p-4">
                     <div class="col-sm">
 
-                    <!-- Current, Target, and Deficit points starts here -->
-                        <div class="points-container">
+                        <!-- Current points and days, Average and Progress starts here -->
+                        <div class="productivity-container pcon-1">
 
                             <!-- Current points -->
-                                <div class="current-p">
-                                    <span class="cp-span">Current Points</span>
-                                    <input type="text" value="113.63" disabled>
-                                </div>
-
-                            <!-- Target points -->
-                            <div class="target-p mt-1">
-                                <span class="tp-span">Target Points</span>
-                                <input type="text" value="152" disabled>
+                            <div class="current-points">
+                                <div>Current Points</div>
+                                <input type="number" value="113.63" class="form-control" disabled>
                             </div>
 
-                            <!-- Deficit points -->
-                            <div class="deficit-p mt-1">
-                                <span class="dp-span">Deficit Points</span>
-                                <input type="text" value="38.37" disabled>
+                            <!-- Current days passed -->
+                            <div class="days-passed mt-3">
+                                <div>Days Passed</div>
+                                <input type="number" value="22" class="form-control" disabled>
                             </div>
 
                             <!-- Average -->
-                            <div class="average-p% mt-1">
-                                <span class="dp-span">Average</span>
-                                <input type="text" value="5.165" disabled>
+                            <div class="average-points mt-3">
+                                <div>Average</div>
+                                <input type="number" value="5.165" class="form-control" disabled>
+                            </div>
+
+                            <!-- Progress -->
+                            <div class="prog-total mt-3">
+                                <div>Progress</div>
+                                <input type="text" value="74.76%" class="form-control prog-f" disabled>
                             </div>
 
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="days-container">
-                            
-                        <!-- Current points -->
-                        <div class="current-p">
-                                    <span class="cp-span">Current Days Passed</span>
-                                    <input type="text" value="22" disabled>
-                                </div>
+
+                        <!-- Target and Deficit points and Current target/day starts here -->
+                        <div class="productivity-container pcon-2">
 
                             <!-- Target points -->
-                            <div class="target-p mt-1">
-                                <span class="tp-span">Current Target/Day</span>
-                                <input type="text" value="8">
+                            <div class="target-points">
+                                <div>Target Points</div>
+                                <input type="number" value="152" class="form-control" disabled>
                             </div>
 
                             <!-- Deficit points -->
-                            <div class="deficit-p mt-1">
-                                <span class="dp-span">Progress</span>
-                                <input type="text" value="74.76%" disabled>
+                            <div class="deficit-points mt-3">
+                                <div>Deficit Points</div>
+                                <input type="number" value="38.37" class="form-control" disabled>
+                            </div>
+
+                            <!-- Current target per day -->
+                            <div class="target-pday mt-3">
+                                <div>Target Per Day</div>
+                                <input type="number" value="8" class="form-control">
                             </div>
 
                         </div>
@@ -579,7 +581,7 @@
                             <td>Mid Month Scorecard</td>
                             <td>{{ $user->FullName() }}</td>
                             <td>
-                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Start Adding Notes</span>
+                                <span id="btn-add-notes" class="action-btn-addNotes mr-2"><i class="fa fa-pencil-alt mr-2"></i>Start Adding Notes</span>
                             </td>
                         </tr>
                         <tr>
@@ -587,7 +589,7 @@
                             <td>Coaching</td>
                             <td>{{ $user->FullName() }}</td>
                             <td>
-                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Start Adding Notes</span>
+                                <span id="btn-add-notes" class="action-btn-addNotes mr-2"><i class="fa fa-pencil-alt mr-2"></i>Start Adding Notes</span>
                             </td>
                         </tr>
                         </tbody>
