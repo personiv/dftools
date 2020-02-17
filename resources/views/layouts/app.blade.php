@@ -172,7 +172,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="session-agent">Resource:</label>
+                                <label class="custom-label" for="session-agent">Resource:</label>
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
                                     <?php $members = $user->TeamMembers(); ?>
                                     @for ($i = 0; $i < count($members); $i++)
@@ -182,12 +182,11 @@
                                 </select>
                             </div>
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="session-type">Session Type:</label>
+                                <label class="custom-label" for="session-type">Session Type:</label>
                                 <select class="custom-select" id="session-type" name="session-type" required>
-                                    <option class="modal-option" value="SCORE">Scorecard</option>
-                                    <option class="modal-option" value="COACH">Coaching</option>
-                                    <option class="modal-option" value="TRIAD">Triad</option>
-                                    <option class="modal-option" value="GOAL">Goal Setting</option>
+                                    @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
+                                        <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="custom-control custom-checkbox mt-5">
