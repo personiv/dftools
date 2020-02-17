@@ -26,4 +26,5 @@ function mergeColumn(columnIndex) {
 function showVerify() {
     $("#session-verify-trigger-wrapper").remove();
     document.querySelector("#session-verify-wrapper").style.display = "block";
+    document.querySelector("#session-verify-password").focus();
 }
