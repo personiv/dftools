@@ -341,7 +341,8 @@ body, html {
 .excp-btn #edit-btn, 
 .excp-btn #add-btn,
 #btn-delete,
-#btn-edit {
+#btn-edit, 
+#btn-add-notes {
     padding: 5px 10px !important;
     font-size: 13px;
     font-weight: 600;
@@ -357,9 +358,15 @@ body, html {
     width: 80px;
 }
 
+/* For add notes */
+.action-btn-addNotes {
+    max-width: 160px !important;
+}
+
 /* Action button / Create session */
 .action-btn-edit,
-.action-btn-add {
+.action-btn-add,
+.action-btn-addNotes {
     background-color: var(--info) !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -413,7 +420,7 @@ body, html {
 .tr-name-role {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
 }
 
 
@@ -770,6 +777,91 @@ body, html {
     background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 } /* end */
+
+
+/*
+|———————————————————————————————————————————————————————————————
+| Designer's dashboard
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the css for Designer's dashboard
+|
+|
+*/ /* My scorecard status */
+
+/* end */
+
+/* Productivity improvement */
+/* Hide arrows for number input */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+.productivity-container div div {
+    display: inline-block;
+    width: 30%;
+}
+
+.productivity-container div input {
+    width: 20%;
+    display: inline-block;
+    border-color: #ddd !important;
+}
+
+/* passed line of 90 and higher */
+.productivity-container div .prog-p {
+    background-color: var(--completed-transparent) !important;
+    color: var(--completed) !important;
+}
+
+/* passed line of 80-89 */
+.productivity-container div .prog-sp {
+    background-color: var(--pending-transparent) !important;
+    color: var(--pending) !important;
+}
+
+/* failed line of 79 below */
+.productivity-container div .prog-f {
+    background-color: var(--for-coaching-transparent) !important;
+    color: var(--for-coaching) !important;
+}
+
+input[type=number]:disabled {
+    background: #fafafa;
+    color: var(--dark-color);
+}
+
+@media (max-width: 1280px) {
+    .productivity-container div div {
+        display: inline-block;
+        width: 50%;
+        transition: width .3s ease-out;
+    }
+    
+    .productivity-container div input {
+        width: 40%;
+        transition: width .3s ease-out;
+    }
+
+    #wrapper.toggled .productivity-container div div {
+        display: inline-block;
+        width: 40%;
+    }
+    
+    #wrapper.toggled .productivity-container div input {
+        width: 30%;
+    }
+}
+/* end */
+
 
 
   
