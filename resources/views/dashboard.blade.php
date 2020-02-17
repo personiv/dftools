@@ -143,7 +143,7 @@
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
-                                            <td><span id="action-btn" class="action-btn-rtsession">Complete Session</span></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-rtsession">Complete Session</span></a></td>
                                         </tr>
                                     @elseif ($summaryStatus == "Completed")
                                         <tr>
@@ -151,7 +151,7 @@
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td><span class="stats-completed">Completed</span></td>
-                                            <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                                            <td></td>
                                         </tr>
                                     @endif
                                 @endfor
