@@ -1,27 +1,48 @@
-#scorecard thead tr {
+/* For coaching table */
+.dboard-wrapper table th, .dboard-wrapper table td {
+    white-space: pre-line;
+    line-height: 24px;
+}
+
+/* Table title/headings */
+#scorecard thead tr th {
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+/* Table headings and data aligned to center except column 3 */
+#scorecard thead tr th, #scorecard tbody tr td:not(:nth-child(3)){
     text-align: center;
 }
-#scorecard tbody tr td:nth-child(1),
-#scorecard tbody tr td:nth-child(2),
-#scorecard tbody tr td:nth-child(4),
-#scorecard tbody tr td:nth-child(5),
-#scorecard tbody tr td:nth-child(6),
-#scorecard tbody tr td:nth-child(7) {
-    text-align: center;
+
+/* Set the column 3 of each table data to max width with 350px */
+#scorecard tbody tr td:nth-child(3) {
+    max-width: 350px;
 }
-#scorecard tbody tr td:nth-child(7) {
+
+/* Total score styling */
+#scorecard tbody tr td:last-child {
     font-size: 24px;
     font-weight: 700;
 }
+
+/* Notes */
+.card-header {
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.session-field {
+    color: var(--dark-color);
+    width: 100%;
+    min-height: 150px;
+    border: none;
+    resize: none;
+}
+
 label {
     white-space: normal;
     word-wrap: break-word;
-}
-.session-field {
-    width: 100%;
-    min-height: 200px;
-    border: none;
-    resize: none;
 }
 
 #session-verify-wrapper input {
@@ -29,11 +50,4 @@ label {
     min-width: 200px;
     padding: 4px;
     margin-bottom: 8px;
-}
-
-pre {
-    margin-bottom: 0px !important;
-    font-family: var(--font-family-sans-serif) !important;
-    color: var(--dark-color-50p) !important;
-    font-size: 1rem !important;
 }
