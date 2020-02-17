@@ -30,3 +30,10 @@ label {
     padding: 4px;
     margin-bottom: 8px;
 }
+
+pre {
+    margin-bottom: 0px !important;
+    font-family: var(--font-family-sans-serif) !important;
+    color: var(--dark-color-50p) !important;
+    font-size: 1rem !important;
+}
