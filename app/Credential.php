@@ -3,8 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Session;
-use App\Tag;
+use Illuminate\Support\Facades\DB;
 
 class Credential extends Model
 {
@@ -118,7 +117,10 @@ class Credential extends Model
         return $count;
     }
 
-    function TeamStackRank() {
-
+    function ExceptionsThisWeek() {
+        return DB::table("exceptions")
+                ->join("credentials", "exception_agent", "=", "credential_user")
+                ->select("exception_id", "exception_agent", "exception_reason")
+                ->where("exception_week", (int)date("W"))->where("credential_up", $this->EmployeeID())->get();
     }
 }
