@@ -21,15 +21,9 @@
 <!-- Resource's credential -->
 <div class="container-fluid mb-4">
     <div class="row">
-<<<<<<< HEAD
         <div class="col">
             <div><span class="font-weight-bold">Last Name:</span>&nbsp;&nbsp;{{ $agent->FirstName() }}</div>
             <div><span class="font-weight-bold">First Name:</span>&nbsp;&nbsp;{{ $agent->LastName() }}</div>
-=======
-        <div class="col-4">
-            <div><span class="font-weight-bold">Last Name:</span> {{ $agent->LastName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span> {{ $agent->FirstName() }}</div>
->>>>>>> d5bac4596e582ee0022e0e586c01ee8482c9e564
         </div>
         <div class="col">
             <div><span class="font-weight-bold">Status:</span>&nbsp;&nbsp;{{ $agent->Status() }}</div>
