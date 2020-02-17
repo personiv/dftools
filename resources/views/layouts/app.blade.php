@@ -222,7 +222,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{{ action('HomeController@addException') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
@@ -237,8 +237,8 @@
                             </div>
 
                             <div class="input-group">
-                                    <label class="custom-label" for="FormControlTextarea">Reason:</label>
-                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
+                                    <label class="custom-label" for="exception-reason">Reason:</label>
+                                    <textarea class="form-control" id="exception-reason" name="exception-reason" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -271,13 +271,13 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="feedback-name">Name:</label>
-                                    <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
+                                <label class="custom-label" for="feedback-name">Name:</label>
+                                <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
                             </div>
 
                             <div class="input-group">
-                                    <label class="custom-label" for="FormControlTextarea">Comments:</label>
-                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
+                                <label class="custom-label" for="FeedbackFormControlTextarea">Comments:</label>
+                                <textarea class="form-control" id="FeedbackFormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
