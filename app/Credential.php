@@ -69,23 +69,43 @@ class Credential extends Model
         return $sessions;
     }
 
-    function PendingCoachingThisWeek() {
-        $sessions = array();
-        $weeksessions = $this->SessionsThisWeek();
-        for ($i=0; $i < count($weeksessions); $i++)
-            if ($weeksessions[$i]->IsSignee($this->EmployeeID()) && !$weeksessions[$i]->IsSigned($this->EmployeeID()))
-                array_push($sessions, $weeksessions[$i]);
-        
-        return $sessions;
-    }
-
-    function CompletedCoachingThisWeek() {
-        $sessions = array();
-        $weeksessions = $this->SessionsThisWeek();
-        for ($i=0; $i < count($weeksessions); $i++)
-            if ($weeksessions[$i]->IsSignee($this->EmployeeID()) && $weeksessions[$i]->IsSigned($this->EmployeeID()))
-                array_push($sessions, $weeksessions[$i]);
-
+    function CoachingSummaryThisWeek() {
+        $sessions = array("For Coaching" => [], "Pending" => [], "Completed" => []);
+        $teamMembers = $this->TeamMembers();
+        $weekSessions = $this->SessionsThisWeek();
+        for ($i = 0; $i < $teamMembers->count(); $i++) { 
+            $teamMember = $teamMembers[$i];
+            $hasSession = false;
+            for ($j = 0; $j < count($weekSessions); $j++) {
+                $weekSession = $weekSessions[$j];
+                if ($teamMember->EmployeeID() == $weekSession->AgentID()) {
+                    $hasSession = true;
+                    break;
+                }
+            }
+            if (!$hasSession) {
+                array_push($sessions["For Coaching"], [
+                    "employeeID" => $teamMember->EmployeeID(),
+                    "fullName" => $teamMember->FullName(),
+                    "jobPosition" => $teamMember->JobPosition()
+                ]);
+            } else {
+                if ($weekSession->IsSignee($this->EmployeeID()) && !$weekSession->IsSigned($this->EmployeeID())) {
+                    array_push($sessions["Pending"], [
+                        "employeeID" => $teamMember->EmployeeID(),
+                        "fullName" => $teamMember->FullName(),
+                        "jobPosition" => $teamMember->JobPosition(),
+                        "sessionID" => $weekSession->SessionID()
+                    ]);
+                } else if ($weekSession->IsSignee($this->EmployeeID()) && $weekSession->IsSigned($this->EmployeeID())) {
+                    array_push($sessions["Completed"], [
+                        "employeeID" => $teamMember->EmployeeID(),
+                        "fullName" => $teamMember->FullName(),
+                        "jobPosition" => $teamMember->JobPosition()
+                    ]);
+                }
+            }
+        }
         return $sessions;
     }
 }

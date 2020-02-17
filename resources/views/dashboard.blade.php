@@ -7,14 +7,13 @@
 @php
     $user = session("user");
     $userTeam = $user->TeamMembers();
-    $pendingCoaching = $user->PendingCoachingThisWeek();
-    $completedCoaching = $user->CompletedCoachingThisWeek();
+    $coachingSummary = $user->CoachingSummaryThisWeek();
 @endphp
 
 @section('bladescript')
 <script type="text/javascript">
-    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($completedCoaching) }}, {{ $userTeam->count() }});
-    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($pendingCoaching) }}, {{ $userTeam->count() }});
+    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $userTeam->count() }});
+    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $userTeam->count() }});
     createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, 2);
 </script>
 @endsection
@@ -123,107 +122,40 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-for-coaching">For Coaching</span></td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <a data-toggle="modal" data-target="#exampleModalCenter">
-                                        <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-for-coaching">For Coaching</span></td>
-                                <td>
-                                    <!-- Button trigger modal -->
-                                    <a data-toggle="modal" data-target="#exampleModalCenter">
-                                        <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-pending">Pending</span></td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-pending">Pending</span></td>
-                                <td>N/A</td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
-                            <tr>
-                                <td>10021002</td>
-                                <td>John Doe</td>
-                                <td>Web Designer</td>
-                                <td><span class="stats-completed">Completed</span></td>
-                                <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
-                            </tr>
+                            @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                                @for ($i = 0; $i < count($summaryItems); $i++)
+                                    @if ($summaryStatus == "For Coaching")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td><span class="stats-for-coaching">For Coaching</span></td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <a data-toggle="modal" data-target="#exampleModalCenter">
+                                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @elseif ($summaryStatus == "Pending")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td><span class="stats-pending">Pending</span></td>
+                                            <td><span id="action-btn" class="action-btn-rtsession">Complete Session</span></td>
+                                        </tr>
+                                    @elseif ($summaryStatus == "Completed")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td><span class="stats-completed">Completed</span></td>
+                                            <td><span id="action-btn" class="action-btn-rtsession">Retake Session</span></td>
+                                        </tr>
+                                    @endif
+                                @endfor
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
