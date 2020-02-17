@@ -172,7 +172,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="session-agent">Resource:</label>
+                                <label class="custom-label" for="session-agent">Resource:</label>
                                 <select class="custom-select" id="session-agent" name="session-agent" required>
                                     <?php $members = $user->TeamMembers(); ?>
                                     @for ($i = 0; $i < count($members); $i++)
@@ -182,12 +182,11 @@
                                 </select>
                             </div>
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="session-type">Session Type:</label>
+                                <label class="custom-label" for="session-type">Session Type:</label>
                                 <select class="custom-select" id="session-type" name="session-type" required>
-                                    <option class="modal-option" value="SCORE">Scorecard</option>
-                                    <option class="modal-option" value="COACH">Coaching</option>
-                                    <option class="modal-option" value="TRIAD">Triad</option>
-                                    <option class="modal-option" value="GOAL">Goal Setting</option>
+                                    @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
+                                        <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="custom-control custom-checkbox mt-5">
@@ -223,7 +222,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{{ action('HomeController@addException') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
@@ -238,8 +237,8 @@
                             </div>
 
                             <div class="input-group">
-                                    <label class="custom-label" for="FormControlTextarea">Reason:</label>
-                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
+                                    <label class="custom-label" for="exception-reason">Reason:</label>
+                                    <textarea class="form-control" id="exception-reason" name="exception-reason" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -272,13 +271,13 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="feedback-name">Name:</label>
-                                    <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
+                                <label class="custom-label" for="feedback-name">Name:</label>
+                                <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
                             </div>
 
                             <div class="input-group">
-                                    <label class="custom-label" for="FormControlTextarea">Comments:</label>
-                                    <textarea class="form-control" id="FormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
+                                <label class="custom-label" for="FeedbackFormControlTextarea">Comments:</label>
+                                <textarea class="form-control" id="FeedbackFormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -296,6 +295,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="{{ URL::asset('js/jquery.waypoints.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/progressbar.js') }}"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>

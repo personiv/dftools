@@ -9,13 +9,26 @@
     $userTeam = $user->TeamMembers();
     $coachingSummary = $user->CoachingSummaryThisWeek();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
+    $exceptions = $user->ExceptionsThisWeek();
 @endphp
 
 @section('bladescript')
 <script type="text/javascript">
     createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
     createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
-    createCircle("ovTotal3", "#5bc0de", "#5bc0de", 1, {{ $totalCoaching }});
+    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $totalCoaching }});
+    var loaded = false;
+    var waypoints = $('.top-resource-container').waypoint(function(direction) {
+        if (!loaded) {
+            document.querySelector("#pb-productivity").style.width = "89%";
+            document.querySelector("#pb-quality").style.width = "99.4%";
+            document.querySelector("#pb-churn").style.width = "70%";
+            document.querySelector("#pb-pkt").style.width = "85%";
+            document.querySelector("#pb-attendance").style.width = "100%";
+            document.querySelector("#pb-bonus").style.width = "100%";
+            loaded = true;
+        }
+    }, { offset: '80%' });
 </script>
 @endsection
 
@@ -125,15 +138,16 @@
                         <tbody>
                             @foreach ($coachingSummary as $summaryStatus => $summaryItems)
                                 @for ($i = 0; $i < count($summaryItems); $i++)
+                                    <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
                                     @if ($summaryStatus == "For Coaching")
                                         <tr>
-                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryEmployeeID }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td><span class="stats-for-coaching">For Coaching</span></td>
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <a data-toggle="modal" data-target="#exampleModalCenter">
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
                                                     <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
                                                 </a>
                                             </td>
@@ -198,26 +212,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td>Core Leave</td>
-                            <td>
-                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
-                                <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>10021002</td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                            <td>Suspended</td>
-                            <td>
-                                <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
-                                <span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span>
-                            </td>
-                        </tr>
+                        @foreach ($exceptions as $exception)
+                            <?php $agent = App\Credential::where("credential_user", $exception->exception_agent)->first() ?>
+                            <tr>
+                                <td>{{ $agent->EmployeeID() }}</td>
+                                <td>{{ $agent->FullName() }}</td>
+                                <td>{{ $agent->JobPosition() }}</td>
+                                <td>{{ $exception->exception_reason }}</td>
+                                <td>
+                                    <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
+                                    <a href="{{ route('deleteexception', [$exception->exception_id]) }}"><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></a>
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -280,19 +287,19 @@
                         <div class="eachScore-container px-4 py-3">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-productivity" class="progress-bar pb-color-sp" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div> 
                             </div>
 
                             <!-- Quality score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-quality" class="progress-bar pb-color-p" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
                             </div>
 
                             <!-- Churn score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-f" role="progressbar" style="width: 70%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-churn" class="progress-bar pb-color-f" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Churn: <span class="progress-score">70%</span></span></div>
                             </div>
 
@@ -303,19 +310,19 @@
                         <div class="eachScore-container px-4 py-3">
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-pkt" class="progress-bar pb-color-sp" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-attendance" class="progress-bar pb-color-p" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div class="progress-bar pb-color-bonus" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div id="pb-bonus" class="progress-bar pb-color-bonus" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                 <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
                             </div>
                         </div>
