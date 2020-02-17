@@ -108,4 +108,17 @@ class Credential extends Model
         }
         return $sessions;
     }
+
+    function TotalOfCoachingSummaryThisWeek() {
+        $count = 0;
+        $coachingSummary = $this->CoachingSummaryThisWeek();
+        foreach ($coachingSummary as $summaryStatus => $summaryItems) {
+            $count += count($summaryItems);
+        }
+        return $count;
+    }
+
+    function TeamStackRank() {
+
+    }
 }
