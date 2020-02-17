@@ -56,4 +56,13 @@ class HomeController extends Controller {
         $exception->save();
         return redirect()->route('dashboard');
     }
+
+    function deleteException($eid, Request $r) {
+        $exception = Exception::where("exception_id", $eid)->first();
+        if ($exception == null || $exception->AgentLeader()->EmployeeID() != $r->session()->get("user")->EmployeeID())
+            return redirect()->route('dashboard');
+        
+        $exception->delete();
+        return redirect()->route('dashboard');
+    }
 }
