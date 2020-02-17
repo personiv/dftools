@@ -127,10 +127,9 @@ class Session extends Model
                         return $value - 1;
                     }
 
-                    $links = ["W", "Y", "X", "AB", "AC", "AF"];
                     for ($i = 0; $i < $scorecard->count(); $i++) {
                         if (!empty($agentvalues)) {
-                            $actual = $agentvalues[IndexOfCell($links[$i])];
+                            $actual = $agentvalues[IndexOfCell($scorecard[$i]["score_item_cell"])];
                             $overall = $agentvalues[IndexOfCell("AG")];
                             if (is_numeric($actual)) $actual = round($actual * 100, 2);
                             if (is_numeric($overall)) $overall = round($overall * 100, 2);
