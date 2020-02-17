@@ -9,6 +9,7 @@
     $agent = $session->Agent();
     $data = $session->Data();
     $scorecard = $data["scorecard"] ?? [];
+    $scorecardGoal = $data["scorecardGoal"] ?? [];
     $fields = $data["fields"] ?? [];
     $signees = $data["signatures"] ?? [];
     $pendingLevel = $session->PendingLevel();
@@ -59,6 +60,37 @@
                             <td class="align-middle">{{ $scorecard[$i]['score_item_weight'] }}%</td>
                             <td class="align-middle">{{ $scorecard[$i]['score_item_actual'] }}%</td>
                             <td class="align-middle">{{ $scorecard[$i]['score_item_overall'] }}%</td>
+                        </tr>
+                    @endfor
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@elseif (!empty($scorecardGoal))
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Classification</th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Goal</th>
+                            <th>Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for ($i = 0; $i < count($scorecardGoal); $i++)
+                        <tr>
+                            <td class="align-middle">{{ $scorecardGoal[$i]['score_item_class'] }}</td>
+                            <td class="align-middle">{{ $scorecardGoal[$i]['score_item_name'] }}</td>
+                            <td style="max-width: 350px;"><pre>{{ $scorecardGoal[$i]['score_item_desc'] }}</pre></td>
+                            <td class="align-middle">{{ $scorecardGoal[$i]['score_item_goal'] }}</td>
+                            <td class="align-middle">{{ $scorecardGoal[$i]['score_item_weight'] }}%</td>
                         </tr>
                     @endfor
                     </tbody>
