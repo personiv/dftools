@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Credential;
 use App\ScoreItem;
 use App\Session;
+use App\Exception;
 
 class HomeController extends Controller {
     function session($sid) {
@@ -40,6 +41,19 @@ class HomeController extends Controller {
     function movePendingLevel(Request $r) {
         $session = Session::where("session_id", $r->input("session-id"))->first();
         $session->MovePendingLevel($r);
+        return redirect()->route('dashboard');
+    }
+
+    function addException(Request $r) {
+        $agentID = $r->input("exception-agent");
+        $reason = $r->input("exception-reason");
+        if (Exception::where("exception_agent", $agentID)->count() > 0) return redirect()->route('dashboard');
+        
+        $exception = new Exception;
+        $exception->setAttribute("exception_agent", $agentID);
+        $exception->setAttribute("exception_reason", $reason);
+        $exception->setAttribute("exception_week", date("W"));
+        $exception->save();
         return redirect()->route('dashboard');
     }
 }
