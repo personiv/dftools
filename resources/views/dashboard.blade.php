@@ -125,15 +125,16 @@
                         <tbody>
                             @foreach ($coachingSummary as $summaryStatus => $summaryItems)
                                 @for ($i = 0; $i < count($summaryItems); $i++)
+                                    <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
                                     @if ($summaryStatus == "For Coaching")
                                         <tr>
-                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryEmployeeID }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td><span class="stats-for-coaching">For Coaching</span></td>
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <a data-toggle="modal" data-target="#exampleModalCenter">
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
                                                     <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
                                                 </a>
                                             </td>
