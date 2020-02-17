@@ -45,6 +45,7 @@ class CreateCredentialsTable extends Migration
             addEmployee('10071309', 'SPRVR', 'Noel', 'Cruz', '7010609');
                 addEmployee('10072444', 'DESGN', 'Justin Ivan', 'Dizon', '10071309');
                 addEmployee('10072438', 'DESGN', 'Jerome', 'Arcabos', '10071309');
+                addEmployee('10072073', 'DESGN', 'John Anthony', 'Rosete', '10071309');
             addEmployee('10072501', 'SPRVR', 'Richard', 'De Los Santos', '7010609');
 
         addEmployee('10071937', 'MANGR', 'Ryan', 'Pasquin', '10072397');
