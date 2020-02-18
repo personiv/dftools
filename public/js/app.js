@@ -94,4 +94,7 @@ function isToggled() {
     // end
   }
 
-  
+  // Lazy fill progress bar in top resource card
+  function lazyFill(selector, width) {
+    $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = width; }, { offset: '100%' });
+  }
