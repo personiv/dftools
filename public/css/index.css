@@ -8,8 +8,15 @@ body {
     background-image: url('../images/bg_index-default.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     height: 100%;
+}
+
+@supports not (backdrop-filter: none) {
+  body {
+    background-image: url('../images/bg_index-blur.jpg');
+  }
 }
 
 /* General styling for form */
@@ -41,6 +48,8 @@ body {
     padding: 50px 100px;
     width: 100%;
     height: 100%;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 .main-container {
