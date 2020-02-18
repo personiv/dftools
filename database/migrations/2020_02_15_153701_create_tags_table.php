@@ -31,6 +31,8 @@ class CreateTagsTable extends Migration
 
         // Agents
         addTag("AGENT", "DESGN", "Web Designer");
+        addTag("AGENT", "LEGACY", "Legacy Product Maintenance");
+        addTag("AGENT", "LOGO", "Logo Designer");
         addTag("AGENT", "CUSTM", "Senior Web Designer");
         addTag("AGENT", "PR", "Website Proofreader");
         addTag("AGENT", "WML", "Web Mods Line");
