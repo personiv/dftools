@@ -44,7 +44,7 @@
                 <i class="fa fa-file-text mr-3"></i><span>Create Session</span>
             </a>
             @endif
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="{{ route('history') }}" class="list-group-item list-group-item-action">
                 <i class="fa fa-history mr-3"></i><span>History</span>
             </a>
             <!-- Modal style menu -->
