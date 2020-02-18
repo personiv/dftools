@@ -47,6 +47,22 @@ class CreateScoreItemsTable extends Migration
         addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95%", 15, "AB");
         addItem("DESGN", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 20, "AC");
         addItem("DESGN", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
+
+        addItem("WML", "Quantitative Measure (95%)", "Productivity", "BAU (1 pt per page)\nMODS (1pt per mod)\nCALLS (1pt per call)", "Productivity", "Weighted Score\nGoal: 10 points per day", 10, "W");
+        addItem("WML", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Design Quality", "Roll-up", 10, "W");
+        addItem("WML", "Quantitative Measure (95%)", "Quality", "PSI Quality Scores (CE)", "PSI Quality", "95%", 20, "W");
+        addItem("WML", "Quantitative Measure (95%)", "FCR", "FCR", "FCR", "83%", 15, "W");
+        addItem("WML", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95.00%", 15, "W");
+        addItem("WML", "Quantitative Measure (95%)", "Efficiency", "Design Churn", "Churn", "Refer to Tier", 15, "W");
+        addItem("WML", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 10, "W");
+        addItem("WML", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
+
+        addItem("VQA", "Quantitative Measure (95%)", "Productivity", "% to Goal", "Productivity", "100.00%", 35, "W");
+        addItem("VQA", "Quantitative Measure (95%)", "Quality", "TL Audit (4 audit per agent per month)", "TL Audit", "95.00%", 10, "Y");
+        addItem("VQA", "Quantitative Measure (95%)", "Quality", "Disputed Audit Work", "Disputed Audit", "80.00%", 10, "X");
+        addItem("VQA", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95.00%", 15, "AB");
+        addItem("VQA", "Quantitative Measure (95%)", "Product Knowledge", "External Calibration", "Calibration", "<5%", 25, "AC");
+        addItem("VQA", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
     }
 
     /**
