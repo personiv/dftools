@@ -121,7 +121,7 @@ class Credential extends Model
                 if ($agent->EmployeeID() == $weekSession->AgentID()) {
                     if ($weekSession->IsSignee($this->EmployeeID()) && !$weekSession->IsSigned($this->EmployeeID())) {
                         array_push($sessions["Pending"], [
-                            "session" => $weekSession,
+                            "sessionType" => $weekSession->TypeDescription(),
                             "employeeID" => $agent->EmployeeID(),
                             "fullName" => $agent->FullName(),
                             "jobPosition" => $agent->JobPosition(),
@@ -129,7 +129,7 @@ class Credential extends Model
                         ]);
                     } else if ($weekSession->IsSignee($this->EmployeeID()) && $weekSession->IsSigned($this->EmployeeID())) {
                         array_push($sessions["Completed"], [
-                            "session" => $weekSession,
+                            "sessionType" => $weekSession->TypeDescription(),
                             "employeeID" => $agent->EmployeeID(),
                             "fullName" => $agent->FullName(),
                             "jobPosition" => $agent->JobPosition()

@@ -131,6 +131,7 @@
                             <th scope="col">Employee ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -144,6 +145,7 @@
                                             <td>{{ $summaryEmployeeID }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td></td>
                                             <td><span class="stats-for-coaching">For Coaching</span></td>
                                             <td>
                                                 <!-- Button trigger modal -->
@@ -157,6 +159,7 @@
                                             <td>{{ $summaryItems[$i]["employeeID"] }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
                                             <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-rtsession">Confirm Session</span></a></td>
                                         </tr>
@@ -165,6 +168,7 @@
                                             <td>{{ $summaryItems[$i]["employeeID"] }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                             <td><span class="stats-completed">Completed</span></td>
                                             <td></td>
                                         </tr>
