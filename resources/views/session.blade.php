@@ -19,7 +19,7 @@
 @section('content')
 
 <!-- Resource's credential -->
-<div class="container-fluid mb-4">
+<div class="container-fluid mb-4" style="color: var(--dark-color);">
     <div class="row">
         <div class="col">
             <div><span class="font-weight-bold">Last Name:</span>&nbsp;&nbsp;{{ $agent->FirstName() }}</div>
@@ -37,7 +37,7 @@
 </div>
 
 @if (!empty($scorecard))
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col-lg">
             <div class="table-responsive session-container">
@@ -72,7 +72,7 @@
     </div>
 </div>
 @elseif (!empty($scorecardGoal))
-<div class="container-fluid">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col-lg">
             <div class="table-responsive session-container">
@@ -112,7 +112,7 @@
         <!-- For 1st Assistant bonus score -->
             <div class="extra-score-wrapper">
                 <div class="extra-heading">Adming Task Assignment (For 1st Assistant Only)</div>
-                <div class="table-responsive session-container">
+                <div class="table-responsive session-tiering-container">
                     <table class="table table-bordered">
                         <thead class="">
                             <tr>
@@ -152,7 +152,7 @@
             <!-- Churn Tiering -->
             <div class="extra-score-wrapper">
                 <div class="extra-heading">Design Churn Tiering</div>
-                <div class="table-responsive session-container">
+                <div class="table-responsive session-tiering-container">
                     <table class="table table-bordered">
                         <thead class="">
                             <tr>
@@ -184,7 +184,6 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="extra-footer">* Agreed scoring for both OS and Designer</div>
             </div> 
         </div>
         <div class="col"></div>
@@ -203,12 +202,12 @@
     <div class="row">
         <div class="col-{{ $field_size }}">
             <div class="card">
-                <div class="card-header bg-dark text-white font-weight-bold">{{ $field_title }}</div>
+                <div class="card-header bg-dark text-white">{{ $field_title }}</div>
                 <div class="card-body">
                     @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
                         <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" required>{{ $field_value }}</textarea>
                     @else
-                        <div class="session-field"><pre>{{ $field_value }}</pre></div>
+                        <div class="session-field">{{ $field_value }}</div>
                     @endif
                 </div>
             </div>
@@ -221,20 +220,21 @@
         @foreach ($signees as $employeeID => $signed)
             <?php $employee = App\Credential::where("credential_user", $employeeID)->first() ?>
             <div class="col">
-                <div class="font-weight-bold">{{ $employee->JobPosition() }}</div>
-                <div class="mb-3">{{ $employee->FullName() }}</div>
+                <div class="signi-container">
+                <div class="font-weight-bold" style="color: var(--dark-color);">{{ $employee->JobPosition() }}</div>
+                <div class="mb-3" style="color: var(--dark-color);">{{ $employee->FullName() }}</div>
                 @if ($employeeID == $user->EmployeeID())
                     @if ($pendingLevel == $s)
                         <form id="session-form" action="{{ action('HomeController@movePendingLevel') }}" method="post">
                             {{ csrf_field() }}
-                            <div id="session-verify-trigger-wrapper" class="custom-control custom-checkbox mt-4">
+                            <div id="session-verify-trigger-wrapper" class="custom-control custom-checkbox mt-3">
                                 <input type="checkbox" class="custom-control-input" id="session-verify-trigger" onclick="showVerify()">
                                 <label class="custom-control-label" for="session-verify-trigger">{{ $session::SIGNEDVERBIAGE }}</label>
                             </div>
                             <div id="session-verify-wrapper" style="display: none;">
-                                <input type="password" name="session-verify-password" id="session-verify-password" placeholder="Verify password" required>
+                                <input type="password" name="session-verify-password" class="form-control" id="session-verify-password" placeholder="Verify password" required>
                                 <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
-                                <input type="submit" class="btn btn-primary" value="Sign">
+                                <input type="submit" class="signi-btn" value="Sign">
                             </div>
                         </form>
                     @elseif ($pendingLevel > $s)
@@ -247,6 +247,7 @@
                 @else
                     <label>{{ $session::UNSIGNEDVERBIAGE }}</label>
                 @endif
+                </div>
             </div>
             <?php $s++ ?>
         @endforeach
