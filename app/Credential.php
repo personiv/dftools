@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Credential extends Model
 {
     protected $primaryKey = 'credential_id';
+    static function GetCredential($employeeID) { return self::where("credential_user", $employeeID)->first(); }
     static function GetAllLeaders() {
         $types = Tag::LeaderTypes();
         for ($i = 0; $i < $types->count(); $i++) { 
@@ -72,36 +73,68 @@ class Credential extends Model
         $sessions = array("For Coaching" => [], "Pending" => [], "Completed" => []);
         $teamMembers = $this->TeamMembers();
         $weekSessions = $this->SessionsThisWeek();
-        for ($i = 0; $i < $teamMembers->count(); $i++) { 
-            $teamMember = $teamMembers[$i];
+        $exceptions = $this->ExceptionsThisWeek();
+        
+        // For Coaching iteration
+        foreach ($teamMembers as $agent) {
+            // Check first if this agent is in list of excepted
+            $excepted = false;
+            foreach ($exceptions as $exception)
+                if ($exception->exception_agent == $agent->EmployeeID())
+                    $excepted = true;
+
+            // Skip this iteration for current agent
+            if ($excepted) continue;
+
+            // Check if this agent has session this week
             $hasSession = false;
-            for ($j = 0; $j < count($weekSessions); $j++) {
-                $weekSession = $weekSessions[$j];
-                if ($teamMember->EmployeeID() == $weekSession->AgentID()) {
+            foreach ($weekSessions as $weekSession) {
+                if ($agent->EmployeeID() == $weekSession->AgentID()) {
                     $hasSession = true;
                     break;
                 }
             }
+
+            // Only tag as [For Coaching] if this agent has no session this week and not excepted
             if (!$hasSession) {
                 array_push($sessions["For Coaching"], [
-                    "employeeID" => $teamMember->EmployeeID(),
-                    "fullName" => $teamMember->FullName(),
-                    "jobPosition" => $teamMember->JobPosition()
+                    "employeeID" => $agent->EmployeeID(),
+                    "fullName" => $agent->FullName(),
+                    "jobPosition" => $agent->JobPosition()
                 ]);
-            } else {
-                if ($weekSession->IsSignee($this->EmployeeID()) && !$weekSession->IsSigned($this->EmployeeID())) {
-                    array_push($sessions["Pending"], [
-                        "employeeID" => $teamMember->EmployeeID(),
-                        "fullName" => $teamMember->FullName(),
-                        "jobPosition" => $teamMember->JobPosition(),
-                        "sessionID" => $weekSession->SessionID()
-                    ]);
-                } else if ($weekSession->IsSignee($this->EmployeeID()) && $weekSession->IsSigned($this->EmployeeID())) {
-                    array_push($sessions["Completed"], [
-                        "employeeID" => $teamMember->EmployeeID(),
-                        "fullName" => $teamMember->FullName(),
-                        "jobPosition" => $teamMember->JobPosition()
-                    ]);
+            }
+        }
+
+        // Pending and Completed iteration
+        foreach ($teamMembers as $agent) {
+            // Check first if this agent is in list of excepted
+            $excepted = false;
+            foreach ($exceptions as $exception)
+                if ($exception->exception_agent == $agent->EmployeeID())
+                    $excepted = true;
+
+            // Skip this iteration for current agent
+            if ($excepted) continue;
+
+            // Iterate sessions this week and segregate it
+            foreach ($weekSessions as $weekSession) {
+                if ($agent->EmployeeID() == $weekSession->AgentID()) {
+                    if ($weekSession->IsSignee($this->EmployeeID()) && !$weekSession->IsSigned($this->EmployeeID())) {
+                        array_push($sessions["Pending"], [
+                            "session" => $weekSession,
+                            "employeeID" => $agent->EmployeeID(),
+                            "fullName" => $agent->FullName(),
+                            "jobPosition" => $agent->JobPosition(),
+                            "sessionID" => $weekSession->SessionID()
+                        ]);
+                    } else if ($weekSession->IsSignee($this->EmployeeID()) && $weekSession->IsSigned($this->EmployeeID())) {
+                        array_push($sessions["Completed"], [
+                            "session" => $weekSession,
+                            "employeeID" => $agent->EmployeeID(),
+                            "fullName" => $agent->FullName(),
+                            "jobPosition" => $agent->JobPosition()
+                        ]);
+                    }
                 }
             }
         }
