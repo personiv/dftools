@@ -250,7 +250,7 @@
             <div class="tb-container pb-2">
                 <div class="dboard-text  px-4 pt-4 pb-3">
                     <div class="dboard-title">Overall Top Resource</div>
-                    <div class="dboard-othtext">for the month of June</div>
+                    <div class="dboard-othtext">for the month of {{ date('F') }}</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="top-resource-container">
@@ -269,7 +269,7 @@
                                 <div class="title-scorecard-container">
                                     <div class="title-scc d-inline-flex justify-content-center align-items-center">
                                        <div class="mr-2">Scorecard</div>
-                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall scorecard of the resource for the month of June"><i class="fa fa-question-circle"></i></a>
+                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall scorecard of the resource for the month of {{ date('F') }}"><i class="fa fa-question-circle"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -345,7 +345,7 @@
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Top 3 Resource</div>
-                    <div class="dboard-othtext">for the month of june</div>
+                    <div class="dboard-othtext">for the month of {{ date('F') }}</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="table-responsive px-4 pt-0 pb-4">
@@ -404,7 +404,7 @@
             <div class="tb-container pb-2">
                 <div class="dboard-text  px-4 pt-4 pb-3">
                     <div class="dboard-title">My Scorecard Status</div>
-                    <div class="dboard-othtext">for the month of June</div>
+                    <div class="dboard-othtext">for the month of {{ date('F') }}</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="top-resource-container">
@@ -423,7 +423,7 @@
                                 <div class="title-scorecard-container">
                                     <div class="title-scc d-inline-flex justify-content-center align-items-center">
                                        <div class="mr-2">Scorecard</div>
-                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall status of your scorecard for the month of June"><i class="fa fa-question-circle"></i></a>
+                                       <a tabindex="0" class="popover-dismiss" role="button" data-toggle="popover" data-trigger="focus" title="Scorecard Overview" data-content="This is the overall status of your scorecard for the month of {{ date('F') }}"><i class="fa fa-question-circle"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -499,7 +499,7 @@
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Productivity Improvement</div>
-                    <div class="dboard-othtext">for the month of june</div>
+                    <div class="dboard-othtext">for the month of {{ date('F') }}</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="row p-4">
