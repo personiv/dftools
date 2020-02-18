@@ -16,7 +16,7 @@
 <script type="text/javascript">
     createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
     createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
-    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $totalCoaching }});
+    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $totalCoaching + $exceptions->count() }});
     var loaded = false;
     var waypoints = $('.top-resource-container').waypoint(function(direction) {
         if (!loaded) {
@@ -213,7 +213,7 @@
                         </thead>
                         <tbody>
                         @foreach ($exceptions as $exception)
-                            <?php $agent = App\Credential::where("credential_user", $exception->exception_agent)->first() ?>
+                            <?php $agent = App\Credential::GetCredential($exception->exception_agent) ?>
                             <tr>
                                 <td>{{ $agent->EmployeeID() }}</td>
                                 <td>{{ $agent->FullName() }}</td>
