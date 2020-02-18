@@ -156,4 +156,29 @@ class Credential extends Model
                 ->select("exception_id", "exception_agent", "exception_reason")
                 ->where("exception_week", (int)date("W"))->where("credential_up", $this->EmployeeID())->get();
     }
+
+    function TeamStackRank() {
+        $data = array();
+        $teamMembers = $this->TeamMembers();
+
+        foreach ($teamMembers as $teamMember) {
+            $actualData = Session::GetAgentActualData(date("Y"), date("M"), $teamMember->EmployeeID());
+            array_push($data, [
+                "agent" => self::GetCredential($teamMember->EmployeeID()),
+                "productivity" => $actualData[Session::IndexOfCell("W")],
+                "quality" => $actualData[Session::IndexOfCell("Y")],
+                "churn" => $actualData[Session::IndexOfCell("X")],
+                "pkt" => $actualData[Session::IndexOfCell("AB")],
+                "attendance" => $actualData[Session::IndexOfCell("AC")],
+                "bonus" => $actualData[Session::IndexOfCell("AF")],
+                "overall" => $actualData[Session::IndexOfCell("AG")]
+            ]);
+        }
+
+        usort($data, function($a, $b) {
+            return $a["overall"] < $b["overall"] ? 1 : -1;
+        });
+
+        return $data;
+    }
 }

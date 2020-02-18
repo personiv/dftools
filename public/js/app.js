@@ -55,23 +55,23 @@ function isToggled() {
 } // end
 
 
-  // Progress bar in dashboard
-  // progressbar.js
-  function createCircle(elementId, trailColor, strokeColor, value, max) {
-    var bar = new ProgressBar.Circle(document.getElementById(elementId), {
-      color: trailColor,
+// Progress bar in dashboard
+// progressbar.js
+function createCircle(elementId, trailColor, strokeColor, value, max) {
+  var bar = new ProgressBar.Circle(document.getElementById(elementId), {
+    color: trailColor,
 
-      // This has to be the same size as the maximum width to
-      // prevent clipping
-      strokeWidth: 4,
-      trailWidth: 1,
-      easing: 'easeInOut',
-      duration: 1400,
-      text: {
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 4,
+    trailWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    text: {
       autoStyleContainer: false
     },
-      from: { color: trailColor, width: 1 },
-      to: { color: strokeColor, width: 4 },
+    from: { color: trailColor, width: 1 },
+    to: { color: strokeColor, width: 4 },
 
     // Set default step function for all animate calls
     step: function(state, circle) {
@@ -84,17 +84,25 @@ function isToggled() {
       } else {
         circle.setText(value);
       }
-
     }
-    });
-    bar.text.style.fontFamily = '"Open sans", Helvetica, sans-serif';
-    bar.text.style.fontSize = '2rem';
+  });
+  bar.text.style.fontFamily = '"Open sans", Helvetica, sans-serif';
+  bar.text.style.fontSize = '2rem';
 
-    bar.animate(value / max);  // Number from 0.0 to 1.0
-    // end
-  }
+  bar.animate(value / max);  // Number from 0.0 to 1.0
+  // end
+}
 
-  // Lazy fill progress bar in top resource card
-  function lazyFill(selector, width) {
-    $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = width; }, { offset: '100%' });
+// Lazy fill progress bar in top resource card
+function lazyFill(selector, width) {
+  var className = "";
+  if (width < 80) {
+    className = "pb-color-f";
+  } else if (width >= 80 && width < 90) {
+    className = "pb-color-sp";
+  } else {
+    className = "pb-color-p";
   }
+  $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = width + '%'; }, { offset: '100%' });
+  $(selector).addClass(className);
+}

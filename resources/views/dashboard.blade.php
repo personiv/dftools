@@ -10,6 +10,16 @@
     $coachingSummary = $user->CoachingSummaryThisWeek();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     $exceptions = $user->ExceptionsThisWeek();
+    if ($userTeam->count()) {
+        $stackRank = $user->TeamStackRank();
+        $topResource = $stackRank[0];
+        $topResourceProductivity = round($topResource["productivity"] * 100, 2);
+        $topResourceQuality = round($topResource["quality"] * 100, 2);
+        $topResourceChurn = round($topResource["churn"] * 100, 2);
+        $topResourcePKT = round($topResource["pkt"] * 100, 2);
+        $topResourceAttendance = round($topResource["attendance"] * 100, 2);
+        $topResourceBonus = round($topResource["bonus"] * 100, 2);
+    }
 @endphp
 
 @section('bladescript')
@@ -17,17 +27,18 @@
     createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
     createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
     createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
-    lazyFill("#pb-productivity", "89%");
-    lazyFill("#pb-quality", "89%");
-    lazyFill("#pb-churn", "89%");
-    lazyFill("#pb-pkt", "89%");
-    lazyFill("#pb-attendance", "89%");
-    lazyFill("#pb-bonus", "89%");
+    @if ($userTeam->count())
+        lazyFill("#pb-productivity", {{ $topResourceProductivity }});
+        lazyFill("#pb-quality", {{ $topResourceQuality }});
+        lazyFill("#pb-churn", {{ $topResourceChurn }});
+        lazyFill("#pb-pkt", {{ $topResourcePKT }});
+        lazyFill("#pb-attendance", {{ $topResourceAttendance }});
+        lazyFill("#pb-bonus", {{ $topResourceBonus }});
+    @endif
 </script>
 @endsection
 
 @section('content')
-
 
 <!-- Supervisor Dashboard -->    
 @if ($user->AccountType() == "SPRVR")
@@ -251,8 +262,8 @@
                                 <div class="tr-section1 px-4 mb-4">
                                 <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
-                                        <div class="r-name">John Doe</div>
-                                        <div class="r-role">Web Designer</div>
+                                        <div class="r-name">{{ $topResource["agent"]->FullName() }}</div>
+                                        <div class="r-role">{{ $topResource["agent"]->JobPosition() }}</div>
                                     </div>
                                 </div>
                                 <div class="title-scorecard-container">
@@ -272,7 +283,7 @@
                                     TOTAL
                                 </div>
                                 <div class="total-score">
-                                    95<sup>%</sup>
+                                    {{ round($topResource["overall"] * 100) }}<sup>%</sup>
                                 </div>
                             </div>
                         </div>
@@ -285,20 +296,20 @@
                         <div class="eachScore-container px-4 py-3">
                             <!-- Productivity score -->
                             <div class="progress mt-1">
-                                <div id="pb-productivity" class="progress-bar pb-color-sp" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div> 
+                                <div id="pb-productivity" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Productivity: <span class="progress-score">{{ $topResourceProductivity }}%</span></span></div> 
                             </div>
 
                             <!-- Quality score -->
                             <div class="progress mt-1">
-                                <div id="pb-quality" class="progress-bar pb-color-p" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
+                                <div id="pb-quality" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Quality: <span class="progress-score">{{ $topResourceQuality }}%</span></span></div>
                             </div>
 
                             <!-- Churn score -->
                             <div class="progress mt-1">
-                                <div id="pb-churn" class="progress-bar pb-color-f" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Churn: <span class="progress-score">70%</span></span></div>
+                                <div id="pb-churn" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Churn: <span class="progress-score">{{ $topResourceChurn }}%</span></span></div>
                             </div>
 
                         </div>
@@ -308,20 +319,20 @@
                         <div class="eachScore-container px-4 py-3">
                             <!-- Product Knowledge Test score -->
                             <div class="progress mt-1">
-                                <div id="pb-pkt" class="progress-bar pb-color-sp" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
+                                <div id="pb-pkt" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">PKT: <span class="progress-score">{{ $topResourcePKT }}%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
-                                <div id="pb-attendance" class="progress-bar pb-color-p" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
+                                <div id="pb-attendance" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">Attendance: <span class="progress-score">{{ $topResourceAttendance }}%</span></span></div>
                             </div>
 
                             <!-- Attendance score -->
                             <div class="progress mt-1">
                                 <div id="pb-bonus" class="progress-bar pb-color-bonus" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
+                                <span class="progress-title">Bonus: <span class="progress-score">{{ $topResourceBonus }}%</span></span></div>
                             </div>
                         </div>
                     </div>
@@ -347,36 +358,32 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="tr-3 tr-topOne d-inline-flex justify-content-center align-items-center">
-                                    <span class="mr-2">1</span>
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                            </td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="tr-3 tr-topTwo d-inline-flex justify-content-center align-items-center">
-                                    <span class="mr-2">2</span>
-                                    <i class="fas fa-medal"></i>
-                                </div>
-                            </td>
-                            <td>John Doe</td>
-                            <td>Custom Designer</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="tr-3 tr-topThree d-inline-flex justify-content-center align-items-center">
-                                    <span class="mr-2">3</span>
-                                    <i class="fas fa-award"></i>
-                                </div>
-                            </td>
-                            <td>John Doe</td>
-                            <td>Web Designer</td>
-                        </tr>
+                        @for ($i = 0; $i < 3; $i++)
+                            @if ($i < count($stackRank))
+                                <tr>
+                                    <td>
+                                    @if ($i == 0)
+                                        <div class="tr-3 tr-topOne d-inline-flex justify-content-center align-items-center">
+                                            <span class="mr-2">1</span>
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                    @elseif ($i == 1)
+                                        <div class="tr-3 tr-topTwo d-inline-flex justify-content-center align-items-center">
+                                            <span class="mr-2">2</span>
+                                            <i class="fas fa-medal"></i>
+                                        </div>
+                                    @elseif ($i == 2)
+                                        <div class="tr-3 tr-topThree d-inline-flex justify-content-center align-items-center">
+                                            <span class="mr-2">3</span>
+                                            <i class="fas fa-award"></i>
+                                        </div>
+                                    @endif
+                                    </td>
+                                    <td>{{ $stackRank[$i]["agent"]->FullName() }}</td>
+                                    <td>{{ $stackRank[$i]["agent"]->JobPosition() }}</td>
+                                </tr>
+                            @endif
+                        @endfor
                         </tbody>
                     </table>
                 </div>

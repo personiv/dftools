@@ -23,21 +23,20 @@ class Session extends Model
         }
         return $value - 1;
     }
-    static function GetAgentActualData($path, $agentID) {
-        $agentvalues = array();
+    static function GetAgentActualData($year, $month, $agentID) {
         $reader = new Xlsx;
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($path);
+        $reader->setLoadSheetsOnly(["RESOURCES"]);
+        $spreadsheet = $reader->load("data/actual/$year/$month.xlsx");
         $spreadsheet->setActiveSheetIndexByName("RESOURCES");
         $scorevalues = $spreadsheet->getActiveSheet()->toArray();
 
         for ($i = 0; $i < count($scorevalues); $i++) {
             if ($scorevalues[$i][2] == $agentID) {
-                $agentvalues = $scorevalues[$i];
-                break;
+                return $scorevalues[$i];
             }
         }
-        return $agentvalues;
+        return array();
     }
 
     function SessionID() { return $this->getAttribute("session_id"); }
@@ -137,7 +136,7 @@ class Session extends Model
                     }
                     break;
                 case 'actual':
-                    $agentvalues = self::GetAgentActualData($path, $this->AgentID());
+                    $agentvalues = self::GetAgentActualData($year, $month, $this->AgentID());
                     for ($i = 0; $i < $scorecard->count(); $i++) {
                         if (!empty($agentvalues)) {
                             $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
