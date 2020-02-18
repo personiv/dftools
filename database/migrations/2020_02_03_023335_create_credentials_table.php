@@ -63,10 +63,25 @@ class CreateCredentialsTable extends Migration
             addEmployee('10072501', 'SPRVR', 'Richard', 'De Los Santos', '7010609');
 
         addEmployee('10071937', 'MANGR', 'Ryan', 'Pasquin', '10072397');
-            addEmployee('10071256', 'SPRVR', 'Renell', 'Barrios', '10071937');
-            addEmployee('10071492', 'SPRVR', 'Katherine', 'Arpon', '10071937');
-            addEmployee('10070828', 'SPRVR', 'Apple', 'Remulla', '10071937');
+            // WML here
             addEmployee('10071245', 'SPRVR', 'Reymark', 'Regencia', '10071937');
+            addEmployee('10071256', 'SPRVR', 'Renell', 'Barrios', '10071937');
+                addEmployee('10071908', 'WML', 'Marimar', 'Domingo', '10071256');
+                addEmployee('10071600', 'WML', 'Lizbert', 'Ortillano', '10071256');
+                addEmployee('10072220', 'WML', 'Marlon', 'Magpoc', '10071256');
+
+            // VQA here 
+            addEmployee('10071492', 'SPRVR', 'Katherine', 'Arpon', '10071937');
+                addEmployee('10072613', 'VQA', 'Francis', 'Rempillo', '10071492');
+                addEmployee('10072011', 'VQA', 'Hannah Elkanah', 'Santos', '10071492');
+                addEmployee('10072010', 'VQA', 'Julie Ann', 'Torres', '10071492');
+
+            // Proofer here
+            addEmployee('10070828', 'SPRVR', 'Apple', 'Remulla', '10071937');
+                addEmployee('10072182', 'PR', 'Ayra', 'Gonzaga', '10070828');
+                addEmployee('10072472', 'PR', 'Angelica', 'Liad', '10070828');
+                addEmployee('10072069', 'PR', 'Pauline Joyce', 'Monzon', '10070828');
+            
 
         addEmployee('10072003', 'MANGR', 'Carlo', 'Mendoza', '10072397');
             addEmployee('10070715', 'SPRVR', 'Franklin', 'Jayawon', '10072003');
