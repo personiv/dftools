@@ -16,7 +16,7 @@
 <script type="text/javascript">
     createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
     createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
-    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $totalCoaching + $exceptions->count() }});
+    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
     var loaded = false;
     var waypoints = $('.top-resource-container').waypoint(function(direction) {
         if (!loaded) {
