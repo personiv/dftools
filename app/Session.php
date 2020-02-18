@@ -14,6 +14,31 @@ class Session extends Model
     const UNSIGNEDVERBIAGE = "On hold.";
     const PENDINGVERBIAGE = "Unable to sign yet.";
     const SIGNEDVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+    static function IndexOfCell($columnName) {
+        $columnName = strtoupper($columnName);
+        $value = 0;
+        for ($i = 0; $i < strlen($columnName); $i++) {
+            $delta = ord($columnName[$i]) - 64;
+            $value = $value * 26 + $delta;
+        }
+        return $value - 1;
+    }
+    static function GetAgentActualData($path, $agentID) {
+        $agentvalues = array();
+        $reader = new Xlsx;
+        $reader->setReadDataOnly(true);
+        $spreadsheet = $reader->load($path);
+        $spreadsheet->setActiveSheetIndexByName("RESOURCES");
+        $scorevalues = $spreadsheet->getActiveSheet()->toArray();
+
+        for ($i = 0; $i < count($scorevalues); $i++) {
+            if ($scorevalues[$i][2] == $agentID) {
+                $agentvalues = $scorevalues[$i];
+                break;
+            }
+        }
+        return $agentvalues;
+    }
 
     function SessionID() { return $this->getAttribute("session_id"); }
     function DateCreated() { return $this->getAttribute("created_at"); }
@@ -60,6 +85,7 @@ class Session extends Model
 
         // Unique Fields
         switch ($this->Type()) {
+            case 'GOAL':
             case 'SCORE':
                 if ($userID == $this->AgentID())
                     $data["fields"]["notes"]["value"] = $r->input("session-notes");
@@ -85,18 +111,20 @@ class Session extends Model
         $scorecard = ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get();
         $agentvalues = array();
         if (file_exists($path)) {
-            $reader = new Xlsx;
-            $reader->setReadDataOnly(true);
-            $spreadsheet = $reader->load($path);
-
             switch ($this->Mode()) {
                 case 'manual':
+                    $reader = new Xlsx;
+                    $reader->setReadDataOnly(true);
+                    $spreadsheet = $reader->load($path);
                     $spreadsheet->setActiveSheetIndexByName($this->AgentRole());
                     $scorevalues = $spreadsheet->getActiveSheet()->toArray();
 
-                    for ($i = 0; $i < count($scorevalues); $i++) 
-                        if ($scorevalues[$i][0] == $this->AgentID())
+                    for ($i = 0; $i < count($scorevalues); $i++) {
+                        if ($scorevalues[$i][0] == $this->AgentID()) {
                             $agentvalues = $scorevalues[$i];
+                            break;
+                        }
+                    }
 
                     for ($i = 0; $i < $scorecard->count(); $i++) {
                         if (!empty($agentvalues)) {
@@ -109,27 +137,11 @@ class Session extends Model
                     }
                     break;
                 case 'actual':
-                    $spreadsheet->setActiveSheetIndexByName("RESOURCES");
-                    $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-
-                    for ($i = 0; $i < count($scorevalues); $i++)
-                        if ($scorevalues[$i][2] == $this->AgentID())
-                            $agentvalues = $scorevalues[$i];
-                    
-                    function IndexOfCell($columnName) {
-                        $columnName = strtoupper($columnName);
-                        $value = 0;
-                        for ($i = 0; $i < strlen($columnName); $i++) {
-                            $delta = ord($columnName[$i]) - 64;
-                            $value = $value * 26 + $delta;
-                        }
-                        return $value - 1;
-                    }
-
+                    $agentvalues = self::GetAgentActualData($path, $this->AgentID());
                     for ($i = 0; $i < $scorecard->count(); $i++) {
                         if (!empty($agentvalues)) {
-                            $actual = $agentvalues[IndexOfCell($scorecard[$i]["score_item_cell"])];
-                            $overall = $agentvalues[IndexOfCell("AG")];
+                            $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
+                            $overall = $agentvalues[self::IndexOfCell("AG")];
                             if (is_numeric($actual)) $actual = round($actual * 100, 2);
                             if (is_numeric($overall)) $overall = round($overall * 100, 2);
                             $scorecard[$i]["score_item_actual"] = $actual;
