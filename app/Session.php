@@ -205,7 +205,9 @@ class Session extends Model
     }
 
     function ExistingSession() {
-        return Session::where("session_agent", $this->AgentID())->where("session_week", $this->Week())->first();
+        return self::where("session_agent", $this->AgentID())
+            ->where("session_week", $this->Week())
+            ->where("session_type", $this->Type())->first();
     }
 
     function ExistsThisWeek() {
