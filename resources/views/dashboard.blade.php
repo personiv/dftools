@@ -17,18 +17,12 @@
     createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
     createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
     createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
-    var loaded = false;
-    var waypoints = $('.top-resource-container').waypoint(function(direction) {
-        if (!loaded) {
-            document.querySelector("#pb-productivity").style.width = "89%";
-            document.querySelector("#pb-quality").style.width = "99.4%";
-            document.querySelector("#pb-churn").style.width = "70%";
-            document.querySelector("#pb-pkt").style.width = "85%";
-            document.querySelector("#pb-attendance").style.width = "100%";
-            document.querySelector("#pb-bonus").style.width = "100%";
-            loaded = true;
-        }
-    }, { offset: '80%' });
+    lazyFill("#pb-productivity", "89%");
+    lazyFill("#pb-quality", "89%");
+    lazyFill("#pb-churn", "89%");
+    lazyFill("#pb-pkt", "89%");
+    lazyFill("#pb-attendance", "89%");
+    lazyFill("#pb-bonus", "89%");
 </script>
 @endsection
 
