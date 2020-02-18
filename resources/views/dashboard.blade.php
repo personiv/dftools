@@ -145,7 +145,7 @@
                                             <td>{{ $summaryEmployeeID }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
-                                            <td></td>
+                                            <td>N/A</td>
                                             <td><span class="stats-for-coaching">For Coaching</span></td>
                                             <td>
                                                 <!-- Button trigger modal -->
