@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-use App\Credential;
-use App\ScoreItem;
 
 class Session extends Model
 {
@@ -22,6 +20,7 @@ class Session extends Model
     function AgentID() { return $this->getAttribute("session_agent"); }
     function AgentRole() { return $this->Agent()->getAttribute("credential_type"); }
     function Type() { return $this->getAttribute("session_type"); }
+    function TypeDescription() { return Tag::where("tag_name", $this->getAttribute("session_type"))->first()->Description(); }
     function Mode() { return $this->getAttribute("session_mode"); }
     function Year() { return $this->getAttribute("session_year"); }
     function Month() { return $this->getAttribute("session_month"); }
