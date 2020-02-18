@@ -15,6 +15,8 @@
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
     }
+
+    function perc($value) { return is_numeric($value) ? round($value * 100, 2) : 0; }
 @endphp
 
 @section('bladescript')
@@ -24,7 +26,7 @@
     createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
     @if ($userTeam->count())
         @foreach ($scoreItem as $item)
-            lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ round($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))] * 100, 2) }});
+            lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
         @endforeach
     @endif
 </script>
@@ -275,7 +277,7 @@
                                     TOTAL
                                 </div>
                                 <div class="total-score">
-                                    {{ round($topResource["data"][App\Session::IndexOfCell("AG")] * 100) }}<sup>%</sup>
+                                    {{ perc($topResource["data"][App\Session::IndexOfCell("AG")]) }}<sup>%</sup>
                                 </div>
                             </div>
                         </div>
@@ -289,7 +291,7 @@
                             @for ($i = 0; $i < $scoreItem->count() / 2; $i++)
                                 <div class="progress mt-1">
                                     <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ round($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))] * 100, 2) }}%</span></span></div>
+                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
                                 </div>
                             @endfor
                         </div>
@@ -300,7 +302,7 @@
                             @for ($i = $scoreItem->count() / 2; $i < $scoreItem->count(); $i++)
                                 <div class="progress mt-1">
                                     <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ round($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))] * 100, 2) }}%</span></span></div>
+                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
                                 </div>
                             @endfor
                         </div>
