@@ -163,20 +163,15 @@ class Credential extends Model
 
         foreach ($teamMembers as $teamMember) {
             $actualData = Session::GetAgentActualData(date("Y"), date("M"), $teamMember->EmployeeID());
+
             array_push($data, [
                 "agent" => self::GetCredential($teamMember->EmployeeID()),
-                "productivity" => $actualData[Session::IndexOfCell("W")],
-                "quality" => $actualData[Session::IndexOfCell("Y")],
-                "churn" => $actualData[Session::IndexOfCell("X")],
-                "pkt" => $actualData[Session::IndexOfCell("AB")],
-                "attendance" => $actualData[Session::IndexOfCell("AC")],
-                "bonus" => $actualData[Session::IndexOfCell("AF")],
-                "overall" => $actualData[Session::IndexOfCell("AG")]
+                "data" => $actualData
             ]);
         }
 
         usort($data, function($a, $b) {
-            return $a["overall"] < $b["overall"] ? 1 : -1;
+            return $a["data"][Session::IndexOfCell("AG")] < $b["data"][Session::IndexOfCell("AG")] ? 1 : -1;
         });
 
         return $data;
