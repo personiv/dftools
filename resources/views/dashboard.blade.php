@@ -166,7 +166,7 @@
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
-                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-rtsession">Confirm Session</span></a></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
                                         </tr>
                                     @elseif ($summaryStatus == "Completed")
                                         <tr>
@@ -349,7 +349,7 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="table-responsive px-4 pt-0 pb-4">
-                    <table class="table table-borderless">
+                    <table class="table table-borderless custom-tb-hover">
                         <thead>
                         <tr>
                             <th scope="col">&nbsp;&nbsp;#</th>

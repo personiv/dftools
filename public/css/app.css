@@ -292,16 +292,16 @@ body, html {
 } 
 
 /* Action button / Retake session */
-.action-btn-rtsession {
-    background-color: var(--btemp-danger);
+.action-btn-psession {
+    background-color: var(--pending);
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-.action-btn-rtsession:hover, .action-btn-rtsession:focus, .action-btn-rtsession:active  {
-    background-color: #bf4845;
-    box-shadow: 0 0 0 0.2rem rgba(191, 72, 69,.25);
+.action-btn-psession:hover, .action-btn-psession:focus, .action-btn-psession:active  {
+    background-color: #d19643;
+    box-shadow: 0 0 0 0.2rem rgba(209, 150, 67,.25);
 } 
 
 /* Scrollbar for table */
@@ -636,7 +636,20 @@ body, html {
     background: linear-gradient(55deg, rgba(121,85,72,1) 0%, rgba(141,110,99,1) 35%, rgba(161,136,127,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-} /* end */
+} 
+
+.custom-tb-hover tbody tr:nth-child(1):hover {
+    background: rgba(166,124,0, .1);
+}
+
+.custom-tb-hover tbody tr:nth-child(2):hover {
+    background: rgba(121,121,121, .1);
+}
+
+.custom-tb-hover tbody tr:nth-child(3):hover {
+    background: rgba(121,85,72, .1);
+}
+/* end */
 
 
 /*

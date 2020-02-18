@@ -238,7 +238,7 @@
 
                             <div class="input-group">
                                     <label class="custom-label" for="exception-reason">Reason:</label>
-                                    <textarea class="form-control" id="exception-reason" name="exception-reason" placeholder="Here you can add a valid reason..." rows="3" required></textarea>
+                                    <textarea class="form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -277,7 +277,7 @@
 
                             <div class="input-group">
                                 <label class="custom-label" for="FeedbackFormControlTextarea">Comments:</label>
-                                <textarea class="form-control" id="FeedbackFormControlTextarea" placeholder="Here you can share your feedback and stayed anonymous..." rows="3" required></textarea>
+                                <textarea class="form-control" id="FeedbackFormControlTextarea" placeholder="Well done!" rows="3" required></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
