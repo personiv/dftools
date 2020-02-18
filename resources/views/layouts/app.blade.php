@@ -19,11 +19,12 @@
     <link rel="stylesheet" href="@yield('sidebar')">
     <link rel="stylesheet" href="@yield('css')">
     <script type="text/javascript" src="@yield('js')"></script>
-
+    
     <!-- Plugins -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datepicker3.min.css') }}">
     
 </head>
 <body>
@@ -297,13 +298,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="{{ URL::asset('js/jquery.waypoints.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/progressbar.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/bootstrap-datepicker.min.js') }}"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     @yield('bladescript')
-    <script>
-        $('.popover-dismiss').popover({
-            trigger: 'focus'
-        })
-    </script>
+
+    <script> $('.popover-dismiss').popover({ trigger: 'focus' }); </script>
+
 </body>
 </html>

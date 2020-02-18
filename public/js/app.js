@@ -106,3 +106,11 @@ function lazyFill(selector, width) {
   $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = width + '%'; }, { offset: '100%' });
   $(selector).addClass(className);
 }
+
+
+// Datepicker for history page
+$('#history-wrapper .input-daterange').datepicker({
+  clearBtn: true,
+  autoclose: true,
+  todayHighlight: true
+});
