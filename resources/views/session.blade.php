@@ -214,7 +214,9 @@
                     <form action="{{ action('HomeController@resetPending') }}" method="post">
                         <div class="card-footer">
                             {{ csrf_field() }}
-                            <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
+                            <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
+                            <input type="hidden" name="session-pending" value="{{ $field_pending }}" required>
+                            <input type="hidden" name="session-field" value="{{ $fieldName }}" required>
                             <input type="submit" class="btn btn-danger" value="Reset">
                         </div>
                     </form>
@@ -242,7 +244,7 @@
                             </div>
                             <div id="session-verify-wrapper" style="display: none;">
                                 <input type="password" name="session-verify-password" class="form-control" id="session-verify-password" placeholder="Verify password" required>
-                                <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
+                                <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
                                 <input type="submit" class="signi-btn" value="Sign">
                             </div>
                         </form>
