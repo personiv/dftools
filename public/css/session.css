@@ -77,7 +77,7 @@
 .session-field {
     color: var(--dark-color);
     width: 100%;
-    min-height: 150px;
+    height: 150px;
     border: none;
     resize: none;
 }
