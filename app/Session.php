@@ -56,6 +56,7 @@ class Session extends Model
     function Manager() { return $this->Supervisor()->TeamLeader(); }
     function Head() { return $this->Manager()->TeamLeader(); }
     function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
+    function SigneeLevel($employeeID) { return array_keys($this->Data()["signatures"], $employeeID)[0]; }
     function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }
     function IsNextSignee($employeeID) { return array_keys($this->Data()["signatures"])[$this->PendingLevel()] == $employeeID; }
 
@@ -90,6 +91,24 @@ class Session extends Model
                     $data["fields"]["notes"]["value"] = $r->input("session-notes");
                 break;
         }
+
+        $this->setAttribute("session_data", $data);
+        $this->save();
+    }
+
+    function ResetPending(Request $r) {
+        $data = $this->Data();
+        $userID = $r->session()->get("user")->EmployeeID();
+        $fieldName = $r->input("session-field");
+        $fieldPendingLevel = $r->input("session-pending");
+        $writerIndex = array_keys($data["signatures"])[$fieldPendingLevel];
+
+        // Check if the userID exists in signees to authorize the process
+        if (!$this->IsSignee($userID)) return;
+
+        // Finally unsign the user's part and clear the field
+        $data["signatures"][$writerIndex] = false;
+        $data["fields"][$fieldName]["value"] = "";
 
         $this->setAttribute("session_data", $data);
         $this->save();
@@ -193,6 +212,92 @@ class Session extends Model
         ];
     }
 
+    protected function GenerateCoachingData() {
+        if ($this->Agent() == null) return null;
+        return [
+            "fields" => [
+                "strnopr" => [
+                    "title" => "Strengths & Opportunities",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "action" => [
+                    "title" => "Action Plan/s",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "commit" => [
+                    "title" => "Commitments & Targets",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "follow" => [
+                    "title" => "Follow Up Date",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 50, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ]
+            ], "signatures" => [
+                $this->Agent()->EmployeeID() => false,
+                $this->Supervisor()->EmployeeID() => false
+            ]
+        ];
+    }
+
+    protected function GenerateTriadData() {
+        if ($this->Agent() == null) return null;
+        return [
+            "fields" => [
+                "strength" => [
+                    "title" => "Strength",
+                    "size" => 6, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "improve" => [
+                    "title" => "Areas of Improvement",
+                    "size" => 6, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "action" => [
+                    "title" => "Action Plan",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "commit" => [
+                    "title" => "Commitment",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ]
+            ], "signatures" => [
+                $this->Supervisor()->EmployeeID() => false,
+                $this->Manager()->EmployeeID() => false,
+                // $this->SeniorOM()->EmployeeID() => false,
+                $this->Head()->EmployeeID() => false
+            ]
+        ];
+    }
+
     function GenerateData() {
         $data = array();
         switch ($this->Type()) {
@@ -201,6 +306,12 @@ class Session extends Model
                 break;
             case 'GOAL':
                 $data = $this->GenerateGoalSettingData();
+                break;
+            case 'COACH':
+                $data = $this->GenerateCoachingData();
+                break;
+            case 'TRIAD':
+                $data = $this->GenerateTriadData();
                 break;
             default:
                 $data = [

@@ -37,7 +37,7 @@
 </div>
 
 @if (!empty($scorecard))
-<div class="container-fluid mb-4">
+<div class="container-fluid pt-4">
     <div class="row">
         <div class="col-lg">
             <div class="table-responsive session-container">
@@ -104,8 +104,9 @@
 </div>
 @endif
 
+@if (!empty($scorecard) || !empty($scorecardGoal))
 <!-- Target, Score Tiering -->
-<div class="container-fluid mb-4">
+<div class="container-fluid pt-4">
     <div class="row">
         <div class="col">
 
@@ -189,7 +190,10 @@
         <div class="col"></div>
     </div>
 </div>
+@endif
 
+<div class="container-fluid pt-4">
+    <div class="row">
 @foreach ($fields as $fieldName => $fieldProperties)
 <?php
     $field_title = $fieldProperties["title"];
@@ -198,23 +202,40 @@
     $field_for = $fieldProperties["for"];
     $field_pending = $fieldProperties["pending"];
 ?>
-<div class="container-fluid mt-4">
-    <div class="row">
         <div class="col-{{ $field_size }}">
-            <div class="card">
+            <div class="card mb-4">
                 <div class="card-header bg-dark text-white">{{ $field_title }}</div>
                 <div class="card-body">
                     @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
-                        <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" required>{{ $field_value }}</textarea>
+                        @if (!array_key_exists("height", $fieldProperties))
+                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" required>{{ $field_value }}</textarea>
+                        @else
+                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" required style="height: {{ $fieldProperties['height'] }}px;">{{ $field_value }}</textarea>
+                        @endif
                     @else
-                        <div class="session-field">{{ $field_value }}</div>
+                        @if (!array_key_exists("height", $fieldProperties))
+                            <div class="session-field">{{ $field_value }}</div>
+                        @else
+                            <div class="session-field" style="height: {{ $fieldProperties['height'] }}px;">{{ $field_value }}</div>
+                        @endif
                     @endif
                 </div>
+                @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()))
+                    <form action="{{ action('HomeController@resetPending') }}" method="post">
+                        <div class="card-footer">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
+                            <input type="hidden" name="session-pending" value="{{ $field_pending }}" required>
+                            <input type="hidden" name="session-field" value="{{ $fieldName }}" required>
+                            <input type="submit" class="btn btn-danger" value="Reset">
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
+@endforeach
     </div>
 </div>
-@endforeach
 <div class="container-fluid mt-5">
     <div class="row">
         @foreach ($signees as $employeeID => $signed)
@@ -238,7 +259,7 @@
                                     <i></i>
                                     </span>
                                 </div> <!-- input line animation end -->
-                                <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
+                                <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
                                 <input type="submit" class="signi-btn" value="Sign">
                             </div>
                         </form>
