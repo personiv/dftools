@@ -40,4 +40,5 @@ Route::post('/add-exception', 'HomeController@addException')->middleware('superv
 Route::get('/delete-exception/{eid}', 'HomeController@deleteException')->middleware('supervisor')->name("deleteexception");
 Route::post('/create-session', 'HomeController@createSession')->middleware('supervisor');
 Route::post('/move-pending-level', 'HomeController@movePendingLevel')->middleware('granted');
+Route::post('/reset-pending', 'HomeController@resetPending')->middleware('granted');
 Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');

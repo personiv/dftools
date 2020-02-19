@@ -95,6 +95,17 @@ class Session extends Model
         $this->save();
     }
 
+    function ResetPending(Request $r) {
+        $data = $this->Data();
+        $userID = $r->session()->get("user")->EmployeeID();
+
+        // Check if the userID exists in signees
+        if (!$this->IsSignee($userID)) return;
+
+        $this->setAttribute("session_data", $data);
+        $this->save();
+    }
+
     function Data() {
         // Get JSON saved in database in array form
         return $this->getAttribute("session_data");

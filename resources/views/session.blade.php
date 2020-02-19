@@ -210,6 +210,15 @@
                         <div class="session-field">{{ $field_value }}</div>
                     @endif
                 </div>
+                @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()))
+                    <form action="{{ action('HomeController@resetPending') }}" method="post">
+                        <div class="card-footer">
+                            {{ csrf_field() }}
+                            <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
+                            <input type="submit" class="btn btn-danger" value="Reset">
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

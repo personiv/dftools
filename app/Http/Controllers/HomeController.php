@@ -43,6 +43,12 @@ class HomeController extends Controller {
         $session->MovePendingLevel($r);
         return redirect()->route('dashboard');
     }
+    
+    function resetPending(Request $r) {
+        $session = Session::where("session_id", $r->input("session-id"))->first();
+        $session->ResetPending($r);
+        return redirect()->route('dashboard');
+    }
 
     function addException(Request $r) {
         $agentID = $r->input("exception-agent");
