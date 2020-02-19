@@ -174,21 +174,31 @@
                         <div class="modal-body">
                             <div class="input-group mb-4">
                                 <label class="custom-label" for="session-agent">Resource:</label>
-                                <select class="custom-select" id="session-agent" name="session-agent" required>
-                                    <?php $members = $user->TeamMembers(); ?>
-                                    @for ($i = 0; $i < count($members); $i++)
-                                        <?php $member = $members[$i]; ?>
-                                        <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
-                                    @endfor
-                                </select>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <select class="line-effect custom-select" id="session-agent" name="session-agent" required>
+                                        <?php $members = $user->TeamMembers(); ?>
+                                        @for ($i = 0; $i < count($members); $i++)
+                                            <?php $member = $members[$i]; ?>
+                                            <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
+                                        @endfor
+                                    </select>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation -->
                             </div>
                             <div class="input-group mb-4">
                                 <label class="custom-label" for="session-type">Session Type:</label>
-                                <select class="custom-select" id="session-type" name="session-type" required>
-                                    @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
-                                        <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <select class="line-effect custom-select" id="session-type" name="session-type" required>
+                                        @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
+                                            <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                             </div>
                             <div class="custom-control custom-checkbox mt-5">
                                 <input type="checkbox" class="custom-control-input" id="session-mode" name="session-mode" value="MANUAL">
@@ -227,19 +237,29 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                    <label class="custom-label" for="exception-agent">Resource:</label>
-                                <select class="custom-select" id="exception-agent" name="exception-agent" required>
-                                    <?php $members = $user->TeamMembers(); ?>
-                                    @for ($i = 0; $i < count($members); $i++)
+                                <label class="custom-label" for="exception-agent">Resource:</label>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <select class="line-effect custom-select" id="exception-agent" name="exception-agent" required>
+                                        <?php $members = $user->TeamMembers(); ?>
+                                        @for ($i = 0; $i < count($members); $i++)
                                         <?php $member = $members[$i]; ?>
                                         <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
-                                    @endfor
-                                </select>
+                                        @endfor
+                                    </select>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                             </div>
 
                             <div class="input-group">
-                                    <label class="custom-label" for="exception-reason">Reason:</label>
-                                    <textarea class="form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required></textarea>
+                                <label class="custom-label" for="exception-reason">Reason:</label>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <textarea class="line-effect form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required></textarea>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -273,12 +293,23 @@
                         <div class="modal-body">
                             <div class="input-group mb-4">
                                 <label class="custom-label" for="feedback-name">Name:</label>
-                                <input type="text" class="form-control" id="feedback-name" placeholder="John Doe">
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <input type="text" class="line-effect form-control" id="feedback-name" placeholder="John Doe">
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                             </div>
 
                             <div class="input-group">
                                 <label class="custom-label" for="FeedbackFormControlTextarea">Comments:</label>
-                                <textarea class="form-control" id="FeedbackFormControlTextarea" placeholder="Well done!" rows="3" required></textarea>
+                                
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <textarea class="line-effect form-control" id="FeedbackFormControlTextarea" placeholder="Well done!" rows="3" required></textarea>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -289,6 +320,67 @@
                 </div>
             </div>
         </div>
+        <!--
+        <
+        <
+        <   History
+        <
+        <
+        -->
+        <!-- Modal -->
+        <div class="modal fade" id="dateHistoryModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">History</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="#" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+
+                            <!-- Date picker -->
+                            <div id="history-wrapper">
+                                <div class="input-daterange input-group" id="datepicker">
+
+                                    <!-- Date start -->
+                                    <div class="date-start mr-5">
+                                        <div>From</div>
+                                        <div class="effect-container"> <!-- input line animation -->
+                                            <input class="line-effect form-control" type="text" name="start">
+                                            <span class="focus-border">
+                                            <i></i>
+                                            </span>
+                                        </div> <!-- input line animation end -->
+                                    </div>
+
+                                    <!-- Date end -->
+                                    <div class="date-end">
+                                        <div>To</div>
+                                        <div class="effect-container"> <!-- input line animation -->
+                                            <input class="line-effect form-control" type="text" name="end">
+                                            <span class="focus-border">
+                                            <i></i>
+                                            </span>
+                                        </div> <!-- input line animation end -->
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <!-- Date picker end -->
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     <!-- End of main wrapper -->
     </div>
 

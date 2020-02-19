@@ -17,12 +17,26 @@ body, html {
     vertical-align: middle !important;
 }
 
-/* For coaching table 
-.dboard-wrapper table th, .dboard-wrapper table td {
-    padding: 1em;
-    white-space: pre-line;
-    word-wrap: break-word !important;
-} */
+/* Input animation effect */
+.effect-container{float: left; position: relative;} /* necessary to give position: relative to parent. */
+
+.width-custom {
+    width: 80%;
+}
+
+.line-effect{transition: 0.4s;}
+:focus{outline: none;}
+
+.line-effect ~ .focus-border:before,
+.line-effect ~ .focus-border:after{content: ""; position: absolute; top: 0; left: 0; width: 0; height: 2px; background-color: #3399FF; transition: 0.3s;}
+.line-effect ~ .focus-border:after{top: auto; bottom: 0; left: auto; right: 0;}
+.line-effect ~ .focus-border i:before,
+.line-effect ~ .focus-border i:after{content: ""; position: absolute; top: 0; left: 0; width: 2px; height: 0; background-color: #3399FF; transition: 0.4s;}
+.line-effect ~ .focus-border i:after{left: auto; right: 0; top: auto; bottom: 0;}
+.line-effect:focus ~ .focus-border:before,
+.line-effect:focus ~ .focus-border:after{width: 100%; transition: 0.3s;}
+.line-effect:focus ~ .focus-border i:before,
+.line-effect:focus ~ .focus-border i:after{height: 100%; transition: 0.4s;}
 
 ::-webkit-input-placeholder { /* Edge */
     color: #bbb !important;
@@ -34,6 +48,15 @@ body, html {
 
 ::placeholder {
     color: #bbb !important;
+}
+
+/* Global table heading */
+.table thead th {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary-color);
+    letter-spacing: .5px;
+    word-spacing: 1px;
 }
 
 /* Dashboard styling here */
@@ -366,7 +389,8 @@ body, html {
 /* Action button / Create session */
 .action-btn-edit,
 .action-btn-add,
-.action-btn-addNotes {
+.action-btn-addNotes,
+.action-btn-view {
     background-color: var(--info) !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -375,7 +399,9 @@ body, html {
 }
 
 .action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
-.action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active  {
+.action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active,
+.action-btn-addNotes:hover, .action-btn-addNotes:focus, .action-btn-addNotes:active,
+.action-btn-view:hover, .action-btn-view:focus, .action-btn-view:active {
     background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
@@ -495,16 +521,14 @@ body, html {
 }
 
 .totalScore-container .total-score sup {
-    font-size: 30px;
+    font-size: 20px;
 } 
 
 .totalScore-container .total-score {
-    font-family: 'Open sans', sans-serif;
-    font-size: 50px;
-    font-weight: 700;
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--dark-color);
     line-height: 40px;
-    letter-spacing: 1px;
-    word-spacing: 2px;
 } /* end */
 
 /* Remove the padding right and left */
@@ -827,6 +851,7 @@ input[type=number] {
     width: 20%;
     display: inline-block;
     border-color: #ddd !important;
+    cursor: not-allowed;
 }
 
 /* passed line of 90 and higher */
@@ -875,19 +900,7 @@ input[type=number]:disabled {
 }
 /* end */
 
-Edit in JSFiddle
-Result
-HTML
-CSS
-JavaScript
-Resources
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
+/* Date picker styling */
 .datepicker td, .datepicker th {
     width: 2.5rem;
     height: 2.5rem;
@@ -898,45 +911,4 @@ Resources
     margin-bottom: 3rem;
 }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-body {
-    min-height: 100vh;
-    background-color: #fafafa;
-}
-
-.input-group {
-    border-radius: 30rem;
-}
-
-input.form-control {
-    border-radius: 30rem 0 0 30rem;
-    border: none;
-}
-
-input.form-control:focus {
-    box-shadow: none;
-}
-
-input.form-control::placeholder {
-    font-style: italic;
-}
-
-.input-group-text {
-    border-radius: 0 30rem 30rem 0;
-    border: none;
-}
-
-.datepicker-dropdown {
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-
-  
 

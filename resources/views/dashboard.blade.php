@@ -526,6 +526,7 @@
                             <div class="target-pday mt-3">
                                 <div>Target Per Day</div>
                                 <input type="number" value="8" class="form-control">
+                                
                             </div>
 
                         </div>

@@ -232,7 +232,12 @@
                                 <label class="custom-control-label" for="session-verify-trigger">{{ $session::SIGNEDVERBIAGE }}</label>
                             </div>
                             <div id="session-verify-wrapper" style="display: none;">
-                                <input type="password" name="session-verify-password" class="form-control" id="session-verify-password" placeholder="Verify password" required>
+                                <div class="effect-container"> <!-- input line animation -->
+                                    <input type="password" name="session-verify-password" class="line-effect form-control" id="session-verify-password" placeholder="Verify password" required>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
                                 <input type="hidden" id="session-id" name="session-id" value="{{ $session->SessionID() }}" required>
                                 <input type="submit" class="signi-btn" value="Sign">
                             </div>

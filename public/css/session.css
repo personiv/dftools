@@ -103,6 +103,10 @@ label {
 /* For input password */
 #session-verify-wrapper input {
     width: 200px !important;
+    display: block;
+}
+
+#session-verify-wrapper .effect-container {
     margin-bottom: 8px;
 }
 
