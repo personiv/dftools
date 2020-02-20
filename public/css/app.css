@@ -13,6 +13,10 @@ body, html {
     width: 100%;
 }
 
+form {
+    margin-block-end: 0;
+}
+
 .table td, .table th {
     vertical-align: middle !important;
 }
@@ -365,7 +369,8 @@ body, html {
 .excp-btn #add-btn,
 #btn-delete,
 #btn-edit, 
-#btn-add-notes {
+#btn-add-notes,
+#date-btn {
     padding: 5px 10px !important;
     font-size: 13px;
     font-weight: 600;
@@ -900,6 +905,7 @@ input[type=number]:disabled {
 }
 /* end */
 
+/* History page */
 /* Date picker styling */
 .datepicker td, .datepicker th {
     width: 2.5rem;
@@ -911,4 +917,39 @@ input[type=number]:disabled {
     margin-bottom: 3rem;
 }
 
+/* Modal for history page */
+.date-start,
+.date-end,
+.date-input-container {
+    width: 100%;
+    font-weight: 600;
+}
 
+.history-desc div:nth-child(1) {
+    color: #dfdfdf;
+    font-size: 60px;
+    margin-bottom: -53px;
+}
+
+.history-desc div:not(:nth-child(1)){
+    color: var(--primary-color);
+    font-family: 'Open sans', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    text-shadow: 2px 2px 4px var(--light-color);
+    margin-left: 20px;
+}
+  
+
+/* Arrow animation in history page */
+.arrows {position: relative;position: absolute;top: 36%;left: 80%;width: 15px;height: 15px;transform: translate(-50%, -20%);}
+.arrows:before {content: '';position: absolute;width: 100%;height: 100%;border-left: 4px solid #cfcfcf;border-bottom: 4px solid #cfcfcf;transform: translate(50px, 50px) rotate(220deg);animation: arrows 1.5s linear infinite;}
+.arrows:after {content: '';position: absolute;width: 100%;height: 100%;border-left: 4px solid #cfcfcf;border-bottom: 4px solid #cfcfcf;transform: translate(50px, 50px) rotate(220deg);animation: arrows 1.5s linear infinite -0.75s;}
+@keyframes arrows {
+0% {border-left: 4px solid transparent;border-bottom: 4px solid transparent;transform: translate(-10px, 0px) rotate(220deg);}
+10%, 90% {border-left: 4px solid transparent;border-bottom: 4px solid transparent;}
+50% {border-left: 4px solid #cfcfcf;border-bottom: 4px solid #cfcfcf;transform: translate(-10px, 0px) rotate(220deg);}
+100% {border-left: 4px solid transparent;border-bottom: 4px solid transparent;transform: translate(4px, 0px) rotate(220deg);}
+} /* end */

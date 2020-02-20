@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datepicker3.min.css') }}">
     
+    
 </head>
 <body>
 
@@ -340,36 +341,51 @@
                     <form action="#" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
-
-                            <!-- Date picker -->
-                            <div id="history-wrapper">
-                                <div class="input-daterange input-group" id="datepicker">
-
-                                    <!-- Date start -->
-                                    <div class="date-start mr-5">
-                                        <div>From</div>
-                                        <div class="effect-container"> <!-- input line animation -->
-                                            <input class="line-effect form-control" type="text" name="start">
-                                            <span class="focus-border">
-                                            <i></i>
-                                            </span>
-                                        </div> <!-- input line animation end -->
+                            <div class="row">
+                                <div class="col d-flex justify-content-start align-items-center">
+                                    <div class="history-desc">
+                                        <div><i class="far fa-calendar-alt mr-2"></i></div>
+                                        <div>Set the date <div class="arrows"></div></div>
+                                        <div>to view the</div>
+                                        <div>session history</div>
                                     </div>
+                                </div>
+                                
+                                <div class="col d-flex justify-content-start align-items-center">
 
-                                    <!-- Date end -->
-                                    <div class="date-end">
-                                        <div>To</div>
-                                        <div class="effect-container"> <!-- input line animation -->
-                                            <input class="line-effect form-control" type="text" name="end">
-                                            <span class="focus-border">
-                                            <i></i>
-                                            </span>
-                                        </div> <!-- input line animation end -->
+                                    <!-- Date picker -->
+                                    <div id="history-wrapper">
+                                        <div class="input-daterange input-group" id="datepicker">
+
+                                            <!-- Date start -->
+                                            <div class="date-start mb-4">
+                                                <div>From date:</div>
+                                                <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                                    <input class="line-effect form-control" type="text" name="start">
+                                                    <span class="focus-border">
+                                                    <i></i>
+                                                    </span>
+                                                </div> <!-- input line animation end -->
+                                            </div>
+
+                                            <!-- Date end -->
+                                            <div class="date-end">
+                                                <div>To date:</div>
+                                                <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                                    <input class="line-effect form-control" type="text" name="end">
+                                                    <span class="focus-border">
+                                                    <i></i>
+                                                    </span>
+                                                </div> <!-- input line animation end -->
+                                            </div>
+                                            
+                                        </div>
                                     </div>
-                                    
+                                    <!-- Date picker end -->
+
                                 </div>
                             </div>
-                            <!-- Date picker end -->
+                            
                             
                         </div>
                         <div class="modal-footer">
