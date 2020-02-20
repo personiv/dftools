@@ -10,10 +10,13 @@
     $coachingSummary = $user->CoachingSummaryThisWeek();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     $exceptions = $user->ExceptionsThisWeek();
-    if ($userTeam->count()) {
+    if ($user->Type() == "SPRVR") {
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
+    } else {
+        $agent = 
+        $scoreItem = App\ScoreItem::where("score_item_role", $agent["agent"]->AccountType())->get();
     }
 
     function perc($value) { return is_numeric($value) ? round($value * 100, 2) : 0; }
@@ -419,46 +422,23 @@
                 <div class="row mt-1">
                     <div class="col-sm">
                         <div class="eachScore-container px-4 py-3">
-                            <!-- Productivity score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 89%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Productivity: <span class="progress-score">89%</span></span></div>
-                            </div>
-
-                            <!-- Quality score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 99.4%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Quality: <span class="progress-score">99.4%</span></span></div>
-                            </div>
-
-                            <!-- Churn score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-f" role="progressbar" style="width: 70%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Churn: <span class="progress-score">70%</span></span></div>
-                            </div>
-
+                            @for ($i = 0; $i < $scoreItem->count() / 2; $i++)
+                                <div class="progress mt-1">
+                                    <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
+                                </div>
+                            @endfor
                         </div>
                     </div>
 
                     <div class="col-sm">
                         <div class="eachScore-container px-4 py-3">
-                            <!-- Product Knowledge Test score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-sp" role="progressbar" style="width: 85%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">PKT: <span class="progress-score">85%</span></span></div>
-                            </div>
-
-                            <!-- Attendance score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-p" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Attendance: <span class="progress-score">100%</span></span></div>
-                            </div>
-
-                            <!-- Attendance score -->
-                            <div class="progress">
-                                <div class="progress-bar pb-color-bonus" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                <span class="progress-title">Bonus: <span class="progress-score">5%</span></span></div>
-                            </div>
+                            @for ($i = $scoreItem->count() / 2; $i < $scoreItem->count(); $i++)
+                                <div class="progress mt-1">
+                                    <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($topResource["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
+                                </div>
+                            @endfor
                         </div>
                     </div>
                 </div>
