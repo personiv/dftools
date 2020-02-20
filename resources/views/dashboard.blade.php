@@ -28,6 +28,8 @@
         $mySessions = $user->MySessionsThisWeek();
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
+        $productivityScore = perc($agentSummary['data'][App\Session::IndexOfCell('W')]);
+        $productivityProgressClass = $productivityScore < 80 ? "prog-f" : ($productivityScore >= 80 && $productivityScore < 90 ? "prog-sp" : "prog-p");
     }
 
     function perc($value) { return is_numeric($value) ? round($value * 100, 2) : 0; }
@@ -503,7 +505,7 @@
                             <!-- Progress -->
                             <div class="prog-total mt-3">
                                 <div>Progress</div>
-                                <input id="sim-progress" type="text" value="{{ perc($agentSummary['data'][App\Session::IndexOfCell('W')]) }}%" class="form-control prog-f" disabled>
+                                <input id="sim-progress" type="text" value="{{ $productivityScore }}%" class="form-control {{ $productivityProgressClass }}" disabled>
                             </div>
 
                         </div>

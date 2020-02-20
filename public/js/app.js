@@ -126,9 +126,22 @@ function recalculateProductivity() {
   var goal = document.querySelector("#sim-goal");
   var total = document.querySelector("#sim-total");
   var average = document.querySelector("#sim-average");
+  var progress = document.querySelector("#sim-progress");
 
   total.value = (days.value * goal.value);
   average.value = (productivity.value / days.value);
   document.querySelector("#sim-deficit").value = (total.value - productivity.value);
-  document.querySelector("#sim-progress").value = ((average.value / goal.value) * 100) + '%';
+  var progressValue = (average.value / goal.value) * 100;
+  progress.value = progressValue + '%';
+
+  progress.classList.remove("prog-f");
+  progress.classList.remove("prog-sp");
+  progress.classList.remove("prog-p");
+  if (progressValue < 80) {
+    progress.classList.add("prog-f");
+  } else if (progressValue >= 80 && progressValue < 90) {
+    progress.classList.add("prog-sp");
+  } else {
+    progress.classList.add("prog-p");
+  }
 }
