@@ -3,7 +3,7 @@
 @section('admin-content')
 <div class="content-title">Upload Actual Data</div>
 <div class="note-box">
-<p><span class="font-weight-bold">Note:</span> Data to be uploaded must be an Excel Workbook (*.xls, *.xlsx) file and also mustn't contain formula. To convert all formula to value, select all cells then press (Shift + F10 + V).</p>
+<p><span class="font-weight-bold">Note:</span> Data to be uploaded must be an Excel Workbook (*.xls, *.xlsx) file and also mustn't contain formula. To convert all formula to value, select and copy all cells then press (Shift + F10 + V).</p>
 </div>
 <form action="{{ action('AdminController@saveData') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}

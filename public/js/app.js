@@ -107,6 +107,11 @@ function lazyFill(selector, width) {
   $(selector).addClass(className);
 }
 
+function lazyFillBonus(selector) {
+  var className = "pb-color-bonus";
+  $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = '100%'; }, { offset: '100%' });
+  $(selector).addClass(className);
+}
 
 // Datepicker for history page
 $('#history-wrapper .input-daterange').datepicker({
@@ -114,3 +119,29 @@ $('#history-wrapper .input-daterange').datepicker({
   autoclose: true,
   todayHighlight: true
 });
+
+function recalculateProductivity() {
+  var productivity = document.querySelector("#sim-productivity");
+  var days = document.querySelector("#sim-days");
+  var goal = document.querySelector("#sim-goal");
+  var total = document.querySelector("#sim-total");
+  var average = document.querySelector("#sim-average");
+  var progress = document.querySelector("#sim-progress");
+
+  total.value = parseFloat(days.value * goal.value).toFixed(2);
+  average.value = parseFloat(productivity.value / days.value).toFixed(2);
+  document.querySelector("#sim-deficit").value = parseFloat(total.value - productivity.value).toFixed(2);
+  var progressValue = parseFloat((average.value / goal.value) * 100).toFixed(2);
+  progress.value = progressValue + '%';
+
+  progress.classList.remove("prog-f");
+  progress.classList.remove("prog-sp");
+  progress.classList.remove("prog-p");
+  if (progressValue < 80) {
+    progress.classList.add("prog-f");
+  } else if (progressValue >= 80 && progressValue < 90) {
+    progress.classList.add("prog-sp");
+  } else {
+    progress.classList.add("prog-p");
+  }
+}

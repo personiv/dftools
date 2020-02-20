@@ -135,6 +135,26 @@ class Session extends Model
         return $this->getAttribute("session_data");
     }
 
+    static function GetActualDataRow($employeeID, $year, $month, $sheetName) {
+        $reader = new Xlsx;
+        $reader->setReadDataOnly(true);
+        $reader->setLoadSheetsOnly([$sheetName]);
+        $spreadsheet = $reader->load("data/actual/$year/$month.xlsx");
+        $spreadsheet->setActiveSheetIndexByName($sheetName);
+        $scorevalues = $spreadsheet->getActiveSheet()->toArray();
+
+        for ($i = 0; $i < count($scorevalues); $i++) {
+            if ($scorevalues[$i][1] == $employeeID) {
+                return $scorevalues[$i];
+            }
+        }
+        return array();
+    }
+
+    static function GetActualDataCellValue($employeeID, $year, $month, $sheetName, $cellName) {
+        return self::GetActualDataRow($employeeID, $year, $month, $sheetName)[self::IndexOfCell($cellName)];
+    }
+
     protected function GenerateScorecardData() {
         if ($this->Agent() == null) return null;
         $year = $this->Year();
