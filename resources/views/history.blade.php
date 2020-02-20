@@ -17,6 +17,8 @@
 
     <!-- 1st row supervisor history -->
  @if ($user->AccountType() == "SPRVR")
+
+
     <div class="row mt-5">
 
         <!-- Pending section -->
@@ -135,6 +137,9 @@
         </div>
 
     </div>
+
+
+    
     
 @endif
 
