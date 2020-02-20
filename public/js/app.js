@@ -128,10 +128,10 @@ function recalculateProductivity() {
   var average = document.querySelector("#sim-average");
   var progress = document.querySelector("#sim-progress");
 
-  total.value = (days.value * goal.value);
-  average.value = (productivity.value / days.value);
-  document.querySelector("#sim-deficit").value = (total.value - productivity.value);
-  var progressValue = (average.value / goal.value) * 100;
+  total.value = parseFloat(days.value * goal.value).toFixed(2);
+  average.value = parseFloat(productivity.value / days.value).toFixed(2);
+  document.querySelector("#sim-deficit").value = parseFloat(total.value - productivity.value).toFixed(2);
+  var progressValue = parseFloat((average.value / goal.value) * 100).toFixed(2);
   progress.value = progressValue + '%';
 
   progress.classList.remove("prog-f");
