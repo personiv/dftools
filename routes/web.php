@@ -43,3 +43,4 @@ Route::post('/move-pending-level', 'HomeController@movePendingLevel')->middlewar
 Route::post('/reset-pending', 'HomeController@resetPending')->middleware('granted');
 Route::post('/update-field', 'HomeController@updateFieldValue')->middleware('granted');
 Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');
+Route::post('/add-feedback', 'HomeController@addFeedback')->middleware('granted');

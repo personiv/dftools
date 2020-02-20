@@ -14,7 +14,9 @@ class CreateFeedbackTable extends Migration
     public function up()
     {
         Schema::create('feedback', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('feedback_id');
+            $table->string('feedback_sender', 64);
+            $table->string('feedback_comment', 10240);
             $table->timestamps();
         });
     }

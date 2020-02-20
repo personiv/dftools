@@ -7,6 +7,7 @@ use App\Credential;
 use App\ScoreItem;
 use App\Session;
 use App\Exception;
+use App\Feedback;
 
 class HomeController extends Controller {
     function session($sid) {
@@ -75,6 +76,17 @@ class HomeController extends Controller {
             return redirect()->route('dashboard');
         
         $exception->delete();
+        return redirect()->route('dashboard');
+    }
+
+    function addFeedback(Request $r) {
+        $sender = $r->input("feedback-sender") != "" ? $r->input("feedback-sender") : "Anonymous";
+        $comment = $r->input("feedback-comment");
+        
+        $feedback = new Feedback;
+        $feedback->setAttribute("feedback_sender", $sender);
+        $feedback->setAttribute("feedback_comment", $comment);
+        $feedback->save();
         return redirect()->route('dashboard');
     }
 }
