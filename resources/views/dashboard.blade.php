@@ -9,11 +9,13 @@
     $userTeam = $user->TeamMembers();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     $exceptions = $user->ExceptionsThisWeek();
-    if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
+    if ($user->AccountType() == "SPRVR") {
         $coachingSummary = $user->CoachingSummaryThisWeek();
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
+    } else if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
+        $coachingSummary = $user->CoachingSummaryThisWeek();
     } else {
         // Productivity Improvement
         $row = App\Session::GetActualDataRow($user->EmployeeID(), date('Y'), date('M'), "PRODUCTIVITY RAW");
@@ -37,7 +39,7 @@
 
 @section('bladescript')
 <script type="text/javascript">
-    @if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+    @if ($user->AccountType() == "SPRVR")
         createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
         createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
         createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
@@ -48,6 +50,8 @@
                 lazyFillBonus("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
             @endif
         @endforeach
+    @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+
     @else
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")
@@ -71,7 +75,7 @@
 @section('content')
 
 <!-- Supervisor Dashboard -->    
-@if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+@if ($user->AccountType() == "SPRVR")
 
     <!-- 1st row supervisor dashboard -->
     <div class="row">
@@ -397,6 +401,359 @@
             </div>
         </div>
         
+    </div>
+
+@elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+
+    <!-- 1st row supervisor dashboard -->
+    <div class="row">
+
+        <!-- Overview of coaching completed -->
+        <div class="col-lg">
+            <div class="ov-container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="overview-txt ov-completed d-flex flex-column">
+                            <div class="ov-title">Completed</div>
+                            <div class="ov-oth-txt">Coaching Completed</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="overview-prcnt">
+                            <div id="ovTotal1" class="ov-total">
+                                <div class="sr-only">
+                                    Total count of coaching completed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview of coaching pending -->
+        <div class="col-lg">
+            <div class="ov-container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="overview-txt ov-pending d-flex flex-column">
+                            <div class="ov-title">Pending</div>
+                            <div class="ov-oth-txt">Coaching Pending</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="overview-prcnt">
+                            <div id="ovTotal2" class="ov-total">
+                                <div class="sr-only">
+                                    Total count of coaching pending
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview of coaching exception -->
+        <div class="col-lg">
+            <div class="ov-container">
+            <div class="row">
+                    <div class="col-6">
+                        <div class="overview-txt ov-exception d-flex flex-column">
+                            <div class="ov-title">Exception</div>
+                            <div class="ov-oth-txt">Coaching Exception</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="overview-prcnt">
+                            <div id="ovTotal3" class="ov-total">
+                                <div class="sr-only">
+                                    Total count of coaching exception
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 2nd row supervisor dashboard -->
+    <div class="row mt-5">
+
+        <!-- Summary section -->
+        <div class="col-lg">
+            <div class="tb-container">
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">Summary</div>
+                    <div class="dboard-othtext">of <span class="stats-for-coaching">For Coaching</span>, pending and completed</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                
+                <!-- Nav tab item starts here -->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                        <!-- First nav tab item -->
+                        <a class="nav-item nav-link active" id="nav-one-tab" data-toggle="tab" href="#nav-one" role="tab" aria-controls="nav-one" aria-selected="true">Team Noel</a>
+
+                        <!-- Second nav tab item -->
+                        <a class="nav-item nav-link" id="nav-two-tab" data-toggle="tab" href="#nav-two" role="tab" aria-controls="nav-two" aria-selected="false">Team Chado</a>
+
+                        <!-- Third nav tab item -->
+                        <a class="nav-item nav-link" id="nav-three-tab" data-toggle="tab" href="#nav-three" role="tab" aria-controls="nav-three" aria-selected="false">Team Karleen</a>
+
+                    </div>
+                </nav>
+
+                <!-- Nav tab content starts here -->
+                <div class="tab-content" id="nav-tabContent">
+                
+                    <!-- First nav tab content -->
+                    <div class="tab-pane fade show active" id="nav-one" role="tabpanel" aria-labelledby="nav-one-tab">
+                        <div class="scrollbar scrollbar-primary">
+                            <div class="table-responsive px-4 pt-0 pb-4">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Status</th> 
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                                <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
+                                                @if ($summaryStatus == "For Coaching")
+                                                    <tr>
+                                                        <td>{{ $summaryEmployeeID }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>N/A</td>
+                                                        <td><span class="stats-for-coaching">For Coaching</span></td>
+                                                        <td>
+                                                            <!-- Button trigger modal -->
+                                                            <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
+                                                                <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Pending")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-pending">Pending</span></td>
+                                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Completed")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-completed">Completed</span></td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endif
+                                            @endfor
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- -->
+                    </div>
+                    <!-- end of first nav -->
+
+                    <!-- Second nav tab content -->
+                    <div class="tab-pane fade" id="nav-two" role="tabpanel" aria-labelledby="nav-two-tab">
+                        <div class="scrollbar scrollbar-primary">
+                            <div class="table-responsive px-4 pt-0 pb-4">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                                <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
+                                                @if ($summaryStatus == "For Coaching")
+                                                    <tr>
+                                                        <td>{{ $summaryEmployeeID }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>N/A</td>
+                                                        <td><span class="stats-for-coaching">For Coaching</span></td>
+                                                        <td>
+                                                            <!-- Button trigger modal -->
+                                                            <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
+                                                                <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Pending")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-pending">Pending</span></td>
+                                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Completed")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-completed">Completed</span></td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endif
+                                            @endfor
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <!-- -->
+                    </div>
+                    <!-- end of second nav -->
+
+                    <!-- Third nav tab content -->
+                    <div class="tab-pane fade" id="nav-three" role="tabpanel" aria-labelledby="nav-three-tab">
+                        <div class="scrollbar scrollbar-primary">
+                            <div class="table-responsive px-4 pt-0 pb-4">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                                <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
+                                                @if ($summaryStatus == "For Coaching")
+                                                    <tr>
+                                                        <td>{{ $summaryEmployeeID }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>N/A</td>
+                                                        <td><span class="stats-for-coaching">For Coaching</span></td>
+                                                        <td>
+                                                            <!-- Button trigger modal -->
+                                                            <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
+                                                                <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Pending")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-pending">Pending</span></td>
+                                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                    </tr>
+                                                @elseif ($summaryStatus == "Completed")
+                                                    <tr>
+                                                        <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                                        <td><span class="stats-completed">Completed</span></td>
+                                                        <td></td>
+                                                    </tr>
+                                                @endif
+                                            @endfor
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    <!-- -->
+                    </div>
+                    <!-- end of third nav -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3rd row supervisor dashboard -->
+    <div class="row mt-5">
+
+         <!-- Exception section -->
+         <div class="col-lg">
+            <div class="tb-container">
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="dboard-text px-4 pt-4 pb-3">
+                            <div class="dboard-title">Exception</div>
+                            <div class="dboard-othtext">with valid reason</div>
+                        </div>
+                    </div>
+                    <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
+                        <div class="excp-btn mx-wdth d-inline-flex">
+                            <span id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="table-responsive px-4 pt-0 pb-4">
+                    <table class="table table-hover table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col">Employee ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Reason</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($exceptions as $exception)
+                            <?php $agent = App\Credential::GetCredential($exception->exception_agent) ?>
+                            <tr>
+                                <td>{{ $agent->EmployeeID() }}</td>
+                                <td>{{ $agent->FullName() }}</td>
+                                <td>{{ $agent->JobPosition() }}</td>
+                                <td>{{ $exception->exception_reason }}</td>
+                                <td>
+                                    <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
+                                    <a href="{{ route('deleteexception', [$exception->exception_id]) }}"><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
