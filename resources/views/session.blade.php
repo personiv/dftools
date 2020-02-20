@@ -16,6 +16,18 @@
     $s = 0;
 ?>
 
+@section('bladescript')
+<script type="text/javascript">
+function updateFieldValue(e) {
+    request("{{ action('HomeController@updateFieldValue') }}", JSON.stringify({
+        fieldName: e.id.split('-')[1],
+        fieldValue: e.value,
+        sessionID: "{{ $session->SessionID() }}"
+    }), null)
+}
+</script>
+@endsection
+
 @section('content')
 
 <!-- Resource's credential -->
@@ -201,23 +213,25 @@
     $field_value = $fieldProperties["value"];
     $field_for = $fieldProperties["for"];
     $field_pending = $fieldProperties["pending"];
+    if (!array_key_exists("height", $fieldProperties)) {
+        $customHeight = "";
+    } else {
+        $field_height = $fieldProperties['height'];
+        $customHeight = "style='height: " . $field_height . "px;'";
+    }
 ?>
         <div class="col-{{ $field_size }}">
             <div class="card mb-4">
                 <div class="card-header bg-dark text-white">{{ $field_title }}</div>
                 <div class="card-body">
                     @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
-                        @if (!array_key_exists("height", $fieldProperties))
-                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" required>{{ $field_value }}</textarea>
+                        @if (array_key_exists('instant', $fieldProperties) && $fieldProperties['instant'])
+                            <textarea class="session-field" id="session-{{ $fieldName }}" placeholder="* Required" onchange="updateFieldValue(this)" <?= $customHeight ?>>{{ $field_value }}</textarea>
                         @else
-                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" required style="height: {{ $fieldProperties['height'] }}px;">{{ $field_value }}</textarea>
+                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" <?= $customHeight ?> required>{{ $field_value }}</textarea>
                         @endif
                     @else
-                        @if (!array_key_exists("height", $fieldProperties))
-                            <div class="session-field">{{ $field_value }}</div>
-                        @else
-                            <div class="session-field" style="height: {{ $fieldProperties['height'] }}px;">{{ $field_value }}</div>
-                        @endif
+                        <div class="session-field" <?= $customHeight ?>>{{ $field_value }}</div>
                     @endif
                 </div>
                 @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()))

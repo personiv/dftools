@@ -114,6 +114,22 @@ class Session extends Model
         $this->save();
     }
 
+    function updateField(Request $r, $jsonData) {
+        $data = $this->Data();
+        $userID = $r->session()->get("user")->EmployeeID();
+        $fieldName = $jsonData["fieldName"];
+        $fieldValue = $jsonData["fieldValue"];
+
+        // Check if the userID exists in signees to authorize the process
+        if (!$this->IsSignee($userID)) return;
+
+        // Finally change the field's value
+        $data["fields"][$fieldName]["value"] = $fieldValue;
+
+        $this->setAttribute("session_data", $data);
+        $this->save();
+    }
+
     function Data() {
         // Get JSON saved in database in array form
         return $this->getAttribute("session_data");
@@ -222,14 +238,16 @@ class Session extends Model
                     "height" => 100, // In pixel
                     "value" => "",
                     "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0 // Pending Level where this input is active
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
                 "action" => [
                     "title" => "Action Plan/s",
                     "size" => 12, // Bootstrap grid size
                     "value" => "",
                     "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0 // Pending Level where this input is active
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
                 "commit" => [
                     "title" => "Commitments & Targets",
@@ -244,7 +262,8 @@ class Session extends Model
                     "height" => 50, // In pixel
                     "value" => "",
                     "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0 // Pending Level where this input is active
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
                 ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,

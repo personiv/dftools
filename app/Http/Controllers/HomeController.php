@@ -50,6 +50,12 @@ class HomeController extends Controller {
         return redirect()->route('dashboard');
     }
 
+    function updateFieldValue(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        $session = Session::where("session_id", $data["sessionID"])->first();
+        $session->updateField($r, $data);
+    }
+
     function addException(Request $r) {
         $agentID = $r->input("exception-agent");
         $reason = $r->input("exception-reason");
