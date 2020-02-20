@@ -57,6 +57,14 @@
             @endif
         @endforeach
     @endif
+
+    // Toast message/time
+    $('.toast').toast('show');
+
+    var dt = new Date("February 21, 2020 03:59:00");
+
+    $('#ts, #tst').html(timeSince(dt));
+
 </script>
 @endsection
 
@@ -487,25 +495,25 @@
                             <!-- Current points -->
                             <div class="current-points">
                                 <div>Current Points</div>
-                                <input id="sim-productivity" type="number" value="{{ $productivityPoints }}" class="form-control" oninput="recalculateProductivity()">
+                                <input id="sim-productivity" type="number" value="{{ $productivityPoints }}" class="form-control allowed" oninput="recalculateProductivity()">
                             </div>
 
                             <!-- Current days passed -->
                             <div class="days-passed mt-3">
                                 <div>Days Passed</div>
-                                <input id="sim-days" type="number" value="{{ round($daysPassed, 2) }}" class="form-control" oninput="recalculateProductivity()">
+                                <input id="sim-days" type="number" value="{{ round($daysPassed, 2) }}" class="form-control allowed" oninput="recalculateProductivity()">
                             </div>
 
                             <!-- Average -->
                             <div class="average-points mt-3">
                                 <div>Average</div>
-                                <input id="sim-average" type="number" value="{{ round($pointsPerDay, 2) }}" class="form-control" disabled>
+                                <input id="sim-average" type="number" value="{{ round($pointsPerDay, 2) }}" class="form-control not-allowed" disabled>
                             </div>
 
                             <!-- Progress -->
                             <div class="prog-total mt-3">
                                 <div>Progress</div>
-                                <input id="sim-progress" type="text" value="{{ $productivityScore }}%" class="form-control {{ $productivityProgressClass }}" disabled>
+                                <input id="sim-progress" type="text" value="{{ $productivityScore }}%" class="form-control not-allowed {{ $productivityProgressClass }}" disabled>
                             </div>
 
                         </div>
@@ -518,19 +526,19 @@
                             <!-- Target points -->
                             <div class="target-points">
                                 <div>Target Points</div>
-                                <input id="sim-total" type="number" value="{{ round($totalTarget, 2) }}" class="form-control" disabled>
+                                <input id="sim-total" type="number" value="{{ round($totalTarget, 2) }}" class="form-control not-allowed" disabled>
                             </div>
 
                             <!-- Deficit points -->
                             <div class="deficit-points mt-3">
                                 <div>Deficit Points</div>
-                                <input id="sim-deficit" type="number" value="{{ round($deficitPoints, 2) }}" class="form-control" disabled>
+                                <input id="sim-deficit" type="number" value="{{ round($deficitPoints, 2) }}" class="form-control not-allowed" disabled>
                             </div>
 
                             <!-- Current target per day -->
                             <div class="target-pday mt-3">
                                 <div>Target Per Day</div>
-                                <input id="sim-goal" type="number" value="{{ round($targetPerDay, 2) }}" class="form-control" oninput="recalculateProductivity()">
+                                <input id="sim-goal" type="number" value="{{ round($targetPerDay, 2) }}" class="form-control allowed" oninput="recalculateProductivity()">
                             </div>
 
                         </div>
@@ -593,5 +601,31 @@
     </div>
 
 @endif
+
+<div class="row">
+     <div class="col">
+        <div aria-live="polite" aria-atomic="true" style="position: relative;">
+            <!-- Position it -->
+            <div style="position: fixed; top: 10%; right: 1%;">
+
+            <!-- Toast message starts here -->
+            <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+                <div class="toast-header">
+                <div class="mr-auto">Message</div>
+                <small id="ts"></small>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="toast-body">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi natus, at voluptate impedit ratione aut blanditiis cupiditate ad provident aspernatur.
+                </div>
+            </div>
+            <!-- end -->
+
+        </div>
+        </div>
+     </div>
+ </div>
 
 @endsection

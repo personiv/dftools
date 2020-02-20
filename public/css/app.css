@@ -21,6 +21,30 @@ form {
     vertical-align: middle !important;
 }
 
+/* Toast message */
+.toast {
+    max-width: 250px !important;
+    white-space: normal;
+    background-color: rgba(0, 58, 93, .85) !important;
+    color: var(--light-color-50p);
+}
+
+.toast-header {
+    color: var(--light-color-50p) !important;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    background-color: rgba(0, 58, 93, .85) !important;
+}
+
+.toast-header div {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.toast-body {
+    padding: .75rem .75rem 1rem !important;
+    line-height: 20px;
+}
+
 /* Input animation effect */
 .effect-container{float: left; position: relative;} /* necessary to give position: relative to parent. */
 
@@ -856,6 +880,9 @@ input[type=number] {
     width: 20%;
     display: inline-block;
     border-color: #ddd !important;
+}
+
+.productivity-container div input.not-allowed {
     cursor: not-allowed;
 }
 
