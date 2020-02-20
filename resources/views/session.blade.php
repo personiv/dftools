@@ -273,8 +273,10 @@ function updateFieldValue(e) {
                                     <i></i>
                                     </span>
                                 </div> <!-- input line animation end -->
-                                <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
-                                <input type="submit" class="signi-btn" value="Sign">
+                                <div>
+                                    <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
+                                    <input type="submit" class="signi-btn" value="Sign">
+                                </div>
                             </div>
                         </form>
                     @elseif ($pendingLevel > $s)

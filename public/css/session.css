@@ -106,8 +106,13 @@ label {
     display: block;
 }
 
+#session-verify-wrapper {
+    flex-direction: column !important;
+}
+
 #session-verify-wrapper .effect-container {
     margin-bottom: 8px;
+    width: 200px;
 }
 
 /* Sign button */
