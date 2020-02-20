@@ -57,6 +57,11 @@ class Credential extends Model
         }
     }
 
+    // Agent Methods
+    function ScorecardSummary() {
+        return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetAgentActualData(date("Y"), date("M"), $this->EmployeeID()) ];
+    }
+
     // Team Leader Methods
     function SessionsThisWeek() {
         $sessions = array();
