@@ -107,6 +107,11 @@ function lazyFill(selector, width) {
   $(selector).addClass(className);
 }
 
+function lazyFillBonus(selector) {
+  var className = "pb-color-bonus";
+  $(selector).waypoint(function(direction) { document.querySelector(selector).style.width = '100%'; }, { offset: '100%' });
+  $(selector).addClass(className);
+}
 
 // Datepicker for history page
 $('#history-wrapper .input-daterange').datepicker({

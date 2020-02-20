@@ -62,6 +62,39 @@ class Credential extends Model
         return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetAgentActualData(date("Y"), date("M"), $this->EmployeeID()) ];
     }
 
+    function MySessionsThisWeek() {
+        $sessions = array("Pending" => [], "Completed" => []);
+        $myWeekSessions = array();
+        $weeksessions = Session::where("session_week", (int)date("W"))->get();
+        for ($i=0; $i < count($weeksessions); $i++) { 
+            if ($weeksessions[$i]->Agent()->EmployeeID() == $this->EmployeeID()) {
+                array_push($myWeekSessions, $weeksessions[$i]);
+            }
+        }
+
+        // Iterate my sessions this week and segregate it
+        foreach ($myWeekSessions as $session) {
+            if ($this->EmployeeID() == $session->AgentID()) {
+                if ($session->IsSignee($this->EmployeeID()) && !$session->IsSigned($this->EmployeeID())) {
+                    array_push($sessions["Pending"], [
+                        "sessionDate" => $session->DateCreated(),
+                        "sessionType" => $session->TypeDescription(),
+                        "sentBy" => $this->TeamLeader()->FullName(),
+                        "sessionID" => $session->SessionID()
+                    ]);
+                } else if ($session->IsSignee($this->EmployeeID()) && $session->IsSigned($this->EmployeeID())) {
+                    array_push($sessions["Completed"], [
+                        "sessionDate" => $session->DateCreated(),
+                        "sessionType" => $session->TypeDescription(),
+                        "sentBy" => $this->TeamLeader()->FullName()
+                    ]);
+                }
+            }
+        }
+
+        return $sessions;
+    }
+
     // Team Leader Methods
     function SessionsThisWeek() {
         $sessions = array();

@@ -7,14 +7,15 @@
 @php
     $user = session("user");
     $userTeam = $user->TeamMembers();
-    $coachingSummary = $user->CoachingSummaryThisWeek();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     $exceptions = $user->ExceptionsThisWeek();
     if ($user->AccountType() == "SPRVR") {
+        $coachingSummary = $user->CoachingSummaryThisWeek();
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
     } else {
+        $mySessions = $user->MySessionsThisWeek();
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
     }
@@ -24,16 +25,24 @@
 
 @section('bladescript')
 <script type="text/javascript">
-    createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
-    createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
-    createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
     @if ($user->AccountType() == "SPRVR")
+        createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
+        createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
+        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
         @foreach ($scoreItem as $item)
-            lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+            @if ($item->getAttribute('score_item_title') != "Bonus")
+                lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+            @else
+                lazyFillBonus("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
+            @endif
         @endforeach
     @else
         @foreach ($scoreItem as $item)
-            lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($agentSummary["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+            @if ($item->getAttribute('score_item_title') != "Bonus")
+                lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($agentSummary["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+            @else
+                lazyFillBonus("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
+            @endif
         @endforeach
     @endif
 </script>
@@ -538,27 +547,33 @@
                         <tr>
                             <th scope="col">Date</th>
                             <th scope="col">Session Type</th>
-                            <th scope="col">Send By</th>
+                            <th scope="col">Sent By</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Mid Month Scorecard</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-addNotes mr-2"><i class="fa fa-pencil-alt mr-2"></i>Start Adding Notes</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Coaching</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-addNotes mr-2"><i class="fa fa-pencil-alt mr-2"></i>Start Adding Notes</span>
-                            </td>
-                        </tr>
+                        @foreach ($mySessions as $summaryStatus => $summaryItems)
+                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                @if ($summaryStatus == "Pending")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                        <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                        <td><span class="stats-pending">Pending</span></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                    </tr>
+                                @elseif ($summaryStatus == "Completed")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                        <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                        <td><span class="stats-completed">Completed</span></td>
+                                        <td></td>
+                                    </tr>
+                                @endif
+                            @endfor
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
