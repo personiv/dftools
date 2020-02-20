@@ -289,13 +289,13 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{{ action('HomeController@addFeedback') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                <label class="custom-label" for="feedback-name">Name:</label>
+                                <label class="custom-label" for="feedback-sender">Name:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <input type="text" class="line-effect form-control" id="feedback-name" placeholder="John Doe">
+                                    <input type="text" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="John Doe">
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
@@ -303,10 +303,10 @@
                             </div>
 
                             <div class="input-group">
-                                <label class="custom-label" for="FeedbackFormControlTextarea">Comments:</label>
+                                <label class="custom-label" for="feedback-comment">Comments:</label>
                                 
                                 <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <textarea class="line-effect form-control" id="FeedbackFormControlTextarea" placeholder="Well done!" rows="3" required></textarea>
+                                    <textarea class="line-effect form-control" id="feedback-comment" name="feedback-comment" placeholder="Well done!" rows="3" required></textarea>
                                     <span class="focus-border">
                                     <i></i>
                                     </span>

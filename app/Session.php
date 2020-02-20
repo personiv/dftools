@@ -83,13 +83,13 @@ class Session extends Model
         // Finally sign the user's part
         $data["signatures"][$userID] = true;
 
-        // Unique Fields
-        switch ($this->Type()) {
-            case 'GOAL':
-            case 'SCORE':
-                if ($userID == $this->AgentID())
-                    $data["fields"]["notes"]["value"] = $r->input("session-notes");
-                break;
+        // Save the non-instant field values along with the user's signature
+        if (array_key_exists("fields", $data)) {
+            foreach ($data["fields"] as $fieldName => $fieldProperties) {
+                if (!array_key_exists("instant", $fieldProperties) || !$fieldProperties["instant"]) {
+                    if ($userID == $this->AgentID()) $data["fields"][$fieldName]["value"] = $r->input("session-${fieldName}");
+                }
+            }
         }
 
         $this->setAttribute("session_data", $data);
