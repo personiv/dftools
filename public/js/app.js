@@ -119,3 +119,16 @@ $('#history-wrapper .input-daterange').datepicker({
   autoclose: true,
   todayHighlight: true
 });
+
+function recalculateProductivity() {
+  var productivity = document.querySelector("#sim-productivity");
+  var days = document.querySelector("#sim-days");
+  var goal = document.querySelector("#sim-goal");
+  var total = document.querySelector("#sim-total");
+  var average = document.querySelector("#sim-average");
+
+  total.value = (days.value * goal.value);
+  average.value = (productivity.value / days.value);
+  document.querySelector("#sim-deficit").value = (total.value - productivity.value);
+  document.querySelector("#sim-progress").value = ((average.value / goal.value) * 100) + '%';
+}

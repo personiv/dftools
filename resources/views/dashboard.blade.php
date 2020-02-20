@@ -15,6 +15,16 @@
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
     } else {
+        // Productivity Improvement
+        $row = App\Session::GetActualDataRow($user->EmployeeID(), date('Y'), date('M'), "PRODUCTIVITY RAW");
+        $productivityPoints = $row[App\Session::IndexOfCell('L')];
+        $pointsPerDay = $row[App\Session::IndexOfCell('O')];
+        $daysPassed = $row[App\Session::IndexOfCell('N')];
+        $totalTarget = $row[App\Session::IndexOfCell('R')];
+        $targetPerDay = $row[App\Session::IndexOfCell('P')];
+        $deficitPoints = $totalTarget - $productivityPoints;
+
+        // Pending Session
         $mySessions = $user->MySessionsThisWeek();
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
@@ -475,25 +485,25 @@
                             <!-- Current points -->
                             <div class="current-points">
                                 <div>Current Points</div>
-                                <input type="number" value="113.63" class="form-control" disabled>
+                                <input id="sim-productivity" type="number" value="{{ $productivityPoints }}" class="form-control" oninput="recalculateProductivity()">
                             </div>
 
                             <!-- Current days passed -->
                             <div class="days-passed mt-3">
                                 <div>Days Passed</div>
-                                <input type="number" value="22" class="form-control" disabled>
+                                <input id="sim-days" type="number" value="{{ round($daysPassed, 2) }}" class="form-control" oninput="recalculateProductivity()">
                             </div>
 
                             <!-- Average -->
                             <div class="average-points mt-3">
                                 <div>Average</div>
-                                <input type="number" value="5.165" class="form-control" disabled>
+                                <input id="sim-average" type="number" value="{{ round($pointsPerDay, 2) }}" class="form-control" disabled>
                             </div>
 
                             <!-- Progress -->
                             <div class="prog-total mt-3">
                                 <div>Progress</div>
-                                <input type="text" value="74.76%" class="form-control prog-f" disabled>
+                                <input id="sim-progress" type="text" value="{{ perc($agentSummary['data'][App\Session::IndexOfCell('W')]) }}%" class="form-control prog-f" disabled>
                             </div>
 
                         </div>
@@ -506,20 +516,19 @@
                             <!-- Target points -->
                             <div class="target-points">
                                 <div>Target Points</div>
-                                <input type="number" value="152" class="form-control" disabled>
+                                <input id="sim-total" type="number" value="{{ round($totalTarget, 2) }}" class="form-control" disabled>
                             </div>
 
                             <!-- Deficit points -->
                             <div class="deficit-points mt-3">
                                 <div>Deficit Points</div>
-                                <input type="number" value="38.37" class="form-control" disabled>
+                                <input id="sim-deficit" type="number" value="{{ round($deficitPoints, 2) }}" class="form-control" disabled>
                             </div>
 
                             <!-- Current target per day -->
                             <div class="target-pday mt-3">
                                 <div>Target Per Day</div>
-                                <input type="number" value="8" class="form-control">
-                                
+                                <input id="sim-goal" type="number" value="{{ round($targetPerDay, 2) }}" class="form-control" oninput="recalculateProductivity()">
                             </div>
 
                         </div>
