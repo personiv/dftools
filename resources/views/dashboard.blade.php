@@ -9,7 +9,7 @@
     $userTeam = $user->TeamMembers();
     $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     $exceptions = $user->ExceptionsThisWeek();
-    if ($user->AccountType() == "SPRVR") {
+    if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
         $coachingSummary = $user->CoachingSummaryThisWeek();
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
@@ -37,7 +37,7 @@
 
 @section('bladescript')
 <script type="text/javascript">
-    @if ($user->AccountType() == "SPRVR")
+    @if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
         createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
         createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
         createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
@@ -63,7 +63,7 @@
 @section('content')
 
 <!-- Supervisor Dashboard -->    
-@if ($user->AccountType() == "SPRVR")
+@if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
 
     <!-- 1st row supervisor dashboard -->
     <div class="row">
@@ -393,7 +393,7 @@
 
 
 <!-- Agent Dashboard -->    
-@elseif ($user->AccountType() == "DESGN")
+@else
 
     <!-- 1st row designer dashboard -->
     <div class="row">
@@ -538,7 +538,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <!-- 1st row designer dashboard -->
