@@ -8,8 +8,34 @@ use App\ScoreItem;
 use App\Session;
 use App\Exception;
 use App\Feedback;
+use App\Poll;
 
 class HomeController extends Controller {
+    function queuePoll(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        Poll::Queue($data["sender"], $data["receiver"], $data["message"]);
+    }
+
+    function getPolls(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        $polls = array();
+        $pollAvailable = Poll::Get($data["receiver"]);
+        foreach ($pollAvailable as $poll) {
+            array_push($polls, [
+                "poll_id" => $poll->getAttribute("poll_id"),
+                "poll_time" => strtotime($poll->getAttribute("created_at")) * 1000,
+                "poll_sender" => $poll->Sender(),
+                "poll_message" => $poll->Message()
+            ]);
+        }
+        return $polls;
+    }
+
+    function dequeuePoll(Request $r) {
+        $data = json_decode($r->getContent(), true);
+        Poll::destroy($data["id"]);
+    }
+
     function session($sid) {
         $session = Session::where("session_id", $sid)->first();
         if ($session == null) return redirect()->route("dashboard")->with(["msg" => "Session with ID '$sid' does not exists"]);
@@ -35,6 +61,7 @@ class HomeController extends Controller {
             return redirect()->route('session', [$session->ExistingSession()->SessionID()]);
         } else {
             $session->save();
+            Poll::Queue($r->session()->get("user")->FullName(), $r->input("session-agent"), "You have new pending session to be completed");
             return redirect()->route('session', [$session->SessionID()]);
         }
     }

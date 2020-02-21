@@ -14,7 +14,10 @@ class CreatePollsTable extends Migration
     public function up()
     {
         Schema::create('polls', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('poll_id');
+            $table->string('poll_sender', 24);
+            $table->string('poll_receiver', 24);
+            $table->string('poll_message', 1024);
             $table->timestamps();
         });
     }

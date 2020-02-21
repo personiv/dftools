@@ -73,13 +73,8 @@
         @endforeach
     @endif
 
-    // Toast message/time
-    $('.toast').toast('show');
-
-    var dt = new Date("February 21, 2020 03:59:00");
-
-    $('#ts, #tst').html(timeSince(dt));
-
+    // Poll messages
+    Poll('{{ $user->EmployeeID() }}');
 </script>
 @endsection
 
@@ -843,17 +838,15 @@
             <div style="position: fixed; top: 10%; right: 1%;">
 
             <!-- Toast message starts here -->
-            <div role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+            <div id="toast-template" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
                 <div class="toast-header">
-                <div class="mr-auto">Message</div>
-                <small id="ts"></small>
-                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                    <div class="mr-auto toast-title"></div>
+                    <small class="toast-time"></small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="toast-body">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi natus, at voluptate impedit ratione aut blanditiis cupiditate ad provident aspernatur.
-                </div>
+                <div class="toast-body"></div>
             </div>
             <!-- end -->
 

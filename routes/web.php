@@ -45,3 +45,7 @@ Route::post('/update-field', 'HomeController@updateFieldValue')->middleware('gra
 Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');
 Route::post('/add-feedback', 'HomeController@addFeedback')->middleware('granted');
 Route::post('/view-history-sessions', 'HomeController@viewHistorySessions')->middleware('granted');
+
+Route::post('/queue-poll', 'HomeController@queuePoll')->middleware('granted');
+Route::post('/get-polls', 'HomeController@getPolls')->middleware('granted');
+Route::post('/dequeue-poll', 'HomeController@dequeuePoll')->middleware('granted');

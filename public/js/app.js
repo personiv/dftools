@@ -23,7 +23,44 @@ function request(action, postData, success) {
     r.send(postData);
 } // end
 
+// Polling callback
+function Poll(pollReceiver) {
+  request("get-polls", JSON.stringify({ receiver: pollReceiver }), function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var template = document.querySelector("#toast-template");
+      var polls = JSON.parse(this.responseText);
 
+      for (let i = 0; i < polls.length; i++) {
+        const poll = polls[i];
+        
+        // If the toast id exists, continue to next poll
+        if (document.querySelector("#toast-" + poll["poll_id"]) != null) continue;
+
+        var toast = template.cloneNode(true);
+        $(toast).insertAfter(template);
+        toast.id = "toast-" + poll["poll_id"];
+        $('#' + toast.id + " .toast-title").html(poll["poll_sender"]);
+        updateTimeSince(toast.id, poll["poll_time"]);
+        $('#' + toast.id + " .toast-body").html(poll["poll_message"]);
+        $('#' + toast.id + " .close").on("click", function() {
+          request("dequeue-poll", JSON.stringify({ id: poll["poll_id"] }), function() {
+            $("#toast-" + poll["poll_id"]).remove();
+          });
+        });
+        $('#' + toast.id).toast('show');
+      }
+    }
+  });
+  // Refresh every 5sec
+  setTimeout(function() { Poll(pollReceiver) }, 5000);
+}
+
+function updateTimeSince(elementId, pollTime) {
+  if ($('#' + elementId) == null) return;
+  $('#' + elementId + " .toast-time").html(timeSince(pollTime));
+  // Update every 5sec
+  setTimeout(function() { updateTimeSince(elementId, pollTime) }, 5000);
+}
 
 // Menu Toggle Script
 // collapse menu / sidebar
@@ -155,22 +192,32 @@ function timeSince(date) {
 
   if (interval > 1) {
     return interval + " years ago";
+  } else if (interval == 1) {
+    return interval + " year ago";
   }
   interval = Math.floor(seconds / 2592000);
   if (interval > 1) {
     return interval + " months ago";
+  } else if (interval == 1) {
+    return interval + " month ago";
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
     return interval + " days ago";
+  } else if (interval == 1) {
+    return interval + " day ago";
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
     return interval + " hours ago";
+  } else if (interval == 1) {
+    return interval + " hour ago";
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
     return interval + " minutes ago";
+  } else if (interval == 1) {
+    return interval + " minute ago";
   }
   return Math.floor(seconds) + " seconds ago";
 }
