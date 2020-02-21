@@ -51,26 +51,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Mid Month Scorecard</td>
-                            <td>{{ $user->EmployeeID() }}</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>{{ $user->JobPosition() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Coaching</td>
-                            <td>{{ $user->EmployeeID() }}</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>{{ $user->JobPosition() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span>
-                            </td>
-                        </tr>
+                        @if (session('historySessions') != null)
+                            @foreach (session('historySessions') as $session)
+                                <tr>
+                                    <td>{{ $session->DateCreated()->format("Y-M-d") }}</td>
+                                    <td>{{ $session->TypeDescription() }}</td>
+                                    <td>{{ $session->AgentID() }}</td>
+                                    <td>{{ $session->Agent()->FullName() }}</td>
+                                    <td>{{ $session->Agent()->JobPosition() }}</td>
+                                    <td>
+                                        <a href="{{ route('session', [$session->SessionID()]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -114,22 +108,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Mid Month Scorecard</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>03/05/2020</td>
-                            <td>Coaching</td>
-                            <td>{{ $user->FullName() }}</td>
-                            <td>
-                                <span id="btn-add-notes" class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span>
-                            </td>
-                        </tr>
+                        @if (session('historySessions') != null)
+                            @foreach (session('historySessions') as $session)
+                                <tr>
+                                    <td>{{ $session->DateCreated()->format("Y-M-d") }}</td>
+                                    <td>{{ $session->TypeDescription() }}</td>
+                                    <td>{{ $session->Agent()->TeamLeader()->FullName() }}</td>
+                                    <td>
+                                        <a href="{{ route('session', [$session->SessionID()]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

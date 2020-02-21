@@ -338,7 +338,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{{ action('HomeController@viewHistorySessions') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="row">
@@ -361,7 +361,7 @@
                                             <div class="date-start mb-4">
                                                 <div>From date:</div>
                                                 <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
-                                                    <input class="line-effect form-control" type="text" name="start">
+                                                    <input class="line-effect form-control" type="text" name="history-start" required>
                                                     <span class="focus-border">
                                                     <i></i>
                                                     </span>
@@ -372,7 +372,7 @@
                                             <div class="date-end">
                                                 <div>To date:</div>
                                                 <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
-                                                    <input class="line-effect form-control" type="text" name="end">
+                                                    <input class="line-effect form-control" type="text" name="history-end" required>
                                                     <span class="focus-border">
                                                     <i></i>
                                                     </span>

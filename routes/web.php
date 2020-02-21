@@ -44,3 +44,4 @@ Route::post('/reset-pending', 'HomeController@resetPending')->middleware('grante
 Route::post('/update-field', 'HomeController@updateFieldValue')->middleware('granted');
 Route::get('/session/{sid}', 'HomeController@session')->middleware('granted')->name('session');
 Route::post('/add-feedback', 'HomeController@addFeedback')->middleware('granted');
+Route::post('/view-history-sessions', 'HomeController@viewHistorySessions')->middleware('granted');

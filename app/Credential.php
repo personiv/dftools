@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class Credential extends Model
 {
@@ -96,6 +97,17 @@ class Credential extends Model
     }
 
     // Team Leader Methods
+    function HistorySessions($start, $end) {
+        $sessions = array();
+        $historysessions = Session::whereBetween("created_at", [Carbon::parse($start)->startOfDay()->toDateTimeString(), Carbon::parse($end)->endOfDay()->toDateTimeString()])->get();
+        for ($i=0; $i < count($historysessions); $i++) {
+            if ($historysessions[$i]->isSignee($this->EmployeeID())) {
+                array_push($sessions, $historysessions[$i]);
+            }
+        }
+        return $sessions;
+    }
+
     function SessionsThisWeek() {
         $sessions = array();
         $weeksessions = Session::where("session_week", (int)date("W"))->get();

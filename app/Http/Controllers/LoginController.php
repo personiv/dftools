@@ -38,6 +38,7 @@ class LoginController extends Controller {
 
     function logout(Request $r) {
         $r->session()->forget("user");
+        $r->session()->forget("historySessions");
         return redirect()->route("index");
     }
 }

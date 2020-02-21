@@ -89,4 +89,10 @@ class HomeController extends Controller {
         $feedback->save();
         return redirect()->route('dashboard');
     }
+
+    function viewHistorySessions(Request $r) {
+        $sessions = $r->session()->get("user")->HistorySessions($r->input("history-start"), $r->input("history-end"));
+        $r->session()->put("historySessions", $sessions);
+        return redirect()->route("history");
+    }
 }
