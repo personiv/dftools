@@ -54,7 +54,7 @@
                         @if (session('historySessions') != null)
                             @foreach (session('historySessions') as $session)
                                 <tr>
-                                    <td>{{ $session->DateCreated()->format("Y-M-d") }}</td>
+                                    <td>{{ $session->DateCreated()->format("Y-m-d") }}</td>
                                     <td>{{ $session->TypeDescription() }}</td>
                                     <td>{{ $session->AgentID() }}</td>
                                     <td>{{ $session->Agent()->FullName() }}</td>
