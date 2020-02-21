@@ -33,13 +33,15 @@
         $totalTarget = $row[App\Session::IndexOfCell('R')];
         $targetPerDay = $row[App\Session::IndexOfCell('P')];
         $deficitPoints = $totalTarget - $productivityPoints;
-        $productivityScore = perc($agentSummary['data'][App\Session::IndexOfCell('W')]);
-        $productivityProgressClass = $productivityScore < 80 ? "prog-f" : ($productivityScore >= 80 && $productivityScore < 90 ? "prog-sp" : "prog-p");
 
         // Pending Session
         $mySessions = $user->MySessionsThisWeek();
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
+
+        // Productivity Improvement
+        $productivityScore = perc($agentSummary['data'][App\Session::IndexOfCell('W')]);
+        $productivityProgressClass = $productivityScore < 80 ? "prog-f" : ($productivityScore >= 80 && $productivityScore < 90 ? "prog-sp" : "prog-p");
     }
 
     function perc($value) { return is_numeric($value) ? round($value * 100, 2) : 0; }
