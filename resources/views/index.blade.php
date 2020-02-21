@@ -32,7 +32,7 @@
                 <div class="introOne-wrapper flex-column">
                 <!-- Brand name here -->
                 <div class="brand-name">
-                    <span>d</span><span>f</span><span>S</span>
+                    <span>d</span><span>f</span><span>c</span>
                 </div>
 
                 <!-- Greetings intro here -->
@@ -87,7 +87,7 @@
             <div class="col-md-5 intro-two flex-column">
                 <div id="particles-js">
                 <div class="graphic-brname"> 
-                    <span>df</span><span>scorecard</span>
+                    <span>df</span><span>coaching</span>
                 </div>
                 <div class="graphic-slogan">
                     <div>A new way to understand and motivate your teams</div>

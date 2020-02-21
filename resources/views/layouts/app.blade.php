@@ -33,7 +33,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">dfs<span>corecard</span></div>
+        <div class="sidebar-heading">dfc<span>oaching</span></div>
         <div class="list-group list-group-flush">
             @if ($user->AccountType() != "ADMIN")
             <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
@@ -139,7 +139,7 @@
             <!-- Footer  area here -->
             </div>
         <!-- /#page-content-wrapper -->
-            <div class="container-fluid px-5 pb-5">
+            <div class="container-fluid px-5 pb-5 footer-container">
                 <footer>
                     <div class="row">
                         <div class="col">
