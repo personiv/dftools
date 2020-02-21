@@ -108,12 +108,16 @@ class Credential extends Model
         return $sessions;
     }
 
-    function SessionsThisWeek() {
+    function SessionsThisWeek($leader = null) {
+        $leader = $leader ?? $this->EmployeeID();
         $sessions = array();
         $weeksessions = Session::where("session_week", (int)date("W"))->get();
         for ($i=0; $i < count($weeksessions); $i++) { 
-            if ($weeksessions[$i]->Agent()->TeamLeader()->EmployeeID() == $this->EmployeeID()) {
-                array_push($sessions, $weeksessions[$i]);
+            // Check first if the user is a signee and the agent is in list of exception
+            if ($weeksessions[$i]->IsSignee($this->EmployeeID())) {
+                if ($weeksessions[$i]->IsSignee($leader) && !Exception::IsExceptedThisWeek($weeksessions[$i]->AgentID())) {
+                    array_push($sessions, $weeksessions[$i]);
+                }
             }
         }
         return $sessions;
@@ -123,19 +127,9 @@ class Credential extends Model
         $sessions = array("For Coaching" => [], "Pending" => [], "Completed" => []);
         $teamMembers = $this->TeamMembers();
         $weekSessions = $this->SessionsThisWeek();
-        $exceptions = $this->ExceptionsThisWeek();
         
         // For Coaching iteration
         foreach ($teamMembers as $agent) {
-            // Check first if this agent is in list of excepted
-            $excepted = false;
-            foreach ($exceptions as $exception)
-                if ($exception->exception_agent == $agent->EmployeeID())
-                    $excepted = true;
-
-            // Skip this iteration for current agent
-            if ($excepted) continue;
-
             // Check if this agent has session this week
             $hasSession = false;
             foreach ($weekSessions as $weekSession) {
@@ -157,15 +151,6 @@ class Credential extends Model
 
         // Pending and Completed iteration
         foreach ($teamMembers as $agent) {
-            // Check first if this agent is in list of excepted
-            $excepted = false;
-            foreach ($exceptions as $exception)
-                if ($exception->exception_agent == $agent->EmployeeID())
-                    $excepted = true;
-
-            // Skip this iteration for current agent
-            if ($excepted) continue;
-
             // Iterate sessions this week and segregate it
             foreach ($weekSessions as $weekSession) {
                 if ($agent->EmployeeID() == $weekSession->AgentID()) {
