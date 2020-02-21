@@ -56,20 +56,26 @@
                     <form id="main-login-form" method="POST"action="{{ action('LoginController@login') }}"> 
                         {{ csrf_field() }}
 
-                        <!-- Email -->
-                        <div class="field-items">
-                            <label class="item-f username" for="user-id">Username</label>
-                            <input type="text" id="user-id" name="user-id" class="form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
-                        </div>
+                        <!-- Employee ID -->
+                        <div class="field-items effect-container"> <!-- input line animation -->
+                                <label class="item-f username" for="user-id">Employee ID</label>
+                                <input type="text" id="user-id" name="user-id" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
+                                <span class="focus-border">
+                                <i></i>
+                                </span>
+                        </div> <!-- input line animation end -->
 
                         <!-- Password -->
-                        <div class="field-items mt-4">
-                            <label class="item-f password" for="user-pass">Password</label>
-                            <input type="password" id="user-pass" name="user-pass" class="form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
-                        </div>
+                        <div class="field-items effect-container mt-4 mb-4"> <!-- input line animation -->
+                                <label class="item-f password" for="user-pass">Password</label>
+                                <input type="password" id="user-pass" name="user-pass" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
+                                <span class="focus-border">
+                                <i></i>
+                                </span>
+                        </div> <!-- input line animation end -->
                         
                         <!-- Remember me -->
-                        <div class="custom-control custom-checkbox mt-4">
+                        <div class="custom-control custom-checkbox clear">
                             <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
                             <label class="custom-control-label" for="user-remember">Remember Me</label>
                         </div>
