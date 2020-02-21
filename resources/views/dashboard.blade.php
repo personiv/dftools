@@ -414,7 +414,11 @@
 
 @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
 
+<<<<<<< HEAD
     <!-- 1st row manager/head dashboard -->
+=======
+    <!-- 1st row operation manager dashboard -->
+>>>>>>> 2f1cbca8f5f25aba6c773567dc1f37c132406462
     <div class="row">
 
         <!-- Overview of coaching completed -->
