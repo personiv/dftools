@@ -165,7 +165,7 @@
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Summary</div>
-                    <div class="dboard-othtext">of <span class="stats-for-coaching">For Coaching</span>, pending and completed</div>
+                    <div class="dboard-othtext">of For Coaching, Pending and Completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="scrollbar scrollbar-primary">
@@ -493,7 +493,7 @@
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Summary</div>
-                    <div class="dboard-othtext">of <span class="stats-for-coaching">For Coaching</span>, pending and completed</div>
+                    <div class="dboard-othtext">of For Coaching, Pending and Completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 
@@ -578,51 +578,87 @@
     <!-- 3rd row manager/head dashboard -->
     <div class="row mt-5">
 
-         <!-- Exception section -->
-         <div class="col-lg">
+        <!-- Summary section -->
+        <div class="col-lg">
             <div class="tb-container">
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="dboard-text px-4 pt-4 pb-3">
-                            <div class="dboard-title">Exception</div>
-                            <div class="dboard-othtext">with valid reason</div>
-                        </div>
-                    </div>
-                    <div class="col-sm d-inline-flex align-items-center justify-content-end pr-5">
-                        <div class="excp-btn mx-wdth d-inline-flex">
-                            <span id="add-btn" class="action-btn-add" data-toggle="modal" data-target="#exceptionModal"><i class="fa fa-plus mr-2"></i>Add</span>
-                        </div>
-                    </div>
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">Exception</div>
+                    <div class="dboard-othtext">with valid reason</div>
                 </div>
                 <div class="dropdown-divider"></div>
-                <div class="table-responsive px-4 pt-0 pb-4">
-                    <table class="table table-hover table-borderless">
-                        <thead>
-                        <tr>
-                            <th scope="col">Employee ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Reason</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($exceptions as $exception)
-                            <?php $agent = App\Credential::GetCredential($exception->exception_agent) ?>
-                            <tr>
-                                <td>{{ $agent->EmployeeID() }}</td>
-                                <td>{{ $agent->FullName() }}</td>
-                                <td>{{ $agent->JobPosition() }}</td>
-                                <td>{{ $exception->exception_reason }}</td>
-                                <td>
-                                    <span id="btn-edit" class="action-btn-edit mr-2"><i class="fa fa-edit mr-2"></i>Edit</span>
-                                    <a href="{{ route('deleteexception', [$exception->exception_id]) }}"><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></a>
-                                </td>
-                            </tr>
+                
+                <!-- Nav tab item starts here -->
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <?php $l = 0; ?>
+                        @foreach ($userTeam as $leader)
+                            @if ($l == 0)
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                            @else
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                            @endif
+                        <?php $l++; ?>
                         @endforeach
-                        </tbody>
-                    </table>
+                    </div>
+                </nav>
+
+                <!-- Nav tab content starts here -->
+                <div class="tab-content" id="nav-tabContent">
+                    <?php $m = 0; ?>
+                    @foreach ($userTeam as $leader)
+                        @if ($m == 0)
+                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                        @else
+                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                        @endif
+                        <div class="scrollbar scrollbar-primary">
+                            <div class="table-responsive px-4 pt-0 pb-4">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Reason</th> 
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($coachingSummary["Pending"] as $weekSession)
+                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
+                                                <tr>
+                                                    <td>{{ $weekSession->AgentID() }}</td>
+                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
+                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
+                                                    <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    <td><span class="stats-pending">Pending</span></td>
+                                                    <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        @foreach ($coachingSummary["Completed"] as $weekSession)
+                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
+                                                <tr>
+                                                    <td>{{ $weekSession->AgentID() }}</td>
+                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
+                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
+                                                    <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    <td><span class="stats-completed">Completed</span></td>
+                                                    <td></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- -->
+                    </div>
+                    <?php $m++; ?>
+                    @endforeach
+
                 </div>
+
             </div>
         </div>
 
