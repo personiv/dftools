@@ -9,10 +9,14 @@ body, html {
 }
 
 #wrapper {
-    height: 100%;
+    height: auto;
     width: 100%;
 }
 
+.footer-container {
+    position: absolute;
+    bottom: 0;
+}
 form {
     margin-block-end: 0;
 }
@@ -92,6 +96,7 @@ form {
 .dboard-wrapper {
     background-color: #f9fafb;
     white-space: nowrap;
+    margin-bottom: 65px;
 }
 
 .dboard-wrapper table {

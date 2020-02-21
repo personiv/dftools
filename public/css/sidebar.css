@@ -102,6 +102,8 @@ body {
 
 /* Content container margin left when toggled */
 #page-content-wrapper {
+  position: relative;
+  min-height: 100vh;
   margin-left: 280px;
   transition: margin .3s ease-out;
 }
