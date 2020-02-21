@@ -136,10 +136,8 @@ body {
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.field-items:hover, .field-items:focus-within{
+.field-items:focus-within{
     color: var(--dark-color);
-    background-color: #fff;
-    border-color: #80bdff;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
@@ -147,18 +145,27 @@ body {
 .field-items .item-f {
     display: block;
     width: 75px;
-    padding: 5px 5px;
+    padding: 5px 5px 0px 5px;
     background-color: var(--light-color);
-    margin-top: -18px;
+    margin-top: -15px;
+    margin-bottom: 10px;
     cursor: pointer;
 }
 
 .field-items .item-f.username {
-    width: 75px;
+    width: 84px;
+    z-index: 1;
+    position: relative;
 }
 
 .field-items .item-f.password {
-    width: 70px;
+    width: 65px;
+    z-index: 1;
+    position: relative;
+}
+
+.login-container form .clear {
+    clear: both;
 }
 
 .custom-control-label {
