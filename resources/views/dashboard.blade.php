@@ -405,7 +405,7 @@
 
 @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
 
-    <!-- 1st row supervisor dashboard -->
+    <!-- 1st row operation manager dashboard -->
     <div class="row">
 
         <!-- Overview of coaching completed -->
