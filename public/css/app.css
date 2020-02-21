@@ -394,7 +394,8 @@ form {
 #btn-delete,
 #btn-edit, 
 #btn-add-notes,
-#date-btn {
+#date-btn,
+.action-btn-view {
     padding: 5px 10px !important;
     font-size: 13px;
     font-weight: 600;
