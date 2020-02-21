@@ -55,6 +55,7 @@ class Session extends Model
     function Supervisor() { return $this->Agent()->TeamLeader(); }
     function Manager() { return $this->Supervisor()->TeamLeader(); }
     function Head() { return $this->Manager()->TeamLeader(); }
+    function Signees() { return $this->Data()["signatures"]; }
     function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
     function SigneeLevel($employeeID) { return array_keys($this->Data()["signatures"], $employeeID)[0]; }
     function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }

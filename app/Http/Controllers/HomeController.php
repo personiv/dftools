@@ -69,6 +69,12 @@ class HomeController extends Controller {
     function movePendingLevel(Request $r) {
         $session = Session::where("session_id", $r->input("session-id"))->first();
         $session->MovePendingLevel($r);
+        foreach ($session->Signees() as $signeeID => $signed) {
+            if ($session->IsNextSignee($signeeID)) {
+                Poll::Queue($r->session()->get("user")->FullName(), $signeeID, $r->session()->get("user")->FullName() . " signed his pending session");
+                break;
+            }
+        }
         return redirect()->route('dashboard');
     }
     
