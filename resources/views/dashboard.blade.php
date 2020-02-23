@@ -72,9 +72,6 @@
             @endif
         @endforeach
     @endif
-
-    // Poll messages
-    Poll('{{ $user->EmployeeID() }}');
 </script>
 @endsection
 
@@ -866,29 +863,5 @@
     </div>
 
 @endif
-
-<div class="row">
-     <div class="col">
-        <div aria-live="polite" aria-atomic="true" style="position: relative;">
-            <!-- Position it -->
-            <div style="position: fixed; top: 10%; right: 1%;">
-
-            <!-- Toast message starts here -->
-            <div id="toast-template" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
-                <div class="toast-header">
-                    <div class="mr-auto toast-title"></div>
-                    <small class="toast-time"></small>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body"></div>
-            </div>
-            <!-- end -->
-
-        </div>
-        </div>
-     </div>
- </div>
 
 @endsection

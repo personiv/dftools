@@ -400,6 +400,31 @@
     <!-- End of main wrapper -->
     </div>
 
+    <!-- Toast Template -->
+    <div class="row">
+        <div class="col">
+            <div aria-live="polite" aria-atomic="true" style="position: relative;">
+                <!-- Position it -->
+                <div style="position: fixed; top: 10%; right: 1%;">
+
+                <!-- Toast message starts here -->
+                <div id="toast-template" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">
+                    <div class="toast-header">
+                        <div class="mr-auto toast-title"></div>
+                        <small class="toast-time"></small>
+                        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="toast-body"></div>
+                </div>
+                <!-- end -->
+
+            </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Plugins -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -410,7 +435,11 @@
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     @yield('bladescript')
-
+    <!-- Poll Script -->
+    <script type="text/javascript">
+        // Poll messages
+        Poll("{{ action('HomeController@getPolls') }}", "{{ action('HomeController@dequeuePoll') }}", '{{ session("user")->EmployeeID() }}');
+    </script>
     <script> $('.popover-dismiss').popover({ trigger: 'focus' }); </script>
 
 </body>

@@ -24,8 +24,8 @@ function request(action, postData, success) {
 } // end
 
 // Polling callback
-function Poll(pollReceiver) {
-  request("get-polls", JSON.stringify({ receiver: pollReceiver }), function() {
+function Poll(getPollUrl, dequeuePollUrl, pollReceiver) {
+  request(getPollUrl, JSON.stringify({ receiver: pollReceiver }), function() {
     if (this.readyState == 4 && this.status == 200) {
       var template = document.querySelector("#toast-template");
       var polls = JSON.parse(this.responseText);
@@ -43,7 +43,7 @@ function Poll(pollReceiver) {
         updateTimeSince(toast.id, poll["poll_time"]);
         $('#' + toast.id + " .toast-body").html(poll["poll_message"]);
         $('#' + toast.id + " .close").on("click", function() {
-          request("dequeue-poll", JSON.stringify({ id: poll["poll_id"] }), function() {
+          request(dequeuePollUrl, JSON.stringify({ id: poll["poll_id"] }), function() {
             $("#toast-" + poll["poll_id"]).remove();
           });
         });
