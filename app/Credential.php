@@ -60,7 +60,7 @@ class Credential extends Model
 
     // Agent Methods
     function ScorecardSummary() {
-        return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetAgentActualData(date("Y"), date("M"), $this->EmployeeID()) ];
+        return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetRowData(date("Y"), date("M"), $this->EmployeeID(), 'C', "RESOURCES") ];
     }
 
     function MySessionsThisWeek() {
@@ -197,12 +197,8 @@ class Credential extends Model
         $teamMembers = $this->TeamMembers();
 
         foreach ($teamMembers as $teamMember) {
-            $actualData = Session::GetAgentActualData(date("Y"), date("M"), $teamMember->EmployeeID());
-
-            array_push($data, [
-                "agent" => self::GetCredential($teamMember->EmployeeID()),
-                "data" => $actualData
-            ]);
+            $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), 'C', "RESOURCES");
+            array_push($data, [ "agent" => self::GetCredential($teamMember->EmployeeID()), "data" => $actualData ]);
         }
 
         usort($data, function($a, $b) {

@@ -23,16 +23,20 @@ class Session extends Model
         }
         return $value - 1;
     }
-    static function GetAgentActualData($year, $month, $agentID) {
+    static function GetRowData($year, $month, $agentID, $agentIDCell, $sheetName, $supervisorID = "") {
+        if ($supervisorID == "") $path = "data/actual/$year/$month.xlsx";
+        else $path = "data/manual/$year/$month/$supervisorID.xlsx";
+        if (!file_exists($path)) return array();
+
         $reader = new Xlsx;
         $reader->setReadDataOnly(true);
-        $reader->setLoadSheetsOnly(["RESOURCES"]);
-        $spreadsheet = $reader->load("data/actual/$year/$month.xlsx");
-        $spreadsheet->setActiveSheetIndexByName("RESOURCES");
+        $reader->setLoadSheetsOnly($sheetName);
+        $spreadsheet = $reader->load($path);
+        $spreadsheet->setActiveSheetIndexByName($sheetName);
         $scorevalues = $spreadsheet->getActiveSheet()->toArray();
 
         for ($i = 0; $i < count($scorevalues); $i++) {
-            if ($scorevalues[$i][2] == $agentID) {
+            if ($scorevalues[$i][self::IndexOfCell($agentIDCell)] == $agentID) {
                 return $scorevalues[$i];
             }
         }
@@ -136,78 +140,42 @@ class Session extends Model
         return $this->getAttribute("session_data");
     }
 
-    static function GetActualDataRow($employeeID, $year, $month, $sheetName) {
-        $reader = new Xlsx;
-        $reader->setReadDataOnly(true);
-        $reader->setLoadSheetsOnly([$sheetName]);
-        $spreadsheet = $reader->load("data/actual/$year/$month.xlsx");
-        $spreadsheet->setActiveSheetIndexByName($sheetName);
-        $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-
-        for ($i = 0; $i < count($scorevalues); $i++) {
-            if ($scorevalues[$i][1] == $employeeID) {
-                return $scorevalues[$i];
-            }
-        }
-        return array();
-    }
-
-    static function GetActualDataCellValue($employeeID, $year, $month, $sheetName, $cellName) {
-        return self::GetActualDataRow($employeeID, $year, $month, $sheetName)[self::IndexOfCell($cellName)];
-    }
-
     protected function GenerateScorecardData() {
         if ($this->Agent() == null) return null;
         $year = $this->Year();
         $month = $this->Month();
-        $supervisorID = $this->Agent()->TeamLeader()->EmployeeID();
-        $path = $this->Mode() == "manual" ? "data/manual/$year/$month/$supervisorID.xlsx" : "data/actual/$year/$month.xlsx";
         
         $scorecard = ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get();
         $agentvalues = array();
-        if (file_exists($path)) {
-            switch ($this->Mode()) {
-                case 'manual':
-                    $reader = new Xlsx;
-                    $reader->setReadDataOnly(true);
-                    $spreadsheet = $reader->load($path);
-                    $spreadsheet->setActiveSheetIndexByName($this->AgentRole());
-                    $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-
-                    for ($i = 0; $i < count($scorevalues); $i++) {
-                        if ($scorevalues[$i][0] == $this->AgentID()) {
-                            $agentvalues = $scorevalues[$i];
-                            break;
-                        }
+        switch ($this->Mode()) {
+            case 'manual':
+                $agentvalues = self::GetRowData($year, $month, $this->AgentID(), 'A', $this->AgentRole(), $this->Supervisor()->EmployeeID());
+                for ($i = 0; $i < $scorecard->count(); $i++) {
+                    if (!empty($agentvalues)) {
+                        $scorecard[$i]["score_item_actual"] = $agentvalues[$i + 1];
+                        $scorecard[$i]["score_item_overall"] = $agentvalues[$scorecard->count() + 1];
+                    } else {
+                        $scorecard[$i]["score_item_actual"] = "NaN";
+                        $scorecard[$i]["score_item_overall"] = "NaN";
                     }
-
-                    for ($i = 0; $i < $scorecard->count(); $i++) {
-                        if (!empty($agentvalues)) {
-                            $scorecard[$i]["score_item_actual"] = $agentvalues[$i + 1];
-                            $scorecard[$i]["score_item_overall"] = $agentvalues[$scorecard->count() + 1];
-                        } else {
-                            $scorecard[$i]["score_item_actual"] = "NaN";
-                            $scorecard[$i]["score_item_overall"] = "NaN";
-                        }
+                }
+                break;
+            case 'actual':
+                $agentvalues = self::GetRowData($year, $month, $this->AgentID(), 'C', "RESOURCES");
+                for ($i = 0; $i < $scorecard->count(); $i++) {
+                    if (!empty($agentvalues)) {
+                        $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
+                        $overall = $agentvalues[self::IndexOfCell("AG")];
+                        if (is_numeric($actual)) $actual = round($actual * 100, 2);
+                        if (is_numeric($overall)) $overall = round($overall * 100, 2);
+                        $scorecard[$i]["score_item_actual"] = $actual;
+                        $scorecard[$i]["score_item_overall"] = $overall;
+                    } else {
+                        $scorecard[$i]["score_item_actual"] = "NaN";
+                        $scorecard[$i]["score_item_overall"] = "NaN";
                     }
-                    break;
-                case 'actual':
-                    $agentvalues = self::GetAgentActualData($year, $month, $this->AgentID());
-                    for ($i = 0; $i < $scorecard->count(); $i++) {
-                        if (!empty($agentvalues)) {
-                            $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
-                            $overall = $agentvalues[self::IndexOfCell("AG")];
-                            if (is_numeric($actual)) $actual = round($actual * 100, 2);
-                            if (is_numeric($overall)) $overall = round($overall * 100, 2);
-                            $scorecard[$i]["score_item_actual"] = $actual;
-                            $scorecard[$i]["score_item_overall"] = $overall;
-                        } else {
-                            $scorecard[$i]["score_item_actual"] = "NaN";
-                            $scorecard[$i]["score_item_overall"] = "NaN";
-                        }
-                    }
-                    break;
-            }
+                }
+                break;
         }
         return [
             "scorecard" => $scorecard,
