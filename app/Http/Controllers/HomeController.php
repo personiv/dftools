@@ -58,6 +58,7 @@ class HomeController extends Controller {
         
         if ($session->ExistsThisWeek()) {
             // Display the same session as it is already exists this week
+            Poll::Queue("System", $r->session()->get("user")->EmployeeID(), "Session already exists this week, viewing the same session");
             return redirect()->route('session', [$session->ExistingSession()->SessionID()]);
         } else {
             $session->save();
@@ -71,7 +72,7 @@ class HomeController extends Controller {
         $session->MovePendingLevel($r);
         foreach ($session->Signees() as $signeeID => $signed) {
             if ($session->IsNextSignee($signeeID)) {
-                Poll::Queue($r->session()->get("user")->FullName(), $signeeID, $r->session()->get("user")->FullName() . " signed his pending session");
+                Poll::Queue("System", $signeeID, $r->session()->get("user")->FullName() . " signed his pending session");
                 break;
             }
         }
