@@ -405,7 +405,7 @@
         <div class="col">
             <div aria-live="polite" aria-atomic="true" style="position: relative;">
                 <!-- Position it -->
-                <div style="position: fixed; top: 10%; right: 1%;">
+                <div style="position: fixed; top: 12%; right: 1%;">
 
                 <!-- Toast message starts here -->
                 <div id="toast-template" role="alert" aria-live="assertive" aria-atomic="true" class="toast" data-autohide="false">

@@ -495,7 +495,7 @@
                 <div class="dropdown-divider"></div>
                 
                 <!-- Nav tab item starts here -->
-                <nav>
+                <nav class="page-tab-container">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
@@ -585,7 +585,7 @@
                 <div class="dropdown-divider"></div>
                 
                 <!-- Nav tab item starts here -->
-                <nav>
+                <nav class="page-tab-container">
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)

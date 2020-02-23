@@ -1011,3 +1011,49 @@ input[type=number]:disabled {
 50% {border-left: 4px solid #cfcfcf;border-bottom: 4px solid #cfcfcf;transform: translate(-10px, 0px) rotate(220deg);}
 100% {border-left: 4px solid transparent;border-bottom: 4px solid transparent;transform: translate(4px, 0px) rotate(220deg);}
 } /* end */
+
+
+/*
+|———————————————————————————————————————————————————————————————
+| Manager's dashboard
+|———————————————————————————————————————————————————————————————
+|
+| Here, you can edit the css for Manager's dashboard
+|
+|
+*/ /* Summary */
+
+.page-tab-container {
+    padding: 0px 25px;
+}
+.nav-tabs {
+    border-bottom: 1px solid #e9ecef !important;
+    padding: 15px 15px 0 !important;
+    margin-top: -.5rem;
+}
+
+.nav-tabs .nav-link {
+    font-weight: 600;
+    color: var(--dark-color-50p);
+    letter-spacing: .5px;
+    word-spacing: 1px;
+    border: none !important;
+    padding: .5rem 1rem .7rem !important;
+    margin-left: 3px;
+    margin-bottom: -4px !important;
+    transition: border .1s ease;
+    transition-delay: 6ms;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-bottom: 3px solid var(--dark-color-50p) !important;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border-bottom: 3px solid var(--dark-color) !important;
+}
+
+.tab-content {
+    padding-top: .5em;
+}
+
