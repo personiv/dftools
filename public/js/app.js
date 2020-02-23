@@ -44,7 +44,7 @@ function Poll(getPollUrl, dequeuePollUrl, pollReceiver) {
         $('#' + toast.id + " .toast-body").html(poll["poll_message"]);
         $('#' + toast.id + " .close").on("click", function() {
           request(dequeuePollUrl, JSON.stringify({ id: poll["poll_id"] }), function() {
-            $("#toast-" + poll["poll_id"]).remove();
+            if (this.readyState == 4 && this.status == 200) $("#toast-" + poll["poll_id"]).remove();
           });
         });
         $('#' + toast.id).toast('show');
@@ -52,14 +52,14 @@ function Poll(getPollUrl, dequeuePollUrl, pollReceiver) {
     }
   });
   // Refresh every 5sec
-  setTimeout(function() { Poll(pollReceiver) }, 5000);
+  setTimeout(function() { Poll(getPollUrl, dequeuePollUrl, pollReceiver) }, 5000);
 }
 
 function updateTimeSince(elementId, pollTime) {
   if ($('#' + elementId) == null) return;
   $('#' + elementId + " .toast-time").html(timeSince(pollTime));
-  // Update every 5sec
-  setTimeout(function() { updateTimeSince(elementId, pollTime) }, 5000);
+  // Update every 30sec
+  setTimeout(function() { updateTimeSince(elementId, pollTime) }, 30000);
 }
 
 // Menu Toggle Script
