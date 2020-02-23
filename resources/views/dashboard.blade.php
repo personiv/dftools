@@ -26,7 +26,7 @@
         $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]);
     } else {
         // Productivity Improvement
-        $row = App\Session::GetActualDataRow($user->EmployeeID(), date('Y'), date('M'), "PRODUCTIVITY RAW");
+        $row = App\Session::GetRowData(date('Y'), date('M'), $user->EmployeeID(), 'B', "PRODUCTIVITY RAW");
         $productivityPoints = $row[App\Session::IndexOfCell('L')];
         $pointsPerDay = $row[App\Session::IndexOfCell('O')];
         $daysPassed = $row[App\Session::IndexOfCell('N')];
