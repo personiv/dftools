@@ -212,19 +212,19 @@ function updateFieldValue(e) {
 <div class="container-fluid pt-4">
     <div class="row">
 @foreach ($fields as $fieldName => $fieldProperties)
-<?php
-    $field_title = $fieldProperties["title"];
-    $field_size = $fieldProperties["size"];
-    $field_value = $fieldProperties["value"];
-    $field_for = $fieldProperties["for"];
-    $field_pending = $fieldProperties["pending"];
-    if (!array_key_exists("height", $fieldProperties)) {
-        $customHeight = "";
-    } else {
-        $field_height = $fieldProperties['height'];
-        $customHeight = "style='height: " . $field_height . "px;'";
-    }
-?>
+    <?php
+        $field_title = $fieldProperties["title"];
+        $field_size = $fieldProperties["size"];
+        $field_value = $fieldProperties["value"];
+        $field_for = $fieldProperties["for"];
+        $field_pending = $fieldProperties["pending"];
+        if (!array_key_exists("height", $fieldProperties)) {
+            $customHeight = "";
+        } else {
+            $field_height = $fieldProperties['height'];
+            $customHeight = "style='height: " . $field_height . "px;'";
+        }
+    ?>
         <div class="col-{{ $field_size }}">
             <div class="card mb-4">
                 <div class="card-header bg-dark text-white">{{ $field_title }}</div>
