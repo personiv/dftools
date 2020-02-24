@@ -48,7 +48,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
                             @if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
-                                <th scope="col">Supervisor</th>
+                                <th scope="col">Sent by</th>
                             @endif
                             <th scope="col">Action</th>
                         </tr>
