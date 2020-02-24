@@ -16,7 +16,7 @@
     <!-- Starts here -->
 
     <!-- 1st row supervisor history -->
- @if ($user->AccountType() == "SPRVR")
+ @if ($user->AccountType() == "SPRVR" || $user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
 
 
     <div class="row mt-5">
@@ -47,6 +47,9 @@
                             <th scope="col">Employee ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Role</th>
+                            @if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+                                <th scope="col">Supervisor</th>
+                            @endif
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -59,6 +62,9 @@
                                     <td>{{ $session->AgentID() }}</td>
                                     <td>{{ $session->Agent()->FullName() }}</td>
                                     <td>{{ $session->Agent()->JobPosition() }}</td>
+                                    @if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
+                                        <td>{{ $session->Agent()->TeamLeader()->FullName() }}</td>
+                                    @endif
                                     <td>
                                         <a href="{{ route('session', [$session->SessionID()]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a>
                                     </td>
