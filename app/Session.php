@@ -273,23 +273,25 @@ class Session extends Model
                     "size" => 6, // Bootstrap grid size
                     "height" => 100, // In pixel
                     "value" => "",
-                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0 // Pending Level where this input is active
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
                 "improve" => [
                     "title" => "Areas of Improvement",
                     "size" => 6, // Bootstrap grid size
                     "height" => 100, // In pixel
                     "value" => "",
-                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0 // Pending Level where this input is active
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
                 "action" => [
                     "title" => "Action Plan",
                     "size" => 12, // Bootstrap grid size
                     "height" => 100, // In pixel
                     "value" => "",
-                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
                 ],
                 "commit" => [
@@ -297,14 +299,14 @@ class Session extends Model
                     "size" => 12, // Bootstrap grid size
                     "height" => 100, // In pixel
                     "value" => "",
-                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
                 ]
             ], "signatures" => [
+                $this->Agent()->EmployeeID() => false,
                 $this->Supervisor()->EmployeeID() => false,
-                $this->Manager()->EmployeeID() => false,
-                // $this->SeniorOM()->EmployeeID() => false,
-                $this->Head()->EmployeeID() => false
+                // $this->SeniorOM()->EmployeeID() => false
+                $this->Manager()->EmployeeID() => false
             ]
         ];
     }
