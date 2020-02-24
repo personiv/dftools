@@ -30,6 +30,7 @@
             }
         }
         $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]);
+        $prefix = $user->AccountType() == "MANGR" ? "Team " : ($user->AccountType() == "HEAD" ? "Cluster " : "");
     } else {
         // Productivity Improvement
         $row = App\Session::GetRowData(date('Y'), date('M'), $user->EmployeeID(), 'B', "PRODUCTIVITY RAW");
@@ -507,9 +508,9 @@
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
                             @if ($l == 0)
-                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @else
-                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @endif
                         <?php $l++; ?>
                         @endforeach
@@ -534,7 +535,10 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
                                         <th scope="col">Type</th>
-                                        <th scope="col">Status</th> 
+                                        @if ($user->AccountType() == "HEAD")
+                                        <th scope="col">Sent by</th>
+                                        @endif
+                                        <th scope="col">Status</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                     </thead>
@@ -546,6 +550,9 @@
                                                     <td>{{ $weekSession->Agent()->FullName() }}</td>
                                                     <td>{{ $weekSession->Agent()->JobPosition() }}</td>
                                                     <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    @if ($user->AccountType() == "HEAD")
+                                                    <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
+                                                    @endif
                                                     <td><span class="stats-pending">Pending</span></td>
                                                     <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
                                                 </tr>
@@ -558,6 +565,9 @@
                                                     <td>{{ $weekSession->Agent()->FullName() }}</td>
                                                     <td>{{ $weekSession->Agent()->JobPosition() }}</td>
                                                     <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    @if ($user->AccountType() == "HEAD")
+                                                    <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
+                                                    @endif
                                                     <td><span class="stats-completed">Completed</span></td>
                                                     <td></td>
                                                 </tr>
@@ -597,9 +607,9 @@
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
                             @if ($l == 0)
-                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @else
-                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}-except" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}-except" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @endif
                         <?php $l++; ?>
                         @endforeach
@@ -624,6 +634,9 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
                                         <th scope="col">Reason</th>
+                                        @if ($user->AccountType() == "HEAD")
+                                            <th scope="col">Recorded by</th>
+                                        @endif
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -633,6 +646,9 @@
                                                 <td>{{ $weekSession->Agent()->FullName() }}</td>
                                                 <td>{{ $weekSession->Agent()->JobPosition() }}</td>
                                                 <td>{{ $exception->exception_reason }}</td>
+                                                @if ($user->AccountType() == "HEAD")
+                                                    <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
