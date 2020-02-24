@@ -421,11 +421,14 @@ form {
     max-width: 160px !important;
 }
 
-/* Action button / Create session */
+/* Action button / Edit, Add, Add notes, view
+/  For Operation Manager / Triad view button /triad-btn-view\
+*/
 .action-btn-edit,
 .action-btn-add,
 .action-btn-addNotes,
-.action-btn-view {
+.action-btn-view,
+.triad-btn-view {
     background-color: var(--info) !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -436,7 +439,8 @@ form {
 .action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
 .action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active,
 .action-btn-addNotes:hover, .action-btn-addNotes:focus, .action-btn-addNotes:active,
-.action-btn-view:hover, .action-btn-view:focus, .action-btn-view:active {
+.action-btn-view:hover, .action-btn-view:focus, .action-btn-view:active,
+.triad-btn-view:hover, .triad-btn-view:focus, .triad-btn-view:active {
     background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
@@ -1028,7 +1032,7 @@ input[type=number]:disabled {
 }
 .nav-tabs {
     border-bottom: 1px solid #e9ecef !important;
-    padding: 15px 15px 0 !important;
+    padding: 0px 15px !important;
     margin-top: -.5rem;
 }
 
@@ -1038,7 +1042,7 @@ input[type=number]:disabled {
     letter-spacing: .5px;
     word-spacing: 1px;
     border: none !important;
-    padding: .5rem 1rem .7rem !important;
+    padding: 1.5rem 1rem !important;
     margin-left: 3px;
     margin-bottom: -4px !important;
     transition: border .1s ease;
@@ -1055,5 +1059,16 @@ input[type=number]:disabled {
 
 .tab-content {
     padding-top: .5em;
+}
+
+/* Button for Triad coaching only / View for triad coaching */
+.triad-btn-view {
+    padding: 5px 10px !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100% !important;
 }
 
