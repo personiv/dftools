@@ -33,3 +33,30 @@ Redesign and optimized base layout of whole site
 Added animation and graphical plugins to Dashboards
 
 Percentage: 50%
+
+----------
+
+3nd week (February 17, 2020 - February 21, 2020)
+
+Back-End
+Done fixing system vulnerabilities including database injection (specifically SQL injection), illegal page access, illegal page actions and limiting accesses
+Done integrating actual data to scorecard view
+Done adding Mid-month and whole month scorecard, triad, coaching and goal setting in the system
+Added server continuous polling for notification purposes
+Done integrating data for Supervisor's Dashboard
+Done integrating data for Agent's Dashboard
+Done integrating data for History tab
+Done integrating data for Feedback form
+Partially done integrating data for Manager's Dashboard
+Partially done integrating data for Operations Head's Dashboard
+
+Front-End
+Done designing Supervisor's Dashboard
+Done designing Agent's Dashboard
+Done designing History tab
+Done designing Feedback form
+Partially done designing Manager's Dashboard
+Partially done designing Operations Head's Dashboard
+Added notification box for notification purposes
+
+Percentage: 80%
