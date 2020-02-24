@@ -116,11 +116,7 @@ function createCircle(elementId, trailColor, strokeColor, value, max) {
       circle.path.setAttribute('stroke-width', state.width);
 
       var value = Math.round(circle.value() * max);
-      if (value === 0) {
-        circle.setText('');
-      } else {
-        circle.setText(value);
-      }
+      circle.setText(value);
     }
   });
   bar.text.style.fontFamily = '"Open sans", Helvetica, sans-serif';
