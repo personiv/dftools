@@ -25,8 +25,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datepicker3.min.css') }}">
-    
-    
 </head>
 <body>
 
@@ -192,7 +190,8 @@
                                 <label class="custom-label" for="session-type">Session Type:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
                                     <select class="line-effect custom-select" id="session-type" name="session-type" required>
-                                        @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
+                                        <?php $tagType = $user->AccountType() == "SPRVR" ? "SESSION" : ($user->AccountType() == "MANGR" ? "SESSION2" : "SESSION3"); ?>
+                                        @foreach (App\Tag::where("tag_type", $tagType)->get() as $tag)
                                             <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
                                         @endforeach
                                     </select>

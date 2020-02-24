@@ -1,9 +1,3 @@
-@extends('layouts.app')
-@section('title', 'DFTools — Session')
-@section('sidebar', URL::asset('css/sidebar.css'))
-@section('css', URL::asset('css/session.css'))
-@section('js', URL::asset('js/session.js'))
-
 <?php
     $user = session("user");
     $agent = $session->Agent();
@@ -16,26 +10,40 @@
     $s = 0;
 ?>
 
-@section('bladescript')
-<script type="text/javascript">
-function updateFieldValue(e) {
-    request("{{ action('HomeController@updateFieldValue') }}", JSON.stringify({
-        fieldName: e.id.split('-')[1],
-        fieldValue: e.value,
-        sessionID: "{{ $session->SessionID() }}"
-    }), null)
-}
-</script>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="cache-control" content="private, max-age=0, no-cache, must-revalidate">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>Print Session</title>
+    
+    <!-- Global Style -->
+    <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 
-@section('content')
+    <!-- Page Style and Script -->
+    <link rel="stylesheet" href="{{ URL::asset('css/print.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('css/session.css') }}">
+    <script type="text/javascript" src="{{ URL::asset('js/session.js') }}"></script>
+    
+    <!-- Plugins -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ URL::asset('css/bootstrap-datepicker3.min.css') }}">
+</head>
+<body>
 
-<!-- Print section -->
-<div class="container-fluid mb-4">
-    <a href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><span>Print This Session</span></a>
+<!-- Document Header section -->
+<div>
+
 </div>
 
-<!-- Resource's credential -->
+<!-- Resource's Credential Section -->
 <div class="container-fluid mb-4" style="color: var(--dark-color);">
     <div class="row">
         <div class="col">
@@ -53,6 +61,7 @@ function updateFieldValue(e) {
     </div>
 </div>
 
+<!-- Tables Section -->
 @if (!empty($scorecard))
 <div class="container-fluid pt-4">
     <div class="row">
@@ -121,8 +130,8 @@ function updateFieldValue(e) {
 </div>
 @endif
 
+<!-- Additional Table Section -->
 @if (!empty($scorecard) || !empty($scorecardGoal))
-<!-- Target, Score Tiering -->
 <div class="container-fluid pt-4">
     <div class="row">
         <div class="col">
@@ -209,6 +218,7 @@ function updateFieldValue(e) {
 </div>
 @endif
 
+<!-- Field Section -->
 <div class="container-fluid pt-4">
     <div class="row">
 @foreach ($fields as $fieldName => $fieldProperties)
@@ -229,32 +239,15 @@ function updateFieldValue(e) {
             <div class="card mb-4">
                 <div class="card-header bg-dark text-white">{{ $field_title }}</div>
                 <div class="card-body">
-                    @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
-                        @if (array_key_exists('instant', $fieldProperties) && $fieldProperties['instant'])
-                            <textarea class="session-field" id="session-{{ $fieldName }}" placeholder="* Required" onchange="updateFieldValue(this)" <?= $customHeight ?>>{{ $field_value }}</textarea>
-                        @else
-                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" <?= $customHeight ?> required>{{ $field_value }}</textarea>
-                        @endif
-                    @else
-                        <div class="session-field" <?= $customHeight ?>>{{ $field_value }}</div>
-                    @endif
+                    <div class="session-field" <?= $customHeight ?>>{{ $field_value }}</div>
                 </div>
-                @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()))
-                    <form action="{{ action('HomeController@resetPending') }}" method="post">
-                        <div class="card-footer">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
-                            <input type="hidden" name="session-pending" value="{{ $field_pending }}" required>
-                            <input type="hidden" name="session-field" value="{{ $fieldName }}" required>
-                            <input type="submit" class="btn btn-danger" value="Reset">
-                        </div>
-                    </form>
-                @endif
             </div>
         </div>
 @endforeach
     </div>
 </div>
+
+<!-- Signee Section -->
 <div class="container-fluid mt-5">
     <div class="row">
         @foreach ($signees as $employeeID => $signed)
@@ -263,41 +256,25 @@ function updateFieldValue(e) {
                 <div class="signi-container">
                 <div class="font-weight-bold" style="color: var(--dark-color);">{{ $employee->JobPosition() }}</div>
                 <div class="mb-3" style="color: var(--dark-color);">{{ $employee->FullName() }}</div>
-                @if ($employeeID == $user->EmployeeID())
-                    @if ($pendingLevel == $s)
-                        <form id="session-form" action="{{ action('HomeController@movePendingLevel') }}" method="post">
-                            {{ csrf_field() }}
-                            <div id="session-verify-trigger-wrapper" class="custom-control custom-checkbox mt-3">
-                                <input type="checkbox" class="custom-control-input" id="session-verify-trigger" onclick="showVerify()">
-                                <label class="custom-control-label" for="session-verify-trigger">{{ $session::SIGNEDVERBIAGE }}</label>
-                            </div>
-                            <div id="session-verify-wrapper" style="display: none;">
-                                <div class="effect-container"> <!-- input line animation -->
-                                    <input type="password" name="session-verify-password" class="line-effect form-control" id="session-verify-password" placeholder="Verify password" required>
-                                    <span class="focus-border">
-                                    <i></i>
-                                    </span>
-                                </div> <!-- input line animation end -->
-                                <div>
-                                    <input type="hidden" name="session-id" value="{{ $session->SessionID() }}" required>
-                                    <input type="submit" class="signi-btn" value="Sign">
-                                </div>
-                            </div>
-                        </form>
-                    @elseif ($pendingLevel > $s)
+                    @if ($signed)
                         <label>{{ $session::SIGNEDVERBIAGE }}</label>
                     @else
-                        <label>{{ $session::PENDINGVERBIAGE }}</label>
+                        <label>{{ $session::UNSIGNEDVERBIAGE }}</label>
                     @endif
-                @elseif ($pendingLevel > $s)
-                    <label>{{ $session::SIGNEDVERBIAGE }}</label>
-                @else
-                    <label>{{ $session::UNSIGNEDVERBIAGE }}</label>
-                @endif
                 </div>
             </div>
             <?php $s++ ?>
         @endforeach
     </div>
 </div>
-@endsection
+
+<!-- Plugins -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<!-- Global Script -->
+<script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+
+</body>
+</html>

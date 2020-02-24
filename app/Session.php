@@ -142,7 +142,7 @@ class Session extends Model
         return $this->getAttribute("session_data");
     }
 
-    protected function GenerateScorecardData() {
+    protected function GenerateScorecardData($wholeMonth = false) {
         if ($this->Agent() == null) return null;
         $year = $this->Year();
         $month = $this->Month();
@@ -181,6 +181,7 @@ class Session extends Model
         }
         return [
             "scorecard" => $scorecard,
+            "isWholeMonth" => $wholeMonth,
             "fields" => [
                 "notes" => [
                     "title" => "Notes",
@@ -236,7 +237,7 @@ class Session extends Model
                     "title" => "Action Plan/s",
                     "size" => 12, // Bootstrap grid size
                     "value" => "",
-                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0, // Pending Level where this input is active
                     "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
@@ -252,7 +253,7 @@ class Session extends Model
                     "size" => 12, // Bootstrap grid size
                     "height" => 50, // In pixel
                     "value" => "",
-                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0, // Pending Level where this input is active
                     "instant" => true // If the input is instantly saved after onchange event without signing
                 ]
@@ -288,7 +289,7 @@ class Session extends Model
                     "size" => 12, // Bootstrap grid size
                     "height" => 100, // In pixel
                     "value" => "",
-                    "for" => $this->Manager()->EmployeeID(), // Employee who can edit the input
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
                 ],
                 "commit" => [
@@ -313,6 +314,9 @@ class Session extends Model
         switch ($this->Type()) {
             case 'SCORE':
                 $data = $this->GenerateScorecardData();
+                break;
+            case 'SCORE2':
+                $data = $this->GenerateScorecardData(true);
                 break;
             case 'GOAL':
                 $data = $this->GenerateGoalSettingData();

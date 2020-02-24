@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Poll;
 
-class AdminControl
+class ManagerControl
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,8 @@ class AdminControl
     public function handle($request, Closure $next) {
         $user = $request->session()->get("user");
         if ($user != null) {
-            if ($user->EmployeeID() == "admin") {
-                if ($user->AccountType() == "ADMIN")
-                    return $next($request);
+            if ($user->AccountType() == "MANGR") {
+                return $next($request);
             } else {
                 Poll::Queue("System", $user->EmployeeID(), "Access denied");
                 redirect()->route("dashboard");
