@@ -7,14 +7,20 @@
 @php
     $user = session("user");
     $userTeam = $user->TeamMembers();
-    $exceptions = $user->ExceptionsThisWeek();
     if ($user->AccountType() == "SPRVR") {
+        $exceptions = $user->ExceptionsThisWeek();
         $coachingSummary = $user->CoachingSummaryThisWeek();
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
         $totalCoaching = $user->TotalOfCoachingSummaryThisWeek();
     } else if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
+        $exceptionCount = 0;
+        $agentCount = 0;
+        foreach ($user->TeamMembers() as $leader) {
+            $exceptionCount += $leader->ExceptionsThisWeek()->count();
+            $agentCount += $leader->TeamMembers()->count();
+        }
         $coachingSummary = array("Pending" => [], "Completed" => []);
         foreach ($user->SessionsThisWeek() as $weekSession) {
             if (!$weekSession->IsSigned($user->EmployeeID())) {
@@ -63,6 +69,7 @@
     @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
         createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
         createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
+        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptionCount }}, {{ $agentCount }});
     @else
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")

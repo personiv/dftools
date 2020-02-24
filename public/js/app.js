@@ -95,6 +95,7 @@ function isToggled() {
 // Progress bar in dashboard
 // progressbar.js
 function createCircle(elementId, trailColor, strokeColor, value, max) {
+  var lastValue = 0;
   var bar = new ProgressBar.Circle(document.getElementById(elementId), {
     color: trailColor,
 
@@ -116,15 +117,19 @@ function createCircle(elementId, trailColor, strokeColor, value, max) {
       circle.path.setAttribute('stroke-width', state.width);
 
       var value = Math.round(circle.value() * max);
-      circle.setText(value);
+      if (value === 0) {
+        circle.setText('0');
+      } else {
+        circle.setText(value);
+      }
     }
   });
   bar.text.style.fontFamily = '"Open sans", Helvetica, sans-serif';
   bar.text.style.fontSize = '2rem';
 
-  bar.animate(value / max);  // Number from 0.0 to 1.0
-  // end
-}
+  if (max != 0) bar.animate(value / max);  // Number from 0.0 to 1.0
+  else bar.animate(value / 0.1);  // Number from 0.0 to 1.0
+} // end
 
 // Lazy fill progress bar in top resource card
 function lazyFill(selector, width) {
