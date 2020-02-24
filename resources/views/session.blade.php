@@ -30,6 +30,11 @@ function updateFieldValue(e) {
 
 @section('content')
 
+<!-- Print section -->
+<div class="container-fluid mb-4">
+    <a href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><span>Print This Session</span></a>
+</div>
+
 <!-- Resource's credential -->
 <div class="container-fluid mb-4" style="color: var(--dark-color);">
     <div class="row">

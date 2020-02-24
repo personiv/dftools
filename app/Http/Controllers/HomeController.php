@@ -38,8 +38,14 @@ class HomeController extends Controller {
 
     function session($sid) {
         $session = Session::where("session_id", $sid)->first();
-        if ($session == null) return redirect()->route("dashboard")->with(["msg" => "Session with ID '$sid' does not exists"]);
+        if ($session == null) return redirect()->route("dashboard");
         return view('session')->with(["session" => $session]);
+    }
+
+    function print($sid) {
+        $session = Session::where("session_id", $sid)->first();
+        if ($session == null) return redirect()->route("dashboard");
+        return view('print')->with(["session" => $session]);
     }
 
     function createSession(Request $r) {

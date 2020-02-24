@@ -49,3 +49,5 @@ Route::post('/view-history-sessions', 'HomeController@viewHistorySessions')->mid
 Route::post('/queue-poll', 'HomeController@queuePoll')->middleware('granted');
 Route::post('/get-polls', 'HomeController@getPolls')->middleware('granted');
 Route::post('/dequeue-poll', 'HomeController@dequeuePoll')->middleware('granted');
+
+Route::get('/print/{sid}', 'HomeController@print')->middleware('granted')->name('print');
