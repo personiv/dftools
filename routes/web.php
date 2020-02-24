@@ -38,7 +38,7 @@ Route::get('/dashboard', function() { return view('dashboard'); })->middleware('
 Route::get('/history', function() { return view('history'); })->middleware('granted')->name('history');
 Route::post('/add-exception', 'HomeController@addException')->middleware('supervisor');
 Route::get('/delete-exception/{eid}', 'HomeController@deleteException')->middleware('supervisor')->name("deleteexception");
-Route::post('/create-session', 'HomeController@createSession')->middleware('supervisor');
+Route::post('/create-session', 'HomeController@createSession')->middleware('leader');
 Route::post('/move-pending-level', 'HomeController@movePendingLevel')->middleware('granted');
 Route::post('/reset-pending', 'HomeController@resetPending')->middleware('granted');
 Route::post('/update-field', 'HomeController@updateFieldValue')->middleware('granted');
