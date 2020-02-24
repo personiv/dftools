@@ -39,36 +39,80 @@
 <body>
 
 <!-- Document Header section -->
-<div>
+<div class="container-fluid">
 
-</div>
-
-<!-- Resource's Credential Section -->
-<div class="container-fluid mb-4" style="color: var(--dark-color);">
+    <!-- 1st row / Company logo and company tower with session form -->
     <div class="row">
-        <div class="col">
-            <div><span class="font-weight-bold">Last Name:</span>&nbsp;&nbsp;{{ $agent->FirstName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span>&nbsp;&nbsp;{{ $agent->LastName() }}</div>
+        <div class="col d-flex justify-content-start align-items-center">
+            <div class="comp-logo-container">
+                <img class="company-logo" src="{{ URL::asset('images/personiv-logo.png') }}" alt="Personiv">
+            </div>
         </div>
-        <div class="col">
-            <div><span class="font-weight-bold">Status:</span>&nbsp;&nbsp;{{ $agent->Status() }}</div>
-            <div><span class="font-weight-bold">Process:</span>&nbsp;&nbsp;{{ $agent->JobPosition() }}</div>
-        </div>
-        <div class="col">
-            <div><span class="font-weight-bold">Proficiency:</span>&nbsp;&nbsp;{{ $agent->ProficiencyDetail() }}</div>
-            <div><span class="font-weight-bold">Period Covered:</span>&nbsp;&nbsp;{{ $session->DateCreated()->format('Y-m-d') }}</div>
+        <div class="col d-flex justify-content-end align-items-center">
+            <div class="comp-tower-form">
+                <div class="comp-df">
+                    Digital Fulfillment Tower
+                </div>
+                <div class="comp-form">
+                    Coaching Form
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- 2nd row / Session type -->
+    <div class="row">
+        <div class="col">
+            <div class="session-type-container d-flex justify-content-center">
+                <div class="session-styling">
+                    Coaching Session
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3rd row / Field items -->
+    <div class="row field-container">
+
+        <div class="col">
+            <div class="fields-name">
+                <span class="mr-2">Shift Date:</span> <!-- Field type -->
+                <span>{{ $session->DateCreated()->format('Y-m-d') }}</span>
+            </div>
+
+            <div class="fields-name">
+                <span class="mr-2">Time:</span> <!-- Field type -->
+                <span>{{ $session->DateCreated()->format('h:i A') }}</span>
+            </div>
+
+            <div class="fields-name">
+                <span class="mr-2">Venue:</span> <!-- Field type -->
+                <span>Digital Fulfillment Production Area</span>
+            </div>
+        </div> 
+
+        <div class="col">
+            <div class="fields-name">
+                <span class="mr-2">Facilitator:</span> <!-- Field type -->
+                <span></span>
+            </div>
+            <div class="fields-name">
+                <span class="mr-2">Participant/s:</span> <!-- Field type -->
+                <span>{{ $agent->FullName() . " & " . $agent->TeamLeader()->FullName() }} </span>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- Tables Section -->
 @if (!empty($scorecard))
-<div class="container-fluid pt-4">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col-lg">
             <div class="table-responsive session-container">
                 <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
-                    <thead class="thead-dark">
+                    <thead class="thead-custom">
                         <tr>
                             <th scope="col">Measure Classification</th>
                             <th scope="col">Item</th>
@@ -132,7 +176,7 @@
 
 <!-- Additional Table Section -->
 @if (!empty($scorecard) || !empty($scorecardGoal))
-<div class="container-fluid pt-4">
+<div class="container-fluid mb-4">
     <div class="row">
         <div class="col">
 
@@ -219,7 +263,7 @@
 @endif
 
 <!-- Field Section -->
-<div class="container-fluid pt-4">
+<div class="container-fluid mb-4">
     <div class="row">
 @foreach ($fields as $fieldName => $fieldProperties)
     <?php
@@ -248,7 +292,7 @@
 </div>
 
 <!-- Signee Section -->
-<div class="container-fluid mt-5">
+<div class="container-fluid">
     <div class="row">
         @foreach ($signees as $employeeID => $signed)
             <?php $employee = App\Credential::where("credential_user", $employeeID)->first() ?>

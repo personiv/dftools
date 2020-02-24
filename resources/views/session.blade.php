@@ -37,19 +37,35 @@ function updateFieldValue(e) {
 
 <!-- Resource's credential -->
 <div class="container-fluid mb-4" style="color: var(--dark-color);">
-    <div class="row">
-        <div class="col">
-            <div><span class="font-weight-bold">Last Name:</span>&nbsp;&nbsp;{{ $agent->FirstName() }}</div>
-            <div><span class="font-weight-bold">First Name:</span>&nbsp;&nbsp;{{ $agent->LastName() }}</div>
+    <div class="row field-container">
+
+    <div class="col">
+        <div class="fields-name">
+            <span class="mr-2">Shift Date:</span> <!-- Field type -->
+            <span>{{ $session->DateCreated()->format('Y-m-d') }}</span>
         </div>
-        <div class="col">
-            <div><span class="font-weight-bold">Status:</span>&nbsp;&nbsp;{{ $agent->Status() }}</div>
-            <div><span class="font-weight-bold">Process:</span>&nbsp;&nbsp;{{ $agent->JobPosition() }}</div>
+
+        <div class="fields-name">
+            <span class="mr-2">Time:</span> <!-- Field type -->
+            <span>{{ $session->DateCreated()->format('h:i A') }}</span>
         </div>
-        <div class="col">
-            <div><span class="font-weight-bold">Proficiency:</span>&nbsp;&nbsp;{{ $agent->ProficiencyDetail() }}</div>
-            <div><span class="font-weight-bold">Period Covered:</span>&nbsp;&nbsp;{{ $session->DateCreated()->format('Y-m-d') }}</div>
+
+        <div class="fields-name">
+            <span class="mr-2">Venue:</span> <!-- Field type -->
+            <span>Digital Fulfillment Production Area</span>
         </div>
+    </div> 
+
+    <div class="col">
+        <div class="fields-name">
+            <span class="mr-2">Facilitator:</span> <!-- Field type -->
+            <span></span>
+        </div>
+        <div class="fields-name">
+            <span class="mr-2">Participant/s:</span> <!-- Field type -->
+            <span>{{ $agent->FullName() . " & " . $agent->TeamLeader()->FullName() }} </span>
+        </div>
+    </div>
     </div>
 </div>
 
@@ -59,7 +75,7 @@ function updateFieldValue(e) {
         <div class="col-lg">
             <div class="table-responsive session-container">
                 <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
-                    <thead class="thead-dark">
+                    <thead class="thead-custom">
                         <tr>
                             <th scope="col">Measure Classification</th>
                             <th scope="col">Item</th>
