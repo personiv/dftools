@@ -192,7 +192,8 @@
                                 <label class="custom-label" for="session-type">Session Type:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
                                     <select class="line-effect custom-select" id="session-type" name="session-type" required>
-                                        @foreach (App\Tag::where("tag_type", "SESSION")->get() as $tag)
+                                        <?php $tagType = $user->AccountType() == "SPRVR" ? "SESSION" : ($user->AccountType() == "MANGR" ? "SESSION2" : "SESSION3"); ?>
+                                        @foreach (App\Tag::where("tag_type", $tagType)->get() as $tag)
                                             <option class="modal-option" value="{{ $tag->Name() }}">{{ $tag->Description() }}</option>
                                         @endforeach
                                     </select>

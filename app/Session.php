@@ -142,7 +142,7 @@ class Session extends Model
         return $this->getAttribute("session_data");
     }
 
-    protected function GenerateScorecardData() {
+    protected function GenerateScorecardData($wholeMonth = false) {
         if ($this->Agent() == null) return null;
         $year = $this->Year();
         $month = $this->Month();
@@ -181,6 +181,7 @@ class Session extends Model
         }
         return [
             "scorecard" => $scorecard,
+            "isWholeMonth" => $wholeMonth,
             "fields" => [
                 "notes" => [
                     "title" => "Notes",
@@ -313,6 +314,9 @@ class Session extends Model
         switch ($this->Type()) {
             case 'SCORE':
                 $data = $this->GenerateScorecardData();
+                break;
+            case 'SCORE2':
+                $data = $this->GenerateScorecardData(true);
                 break;
             case 'GOAL':
                 $data = $this->GenerateGoalSettingData();

@@ -47,10 +47,14 @@ class CreateTagsTable extends Migration
         addTag("SYSTEM", "ADMIN", "System Administrator");
 
         // Session Types
-        addTag("SESSION", "SCORE", "Scorecard");
+        addTag("SESSION", "SCORE", "Mid-month Scorecard");
+        addTag("SESSION", "SCORE2", "Whole Month Scorecard");
         addTag("SESSION", "GOAL", "Goal Setting");
         addTag("SESSION", "COACH", "Coaching");
-        addTag("SESSION", "TRIAD", "Triad Coaching");
+        // SESSION2 for managers
+        addTag("SESSION2", "TRIAD", "Triad Coaching");
+        // SESSION3 for head
+        // ....
     }
 
     /**
