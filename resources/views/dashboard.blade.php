@@ -497,7 +497,7 @@
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
                     <div class="dboard-title">Summary</div>
-                    <div class="dboard-othtext">of For Coaching, Pending and Completed</div>
+                    <div class="dboard-othtext">of Pending and Completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
                 
@@ -582,7 +582,7 @@
     <!-- 3rd row manager/head dashboard -->
     <div class="row mt-5">
 
-        <!-- Summary section -->
+        <!-- Exception section -->
         <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
@@ -597,9 +597,9 @@
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
                             @if ($l == 0)
-                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
                             @else
-                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">Team {{ $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}-except" aria-selected="true">Team {{ $leader->FirstName() }}</a>
                             @endif
                         <?php $l++; ?>
                         @endforeach
@@ -611,9 +611,9 @@
                     <?php $m = 0; ?>
                     @foreach ($userTeam as $leader)
                         @if ($m == 0)
-                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab-except">
                         @else
-                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab-except">
                         @endif
                         <div class="scrollbar scrollbar-primary">
                             <div class="table-responsive px-4 pt-0 pb-4">
@@ -623,34 +623,17 @@
                                         <th scope="col">Employee ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Role</th>
-                                        <th scope="col">Reason</th> 
-                                        <th scope="col">Action</th>
+                                        <th scope="col">Reason</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($coachingSummary["Pending"] as $weekSession)
-                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
-                                                <tr>
-                                                    <td>{{ $weekSession->AgentID() }}</td>
-                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
-                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
-                                                    <td>{{ $weekSession->TypeDescription() }}</td>
-                                                    <td><span class="stats-pending">Pending</span></td>
-                                                    <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
-                                                </tr>
-                                            @endif
-                                        @endforeach
-                                        @foreach ($coachingSummary["Completed"] as $weekSession)
-                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
-                                                <tr>
-                                                    <td>{{ $weekSession->AgentID() }}</td>
-                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
-                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
-                                                    <td>{{ $weekSession->TypeDescription() }}</td>
-                                                    <td><span class="stats-completed">Completed</span></td>
-                                                    <td></td>
-                                                </tr>
-                                            @endif
+                                        @foreach ($leader->ExceptionsThisWeek() as $exception)
+                                            <tr>
+                                                <td>{{ $weekSession->AgentID() }}</td>
+                                                <td>{{ $weekSession->Agent()->FullName() }}</td>
+                                                <td>{{ $weekSession->Agent()->JobPosition() }}</td>
+                                                <td>{{ $exception->exception_reason }}</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
