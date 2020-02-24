@@ -514,6 +514,9 @@
                             @endif
                         <?php $l++; ?>
                         @endforeach
+                                <div class="excp-btn d-flex justify-content-end align-items-center ml-auto">
+                                    <span id="triad-btn" class="triad-btn-view"><i class="fas fa-pager mr-2"></i>Triad Coaching Summary</span>
+                                </div>
                     </div>
                 </nav>
 
