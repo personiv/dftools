@@ -20,7 +20,6 @@
     <meta http-equiv="cache-control" content="private, max-age=0, no-cache, must-revalidate">
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
-    <title>Print Session</title>
     
     <!-- Global Style -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
@@ -319,6 +318,10 @@
 
 <!-- Global Script -->
 <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+<script type="text/javascript">
+    window.onload = window.print;
+    window.onafterprint = window.close;
+</script>
 
 </body>
 </html>
