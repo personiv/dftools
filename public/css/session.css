@@ -4,6 +4,15 @@
     line-height: 24px;
 }
 
+.session-container .table .thead-custom {
+    background: #343A40 !important;
+    -webkit-print-color-adjust:exact;
+}
+
+.session-container table thead tr th {
+    color: var(--light-color) !important;
+}
+
 /* Table title/headings */
 #scorecard thead tr th {
     text-transform: uppercase;

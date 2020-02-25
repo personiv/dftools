@@ -1042,7 +1042,7 @@ input[type=number]:disabled {
     letter-spacing: .5px;
     word-spacing: 1px;
     border: none !important;
-    padding: 1.5rem 1rem !important;
+    padding: 1.5rem 1rem 1rem !important;
     margin-left: 3px;
     margin-bottom: -4px !important;
     transition: border .1s ease;

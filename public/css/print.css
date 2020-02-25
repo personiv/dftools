@@ -1,5 +1,85 @@
+body, html {
+    background-color: var(--light-color) !important;
+    font-family: Calibri !important;
+}
+
+/* For coaching table */
+table th, table td {
+    white-space: pre-line !important;
+    line-height: 18px;
+}
+
+/* 1st row styling */
+.comp-tower-form {
+    text-align: right;
+    line-height: 28px;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+    padding: 2em 0;
+}
+
+.comp-logo-container img {
+    width: 60%;
+}
+
+.comp-tower-form .comp-df {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark-color);
+    text-transform: uppercase;
+}
+
+.comp-tower-form .comp-form {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+} /* end */
+
+/* 2nd row styling */
+.session-type-container {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--light-color);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+    background-color: var(--primary-color);
+    padding: .1em;
+} /* end */
+
+/* 3rd row styling */
+.field-container {
+    font-weight: 600;
+    color: var(--dark-color);
+    padding: 2em 0;
+}
+
+.field-container .fields-name span:first-child {
+    text-transform: uppercase;
+} /* end */
+
+.extra-heading {
+    padding: 10px !important;
+}
+
+.session-tiering-container .table thead th {
+    background: #808080 !important;
+    color: var(--light) !important;
+}
+
+.session-field {
+    height: 100px !important;
+}
+
 @media print {
-    body {
-        page-break-inside: avoid;
+    .session-container .table .thead-custom tr th {
+        background: #343A40 !important;
+        -webkit-print-color-adjust:exact;
+    }
+
+    .session-container .table thead tr th {
+        color: var(--light-color) !important;
     }
 }
+
+
