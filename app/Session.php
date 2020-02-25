@@ -63,7 +63,14 @@ class Session extends Model
     function Head() { return $this->Manager()->TeamLeader(); }
     function Signees() { return $this->Data()["signatures"]; }
     function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
-    function SigneeLevel($employeeID) { return array_keys($this->Data()["signatures"], $employeeID)[0]; }
+    function SigneeLevel($employeeID) {
+        $c = 0;
+        foreach ($this->Data()["signatures"] as $id => $signed) {
+            if ($employeeID == $id) return $c;
+            $c++;
+        }
+        return -1;
+    }
     function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }
     function IsNextSignee($employeeID) { return array_keys($this->Data()["signatures"])[$this->PendingLevel()] == $employeeID; }
 

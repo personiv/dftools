@@ -239,7 +239,7 @@ function updateFieldValue(e) {
                         <div class="session-field" <?= $customHeight ?>>{{ $field_value }}</div>
                     @endif
                 </div>
-                @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()))
+                @if ($field_pending < $pendingLevel && $field_for != $user->EmployeeID() && $session->IsSignee($user->EmployeeID()) && !$session->IsSigned($user->EmployeeID()) && $session->SigneeLevel($field_for) < $session->SigneeLevel($user->EmployeeID()))
                     <form action="{{ action('HomeController@resetPending') }}" method="post">
                         <div class="card-footer">
                             {{ csrf_field() }}
