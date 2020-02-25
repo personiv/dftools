@@ -75,8 +75,20 @@ class HomeController extends Controller {
 
     function movePendingLevel(Request $r) {
         $session = Session::where("session_id", $r->input("session-id"))->first();
-        $session->MovePendingLevel($r);
-        return redirect()->route('dashboard');
+        if (!$session->MovePendingLevel($r)) {
+            // Notify the signee about the error
+            Poll::Queue("System", $r->session()->get("user")->EmployeeID(), "Failed to verify when signing the pending session");
+            return redirect()->route('session', [$r->input("session-id")]);
+        } else {
+            // Notify the next signee
+            foreach ($session->Signees() as $signeeID => $signed) {
+                if ($session->IsNextSignee($signeeID)) {
+                    Poll::Queue("System", $signeeID, $r->session()->get("user")->FullName() . " signed his/her pending session");
+                    break;
+                }
+            }
+            return redirect()->route('dashboard');
+        }
     }
     
     function resetPending(Request $r) {

@@ -89,10 +89,10 @@ class Session extends Model
         $userID = $r->session()->get("user")->EmployeeID();
 
         // Verify if the sender is authorized through password validation
-        if ($r->session()->get("user")->Password() != $r->input("session-verify-password")) return;
+        if ($r->session()->get("user")->Password() != $r->input("session-verify-password")) return false;
 
         // Check if the userID exists in signees and if the userID is signing in proper order
-        if (!$this->IsSignee($userID) || !$this->IsNextSignee($userID)) return;
+        if (!$this->IsSignee($userID) || !$this->IsNextSignee($userID)) return false;
         
         // Finally sign the user's part
         $data["signatures"][$userID] = true;
@@ -108,14 +108,7 @@ class Session extends Model
 
         $this->setAttribute("session_data", $data);
         $this->save();
-
-        // Notify all other signee
-        foreach ($session->Signees() as $signeeID => $signed) {
-            if ($session->IsNextSignee($signeeID)) {
-                Poll::Queue("System", $signeeID, $r->session()->get("user")->FullName() . " signed his pending session");
-                break;
-            }
-        }
+        return true;
     }
 
     function ResetPending(Request $r) {
