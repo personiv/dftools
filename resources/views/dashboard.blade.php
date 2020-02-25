@@ -7,6 +7,10 @@
 @php
     $user = session("user");
     $userTeam = $user->TeamMembers();
+
+    // Pending Session
+    $mySessions = $user->MySessionsThisWeek();
+
     if ($user->AccountType() == "SPRVR") {
         $exceptions = $user->ExceptionsThisWeek();
         $coachingSummary = $user->CoachingSummaryThisWeek();
@@ -42,7 +46,6 @@
         $deficitPoints = $totalTarget - $productivityPoints;
 
         // Pending Session
-        $mySessions = $user->MySessionsThisWeek();
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
 
@@ -249,45 +252,29 @@
                     <table class="table table-striped table-borderless">
                         <thead>
                         <tr>
-                            <th scope="col">Employee ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Role</th>
+                            <th scope="col">Date</th>
                             <th scope="col">Type</th>
+                            <th scope="col">Sent by</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                            @foreach ($mySessions as $summaryStatus => $summaryItems)
                                 @for ($i = 0; $i < count($summaryItems); $i++)
-                                    <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
-                                    @if ($summaryStatus == "For Coaching")
+                                    @if ($summaryStatus == "Pending")
                                         <tr>
-                                            <td>{{ $summaryEmployeeID }}</td>
-                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
-                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
-                                            <td>N/A</td>
-                                            <td>
-                                                <!-- Button trigger modal -->
-                                                <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
-                                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @elseif ($summaryStatus == "Pending")
-                                        <tr>
-                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
-                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
-                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
                                             <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
                                             <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
                                         </tr>
                                     @elseif ($summaryStatus == "Completed")
                                         <tr>
-                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
-                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
-                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
                                             <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
                                             <td><span class="stats-completed">Completed</span></td>
                                             <td></td>
                                         </tr>
