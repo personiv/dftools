@@ -72,7 +72,11 @@ class Session extends Model
         return -1;
     }
     function IsSigned($employeeID) { return $this->Data()["signatures"][$employeeID]; }
-    function IsNextSignee($employeeID) { return array_keys($this->Data()["signatures"])[$this->PendingLevel()] == $employeeID; }
+    function IsNextSignee($employeeID) {
+        if (count(array_keys($this->Signees())) > $this->PendingLevel())
+            return array_keys($this->Signees())[$this->PendingLevel()] == $employeeID;
+        else return false;
+    }
 
     function PendingLevel() {
         $level = 0;
@@ -246,8 +250,7 @@ class Session extends Model
                     "size" => 12, // Bootstrap grid size
                     "value" => "",
                     "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0, // Pending Level where this input is active
-                    "instant" => true // If the input is instantly saved after onchange event without signing
+                    "pending" => 0 // Pending Level where this input is active
                 ],
                 "commit" => [
                     "title" => "Commitments & Targets",
@@ -262,8 +265,7 @@ class Session extends Model
                     "height" => 50, // In pixel
                     "value" => "",
                     "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
-                    "pending" => 0, // Pending Level where this input is active
-                    "instant" => true // If the input is instantly saved after onchange event without signing
+                    "pending" => 0 // Pending Level where this input is active
                 ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
