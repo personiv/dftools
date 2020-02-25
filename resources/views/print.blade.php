@@ -63,7 +63,7 @@
         <div class="col">
             <div class="session-type-container d-flex justify-content-center">
                 <div class="session-styling">
-                    Coaching Session
+                    {{ $session->TypeDescription() }} — Coaching Session
                 </div>
             </div>
         </div>
@@ -321,8 +321,8 @@
 <!-- Page Script -->
 <script type="text/javascript" src="{{ URL::asset('js/session.js') }}"></script>
 <script type="text/javascript">
-    window.onload = window.print;
-    // window.onafterprint = window.close;
+    window.print();
+    window.onafterprint = window.close;
 </script>
 
 </body>
