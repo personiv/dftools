@@ -270,6 +270,60 @@
                 </div>
             </div>
         </div>
+        <!--
+        <
+        <
+        <   Edit exception data
+        <
+        <
+        -->
+        <!-- Modal -->
+        <div class="modal fade" id="editExceptionModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Exception</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ action('HomeController@addException') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="input-group mb-4">
+                                <label class="custom-label" for="exception-agent">Resource:</label>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <select class="line-effect custom-select" id="exception-agent" name="exception-agent" required>
+                                        <?php $members = $user->TeamMembers(); ?>
+                                        @for ($i = 0; $i < count($members); $i++)
+                                        <?php $member = $members[$i]; ?>
+                                        <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
+                                        @endfor
+                                    </select>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
+                            </div>
+
+                            <div class="input-group">
+                                <label class="custom-label" for="exception-reason">Reason:</label>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <textarea class="line-effect form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required>{{ $exception->exception_reason }}</textarea>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         @endif
         <!--
         <
@@ -431,6 +485,7 @@
     <script src="{{ URL::asset('js/jquery.waypoints.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/progressbar.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     @yield('bladescript')
