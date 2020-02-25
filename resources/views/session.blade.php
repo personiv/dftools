@@ -31,12 +31,23 @@ function updateFieldValue(e) {
 @section('content')
 
 <!-- Print section -->
-<div class="container-fluid mb-4">
-    <a href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><span>Print This Session</span></a>
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="col">
+            <div class="session-type">
+                {{ $session->TypeDescription() }} — Coaching Session
+            </div>
+        </div>
+        <div class="col d-flex align-items-center">
+            <div class="ml-auto triad-btn-view">
+                <a href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><span>Print This Session</span></a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Resource's credential -->
-<div class="container-fluid mb-4" style="color: var(--dark-color);">
+<div class="container-fluid mb-1" style="color: var(--dark-color);">
     <div class="row field-container">
 
     <div class="col">

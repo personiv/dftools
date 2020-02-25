@@ -4,6 +4,26 @@
     line-height: 24px;
 }
 
+.session-type {
+    font-size: 30px;
+    color: var(--dark-color-50p);
+    text-transform: uppercase;
+    
+}
+
+.field-container {
+    color: var(--dark-color);
+}
+
+.field-container .fields-name {
+    line-height: 28px;
+} 
+
+.field-container .fields-name span:first-child {
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
 .session-container .table .thead-custom {
     background: #343A40 !important;
     -webkit-print-color-adjust:exact;
