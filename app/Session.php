@@ -108,6 +108,14 @@ class Session extends Model
 
         $this->setAttribute("session_data", $data);
         $this->save();
+
+        // Notify all other signee
+        foreach ($session->Signees() as $signeeID => $signed) {
+            if ($session->IsNextSignee($signeeID)) {
+                Poll::Queue("System", $signeeID, $r->session()->get("user")->FullName() . " signed his pending session");
+                break;
+            }
+        }
     }
 
     function ResetPending(Request $r) {
