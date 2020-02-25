@@ -142,7 +142,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="copyright-index d-flex justify-content-center">
-                            Copyright © 2020 | DFScorecard All rights reserved.
+                            Copyright © 2020 | DFCoaching All rights reserved.
                             </div>
                         </div>
                     </div>

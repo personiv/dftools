@@ -660,7 +660,42 @@
                     <div class="dboard-othtext">of Pending and Completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
-                
+                <div class="table-responsive px-4 pt-0 pb-4">
+                    <table class="table table-striped table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sent by</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($mySessions as $summaryStatus => $summaryItems)
+                                @for ($i = 0; $i < count($summaryItems); $i++)
+                                    @if ($summaryStatus == "Pending")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                            <td><span class="stats-pending">Pending</span></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                        </tr>
+                                    @elseif ($summaryStatus == "Completed")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                            <td><span class="stats-completed">Completed</span></td>
+                                            <td></td>
+                                        </tr>
+                                    @endif
+                                @endfor
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
                 
 
             </div>
