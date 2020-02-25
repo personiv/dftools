@@ -322,7 +322,7 @@
 <script type="text/javascript" src="{{ URL::asset('js/session.js') }}"></script>
 <script type="text/javascript">
     window.onload = window.print;
-    window.onafterprint = window.close;
+    // window.onafterprint = window.close;
 </script>
 
 </body>
