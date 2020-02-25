@@ -36,7 +36,7 @@ Percentage: 50%
 
 ----------
 
-3nd week (February 17, 2020 - February 21, 2020)
+3rd week (February 17, 2020 - February 21, 2020)
 
 Back-End
 Done fixing system vulnerabilities including database injection (specifically SQL injection), illegal page access, illegal page actions and limiting accesses
