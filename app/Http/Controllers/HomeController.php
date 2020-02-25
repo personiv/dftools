@@ -110,6 +110,20 @@ class HomeController extends Controller {
         return redirect()->route('dashboard');
     }
 
+    function editException(Request $r) {
+        $exceptionId = $r->input("edit-exception-id");
+        $agentID = $r->input("edit-exception-agent");
+        $reason = $r->input("edit-exception-reason");
+        $exception = Exception::where("exception_id", $exceptionId)->first();
+        if ($exception == null || $exception->AgentLeader()->EmployeeID() != $r->session()->get("user")->EmployeeID())
+            return redirect()->route('dashboard');
+
+        $exception->setAttribute("exception_agent", $agentID);
+        $exception->setAttribute("exception_reason", $reason);
+        $exception->save();
+        return redirect()->route('dashboard');
+    }
+
     function deleteException($eid, Request $r) {
         $exception = Exception::where("exception_id", $eid)->first();
         if ($exception == null || $exception->AgentLeader()->EmployeeID() != $r->session()->get("user")->EmployeeID())

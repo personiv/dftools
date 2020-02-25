@@ -215,3 +215,14 @@ function timeSince(date) {
   }
   return Math.floor(seconds) + " seconds ago";
 }
+
+function bindExceptionToModal(element) {
+  var exceptionId = element.parentElement.parentElement.querySelectorAll("td")[0].innerText
+  var agent = element.parentElement.parentElement.querySelectorAll("td")[1].innerText
+  var agentName = element.parentElement.parentElement.querySelectorAll("td")[2].innerText
+  var reason = element.parentElement.parentElement.querySelectorAll("td")[4].innerText
+  document.querySelector("#edit-exception-id").value = exceptionId;
+  document.querySelector("#edit-exception-agent").value = agent;
+  document.querySelector("#edit-exception-agent-name").innerText = agentName;
+  document.querySelector("#edit-exception-reason").value = reason;
+}

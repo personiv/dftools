@@ -324,12 +324,13 @@
                         @foreach ($exceptions as $exception)
                             <?php $agent = App\Credential::GetCredential($exception->exception_agent) ?>
                             <tr>
+                                <td style="display: none;">{{ $exception->exception_id }}</td>
                                 <td>{{ $agent->EmployeeID() }}</td>
                                 <td>{{ $agent->FullName() }}</td>
                                 <td>{{ $agent->JobPosition() }}</td>
                                 <td>{{ $exception->exception_reason }}</td>
                                 <td>
-                                    <span id="btn-edit" class="action-btn-edit mr-2" data-toggle="modal" data-target="#editExceptionModal"><i class="fa fa-edit mr-2"></i>Edit</span>
+                                    <span id="btn-edit" class="action-btn-edit mr-2" data-toggle="modal" data-target="#editExceptionModal" onclick="bindExceptionToModal(this)"><i class="fa fa-edit mr-2"></i>Edit</span>
                                     <a href="{{ route('deleteexception', [$exception->exception_id]) }}"><span id="btn-delete" class="action-btn-delete"><i class="fa fa-trash mr-2"></i>Delete</span></a>
                                 </td>
                             </tr>

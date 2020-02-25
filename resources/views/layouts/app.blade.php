@@ -237,7 +237,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                <label class="custom-label" for="exception-agent">Resource:</label>
+                                <label class="custom-label" for="exception-agent">Agent:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
                                     <select class="line-effect custom-select" id="exception-agent" name="exception-agent" required>
                                         <?php $members = $user->TeamMembers(); ?>
@@ -282,34 +282,26 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Exception</h5>
+                        <h5 class="modal-title" id="editExceptionModalLongTitle">Edit Exception</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ action('HomeController@addException') }}" method="post">
+                    <form action="{{ action('HomeController@editException') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                <label class="custom-label" for="exception-agent">Resource:</label>
-                                <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <select class="line-effect custom-select" id="exception-agent" name="exception-agent" required>
-                                        <?php $members = $user->TeamMembers(); ?>
-                                        @for ($i = 0; $i < count($members); $i++)
-                                        <?php $member = $members[$i]; ?>
-                                        <option value="{{ $member->EmployeeID() }}">{{ $member->FullName() }}</option>
-                                        @endfor
-                                    </select>
-                                    <span class="focus-border">
-                                    <i></i>
-                                    </span>
-                                </div> <!-- input line animation end -->
+                                <label class="custom-label">Agent:</label>
+                                <div class="effect-container width-custom">
+                                    <input type="hidden" id="edit-exception-agent" name="edit-exception-agent">
+                                    <label class="custom-label" id="edit-exception-agent-name"></label>
+                                </div>
                             </div>
 
                             <div class="input-group">
-                                <label class="custom-label" for="exception-reason">Reason:</label>
+                                <label class="custom-label" for="edit-exception-reason">Reason:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <textarea class="line-effect form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required>{{ $exception->exception_reason }}</textarea>
+                                    <textarea class="line-effect form-control" id="edit-exception-reason" name="edit-exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required></textarea>
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
@@ -317,6 +309,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" id="edit-exception-id" name="edit-exception-id">
                             <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
                             <button type="submit" class="modal-btn btn-start">Submit</button>
                         </div>
