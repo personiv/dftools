@@ -24,10 +24,9 @@
     <!-- Global Style -->
     <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
 
-    <!-- Page Style and Script -->
+    <!-- Page Style -->
     <link rel="stylesheet" href="{{ URL::asset('css/print.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('css/session.css') }}">
-    <script type="text/javascript" src="{{ URL::asset('js/session.js') }}"></script>
     
     <!-- Plugins -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -318,6 +317,9 @@
 
 <!-- Global Script -->
 <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
+
+<!-- Page Script -->
+<script type="text/javascript" src="{{ URL::asset('js/session.js') }}"></script>
 <script type="text/javascript">
     window.onload = window.print;
     window.onafterprint = window.close;
