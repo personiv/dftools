@@ -169,7 +169,7 @@
         <div class="col-lg">
             <div class="tb-container">
                 <div class="dboard-text px-4 pt-4 pb-3">
-                    <div class="dboard-title">Summary</div>
+                    <div class="dboard-title">Team Summary</div>
                     <div class="dboard-othtext">of For Coaching, Pending and Completed</div>
                 </div>
                 <div class="dropdown-divider"></div>
@@ -237,6 +237,74 @@
     <!-- 3rd row supervisor dashboard -->
     <div class="row mt-5">
 
+        <!-- Pending section -->
+        <div class="col-lg">
+            <div class="tb-container">
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">My Summary</div>
+                    <div class="dboard-othtext">Of Triad Coaching</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="table-responsive px-4 pt-0 pb-4">
+                    <table class="table table-striped table-borderless">
+                        <thead>
+                        <tr>
+                            <th scope="col">Employee ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($coachingSummary as $summaryStatus => $summaryItems)
+                                @for ($i = 0; $i < count($summaryItems); $i++)
+                                    <?php $summaryEmployeeID = $summaryItems[$i]["employeeID"]; ?>
+                                    @if ($summaryStatus == "For Coaching")
+                                        <tr>
+                                            <td>{{ $summaryEmployeeID }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>N/A</td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
+                                                    <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @elseif ($summaryStatus == "Pending")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td><span class="stats-pending">Pending</span></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                        </tr>
+                                    @elseif ($summaryStatus == "Completed")
+                                        <tr>
+                                            <td>{{ $summaryItems[$i]["employeeID"] }}</td>
+                                            <td>{{ $summaryItems[$i]["fullName"] }}</td>
+                                            <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
+                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                            <td><span class="stats-completed">Completed</span></td>
+                                            <td></td>
+                                        </tr>
+                                    @endif
+                                @endfor
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 4th row supervisor dashboard -->
+    <div class="row mt-5">
+
          <!-- Exception section -->
          <div class="col-lg">
             <div class="tb-container">
@@ -287,7 +355,7 @@
 
     </div>
 
-    <!-- 4th row supervisor dashboard -->
+    <!-- 5th row supervisor dashboard -->
     <div class="row mt-5">
 
         <!-- Top Resource section -->
@@ -514,9 +582,10 @@
                             @endif
                         <?php $l++; ?>
                         @endforeach
+                                <!-- triad coaching button
                                 <div class="excp-btn d-flex justify-content-end align-items-center ml-auto">
                                     <span id="triad-btn" class="triad-btn-view"><i class="fas fa-pager mr-2"></i>Triad Coaching Summary</span>
-                                </div>
+                                </div> -->
                     </div>
                 </nav>
 
@@ -580,6 +649,107 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- -->
+                    </div>
+                    <?php $m++; ?>
+                    @endforeach
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3rd row manager/head dashboard -->
+    <div class="row mt-5">
+
+        <!-- Triad coaching section -->
+        <div class="col-lg">
+            <div class="tb-container">
+                <div class="dboard-text px-4 pt-4 pb-3">
+                    <div class="dboard-title">Summary</div>
+                    <div class="dboard-othtext">of Pending and Completed</div>
+                </div>
+                <div class="dropdown-divider"></div>
+                
+                <!-- Nav tab item starts here -->
+                <nav class="page-tab-container">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <?php $l = 0; ?>
+                        @foreach ($userTeam as $leader)
+                            @if ($l == 0)
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                            @else
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                            @endif
+                        <?php $l++; ?>
+                        @endforeach
+                                <!-- triad coaching button
+                                <div class="excp-btn d-flex justify-content-end align-items-center ml-auto">
+                                    <span id="triad-btn" class="triad-btn-view"><i class="fas fa-pager mr-2"></i>Triad Coaching Summary</span>
+                                </div> -->
+                    </div>
+                </nav>
+
+                <!-- Nav tab content starts here -->
+                <div class="tab-content" id="nav-tabContent">
+                    <?php $m = 0; ?>
+                    @foreach ($userTeam as $leader)
+                        @if ($m == 0)
+                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                        @else
+                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                        @endif
+                            <div class="table-responsive px-4 pt-0 pb-4">
+                                <table class="table table-striped table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Employee ID</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">Type</th>
+                                        @if ($user->AccountType() == "HEAD")
+                                        <th scope="col">Sent by</th>
+                                        @endif
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($coachingSummary["Pending"] as $weekSession)
+                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
+                                                <tr>
+                                                    <td>{{ $weekSession->AgentID() }}</td>
+                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
+                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
+                                                    <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    @if ($user->AccountType() == "HEAD")
+                                                    <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
+                                                    @endif
+                                                    <td><span class="stats-pending">Pending</span></td>
+                                                    <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        @foreach ($coachingSummary["Completed"] as $weekSession)
+                                            @if ($weekSession->IsSignee($leader->EmployeeID()))
+                                                <tr>
+                                                    <td>{{ $weekSession->AgentID() }}</td>
+                                                    <td>{{ $weekSession->Agent()->FullName() }}</td>
+                                                    <td>{{ $weekSession->Agent()->JobPosition() }}</td>
+                                                    <td>{{ $weekSession->TypeDescription() }}</td>
+                                                    @if ($user->AccountType() == "HEAD")
+                                                    <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
+                                                    @endif
+                                                    <td><span class="stats-completed">Completed</span></td>
+                                                    <td></td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         <!-- -->
                     </div>
                     <?php $m++; ?>
@@ -819,7 +989,7 @@
         </div>
     </div>
 
-    <!-- 1st row designer dashboard -->
+    <!-- 2nd row designer dashboard -->
     <div class="row mt-5">
 
         <!-- Pending section -->
