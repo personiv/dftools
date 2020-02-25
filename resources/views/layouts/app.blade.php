@@ -142,7 +142,7 @@
                     <div class="row">
                         <div class="col">
                             <div class="copyright-index d-flex justify-content-center">
-                            Copyright © 2020 | DFScorecard All rights reserved.
+                            Copyright © 2020 | DFCoaching All rights reserved.
                             </div>
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                             <div class="input-group">
                                 <label class="custom-label" for="exception-reason">Reason:</label>
                                 <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <textarea class="line-effect form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required>{{ $exception->exception_reason }}</textarea>
+                                    <textarea class="line-effect form-control" id="exception-reason" name="exception-reason" placeholder="Enjoying his/her vacation leave!" rows="3" required></textarea>
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
