@@ -26,14 +26,23 @@
             $agentCount += $leader->TeamMembers()->count();
         }
         $coachingSummary = array("Pending" => [], "Completed" => []);
+        $supervisorSummary = array("Pending" => [], "Completed" => []);
         foreach ($user->SessionsThisWeek() as $weekSession) {
-            if (!$weekSession->IsSigned($user->EmployeeID())) {
-                array_push($coachingSummary["Pending"], $weekSession);
+            if ($weekSession->Type() != "TRIAD") {
+                if (!$weekSession->IsSigned($user->EmployeeID())) {
+                    array_push($coachingSummary["Pending"], $weekSession);
+                } else {
+                    array_push($coachingSummary["Completed"], $weekSession);
+                }
             } else {
-                array_push($coachingSummary["Completed"], $weekSession);
+                if (!$weekSession->IsSigned($user->EmployeeID())) {
+                    array_push($supervisorSummary["Pending"], $weekSession);
+                } else {
+                    array_push($supervisorSummary["Completed"], $weekSession);
+                }
             }
         }
-        $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]);
+        $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]) + count($supervisorSummary["Pending"]) + count($supervisorSummary["Completed"]);
         $prefix = $user->AccountType() == "MANGR" ? "Team " : ($user->AccountType() == "HEAD" ? "Cluster " : "");
     } else {
         // Productivity Improvement
@@ -71,8 +80,8 @@
             @endif
         @endforeach
     @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
-        createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) }}, {{ $totalCoaching }});
-        createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) }}, {{ $totalCoaching }});
+        createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) + count($supervisorSummary["Completed"]) }}, {{ $totalCoaching }});
+        createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) + count($supervisorSummary["Pending"]) }}, {{ $totalCoaching }});
         createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptionCount }}, {{ $agentCount }});
     @else
         @foreach ($scoreItem as $item)
@@ -260,27 +269,27 @@
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mySessions as $summaryStatus => $summaryItems)
-                                @for ($i = 0; $i < count($summaryItems); $i++)
-                                    @if ($summaryStatus == "Pending")
-                                        <tr>
-                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
-                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
-                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
-                                            <td><span class="stats-pending">Pending</span></td>
-                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
-                                        </tr>
-                                    @elseif ($summaryStatus == "Completed")
-                                        <tr>
-                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
-                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
-                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
-                                            <td><span class="stats-completed">Completed</span></td>
-                                            <td></td>
-                                        </tr>
-                                    @endif
-                                @endfor
-                            @endforeach
+                        @foreach ($mySessions as $summaryStatus => $summaryItems)
+                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                @if ($summaryStatus == "Pending")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                        <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                        <td><span class="stats-pending">Pending</span></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                    </tr>
+                                @elseif ($summaryStatus == "Completed")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
+                                        <td>{{ $summaryItems[$i]["sessionType"] }}</td>
+                                        <td>{{ $summaryItems[$i]["sentBy"] }}</td>
+                                        <td><span class="stats-completed">Completed</span></td>
+                                        <td></td>
+                                    </tr>
+                                @endif
+                            @endfor
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -664,35 +673,35 @@
                     <table class="table table-striped table-borderless">
                         <thead>
                         <tr>
-                            <th scope="col">Date</th>
+                            <th scope="col">Employee ID</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Type</th>
-                            <th scope="col">Sent by</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mySessions as $summaryStatus => $summaryItems)
-                                @for ($i = 0; $i < count($summaryItems); $i++)
-                                    @if ($summaryStatus == "Pending")
-                                        <tr>
-                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
-                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
-                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
-                                            <td><span class="stats-pending">Pending</span></td>
-                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
-                                        </tr>
-                                    @elseif ($summaryStatus == "Completed")
-                                        <tr>
-                                            <td>{{ $summaryItems[$i]["sessionDate"]->format('Y-m-d') }}</td>
-                                            <td>{{ $summaryItems[$i]["sessionType"] }}</td>
-                                            <td>{{ $summaryItems[$i]["sentBy"] }}</td>
-                                            <td><span class="stats-completed">Completed</span></td>
-                                            <td></td>
-                                        </tr>
-                                    @endif
-                                @endfor
-                            @endforeach
+                        @foreach ($supervisorSummary as $summaryStatus => $summaryItems)
+                            @for ($i = 0; $i < count($summaryItems); $i++)
+                                @if ($summaryStatus == "Pending")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]->AgentID() }}</td>
+                                        <td>{{ $summaryItems[$i]->Agent()->FullName() }}</td>
+                                        <td>{{ $summaryItems[$i]->TypeDescription() }}</td>
+                                        <td><span class="stats-pending">Pending</span></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                    </tr>
+                                @elseif ($summaryStatus == "Completed")
+                                    <tr>
+                                        <td>{{ $summaryItems[$i]->AgentID() }}</td>
+                                        <td>{{ $summaryItems[$i]->Agent()->FullName() }}</td>
+                                        <td>{{ $summaryItems[$i]->TypeDescription() }}</td>
+                                        <td><span class="stats-completed">Completed</span></td>
+                                        <td></td>
+                                    </tr>
+                                @endif
+                            @endfor
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
