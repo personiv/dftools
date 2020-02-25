@@ -151,13 +151,6 @@ function lazyFillBonus(selector) {
   $(selector).addClass(className);
 }
 
-// Datepicker for history page
-$('#history-wrapper .input-daterange').datepicker({
-  clearBtn: true,
-  autoclose: true,
-  todayHighlight: true
-});
-
 function recalculateProductivity() {
   var productivity = document.querySelector("#sim-productivity");
   var days = document.querySelector("#sim-days");
