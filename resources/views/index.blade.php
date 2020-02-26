@@ -1,3 +1,8 @@
+<?php
+    $ruser = $_COOKIE['rememberedUser'] ?? '';
+    $rpass = $_COOKIE['rememberedPass'] ?? '';
+    $rme = $ruser != '' && $rpass != '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,10 +80,17 @@
                         </div> <!-- input line animation end -->
                         
                         <!-- Remember me -->
-                        <div class="custom-control custom-checkbox clear">
-                            <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
-                            <label class="custom-control-label" for="user-remember">Remember Me</label>
-                        </div>
+                        @if ($rme)
+                            <div class="custom-control custom-checkbox clear">
+                                <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember" checked>
+                                <label class="custom-control-label" for="user-remember">Remember Me</label>
+                            </div>
+                        @else
+                            <div class="custom-control custom-checkbox clear">
+                                <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
+                                <label class="custom-control-label" for="user-remember">Remember Me</label>
+                            </div>
+                        @endif
 
                         <!-- Sign in button -->
                         <button class="btn custom-btn my-4" onclick="submitLoginForm()">Sign In</button>
