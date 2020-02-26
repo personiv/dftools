@@ -58,6 +58,44 @@
         </div>
     </div>
 
+    @if ($session->Type() == "TRIAD")
+    <!-- Special 2nd row / For triad coaching only -->
+    <div class="row field-container">
+
+        <div class="col">
+            <div class="fields-name">
+                <span class="mr-2">Name:</span> <!-- Field type -->
+                <span></span>
+            </div>
+
+            <div class="fields-name">
+                <span class="mr-2">Designation:</span> <!-- Field type -->
+                <span></span>
+            </div>
+
+            <div class="fields-name">
+                <span class="mr-2">Status:</span> <!-- Field type -->
+                <span></span>
+            </div>
+        </div> 
+
+        <div class="col">
+            <div class="fields-name">
+                <span class="mr-2">Date:</span> <!-- Field type -->
+                <span></span>
+            </div>
+            <div class="fields-name">
+                <span class="mr-2">Operations Manager:</span> <!-- Field type -->
+                <span></span>
+            </div>
+            <div class="fields-name">
+                <span class="mr-2">Sr. Operations Manager:</span> <!-- Field type -->
+                <span></span>
+            </div>
+        </div>
+    </div>
+    @endif
+
     <!-- 2nd row / Session type -->
     <div class="row">
         <div class="col">
