@@ -108,7 +108,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="user-container justify-content-center align-items-center">
-                            <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
+                            <img src="{{ $user->ImagePath() }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                 <div class="d-flex flex-column ml-3">
                                     <span id="navItem-user">{{ $user->FullName() }}</span>
                                     <span id="navItem-role">{{ $user->JobPosition() }}</span>

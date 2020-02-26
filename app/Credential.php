@@ -31,6 +31,7 @@ class Credential extends Model
     function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get(); }
     function TeamLeader() { return Credential::where("credential_user", $this->getAttribute("credential_up"))->first(); }
     function Status() { return $this->getAttribute('credential_status') != null ? $this->getAttribute('credential_status') : "N/A"; }
+    function ImagePath() { return asset($this->getAttribute("credential_img")); }
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
     function IsLeader() { return $this->TeamMembers()->count() > 0; }
 

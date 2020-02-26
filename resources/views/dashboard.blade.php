@@ -370,7 +370,7 @@
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                <img src="{{ URL::asset('images/john_doe.jpg') }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
+                                <img src="{{ $topResource['agent']->ImagePath() }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">{{ $topResource["agent"]->FullName() }}</div>
                                         <div class="r-role">{{ $topResource["agent"]->JobPosition() }}</div>
@@ -813,7 +813,7 @@
                         <!-- Name, role, scorecard title, top 1 -->
                             <div class="tr-section-container flex-column pt-4">
                                 <div class="tr-section1 px-4 mb-4">
-                                <img src="images/john_doe.jpg" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
+                                <img src="{{ $user->ImagePath() }}" class="rounded-circle shadow border float-left" alt="{{ $user->FullName() }}" width="40" height="40"> 
                                     <div class="tr-name-role flex-column ml-3">
                                         <div class="r-name">{{ $user->FullName() }}</div>
                                         <div class="r-role">{{ $user->JobPosition() }}</div>
