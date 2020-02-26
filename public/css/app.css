@@ -427,8 +427,7 @@ form {
 .action-btn-edit,
 .action-btn-add,
 .action-btn-addNotes,
-.action-btn-view,
-.triad-btn-view {
+.action-btn-view {
     background-color: var(--info) !important;
     color: var(--light-color);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -439,8 +438,7 @@ form {
 .action-btn-edit:hover, .action-btn-edit:focus, .action-btn-edit:active,
 .action-btn-add:hover, .action-btn-add:focus, .action-btn-add:active,
 .action-btn-addNotes:hover, .action-btn-addNotes:focus, .action-btn-addNotes:active,
-.action-btn-view:hover, .action-btn-view:focus, .action-btn-view:active,
-.triad-btn-view:hover, .triad-btn-view:focus, .triad-btn-view:active {
+.action-btn-view:hover, .action-btn-view:focus, .action-btn-view:active {
     background-color: #4898b0 !important;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
