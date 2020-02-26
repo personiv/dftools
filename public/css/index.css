@@ -5,6 +5,7 @@
 }
 
 body {
+    background-color: var(--light-color);
     background-image: url('../images/bg_index-default.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -21,24 +22,16 @@ body {
 
 /* General styling for form */
 .form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
     padding: 0 5px !important;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 0;
-    color: var(--dark-color);
-    background-color: #fff;
-    background-clip: padding-box;
+    color: var(--dark-color) !important;
+    background-color: transparent !important;
     border: none !important;
     border-radius: none !important;
     margin-top: -10px;
 }
 
 .form-control:focus {
-    color: #495057;
-    background-color: #fff;
+    background-color: transparent !important;
     border-color: none;
     outline: 0 !important;
     box-shadow: none !important;
