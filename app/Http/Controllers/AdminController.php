@@ -58,7 +58,7 @@ class AdminController extends Controller {
         $userImgInput = $r->file("user-img");
         if ($userImgInput != null) {
             $userImgExt = $userImgInput->getClientOriginalExtension();
-            $userImg = $userImgInput->storeAs("data/images/profiles", $userId . '.' . $userImgExt);
+            $userImg = $userImgInput->storeAs("images/profiles", $userId . '.' . $userImgExt);
         }
         $selected = Credential::where('credential_user', $userId)->first();
         if ($selected != null) {
