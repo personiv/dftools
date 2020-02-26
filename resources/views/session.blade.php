@@ -35,12 +35,13 @@ function updateFieldValue(e) {
     <div class="row">
         <div class="col">
             <div class="session-type">
-                {{ $session->TypeDescription() }} — Coaching Session
+                <div class="coaching-styling">— Coaching Session</div>
+                {{ $session->TypeDescription() }}
             </div>
         </div>
         <div class="col d-flex align-items-center">
-            <div class="ml-auto triad-btn-view">
-                <a href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><span>Print This Session</span></a>
+            <div class="ml-auto">
+                <a class="action-btn-print" href="{{ route('print', [$session->SessionID()]) }}" target="_blank"><i class="fa fa-print mr-2"></i><span>Print This Session</span></a>
             </div>
         </div>
     </div>
