@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-12">
             <div class="content-title">Update Credential</div>
-            <form action="{{ action('AdminController@updateCredential') }}" method="post">
+            <form action="{{ action('AdminController@updateCredential') }}" method="post" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row">
                         <div class="col-6">
@@ -18,6 +18,8 @@
                             <input class="form-control" type="text" placeholder="Leave blank for no changes" id="user-first" name="user-first">
                             <label for="user-last">Last Name</label>
                             <input class="form-control" type="text" placeholder="Leave blank for no changes" id="user-last" name="user-last">
+                            <label for="user-img">Profile Picture (No changes if no file were selected)</label>
+                            <input class="form-control" type="file" id="user-img" name="user-img">
                         </div>
                         <div class="col-6">
                             <label for="user-up">Reporting to</label>

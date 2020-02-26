@@ -55,6 +55,11 @@ class AdminController extends Controller {
         $userUp = $r->input("user-up");
         $userHireDate = $r->input("user-hire-date");
         $userStatus = $r->input("user-status");
+        $userImgInput = $r->file("user-img");
+        if ($userImgInput != null) {
+            $userImgExt = $userImgInput->getClientOriginalExtension();
+            $userImg = $userImgInput->storeAs("data/images/profiles", $userId . '.' . $userImgExt);
+        }
         $selected = Credential::where('credential_user', $userId)->first();
         if ($selected != null) {
             if ($userPass != "") $selected->setAttribute("credential_pass", $userPass);
@@ -62,6 +67,7 @@ class AdminController extends Controller {
             if ($userLast != "") $selected->setAttribute("credential_last", $userLast);
             if ($userType != "NONE") $selected->setAttribute("credential_type", $userType);
             if ($userUp != "NONE") $selected->setAttribute("credential_up", $userUp);
+            if ($userImgInput != null) $selected->setAttribute("credential_img", $userImg);
             if ($userHireDate != "") $selected->setAttribute("credential_hire_date", $userHireDate);
             if ($userStatus != "NONE") $selected->setAttribute("credential_status", $userStatus);
             $selected->save();

@@ -120,6 +120,10 @@
                                 <i class="fas fa-key"></i>
                                 <span>Change Password</span>
                             </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-photo"></i>
+                                <span>Change Photo</span>
+                            </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ action('LoginController@logout') }}">
                                 <i class="fas fa-sign-out-alt"></i>
