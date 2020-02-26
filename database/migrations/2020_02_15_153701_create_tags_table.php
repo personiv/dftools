@@ -37,6 +37,8 @@ class CreateTagsTable extends Migration
         addTag("AGENT", "PR", "Website Proofreader");
         addTag("AGENT", "WML", "Web Mods Line");
         addTag("AGENT", "VQA", "Voice Quality Assurance");
+        addTag("AGENT", "LGSTCS", "Logistics Executive");
+        addTag("AGENT", "DBA", "DBA");
 
         // Team Leaders
         addTag("LEADER", "SPRVR", "Supervisor");
