@@ -1,7 +1,24 @@
+CLOSED
 Process Automation
+Coaching and Scorecard Process
 Agent/Supervisor/OM & OH Dashboards
-E-Signatures
 Session History
 Feedback Form
 Form Action Validation
 Database Security
+Notification System
+Productivity Improvement
+Overall Top Resource
+Resource Ranking
+
+IN PROGRESS
+Data File Link For Realtime Data Update
+Feedback View
+Table Sorting
+Change Password
+Debugging
+Updating Session to new format
+Multiple Roles
+
+ON HOLD
+E-Signatures
