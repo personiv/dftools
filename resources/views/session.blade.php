@@ -243,6 +243,11 @@ function updateFieldValue(e) {
         $field_title = $fieldProperties["title"];
         $field_size = $fieldProperties["size"];
         $field_value = $fieldProperties["value"];
+        if ($field_value == "") {
+            if (old("session-${fieldName}") != null) {
+                $field_value = old("session-${fieldName}");
+            }
+        }
         $field_for = $fieldProperties["for"];
         $field_pending = $fieldProperties["pending"];
         if (!array_key_exists("height", $fieldProperties)) {

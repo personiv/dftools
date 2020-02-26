@@ -78,7 +78,7 @@ class HomeController extends Controller {
         if (!$session->MovePendingLevel($r)) {
             // Notify the signee about the error
             Poll::Queue("System", $r->session()->get("user")->EmployeeID(), "Failed to verify when signing the pending session");
-            return redirect()->route('session', [$r->input("session-id")]);
+            return redirect()->route('session', [$r->input("session-id")])->withInput();
         } else {
             // Notify the next signee
             foreach ($session->Signees() as $signeeID => $signed) {
