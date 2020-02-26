@@ -109,6 +109,8 @@
     height: 150px;
     border: none;
     resize: none;
+    white-space: pre-line;
+    overflow: auto;
 }
 
 /* label */
