@@ -120,7 +120,7 @@
                                 <i class="fas fa-key"></i>
                                 <span>Change Password</span>
                             </a>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="#" onclick="document.querySelector('#new-img').click()">
                                 <i class="fas fa-photo"></i>
                                 <span>Change Photo</span>
                             </a>
@@ -371,6 +371,18 @@
                 </div>
             </div>
         </div>
+        <!--
+        <
+        <
+        <   Change Photo form
+        <
+        <
+        -->
+        <!-- Hidden Form -->
+        <form id="new-img-form" class="hidden-form" action="{{ action('HomeController@changePhoto') }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input type="file" name="new-img" id="new-img" accept="image/*">
+        </form>
         <!--
         <
         <
