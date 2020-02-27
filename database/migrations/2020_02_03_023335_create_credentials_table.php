@@ -21,6 +21,7 @@ class CreateCredentialsTable extends Migration
             $table->string('credential_first', 64);
             $table->string('credential_last', 64);
             $table->string('credential_up', 24);
+            $table->longText('credential_img')->default('images/john_doe.jpg');
             $table->date('credential_hire_date')->nullable();
             $table->string('credential_status', 16)->nullable();
             $table->timestamps();
