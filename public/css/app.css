@@ -1081,3 +1081,6 @@ input[type=number]:disabled {
     width: 100% !important;
 }
 
+.hidden-form {
+    display: none;
+}

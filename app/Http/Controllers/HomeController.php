@@ -155,4 +155,28 @@ class HomeController extends Controller {
         $r->session()->put("historySessions", $sessions);
         return redirect()->route("history");
     }
+
+    function changePassword(Request $r) {
+        $user = $r->session()->get("user");
+        $newPass = $r->input("new-pass");
+        $user = Credential::where('credential_user', $user->EmployeeID())->first();
+        $user->setAttribute("credential_pass", $user);
+        $user->save();
+        Poll::Queue("System", $user->EmployeeID(), "Password successfully changed");
+        return redirect()->route("dashboard");
+    }
+
+    function changePhoto(Request $r) {
+        request()->validate(['new-img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:16384']);
+
+        $user = $r->session()->get("user");
+        $userImgInput = $r->file("new-img");
+        if ($userImgInput == null) return redirect()->route("dashboard");
+        $userImgExt = $userImgInput->getClientOriginalExtension();
+        $userImg = $userImgInput->storeAs("images/profiles", $user->EmployeeID() . '.' . $userImgExt);
+        $user->setAttribute("credential_img", $userImg);
+        $user->save();
+        Poll::Queue("System", $user->EmployeeID(), "Photo successfully changed");
+        return redirect()->route("dashboard");
+    }
 }

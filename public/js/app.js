@@ -9,6 +9,9 @@ $(document).ready(function () {
         $("#wrapper").toggleClass("toggled");
         $('.animated-icon1').toggleClass('open');
     }
+    $('#new-img').on('change', function() {
+      $('#new-img-form').submit();
+    });
 }); // end
 
 
