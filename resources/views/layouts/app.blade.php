@@ -475,7 +475,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ action('HomeController@addFeedback') }}" method="post">
+                    <form action="{{ action('HomeController@changePassword') }}" method="post">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
@@ -486,7 +486,7 @@
                                 </a>
                                 </label>
                                 <div class="effect-container width-70"> <!-- input line animation -->
-                                    <input type="password" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="">
+                                    <input type="password" class="line-effect form-control" id="new-pass" name="new-pass" pattern="^[a-zA-Z0-9]\w{5,23}$" required>
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
@@ -497,7 +497,7 @@
                                 <label class="custom-label width-30" for="feedback-comment">Confirm Password:</label>
                                 
                                 <div class="effect-container width-70"> <!-- input line animation -->
-                                    <input type="password" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="">
+                                    <input type="password" class="line-effect form-control" id="new-pass-verify" name="new-pass-verify" pattern="^[a-zA-Z0-9]\w{5,23}$" required>
                                     <span class="focus-border">
                                     <i></i>
                                     </span>

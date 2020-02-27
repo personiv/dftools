@@ -12,6 +12,17 @@ $(document).ready(function () {
     $('#new-img').on('change', function() {
       $('#new-img-form').submit();
     });
+    var newPass = document.querySelector("#new-pass");
+    var newPassVerify = document.querySelector("#new-pass-verify");
+    function validatePassword(){
+      if(newPass.value != newPassVerify.value) {
+        newPassVerify.setCustomValidity("Passwords do not match");
+      } else {
+        newPassVerify.setCustomValidity('');
+      }
+    }
+    newPass.onchange = validatePassword;
+    newPassVerify.onkeyup = validatePassword;
 }); // end
 
 

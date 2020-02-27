@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Credential;
 use App\ScoreItem;
 use App\Session;
@@ -157,12 +158,17 @@ class HomeController extends Controller {
     }
 
     function changePassword(Request $r) {
-        $user = $r->session()->get("user");
-        $newPass = $r->input("new-pass");
-        $user = Credential::where('credential_user', $user->EmployeeID())->first();
-        $user->setAttribute("credential_pass", $user);
-        $user->save();
-        Poll::Queue("System", $user->EmployeeID(), "Password successfully changed");
+        $validator = Validator::make($r->all(), [ 'new-pass' => 'required|regex:/^[a-zA-Z0-9]\w{5,23}$/' ]);
+
+        if (!$validator->fails()) {
+            $user = $r->session()->get("user");
+            $newPass = $r->input("new-pass");
+            $user->setAttribute("credential_pass", $newPass);
+            $user->save();
+            Poll::Queue("System", $user->EmployeeID(), "Password successfully changed");
+        } else {
+            Poll::Queue("System", $user->EmployeeID(), "Failed to change the password");
+        }
         return redirect()->route("dashboard");
     }
 
