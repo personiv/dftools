@@ -23,6 +23,7 @@ class CreateScoreItemsTable extends Migration
             $table->string('score_item_goal', 64);
             $table->integer('score_item_weight');
             // For dynamic data binding between system and excel files
+            // $table->string('score_item_sheet', 64);
             $table->string('score_item_cell', 8);
             // -------------------------------------------------------
             $table->timestamps();
