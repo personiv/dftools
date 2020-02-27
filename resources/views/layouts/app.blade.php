@@ -442,6 +442,55 @@
                 </div>
             </div>
         </div>
+        <!--
+        <
+        <
+        <   Chnage Password
+        <
+        <
+        -->
+        <!-- Modal -->
+        <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ action('HomeController@addFeedback') }}" method="post">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="input-group mb-4">
+                                <label class="custom-label" for="feedback-sender">Name:</label>
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <input type="text" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="John Doe">
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
+                            </div>
+
+                            <div class="input-group">
+                                <label class="custom-label" for="feedback-comment">Comments:</label>
+                                
+                                <div class="effect-container width-custom"> <!-- input line animation -->
+                                    <textarea class="line-effect form-control" id="feedback-comment" name="feedback-comment" placeholder="Well done!" rows="3" required></textarea>
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                                </div> <!-- input line animation end -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="modal-btn btn-close" data-dismiss="modal">Close</button>
+                            <button type="submit" class="modal-btn btn-start">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     <!-- End of main wrapper -->
     </div>
