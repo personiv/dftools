@@ -24,6 +24,8 @@ function addRow() {
     var newItemDesc = $("#new-score-item-desc").val();
     var newItemGoal = $("#new-score-item-goal").val();
     var newItemWeight = $("#new-score-item-weight").val();
+    var newItemTitle = $("#new-score-item-title").val();
+    var newItemCell = $("#new-score-item-cell").val();
 
     var hasBlankInput = false;
     if (newItemClass == "") hasBlankInput = true;
@@ -31,6 +33,8 @@ function addRow() {
     if (newItemDesc == "") hasBlankInput = true;
     if (newItemGoal == "") hasBlankInput = true;
     if (newItemWeight == "") hasBlankInput = true;
+    if (newItemTitle == "") hasBlankInput = true;
+    if (newItemCell == "") hasBlankInput = true;
 
     if (hasBlankInput == true) {
         alert("Please input value");
@@ -47,6 +51,8 @@ function addRow() {
         description: newItemDesc,
         goal: newItemGoal,
         weight: newItemWeight,
+        title: newItemTitle,
+        cell: newItemCell
     }), function() {
         if (this.readyState == 4 && this.status == 200) {
             var newRowId = this.responseText;
@@ -55,11 +61,13 @@ function addRow() {
             var newRowDescId = newRowId + "-score_item_desc";
             var newRowGoalId = newRowId + "-score_item_goal";
             var newRowWeightId = newRowId + "-score_item_weight";
+            var newRowTitleId = newRowId + "-score_item_title";
+            var newRowCellId = newRowId + "-score_item_cell";
 
             var isDisabled = "";
             if (!editing) isDisabled = "disabled";
             
-            $("<tr><td><input id='" + newRowClassId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemClass + "'></td><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='form-control item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='form-control item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
+            $("<tr><td><input id='" + newRowClassId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemClass + "'></td><td><input id='" + newRowItemId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemName + "'></td><td><textarea id='" + newRowDescId + "' " + isDisabled + " class='form-control item-cell'>" + newItemDesc + "</textarea></td><td><input id='" + newRowGoalId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemGoal + "'></td><td><input id='" + newRowWeightId + "' " + isDisabled + " type='number' class='form-control item-cell' value='" + newItemWeight + "' min='0' max='100'></td><td><input id='" + newRowTitleId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemTitle + "'></td><td><input id='" + newRowCellId + "' " + isDisabled + " type='text' class='form-control item-cell' value='" + newItemCell + "'></td><td><span class='btn btn-danger' onclick='deleteRow(this)'><i class='fa fa-trash'></i>Delete</span></td></tr>").insertBefore("#new-row").on("change", "*.item-cell", function() { updateRow(this); });
         }
     });
 
@@ -68,6 +76,8 @@ function addRow() {
     $("#new-score-item-desc").val("");
     $("#new-score-item-goal").val("");
     $("#new-score-item-weight").val("");
+    $("#new-score-item-title").val("");
+    $("#new-score-item-cell").val("");
 }
 
 function updateRow(row) {
