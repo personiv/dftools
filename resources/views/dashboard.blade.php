@@ -211,7 +211,7 @@
                                             <td><span class="stats-for-coaching">For Coaching</span></td>
                                             <td>
                                                 <!-- Button trigger modal -->
-                                                <a data-toggle="modal" data-target="#exampleModalCenter" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
+                                                <a data-toggle="modal" data-target="#createSessionModal" onclick="document.querySelector('#session-agent').value = '{{ $summaryEmployeeID }}';">
                                                     <span id="action-btn" class="action-btn-crsession"><i class="fa fa-file-text mr-2"></i>Create Session</span>
                                                 </a>
                                             </td>

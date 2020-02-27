@@ -40,7 +40,7 @@
             @if ($user->IsLeader())
             <!-- Modal style menu -->
             <!-- Button trigger modal for create session -->
-            <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#exampleModalCenter">
+            <a class="list-group-item list-group-item-action list-item-modal" data-toggle="modal" data-target="#createSessionModal">
                 <i class="fa fa-file-text mr-3"></i><span>Create Session</span>
             </a>
             @endif
@@ -116,7 +116,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#changePassModal" href="#">
                                 <i class="fas fa-key"></i>
                                 <span>Change Password</span>
                             </a>
@@ -162,7 +162,7 @@
         <
         -->
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        <div class="modal fade" id="createSessionModal" tabindex="-1" role="dialog" aria-labelledby="createSessionModalCenterTitle"
         aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -228,7 +228,7 @@
         <
         -->
         <!-- Modal -->
-        <div class="modal fade" id="exceptionModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exceptionModal" tabindex="-1" role="dialog" aria-labelledby="addExceptionModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -282,7 +282,7 @@
         <
         -->
         <!-- Modal -->
-        <div class="modal fade" id="editExceptionModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editExceptionModal" tabindex="-1" role="dialog" aria-labelledby="editExceptionModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -379,7 +379,7 @@
         <
         -->
         <!-- Modal -->
-        <div class="modal fade" id="dateHistoryModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+        <div class="modal fade" id="dateHistoryModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -454,11 +454,11 @@
         <
         -->
         <!-- Modal -->
-        <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="exceptionModalLabel" aria-hidden="true">
+        <div class="modal fade" id="changePassModal" tabindex="-1" role="dialog" aria-labelledby="changepassModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Change Password</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -467,9 +467,14 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="input-group mb-4">
-                                <label class="custom-label" for="feedback-sender">Name:</label>
-                                <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <input type="text" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="John Doe">
+                                <label class="custom-label width-30" for="feedback-sender">
+                                    New Password:
+                                    <a tabindex="0" class="popover-dismiss ml-1" role="button" data-toggle="popover" data-trigger="focus" title="Changing your password?" data-content="Password should not contain any special characters, symbols or spaces and must be at least 6-24 characters long.">
+                                    <i class="fa fa-question-circle text-primary"></i>
+                                </a>
+                                </label>
+                                <div class="effect-container width-70"> <!-- input line animation -->
+                                    <input type="password" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="">
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
@@ -477,10 +482,10 @@
                             </div>
 
                             <div class="input-group">
-                                <label class="custom-label" for="feedback-comment">Comments:</label>
+                                <label class="custom-label width-30" for="feedback-comment">Confirm Password:</label>
                                 
-                                <div class="effect-container width-custom"> <!-- input line animation -->
-                                    <textarea class="line-effect form-control" id="feedback-comment" name="feedback-comment" placeholder="Well done!" rows="3" required></textarea>
+                                <div class="effect-container width-70"> <!-- input line animation -->
+                                    <input type="password" class="line-effect form-control" id="feedback-sender" name="feedback-sender" placeholder="">
                                     <span class="focus-border">
                                     <i></i>
                                     </span>
