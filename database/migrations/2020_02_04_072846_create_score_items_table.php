@@ -42,6 +42,7 @@ class CreateScoreItemsTable extends Migration
             ));
         }
 
+        // Web Designer
         addItem("DESGN", "Quantitative Measure (95%)", "Productivity Rate", "Productivity Score (BAU, MODs, etc)", "Productivity", "10 points", 25, "W");
         addItem("DESGN", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Quality", "Roll-up", 10, "Y");
         addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Design Churn", "Churn", "Refer to Tier", 25, "X");
@@ -49,6 +50,7 @@ class CreateScoreItemsTable extends Migration
         addItem("DESGN", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 20, "AC");
         addItem("DESGN", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
 
+        // Website Proofreader
         addItem("PR", "Quantitative Measure (95%)", "Productivity Rate", "BAU (1 pt per BAU)\nMODS (0.40 pts per mod)", "Productivity", "Weighted Score\n(6 pts per day)", 34, "W");
         addItem("PR", "Quantitative Measure (95%)", "Quality", "Quality Score\nCompuated as  = 100%-Defect Rate\nDefect Rate = Valid disputes / Count of QC Reject", "Quality", "Rollup Score", 26, "Y");
         addItem("PR", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95%", 15, "AB");
@@ -56,6 +58,16 @@ class CreateScoreItemsTable extends Migration
         addItem("PR", "Quantitative Measure (95%)", "Product Knowledge", "PR Calibration (tiering score)", "Calibration", "80%", 10, "Z");
         addItem("PR", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
 
+        // Logo Designer
+        addItem("LOGO", "Quantitative Measure (95%)", "Productivity Rate", "BAU (1pt per page)\nMODS (1pt per mods)\nLogo Task (5pt per logo)", "Productivity", "Weighted Score\n(10 pts per day)", 30, "W");
+        addItem("LOGO", "Quantitative Measure (95%)", "Quality", "Logo Quality", "Logo Quality", "Roll-up Score", 5, "Y");
+        addItem("LOGO", "Quantitative Measure (95%)", "Quality", "Web Design BAU (60%)\nWeb Design MODS (40%)", "Design Quality", "Roll-up Score", 5, "Y");
+        addItem("LOGO", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95.00%", 15, "AB");
+        addItem("LOGO", "Quantitative Measure (95%)", "Efficiency", "Design Churn", "Churn", "Refer to Tier", 20, "X");
+        addItem("LOGO", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80.00%", 20, "AC");
+        addItem("LOGO", "Quantitative Measure (95%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
+        
+        // Web Mods Line
         addItem("WML", "Quantitative Measure (95%)", "Productivity", "BAU (1 pt per page)\nMODS (1pt per mod)\nCALLS (1pt per call)", "Productivity", "Weighted Score\nGoal: 10 points per day", 10, "W");
         addItem("WML", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Design Quality", "Roll-up", 10, "Y");
         addItem("WML", "Quantitative Measure (95%)", "Quality", "PSI Quality Scores (CE)", "PSI Quality", "95%", 20, "AD");
@@ -65,6 +77,7 @@ class CreateScoreItemsTable extends Migration
         addItem("WML", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 10, "AC");
         addItem("WML", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
 
+        // Voice Quality Assurance
         addItem("VQA", "Quantitative Measure (95%)", "Productivity", "% to Goal", "Productivity", "100.00%", 35, "W");
         addItem("VQA", "Quantitative Measure (95%)", "Quality", "TL Audit (4 audit per agent per month)", "TL Audit", "95.00%", 10, "Y");
         addItem("VQA", "Quantitative Measure (95%)", "Quality", "Disputed Audit Work", "Disputed Audit", "80.00%", 10, "AA");
