@@ -24,18 +24,44 @@
 
 /* Content container */
 .content-base-container {
-    padding: 50px;
+    padding: 50px 100px;
 }
 
-label {
-    margin-top: 30px;
+/* Global label for admin */
+.content-base-container label {
     color: var(--dark-color);
     font-weight: 600;
     letter-spacing: .5px;
     word-spacing: 1px;
     cursor: pointer;
+    display: block;
+    max-width: 200px;
 }
 
+/* Input animation effect */
+.line-container:not(:first-child) {
+    clear: both;
+    padding: 20px 0;
+}
+
+.effect-container {
+    width: 70%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
 #title {
     margin-bottom: 30px;
     text-align: center;
@@ -122,4 +148,4 @@ textarea.item-cell, textarea.input-desc {
 }
 i {
     padding-right: 4px;
-}
+} */

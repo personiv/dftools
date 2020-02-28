@@ -8,8 +8,8 @@
             <form action="{{ action('AdminController@updateCredential') }}" method="post" enctype="multipart/form-data">
                 <div class="container">
                     <div class="row">
+                    {{ csrf_field() }}
                         <div class="col-6">
-                            {{ csrf_field() }}
                             <label for="user-id">Username to be updated</label>
                             <input class="form-control" type="text" id="user-id" name="user-id" required pattern="^[a-zA-Z0-9]*$">
                             <label for="user-pass">New password</label>
