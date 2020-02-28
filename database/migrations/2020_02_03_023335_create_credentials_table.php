@@ -71,7 +71,7 @@ class CreateCredentialsTable extends Migration
                 addEmployee('10072255', 'DESGN', 'Renzel', 'Remulla', '10070715');
                 addEmployee('10070729', 'CUSTM', 'Romniel', 'Salumbides', '10070715');
                 addEmployee('10072450', 'DESGN', 'Almar Abraham', 'Santiago', '10070715');
-                addEmployee('10072440', 'DESGN', 'Emmanuel', 'Tigley', '10070715');
+                addEmployee('10072440', 'LOGO', 'Emmanuel', 'Tigley', '10070715');
 
             // Team Mark / Designer
             addEmployee('10072502', 'SPRVR', 'Mark Anthony', 'Lapastora', '10072003');
@@ -156,7 +156,7 @@ class CreateCredentialsTable extends Migration
             addEmployee('10072501', 'SPRVR', 'Richard', 'De Los Santos', '7010609');
                 addEmployee('10072458', 'DESGN', 'Apolinario', 'Bacurin Jr.', '10072501');
                 addEmployee('10071188', 'DESGN', 'John Benneth', 'Cabauatan', '10072501');
-                addEmployee('10071322', 'DESGN', 'Monneyr Jhon', 'De Guzman', '10072501');
+                addEmployee('10071322', 'LOGO', 'Monneyr Jhon', 'De Guzman', '10072501');
                 addEmployee('10071429', 'LEGACY', 'Paul Andrew', 'Dedel', '10072501');
                 addEmployee('10071430', 'DESGN', 'Amiel Jaeso', 'Enriquez', '10072501');
                 addEmployee('10072202', 'CUSTM', 'Marc Ranielle', 'Garcia', '10072501');
