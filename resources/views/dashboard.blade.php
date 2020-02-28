@@ -837,28 +837,21 @@
                 </div>
 
                 <!-- Progress bar, categories score, and total score -->
+                <?php $scoreItemColumns = array_chunk($scoreItem->toArray(), ceil($scoreItem->count() / 2)); ?>
                 <div class="row mt-1">
+                    @for ($i = 0; $i < count($scoreItemColumns); $i++)
                     <div class="col-sm">
                         <div class="eachScore-container px-4 py-3">
-                            @for ($i = 0; $i < $scoreItem->count() / 2; $i++)
-                                <div class="progress mt-1">
-                                    <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($agentSummary["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
-                                </div>
+                            @for ($j = 0; $j < count($scoreItemColumns[$i]); $j++)
+                            <?php $scoreItemDetail = $scoreItemColumns[$i][$j]; ?>
+                            <div class="progress mt-1">
+                                <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItemDetail['score_item_title'])) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
+                                <span class="progress-title">{{ $scoreItemDetail['score_item_title'] }}: <span class="progress-score">{{ perc($agentSummary["data"][App\Session::IndexOfCell($scoreItemDetail['score_item_cell'])]) }}%</span></span></div>
+                            </div>
                             @endfor
                         </div>
                     </div>
-
-                    <div class="col-sm">
-                        <div class="eachScore-container px-4 py-3">
-                            @for ($i = $scoreItem->count() / 2; $i < $scoreItem->count(); $i++)
-                                <div class="progress mt-1">
-                                    <div id="pb-{{ strtolower(str_replace(' ', '-', $scoreItem[$i]->getAttribute('score_item_title'))) }}" class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="progress-title">{{ $scoreItem[$i]->getAttribute('score_item_title') }}: <span class="progress-score">{{ perc($agentSummary["data"][App\Session::IndexOfCell($scoreItem[$i]->getAttribute('score_item_cell'))]) }}%</span></span></div>
-                                </div>
-                            @endfor
-                        </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>
