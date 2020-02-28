@@ -1,3 +1,41 @@
+/* Main Container format and layout */
+.base-text-wrapper {
+    text-transform: uppercase;
+    font-family: 'Open sans', sans-serif;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    background-color: #f4f4f4;
+    width: 50px;
+}
+
+/* Page title */
+.content-title {
+    font-size: 22px;
+    color: var(--dark-color);
+    font-weight: 700;
+}
+
+/* Page description */
+.content-othtext {
+    line-height: 20px;
+    font-size: 12px;
+    color: var(--dark-color-50p);
+}
+
+/* Content container */
+.content-base-container {
+    padding: 50px;
+}
+
+label {
+    margin-top: 30px;
+    color: var(--dark-color);
+    font-weight: 600;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+    cursor: pointer;
+}
+
 #title {
     margin-bottom: 30px;
     text-align: center;
@@ -24,10 +62,7 @@
     font-weight: 700;
     font-size: 18px;
 }
-.content-title {
-    font-weight: 700;
-    font-size: 24px;
-}
+
 .wrapper-ni-manic {
     background-color: var(--light-color-50p);
     backdrop-filter: blur(8px);
@@ -57,9 +92,6 @@ form > label, form > input, form > select {
     display: block;
     min-width: 300px;
     width: auto !important;
-}
-label {
-    margin-top: 30px;
 }
 input[type=submit] {
     margin-top: 30px !important;
