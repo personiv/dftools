@@ -31,11 +31,10 @@ class Session extends Model
         $reader = new Xlsx;
         $reader->setReadDataOnly(true);
         $reader->setLoadSheetsOnly($sheetName);
-        $reader->setReadFilter(new SheetFilter(range(self::IndexOfCell('A'), self::IndexOfCell('AG'))));
+        $reader->setReadFilter(new SheetFilter(range(self::IndexOfCell('A'), self::IndexOfCell('AS'))));
         $spreadsheet = $reader->load($path);
         $spreadsheet->setActiveSheetIndexByName($sheetName);
         $scorevalues = $spreadsheet->getActiveSheet()->toArray();
-        // dd($scorevalues);
 
         for ($i = 0; $i < count($scorevalues); $i++) {
             if ($scorevalues[$i][self::IndexOfCell($agentIDCell)] == $agentID) {

@@ -552,11 +552,15 @@
     <!-- Global Script -->
     <script type="text/javascript" src="{{ URL::asset('js/app.js') }}"></script>
     @yield('bladescript')
+
+    @if ($user->AccountType() != "ADMIN")
     <!-- Poll Script -->
     <script type="text/javascript">
         // Poll messages
-        Poll("{{ action('HomeController@getPolls') }}", "{{ action('HomeController@dequeuePoll') }}", '{{ session("user")->EmployeeID() }}');
+        Poll("{{ action('HomeController@getPolls') }}", "{{ action('HomeController@dequeuePoll') }}", '{{ $user->EmployeeID() }}');
     </script>
+    @endif
+
     <script> $('.popover-dismiss').popover({ trigger: 'focus' }); </script>
 
 </body>

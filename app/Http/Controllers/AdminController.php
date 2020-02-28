@@ -134,6 +134,8 @@ class AdminController extends Controller {
         $newItem->setAttribute("score_item_desc", $data["description"]);
         $newItem->setAttribute("score_item_goal", $data["goal"]);
         $newItem->setAttribute("score_item_weight", $data["weight"]);
+        $newItem->setAttribute("score_item_title", $data["title"]);
+        $newItem->setAttribute("score_item_cell", $data["cell"]);
         $newItem->save();
         return $newItem->getAttribute("score_item_id");
     }

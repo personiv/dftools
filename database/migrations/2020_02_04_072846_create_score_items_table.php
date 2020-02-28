@@ -15,7 +15,7 @@ class CreateScoreItemsTable extends Migration
     {
         Schema::create('score_items', function (Blueprint $table) {
             $table->increments('score_item_id');
-            $table->string('score_item_role', 5);
+            $table->string('score_item_role', 8);
             $table->string('score_item_class', 64);
             $table->string('score_item_name', 64);
             $table->string('score_item_desc', 10240);
@@ -23,6 +23,7 @@ class CreateScoreItemsTable extends Migration
             $table->string('score_item_goal', 64);
             $table->integer('score_item_weight');
             // For dynamic data binding between system and excel files
+            // $table->string('score_item_sheet', 64);
             $table->string('score_item_cell', 8);
             // -------------------------------------------------------
             $table->timestamps();
@@ -41,12 +42,19 @@ class CreateScoreItemsTable extends Migration
             ));
         }
 
-        addItem("DESGN", "Quantitative Measure (95%)", "Productivity Rate", "Productivity Score (BAU, MODs, etc)", "Productivity", "10 pts per day", 25, "W");
-        addItem("DESGN", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Quality", "80%", 10, "Y");
+        addItem("DESGN", "Quantitative Measure (95%)", "Productivity Rate", "Productivity Score (BAU, MODs, etc)", "Productivity", "10 points", 25, "W");
+        addItem("DESGN", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Quality", "Roll-up", 10, "Y");
         addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Design Churn", "Churn", "Refer to Tier", 25, "X");
         addItem("DESGN", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95%", 15, "AB");
         addItem("DESGN", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 20, "AC");
         addItem("DESGN", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
+
+        addItem("PR", "Quantitative Measure (95%)", "Productivity Rate", "BAU (1 pt per BAU)\nMODS (0.40 pts per mod)", "Productivity", "Weighted Score\n(6 pts per day)", 34, "W");
+        addItem("PR", "Quantitative Measure (95%)", "Quality", "Quality Score\nCompuated as  = 100%-Defect Rate\nDefect Rate = Valid disputes / Count of QC Reject", "Quality", "Rollup Score", 26, "Y");
+        addItem("PR", "Quantitative Measure (95%)", "Efficiency", "Attendance Rate (actual score - individual)", "Attendance", "95%", 15, "AB");
+        addItem("PR", "Quantitative Measure (95%)", "Product Knowledge", "Product Knowledge Test (actual score)", "PKT", "80%", 10, "AC");
+        addItem("PR", "Quantitative Measure (95%)", "Product Knowledge", "PR Calibration (tiering score)", "Calibration", "80%", 10, "Z");
+        addItem("PR", "Qualitative Measure (5%)", "Bonus", "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus", "Met 1", 5, "AF");
 
         addItem("WML", "Quantitative Measure (95%)", "Productivity", "BAU (1 pt per page)\nMODS (1pt per mod)\nCALLS (1pt per call)", "Productivity", "Weighted Score\nGoal: 10 points per day", 10, "W");
         addItem("WML", "Quantitative Measure (95%)", "Quality", "Design Quality Scores (BAU) - from PR\nDesign Quality Scores (MODs) - from PR", "Design Quality", "Roll-up", 10, "Y");
