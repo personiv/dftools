@@ -401,6 +401,7 @@
                 </div>
 
                 <!-- Progress bar, categories score, and total score -->
+                @if ($scoreItem->count() > 0)
                 <?php $scoreItemColumns = array_chunk($scoreItem->toArray(), ceil($scoreItem->count() / 2)); ?>
                 <div class="row mt-1">
                     @for ($i = 0; $i < count($scoreItemColumns); $i++)
@@ -417,6 +418,7 @@
                     </div>
                     @endfor
                 </div>
+                @endif
             </div>
         </div>
 
@@ -566,9 +568,9 @@
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
                             @if ($l == 0)
-                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->EmployeeID()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->EmployeeID()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->EmployeeID()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @else
-                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->EmployeeID()) }}-tab" data-toggle="tab" href="#nav-{{ strtolower($leader->EmployeeID()) }}" role="tab" aria-controls="nav-{{ strtolower($leader->EmployeeID()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @endif
                         <?php $l++; ?>
                         @endforeach
@@ -584,9 +586,9 @@
                     <?php $m = 0; ?>
                     @foreach ($userTeam as $leader)
                         @if ($m == 0)
-                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->EmployeeID()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->EmployeeID()) }}-tab">
                         @else
-                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab">
+                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->EmployeeID()) }}" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->EmployeeID()) }}-tab">
                         @endif
                         <div class="scrollbar scrollbar-primary">
                             <div class="table-responsive px-4 pt-0 pb-4">
@@ -723,9 +725,9 @@
                         <?php $l = 0; ?>
                         @foreach ($userTeam as $leader)
                             @if ($l == 0)
-                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link active" id="nav-{{ strtolower($leader->EmployeeID()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->EmployeeID()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->EmployeeID()) }}" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @else
-                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->FirstName()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->FirstName()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->FirstName()) }}-except" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
+                                <a class="nav-item nav-link" id="nav-{{ strtolower($leader->EmployeeID()) }}-tab-except" data-toggle="tab" href="#nav-{{ strtolower($leader->EmployeeID()) }}-except" role="tab" aria-controls="nav-{{ strtolower($leader->EmployeeID()) }}-except" aria-selected="true">{{ $prefix . $leader->FirstName() }}</a>
                             @endif
                         <?php $l++; ?>
                         @endforeach
@@ -737,9 +739,9 @@
                     <?php $m = 0; ?>
                     @foreach ($userTeam as $leader)
                         @if ($m == 0)
-                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->FirstName()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab-except">
+                            <div class="tab-pane fade show active" id="nav-{{ strtolower($leader->EmployeeID()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->EmployeeID()) }}-tab-except">
                         @else
-                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->FirstName()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->FirstName()) }}-tab-except">
+                            <div class="tab-pane fade" id="nav-{{ strtolower($leader->EmployeeID()) }}-except" role="tabpanel" aria-labelledby="nav-{{ strtolower($leader->EmployeeID()) }}-tab-except">
                         @endif
                         <div class="scrollbar scrollbar-primary">
                             <div class="table-responsive px-4 pt-0 pb-4">
@@ -837,6 +839,7 @@
                 </div>
 
                 <!-- Progress bar, categories score, and total score -->
+                @if ($scoreItem->count() > 0)
                 <?php $scoreItemColumns = array_chunk($scoreItem->toArray(), ceil($scoreItem->count() / 2)); ?>
                 <div class="row mt-1">
                     @for ($i = 0; $i < count($scoreItemColumns); $i++)
@@ -853,6 +856,7 @@
                     </div>
                     @endfor
                 </div>
+                @endif
             </div>
         </div>
 
