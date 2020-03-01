@@ -20,7 +20,7 @@ class CreateCredentialsTable extends Migration
             $table->string('credential_type', 8);
             $table->string('credential_first', 64);
             $table->string('credential_last', 64);
-            $table->string('credential_up', 24);
+            $table->string('credential_up', 24)->nullable();
             $table->longText('credential_img')->default('images/john_doe.jpg');
             $table->date('credential_hire_date')->nullable();
             $table->string('credential_status', 16)->nullable();
@@ -39,14 +39,14 @@ class CreateCredentialsTable extends Migration
         }
 
         // Admin
-        addEmployee('admin', 'ADMIN', 'John', 'Doe', 'admin', 'admin');
+        addEmployee('admin', 'ADMIN', 'John', 'Doe', null, 'admin');
 
 
 
         /*
         // Tower Mike —————
         */
-        addEmployee('10072397', 'HEAD', 'Mike', 'Ventanilla', 'admin');
+        addEmployee('10072397', 'HEAD', 'Mike', 'Ventanilla', null);
 
 
 
