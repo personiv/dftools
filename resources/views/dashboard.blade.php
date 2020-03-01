@@ -880,7 +880,7 @@
 
                             <!-- Current days passed -->
                             <div class="days-passed mt-3">
-                                <div>Days Passed</div>
+                                <div>Days Worked</div>
                                 <input id="sim-days" type="number" value="{{ round($daysPassed, 2) }}" class="form-control allowed" oninput="recalculateProductivity()">
                             </div>
 
