@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Exception;
 
 class Credential extends Model
 {
@@ -21,6 +22,17 @@ class Credential extends Model
         }
         return $leaders->get();
     }
+    static function HeadCount($current, $count = 0, $global = true) {
+        // Count only team members under his/her credential
+        if (!$global) return $current->TeamMembers()->count();
+
+        // Recusively count all children (up to root children) of his/her credential
+        if ($current == null) return $count;
+        foreach ($current->TeamMembers() as $teamMember) {
+            $count += self::HeadCount($teamMember, 1);
+        }
+        return $count;
+    }
 
     function EmployeeID() { return $this->getAttribute("credential_user"); }
     function Password() { return $this->getAttribute("credential_pass"); }
@@ -28,8 +40,9 @@ class Credential extends Model
     function FirstName() { return $this->getAttribute("credential_first"); }
     function LastName() { return $this->getAttribute("credential_last"); }
     function FullName() { return $this->getAttribute("credential_first") . ' ' . $this->getAttribute("credential_last"); }
-    function TeamMembers() { return Credential::where("credential_up", $this->getAttribute("credential_user"))->get(); }
-    function TeamLeader() { return Credential::where("credential_user", $this->getAttribute("credential_up"))->first(); }
+    function TeamMembers() { return self::where("credential_up", $this->getAttribute("credential_user"))->get(); }
+    function TeamLeader() { return self::where("credential_user", $this->getAttribute("credential_up"))->first(); }
+    function Parent() { return self::where("credential_user", $this->getAttribute("credential_up"))->first(); }
     function Status() { return $this->getAttribute('credential_status') != null ? $this->getAttribute('credential_status') : "N/A"; }
     function ImagePath() { return asset($this->getAttribute("credential_img")); }
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
@@ -98,6 +111,15 @@ class Credential extends Model
     }
 
     // Team Leader Methods
+    function BuildOrWhereOfChildren($current, $query, $agentIDColumnName) {
+        // Recusively add 'Or Where' clause to database query to match all children (up to root children) of his/her credential
+        if ($current == null) return;
+        foreach ($current->TeamMembers() as $teamMember) {
+            $query->orWhere($agentIDColumnName, $teamMember->EmployeeID());
+            $this->BuildOrWhereOfChildren($teamMember, $query, $agentIDColumnName);
+        }
+    }
+
     function HistorySessions($start, $end) {
         $sessions = array();
         $historysessions = Session::whereBetween("created_at", [Carbon::parse($start)->startOfDay()->toDateTimeString(), Carbon::parse($end)->endOfDay()->toDateTimeString()])->get();
@@ -114,7 +136,7 @@ class Credential extends Model
         $sessions = array();
         $weeksessions = Session::where("session_week", (int)date("W"))->get();
         for ($i=0; $i < count($weeksessions); $i++) { 
-            // Check first if the user is a signee and the agent is in list of exception
+            // Check first if the user is a signee and the agent is not in the list of exception
             if ($weeksessions[$i]->IsSignee($this->EmployeeID())) {
                 if ($weeksessions[$i]->IsSignee($leader) && !Exception::IsExceptedThisWeek($weeksessions[$i]->AgentID())) {
                     array_push($sessions, $weeksessions[$i]);
@@ -131,6 +153,9 @@ class Credential extends Model
         
         // For Coaching iteration
         foreach ($teamMembers as $agent) {
+            // Check first if this agent is excepted
+            if (Exception::IsExceptedThisWeek($agent->EmployeeID())) continue;
+
             // Check if this agent has session this week
             $hasSession = false;
             foreach ($weekSessions as $weekSession) {
@@ -140,7 +165,7 @@ class Credential extends Model
                 }
             }
 
-            // Only tag as [For Coaching] if this agent has no session this week and not excepted
+            // Only tag as [For Coaching] if this agent has no session this week
             if (!$hasSession) {
                 array_push($sessions["For Coaching"], [
                     "employeeID" => $agent->EmployeeID(),
@@ -187,10 +212,9 @@ class Credential extends Model
     }
 
     function ExceptionsThisWeek() {
-        return DB::table("exceptions")
-                ->join("credentials", "exception_agent", "=", "credential_user")
-                ->select("exception_id", "exception_agent", "exception_reason")
-                ->where("exception_week", (int)date("W"))->where("credential_up", $this->EmployeeID())->get();
+        $query = Exception::where("exception_week", (int)date("W"))
+            ->where(function($query) { $this->BuildOrWhereOfChildren($this, $query, "exception_agent"); });
+        return $query->get();
     }
 
     function TeamStackRank() {
