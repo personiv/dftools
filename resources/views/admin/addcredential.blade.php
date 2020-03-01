@@ -21,7 +21,7 @@
                                 <!-- Username / Employee ID -->
                                 <div class="line-container">
                                 <label for="user-id">Username/Employee ID</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <input class="form-control line-effect" type="text" id="user-id" name="user-id" required pattern="^[a-zA-Z0-9]*$">
                                         <span class="focus-border">
                                         <i></i>
@@ -32,7 +32,7 @@
                                 <!-- Password -->
                                 <div class="line-container">
                                 <label for="user-pass">Password</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <input class="form-control line-effect" type="password" id="user-pass" name="user-pass" required pattern="^[a-zA-Z0-9]*$">
                                         <span class="focus-border">
                                         <i></i>
@@ -43,7 +43,7 @@
                                 <!-- First Name -->
                                 <div class="line-container">
                                 <label for="user-first">First Name</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <input class="form-control line-effect" type="text" id="user-first" name="user-first" required>
                                         <span class="focus-border">
                                         <i></i>
@@ -54,7 +54,7 @@
                                 <!-- Last Name -->
                                 <div class="line-container">
                                 <label for="user-last">Last Name</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <input class="form-control line-effect" type="text" id="user-last" name="user-last" required>
                                         <span class="focus-border">
                                         <i></i>
@@ -63,12 +63,13 @@
                                 </div>
 
                             </div>
+
                             <div class="col">
 
                                 <!-- Reporting to -->
                                 <div class="line-container">
                                 <label for="user-up">Reporting to</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <select class="form-control line-effect" id="user-up" name="user-up" required>
                                         @for($i = 0; $i < $leaders->count(); $i++)
                                             <option value="{{ $leaders[$i]->EmployeeID() }}">{{ $leaders[$i]->FullName() }}</option>
@@ -83,7 +84,7 @@
                                 <!-- Type -->
                                 <div class="line-container">
                                 <label for="user-type">Type</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <select class="form-control line-effect" id="user-type" name="user-type" required>
                                         @for($i = 0; $i < $employeeTypes->count(); $i++)
                                             <option value="{{ $employeeTypes[$i]->Name() }}">{{ $employeeTypes[$i]->Description() }}</option>
@@ -98,7 +99,7 @@
                                 <!-- Hire Date -->
                                 <div class="line-container">
                                 <label for="user-hire-date">Hire Date</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <input class="form-control line-effect" type="date" id="user-hire-date" name="user-hire-date" required>
                                         <span class="focus-border">
                                         <i></i>
@@ -106,10 +107,10 @@
                                     </div> <!-- input line animation end -->
                                 </div>
 
-                                <!-- Hire Date -->
+                                <!-- Status -->
                                 <div class="line-container">
                                 <label for="user-status">Status</label>
-                                    <div class="effect-container date-input-container mt-1"> <!-- input line animation -->
+                                    <div class="effect-container mt-1"> <!-- input line animation -->
                                         <select class="form-control line-effect" id="user-status" name="user-status" required>
                                             <option value="Regular">Regular</option>
                                             <option value="Project-based">Project-based</option>
@@ -122,7 +123,7 @@
                                 
                             </div>
                         </div>
-                    <input type="submit" value="Submit" class="btn btn-success">
+                    <input type="submit" value="Submit" class="admin-btn-submit">
                 </form>
             </div>
         </div>
