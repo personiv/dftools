@@ -24,7 +24,7 @@
 
 /* Content container */
 .content-base-container {
-    padding: 50px 100px;
+    padding: 50px 80px;
 }
 
 /* Global label for admin */
@@ -41,11 +41,44 @@
 /* Input animation effect */
 .line-container:not(:first-child) {
     clear: both;
-    padding: 20px 0;
+    padding: 30px 0;
 }
 
-.effect-container {
-    width: 70%;
+.content-base-container .effect-container {
+    width: 460px;
+}
+
+@media (max-width: 1280px) {
+    .content-base-container .effect-container {
+        width: 280px;
+    }
+}
+
+.content-base-container input[type=file] {
+    height: auto !important;
+}
+
+/* Input button */
+.admin-btn-submit {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 40px;
+    padding: 7px 10px !important;
+    border-radius: 3px;
+    cursor: pointer;
+    max-width: 150px;
+    width: 100%;
+    background-color: var(--info) !important;
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border: none !important;
+}
+
+.admin-btn-submit:hover, .admin-btn-submit:focus, .admin-btn-submit:active {
+    background-color: #4898b0 !important;
+    box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
 }
 
 

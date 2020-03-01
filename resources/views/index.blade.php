@@ -35,77 +35,77 @@
             <!-- Login wrapper here -->
             <div class="col-md-7 intro-one">
                 <div class="introOne-wrapper flex-column">
-                <!-- Brand name here -->
-                <div class="brand-name">
-                    <span>d</span><span>f</span><span>c</span>
-                </div>
-
-                <!-- Greetings intro here -->
-                <div class="greetings">
-
-                    <!-- day, night, afternoon here -->
-                    <div class="day-greeting">
-
+                    <!-- Brand name here -->
+                    <div class="brand-name">
+                        <img src="{{ URL::asset('images/df_logo.png') }}" alt="Digital Fulfillment">
                     </div>
 
-                    <!-- Greetings slogan here -->
-                    <div class="slogan-greeting">
-                        
+                    <!-- Greetings intro here -->
+                    <div class="greetings">
+
+                        <!-- day, night, afternoon here -->
+                        <div class="day-greeting">
+
+                        </div>
+
+                        <!-- Greetings slogan here -->
+                        <div class="slogan-greeting">
+                            
+                        </div>
                     </div>
-                </div>
 
-                <!-- Login form here -->
-                <div class="login-container">
+                    <!-- Login form here -->
+                    <div class="login-container">
 
-                    <!-- Default form login -->
-                    <form id="main-login-form" method="POST"action="{{ action('LoginController@login') }}"> 
-                        {{ csrf_field() }}
+                        <!-- Default form login -->
+                        <form id="main-login-form" method="POST"action="{{ action('LoginController@login') }}"> 
+                            {{ csrf_field() }}
 
-                        <!-- Employee ID -->
-                        <div class="field-items effect-container"> <!-- input line animation -->
-                                <label class="item-f username" for="user-id">Employee ID</label>
-                                <input type="text" id="user-id" name="user-id" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
-                                <span class="focus-border">
-                                <i></i>
-                                </span>
-                        </div> <!-- input line animation end -->
+                            <!-- Employee ID -->
+                            <div class="field-items effect-container"> <!-- input line animation -->
+                                    <label class="item-f username" for="user-id">Employee ID</label>
+                                    <input type="text" id="user-id" name="user-id" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedUser'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                            </div> <!-- input line animation end -->
 
-                        <!-- Password -->
-                        <div class="field-items effect-container mt-4 mb-4"> <!-- input line animation -->
-                                <label class="item-f password" for="user-pass">Password</label>
-                                <input type="password" id="user-pass" name="user-pass" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
-                                <span class="focus-border">
-                                <i></i>
-                                </span>
-                        </div> <!-- input line animation end -->
-                        
-                        <!-- Remember me -->
-                        @if ($rme)
-                            <div class="custom-control custom-checkbox clear">
-                                <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember" checked>
-                                <label class="custom-control-label" for="user-remember">Remember Me</label>
-                            </div>
-                        @else
-                            <div class="custom-control custom-checkbox clear">
-                                <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
-                                <label class="custom-control-label" for="user-remember">Remember Me</label>
-                            </div>
-                        @endif
+                            <!-- Password -->
+                            <div class="field-items effect-container mt-4 mb-4"> <!-- input line animation -->
+                                    <label class="item-f password" for="user-pass">Password</label>
+                                    <input type="password" id="user-pass" name="user-pass" class="line-effect form-control mb-2" value="{{ $_COOKIE['rememberedPass'] ?? '' }}" required pattern="^[a-zA-Z0-9]*$">
+                                    <span class="focus-border">
+                                    <i></i>
+                                    </span>
+                            </div> <!-- input line animation end -->
+                            
+                            <!-- Remember me -->
+                            @if ($rme)
+                                <div class="custom-control custom-checkbox clear">
+                                    <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember" checked>
+                                    <label class="custom-control-label" for="user-remember">Remember Me</label>
+                                </div>
+                            @else
+                                <div class="custom-control custom-checkbox clear">
+                                    <input type="checkbox" class="custom-control-input" id="user-remember" name="user-remember">
+                                    <label class="custom-control-label" for="user-remember">Remember Me</label>
+                                </div>
+                            @endif
 
-                        <!-- Sign in button -->
-                        <button class="btn custom-btn my-4" onclick="submitLoginForm()">Sign In</button>
-                    </form>
-                    <!-- Default form login -->
-                    <span style="color: var(--tertiary-color);">{{ session("msg") }}</span>
-                </div>
+                            <!-- Sign in button -->
+                            <button class="btn custom-btn my-4" onclick="submitLoginForm()">Sign In</button>
+                        </form>
+                        <!-- Default form login -->
+                        <span style="color: var(--tertiary-color);">{{ session("msg") }}</span>
+                    </div>
                 </div>
             </div>
 
             <!-- Graphic brand name and slogan here -->
             <div class="col-md-5 intro-two flex-column">
                 <div id="particles-js">
-                <div class="graphic-brname"> 
-                    <span>df</span><span>coaching</span>
+                <div class="graphic-brname">
+                    <span>Coaching System</span>
                 </div>
                 <div class="graphic-slogan">
                     <div>A new way to understand and motivate your teams</div>

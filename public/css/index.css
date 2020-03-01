@@ -70,42 +70,27 @@ body {
 }
 
 /* Brand name styling */
-.intro-one .brand-name{
-    font-size: 50px;
-    font-family: 'Open sans', sans-serif;
-}
-
-.intro-one .brand-name span:nth-child(1){
-    color: var(--dark-color);
-    font-weight: 700;
-}
-
-.intro-one .brand-name span:nth-child(2){
-    color: var(--tertiary-color);
-    font-weight: 700;
-}
-
-.intro-one .brand-name span:last-child {
-    font-family: 'Open sans', sans-serif;
-    font-weight: 300;
-    color: var(--dark-color-50p);
-    font-size: 38px;
-    letter-spacing: 2px;
-    word-spacing: 2px;
-    text-transform: uppercase;
-    margin-left: 2px;
+.intro-one .brand-name img{
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    width: 170px;
+    height: auto;
 }
 
 /* Greetings styling */
 .greetings {
     display: block;
-    margin-top: 80px;
+    margin-top: 100px;
     margin-bottom: 60px;
 }
 
 .greetings .day-greeting{
     font-family: 'Open sans', sans-serif;
-    font-size: 40px;
+    font-size: 36px;
     font-weight: 300;
     color: var(--dark-color);
     width: 80%;
@@ -113,9 +98,9 @@ body {
 
 .greetings .slogan-greeting{
     font-family: 'Open sans', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
-    line-height: 30px;
+    line-height: 26px;
     margin-left: 20px;
     width: 80%;
 }
@@ -207,24 +192,15 @@ body {
 }
 
 .intro-two .graphic-brname {
-    font-size: 40px;
+    font-family: 'Open sans', sans-serif;
+    font-size: 30px;
     margin: 0 auto;
     cursor: default;
-}
-
-.intro-two .graphic-brname span:first-child {
-    font-weight: 700;
-}
-
-.intro-two .graphic-brname span:last-child {
     font-weight: 300;
-    font-size: 28px;
-    letter-spacing: 2px;
-    word-spacing: 2px;
+    letter-spacing: 6px;
+    word-spacing: 6px;
     text-transform: uppercase;
-    margin-left: 2px;
 }
-
 .intro-two .graphic-slogan {
     display: block;
     float: none;
