@@ -11,9 +11,9 @@ class Session extends Model
 {
     protected $primaryKey = 'session_id';
     protected $casts = ['session_data' => 'array'];
-    const UNSIGNEDVERBIAGE = "On hold.";
-    const PENDINGVERBIAGE = "Unable to sign yet.";
-    const SIGNEDVERBIAGE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+    const UNSIGNEDVERBIAGE = "Not yet reviewed";
+    const PENDINGVERBIAGE = "Unable to sign yet";
+    const SIGNEDVERBIAGE = "I have reviewed this document and hereby certify the the above information is true and correct";
     static function IndexOfCell($columnName) {
         $columnName = strtoupper($columnName);
         $value = 0;
