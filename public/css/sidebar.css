@@ -30,12 +30,20 @@ body {
 
 /* Sidebar heading styling */
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 30px;
+  padding: 0.875rem 1rem;
+  font-size: 24px;
   text-align: center;
   font-weight: 300;
   height: 100%;
   box-shadow: 0 2px 5px var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  word-spacing: 4px;
+  transition: letter-spacing .3s ease-in;
+}
+
+#sidebar-wrapper .sidebar-heading span {
+  font-size: 18px;
 }
 
 /* Sidebar a.link container */
@@ -120,6 +128,7 @@ body {
 
 /* Toggled heading / center the heading if it's toggled */
 #wrapper.toggled .sidebar-heading {
+  letter-spacing: 1px;
   text-align: center;
 }
 

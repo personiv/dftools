@@ -31,7 +31,7 @@
     <div class="d-flex" id="wrapper">
         <!-- Sidebar -->
         <div class="border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">dfc<span>oaching</span></div>
+        <div class="sidebar-heading">DFC<span>oaching</span></div>
         <div class="list-group list-group-flush">
             @if ($user->AccountType() != "ADMIN")
             <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action">
