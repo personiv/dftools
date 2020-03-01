@@ -201,10 +201,12 @@ class Credential extends Model
             $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), 'C', "RESOURCES");
             array_push($data, [ "agent" => self::GetCredential($teamMember->EmployeeID()), "data" => $actualData ]);
         }
-
-        usort($data, function($a, $b) {
-            return $a["data"][Session::IndexOfCell("AG")] < $b["data"][Session::IndexOfCell("AG")] ? 1 : -1;
-        });
+        if (count($data) > 0) {
+            usort($data, function($a, $b) {
+                if (count($a["data"]) < 1) return 0;
+                return $a["data"][Session::IndexOfCell("AG")] < $b["data"][Session::IndexOfCell("AG")] ? 1 : -1;
+            });
+        }
 
         return $data;
     }
