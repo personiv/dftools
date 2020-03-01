@@ -1,3 +1,8 @@
+/* Table /admin */
+.table td, .table th {
+    text-align: center;
+}
+
 /* Main Container format and layout */
 .base-text-wrapper {
     text-transform: uppercase;
@@ -25,6 +30,10 @@
 /* Content container */
 .content-base-container {
     padding: 50px 80px;
+}
+
+.content-base-container form {
+    width: 100%;
 }
 
 /* Global label for admin */
@@ -82,6 +91,43 @@
 }
 
 
+/* Upload Actual Data page */
+.note-box {
+    white-space: normal;
+    margin-bottom: 40px;
+}
+
+/* Upload Manual Data page */
+.admin-primary-btn {
+    padding: 5px 15px !important;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 25px;
+    cursor: pointer;
+    width: auto;
+    background-color: var(--primary-color) !important;
+    color: var(--light-color);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border: none !important;
+}
+
+.admin-primary-btn:hover, .admin-primary-btn:focus, .admin-primary-btn:active {
+    background-color: #002d47 !important;
+    box-shadow: 0 0 0 0.2rem rgba(0, 45, 71,.25);
+    color: var(--light-color);
+    text-decoration: none !important;
+}
+
+/* Update scorecard item page */
+.update-scorecard-container {
+    padding: 0px 30px 60px;
+}
+
+.table td input {
+    text-align: center;
+}
 
 
 

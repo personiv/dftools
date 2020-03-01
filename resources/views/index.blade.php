@@ -105,7 +105,7 @@
             <div class="col-md-5 intro-two flex-column">
                 <div id="particles-js">
                 <div class="graphic-brname">
-                    <span>Coaching System</span>
+                    <span>DFCoaching</span>
                 </div>
                 <div class="graphic-slogan">
                     <div>A new way to understand and motivate your teams</div>

@@ -400,6 +400,7 @@ form {
 /* Add and Edit button for exception */
 .excp-btn #edit-btn, 
 .excp-btn #add-btn,
+#add-btn,
 #btn-delete,
 #btn-edit, 
 #btn-add-notes,

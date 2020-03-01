@@ -68,15 +68,15 @@ body {
 
 /* Sidebar a.link:hover, active, focus */
 #sidebar-wrapper .list-group-item:hover, 
-#sidebar-wrapper .list-group-item:active, 
-#sidebar-wrapper .list-group-item:focus {
+#sidebar-wrapper .list-group-item:focus,
+#sidebar-wrapper .list-group-item:active {
   color: var(--secondary-color) !important;
 }
 
 /* Sidebar a.link / logout:hover, active ,focus */
 #sidebar-wrapper .list-group-itemX:hover, 
-#sidebar-wrapper .list-group-itemX:active, 
-#sidebar-wrapper .list-group-itemX:focus {
+#sidebar-wrapper .list-group-itemX:focus, 
+#sidebar-wrapper .list-group-itemX:active {
   color: var(--secondary-color) !important;
 }
 
