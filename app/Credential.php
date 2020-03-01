@@ -22,6 +22,17 @@ class Credential extends Model
         }
         return $leaders->get();
     }
+    static function HeadCount($current, $count = 0, $global = true) {
+        // Count only team members under his/her credential
+        if (!$global) return $current->TeamMembers()->count();
+
+        // Recusively count all children (up to root children) of his/her credential
+        if ($current == null) return $count;
+        foreach ($current->TeamMembers() as $teamMember) {
+            $count += self::HeadCount($teamMember, 1);
+        }
+        return $count;
+    }
 
     function EmployeeID() { return $this->getAttribute("credential_user"); }
     function Password() { return $this->getAttribute("credential_pass"); }
@@ -101,7 +112,7 @@ class Credential extends Model
 
     // Team Leader Methods
     function BuildOrWhereOfChildren($current, $query, $agentIDColumnName) {
-        // Recusively add 'Or Where' clause to database query to match all children (up to root children) of his credential
+        // Recusively add 'Or Where' clause to database query to match all children (up to root children) of his/her credential
         if ($current == null) return;
         foreach ($current->TeamMembers() as $teamMember) {
             $query->orWhere($agentIDColumnName, $teamMember->EmployeeID());

@@ -20,10 +20,8 @@
         $totalCoaching = $user->TotalOfCoachingSummaryThisWeek() + count($mySessions["Pending"]) + count($mySessions["Completed"]);
     } else if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
         $exceptionCount = 0;
-        $agentCount = 0;
         foreach ($user->TeamMembers() as $leader) {
             $exceptionCount += $leader->ExceptionsThisWeek()->count();
-            $agentCount += $leader->TeamMembers()->count();
         }
         $coachingSummary = array("Pending" => [], "Completed" => []);
         $supervisorSummary = array("Pending" => [], "Completed" => []);
@@ -71,7 +69,7 @@
     @if ($user->AccountType() == "SPRVR")
         createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) + count($mySessions["Completed"]) }}, {{ $totalCoaching }});
         createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) + count($mySessions["Pending"]) }}, {{ $totalCoaching }});
-        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ $userTeam->count() }});
+        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ App\Credential::HeadCount($user) }});
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")
                 lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
@@ -82,7 +80,7 @@
     @elseif ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD")
         createCircle("ovTotal1", "#5cb85c", "#5cb85c", {{ count($coachingSummary['Completed']) + count($supervisorSummary["Completed"]) }}, {{ $totalCoaching }});
         createCircle("ovTotal2", "#f0ad4e", "#f0ad4e", {{ count($coachingSummary['Pending']) + count($supervisorSummary["Pending"]) }}, {{ $totalCoaching }});
-        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptionCount }}, {{ $agentCount }});
+        createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptionCount }}, {{ App\Credential::HeadCount($user) }});
     @else
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")
