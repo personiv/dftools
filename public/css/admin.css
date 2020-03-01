@@ -1,8 +1,3 @@
-/* Table /admin */
-.table td, .table th {
-    text-align: center;
-}
-
 /* Main Container format and layout */
 .base-text-wrapper {
     text-transform: uppercase;
@@ -125,6 +120,18 @@
     padding: 0px 30px 60px;
 }
 
-.table td input {
+/* Table /admin */
+.update-scorecard-container .table td, .update-scorecard-container .table th, .update-scorecard-container input {
     text-align: center;
+}
+
+.table td input, .table td textarea {
+    font-size: 13px;
+}
+
+.table thead th {
+    border-bottom: none !important;
+    background: #343A40 !important;
+    color: var(--light-color);
+    font-size: 13px;
 }

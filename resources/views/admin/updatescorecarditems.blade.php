@@ -79,12 +79,12 @@
             <?php $cid = $scoreItems[$i]->score_item_id; ?>
             <tr>
               <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_class' }}" value="{{ $scoreItems[$i]->score_item_class }}"></td>
-              <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
+              <td style="width:200px !important;"><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_name' }}" value="{{ $scoreItems[$i]->score_item_name }}"></td>
               <td><textarea disabled class="form-control item-cell" id="{{ $cid . '-score_item_desc' }}">{{ $scoreItems[$i]->score_item_desc }}</textarea></td>
               <td><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_goal' }}" value="{{ $scoreItems[$i]->score_item_goal }}"></td>
-              <td style="width:80px !important;"><input disabled type="number" class="form-control item-cell" id="{{ $cid . '-score_item_weight' }}" value="{{ $scoreItems[$i]->score_item_weight }}" min="0" max="100"></td>
-              <td style="width:180px !important;"><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_title' }}" value="{{ $scoreItems[$i]->score_item_title }}"></td>
-              <td style="width:80px !important;"><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_cell' }}" value="{{ $scoreItems[$i]->score_item_cell }}"></td>
+              <td style="width:100px !important;"><input disabled type="number" class="form-control item-cell" id="{{ $cid . '-score_item_weight' }}" value="{{ $scoreItems[$i]->score_item_weight }}" min="0" max="100"></td>
+              <td style="width:200px !important;"><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_title' }}" value="{{ $scoreItems[$i]->score_item_title }}"></td>
+              <td style="width:100px !important;"><input disabled type="text" class="form-control item-cell" id="{{ $cid . '-score_item_cell' }}" value="{{ $scoreItems[$i]->score_item_cell }}"></td>
               <td><span id="btn-delete" class="action-btn-delete" onclick="deleteRow(this)"><i class="fa fa-trash mr-2"></i>Delete</span></td>
             </tr>
           @endfor
