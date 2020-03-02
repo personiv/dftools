@@ -12,6 +12,7 @@
     $scorecardGoal = $data["scorecardGoal"] ?? [];
     $fields = $data["fields"] ?? [];
     $signees = $data["signatures"] ?? [];
+    $altRoles = $data["altRoles"] ?? [];
     $pendingLevel = $session->PendingLevel();
     $s = 0;
 ?>
@@ -291,10 +292,14 @@ function updateFieldValue(e) {
 <div class="container-fluid mt-5">
     <div class="row">
         @foreach ($signees as $employeeID => $signed)
-            <?php $employee = App\Credential::where("credential_user", $employeeID)->first() ?>
+<?php
+            $employee = App\Credential::where("credential_user", $employeeID)->first();
+            $altRole = empty($altRoles) == false ? $altRoles[$s] : null;
+            $signeeRole = $altRole == null ? $employee->JobPosition() : $altRole;
+?>
             <div class="col">
                 <div class="signi-container">
-                <div class="font-weight-bold" style="color: var(--dark-color);">{{ $employee->JobPosition() }}</div>
+                <div class="font-weight-bold" style="color: var(--dark-color);">{{ $signeeRole }}</div>
                 <div class="mb-3" style="color: var(--dark-color);">{{ $employee->FullName() }}</div>
                 @if ($employeeID == $user->EmployeeID())
                     @if ($pendingLevel == $s)
