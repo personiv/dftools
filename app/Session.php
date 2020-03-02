@@ -59,6 +59,9 @@ class Session extends Model
     function Agent() { return Credential::where("credential_user", $this->getAttribute("session_agent"))->first(); }
     function Supervisor() { return $this->Agent()->TeamLeader(); }
     function Manager() { return $this->Supervisor()->TeamLeader(); }
+    // HARD-CODED Senior OM Employee ID!
+    function SeniorOM() { return Credential::where("credential_user", 10072003)->first(); }
+    // ----
     function Head() { return $this->Manager()->TeamLeader(); }
     function Signees() { return $this->Data()["signatures"]; }
     function IsSignee($employeeID) { return array_key_exists($employeeID, $this->Data()["signatures"]); }
@@ -314,8 +317,15 @@ class Session extends Model
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
                 $this->Supervisor()->EmployeeID() => false,
-                // $this->SeniorOM()->EmployeeID() => false
+                $this->SeniorOM()->EmployeeID() => false,
                 $this->Manager()->EmployeeID() => false
+            ], "altRoles" => [
+                // HARD-CODED Senior OM Alternate Role!
+                // Alternative title to be displayed on the session views on signees section
+                null,
+                null,
+                "Senior OM",
+                null
             ]
         ];
     }
