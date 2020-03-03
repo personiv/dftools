@@ -47,7 +47,7 @@
                                     <div class="line-container">
                                     <label for="data-src">Data</label>
                                         <div class="effect-container mt-1"> <!-- input line animation -->
-                                            <input class="form-control" type="file" id="data-src" name="data-src" accept=".xls,.xlsx" required> 
+                                            <input class="form-control line-effect" type="file" id="data-src" name="data-src" accept=".xls,.xlsx" required> 
                                             <span class="focus-border">
                                             <i></i>
                                             </span>
