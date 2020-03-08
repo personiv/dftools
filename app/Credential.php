@@ -49,6 +49,7 @@ class Credential extends Model
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
     function IsLeader() { return $this->TeamMembers()->count() > 0; }
     function AssociatedCellName() { return Tag::where("tag_name", $this->AccountType())->first()->CellName(); }
+    function AssociatedTotalCellName() { return Tag::where("tag_name", $this->AccountType())->first()->TotalCellName(); }
     function AssociatedSheetName() { return Tag::where("tag_name", $this->AccountType())->first()->SheetName(); }
 
     function JobPosition() {
@@ -225,13 +226,13 @@ class Credential extends Model
         $teamMembers = $this->TeamMembers();
 
         foreach ($teamMembers as $teamMember) {
-            $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), $this->AssociatedCellName(), $this->AssociatedSheetName());
+            $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), $teamMember->AssociatedCellName(), $teamMember->AssociatedSheetName());
             array_push($data, [ "agent" => self::GetCredential($teamMember->EmployeeID()), "data" => $actualData ]);
         }
         if (count($data) > 0) {
             usort($data, function($a, $b) {
                 if (count($a["data"]) < 1) return 0;
-                return $a["data"][Session::IndexOfCell("AG")] < $b["data"][Session::IndexOfCell("AG")] ? 1 : -1;
+                return $a["data"][Session::IndexOfCell($a["agent"]->AssociatedTotalCellName())] < $b["data"][Session::IndexOfCell($b["agent"]->AssociatedTotalCellName())] ? 1 : -1;
             });
         }
 

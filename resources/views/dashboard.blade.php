@@ -16,6 +16,7 @@
         $coachingSummary = $user->CoachingSummaryThisWeek();
         $stackRank = $user->TeamStackRank();
         $topResource = $stackRank[0];
+        $overallLocation = $topResource["agent"]->AssociatedTotalCellName();
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
         $totalCoaching = $user->TotalOfCoachingSummaryThisWeek() + count($mySessions["Pending"]) + count($mySessions["Completed"]);
     } else if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
@@ -43,22 +44,28 @@
         $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]) + count($supervisorSummary["Pending"]) + count($supervisorSummary["Completed"]);
         $prefix = $user->AccountType() == "MANGR" ? "Team " : ($user->AccountType() == "HEAD" ? "Cluster " : "");
     } else {
+        $overallLocation = $user->AssociatedTotalCellName();
+
         // Productivity Improvement
-        $row = App\Session::GetRowData(date('Y'), date('M'), $user->EmployeeID(), 'B', "PRODUCTIVITY RAW");
-        $productivityPoints = $row[App\Session::IndexOfCell('L')];
-        $pointsPerDay = $row[App\Session::IndexOfCell('O')];
-        $daysPassed = $row[App\Session::IndexOfCell('N')];
-        $totalTarget = $row[App\Session::IndexOfCell('R')];
-        $targetPerDay = $row[App\Session::IndexOfCell('P')];
-        $deficitPoints = $totalTarget - $productivityPoints;
+        if ($user->AccountType() != "LGSTCS") {
+            $row = App\Session::GetRowData(date('Y'), date('M'), $user->EmployeeID(), 'B', "PRODUCTIVITY RAW");
+            $productivityPoints = $row[App\Session::IndexOfCell('L')];
+            $pointsPerDay = $row[App\Session::IndexOfCell('O')];
+            $daysPassed = $row[App\Session::IndexOfCell('N')];
+            $totalTarget = $row[App\Session::IndexOfCell('R')];
+            $targetPerDay = $row[App\Session::IndexOfCell('P')];
+            $deficitPoints = $totalTarget - $productivityPoints;
+        }
 
         // Pending Session
         $agentSummary = $user->ScorecardSummary();
         $scoreItem = App\ScoreItem::where("score_item_role", $agentSummary["agent"]->AccountType())->get();
 
         // Productivity Improvement
-        $productivityScore = perc($agentSummary['data'][App\Session::IndexOfCell('W')]);
-        $productivityProgressClass = $productivityScore < 80 ? "prog-f" : ($productivityScore >= 80 && $productivityScore < 90 ? "prog-sp" : "prog-p");
+        if ($user->AccountType() != "LGSTCS") {
+            $productivityScore = perc($agentSummary['data'][App\Session::IndexOfCell('W')]);
+            $productivityProgressClass = $productivityScore < 80 ? "prog-f" : ($productivityScore >= 80 && $productivityScore < 90 ? "prog-sp" : "prog-p");
+        }
     }
 
     function perc($value) { return is_numeric($value) ? round($value * 100, 2) : 0; }
@@ -393,7 +400,7 @@
                                     TOTAL
                                 </div>
                                 <div class="total-score">
-                                    {{ perc($topResource["data"][App\Session::IndexOfCell("AG")]) }}<sup>%</sup>
+                                    {{ perc($topResource["data"][App\Session::IndexOfCell($overallLocation)]) }}<sup>%</sup>
                                 </div>
                             </div>
                         </div>
@@ -831,7 +838,7 @@
                                     TOTAL
                                 </div>
                                 <div class="total-score">
-                                    {{ perc($agentSummary["data"][App\Session::IndexOfCell("AG")]) }}<sup>%</sup>
+                                    {{ perc($agentSummary["data"][App\Session::IndexOfCell($overallLocation)]) }}<sup>%</sup>
                                 </div>
                             </div>
                         </div>
@@ -869,6 +876,7 @@
                 </div>
                 <div class="dropdown-divider"></div>
                 <div class="row p-4">
+                    @if ($user->AccountType() != "LGSTCS")
                     <div class="col-sm">
 
                         <!-- Current points and days, Average and Progress starts here -->
@@ -925,6 +933,7 @@
 
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

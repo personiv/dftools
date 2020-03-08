@@ -183,7 +183,7 @@ class Session extends Model
                 for ($i = 0; $i < $scorecard->count(); $i++) {
                     if (!empty($agentvalues)) {
                         $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
-                        $overall = $agentvalues[self::IndexOfCell("AG")];
+                        $overall = $agentvalues[self::IndexOfCell($this->Agent()->AssociatedTotalCellName())];
                         if (is_numeric($actual)) $actual = round($actual * 100, 2);
                         if (is_numeric($overall)) $overall = round($overall * 100, 2);
                         $scorecard[$i]["score_item_actual"] = $actual;

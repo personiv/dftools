@@ -16,5 +16,6 @@ class Tag extends Model
     function Type() { return $this->getAttribute("tag_type"); }
     function Description() { return $this->getAttribute("tag_desc"); }
     function CellName() { return $this->getAttribute("tag_cell"); }
+    function TotalCellName() { return $this->getAttribute("tag_total"); }
     function SheetName() { return $this->getAttribute("tag_sheet"); }
 }
