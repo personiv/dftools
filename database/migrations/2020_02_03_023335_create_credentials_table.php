@@ -90,6 +90,7 @@ class CreateCredentialsTable extends Migration
                 addEmployee('10072233', 'DESGN', 'Rickzel', 'Paderagao', '10072502');
                 addEmployee('10072159', 'DESGN', 'Renz', 'Salazar', '10072502');
                 addEmployee('10072105', 'DESGN', 'Daryl', 'Villabriga', '10072502');
+                addEmployee('10071847', 'LGSTCS', 'Nicah', 'Lauzon', '10072502');
 
             // Team Emman / Designer
             addEmployee('10072072', 'SPRVR', 'Emmanuel', 'Flores', '10072003');
@@ -133,6 +134,7 @@ class CreateCredentialsTable extends Migration
                 addEmployee('10072515', 'DESGN', 'Kristian Dave', 'Pelegrino', '10071099');
                 addEmployee('10072211', 'DESGN', 'Jedalyn', 'Ranera', '10071099');
                 addEmployee('10071903', 'DESGN', 'Rose Ann', 'Sumalinog', '10071099');
+                addEmployee('7010056', 'LGSTCS', 'Christian Henry', 'Abrera', '10071099');
 
             // Team Noel / Designer
             addEmployee('10071309', 'SPRVR', 'Noel', 'Cruz', '7010609');
