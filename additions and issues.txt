@@ -1,9 +1,5 @@
 IN PROGRESS
 Add All Session Type (even if no function yet) — TODO: dynamically hides the unwanted inputs on Create Session dialog
-Completed to count only the headcount of team minus exception
-Pending to count all pending session plus for coaching agents minus exception
-Add percentage to Completed
-Add total for Completed and Pending
 Add View button in completed sessions
 Manual Template
 
@@ -18,5 +14,9 @@ Unlimited [Coaching] session
 Complete Scorecard Items
 
 FOR NEXT PHASE
+Completed to count only the headcount of team minus exception
+Pending to count all pending session plus for coaching agents minus exception
+Add percentage to Completed
+Add total for Completed and Pending
 Selectable week for viewing summary
 Feedback view
