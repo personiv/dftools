@@ -412,6 +412,7 @@ class Session extends Model
 
     function ExistsThisWeek() {
         // Check if this session is a duplicated session this week
-        return $this->ExistingSession() != null;
+        // Note: COACH types can be unlimited
+        return $this->Type() != "COACH" && $this->ExistingSession() != null;
     }
 }

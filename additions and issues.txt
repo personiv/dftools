@@ -5,7 +5,7 @@ Add percentage to Completed
 Add total for Completed and Pending
 Add All Session Type (even if no function yet)
 Add View button in completed sessions
-Unlimited [Coaching] session
+Manual Template
 
 DONE
 Print overlapping
@@ -14,6 +14,7 @@ Triad: Removed SOM
 Facilitator = Supervisor
 Triad: Areas of Improvement is optional field
 Add Signature Date
+Unlimited [Coaching] session
 
 FOR NEXT PHASE
 Selectable week for viewing summary
