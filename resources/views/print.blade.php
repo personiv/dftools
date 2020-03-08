@@ -211,7 +211,7 @@
 @endif
 
 <!-- Additional Table Section -->
-@if (!empty($scorecard) || !empty($scorecardGoal))
+@if (!empty($scorecardGoal))
 <div class="container-fluid mb-4">
     <div class="row">
         <div class="col">
@@ -311,8 +311,7 @@
         if (!array_key_exists("height", $fieldProperties)) {
             $customHeight = "";
         } else {
-            $field_height = $fieldProperties['height'];
-            $customHeight = "style='height: " . $field_height . "px;'";
+            $customHeight = "style='height: " . $fieldProperties['height'] . "px;'";
         }
     ?>
         <div class="col-{{ $field_size }}">

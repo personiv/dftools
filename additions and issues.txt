@@ -1,13 +1,20 @@
-Feedback view
-Print overlapping
-One view for scorecard and coaching
-
-Triad: Areas of Improvement is optional field
-Triad: Removed SOM
-
+IN PROGRESS
 Completed to count only the headcount of team minus exception
 Pending to count all pending session plus for coaching agents minus exception
 Add percentage to Completed
 Add total for Completed and Pending
+Add All Session Type (even if no function yet)
+Add View button in completed sessions
+Unlimited [Coaching] session
+
+DONE
+Print overlapping
+One view for scorecard and coaching
+Triad: Removed SOM
 Facilitator = Supervisor
+Triad: Areas of Improvement is optional field
+Add Signature Date
+
+FOR NEXT PHASE
 Selectable week for viewing summary
+Feedback view

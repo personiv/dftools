@@ -60,7 +60,7 @@ class Session extends Model
     function Supervisor() { return $this->Agent()->TeamLeader(); }
     function Manager() { return $this->Supervisor()->TeamLeader(); }
     // HARD-CODED Senior OM Employee ID!
-    function SeniorOM() { return Credential::where("credential_user", 10072003)->first(); }
+    // function SeniorOM() { return Credential::where("credential_user", 10072003)->first(); }
     // ----
     function Head() { return $this->Manager()->TeamLeader(); }
     function Signees() { return $this->Data()["signatures"]; }
@@ -102,6 +102,7 @@ class Session extends Model
         
         // Finally sign the user's part
         $data["signatures"][$userID] = true;
+        $data["signDates"][$userID] = date("m/d/Y");
 
         // Save the non-instant field values along with the user's signature
         if (array_key_exists("fields", $data)) {
@@ -129,6 +130,7 @@ class Session extends Model
 
         // Finally unsign the user's part and clear the field
         $data["signatures"][$writerIndex] = false;
+        $data["signDates"][$writerIndex] = null;
         $data["fields"][$fieldName]["value"] = "";
 
         $this->setAttribute("session_data", $data);
@@ -197,18 +199,35 @@ class Session extends Model
             "scorecard" => $scorecard,
             "isWholeMonth" => $wholeMonth,
             "fields" => [
-                "notes" => [
-                    "title" => "Notes",
+                "action" => [
+                    "title" => "Action Plan/s",
                     "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "commit" => [
+                    "title" => "Commitments & Targets",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "follow" => [
+                    "title" => "Follow Up Date",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 32, // In pixel
                     "value" => "",
                     "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
                 ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
-                $this->Supervisor()->EmployeeID() => false,
-                $this->Manager()->EmployeeID() => false,
-                $this->Head()->EmployeeID() => false
+                $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Agent()->EmployeeID() => null,
+                $this->Supervisor()->EmployeeID() => null
             ]
         ];
     }
@@ -218,18 +237,35 @@ class Session extends Model
         return [
             "scorecardGoal" => ScoreItem::where("score_item_role", $this->Agent()->AccountType())->get(),
             "fields" => [
-                "notes" => [
-                    "title" => "Notes",
+                "action" => [
+                    "title" => "Action Plan/s",
                     "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "commit" => [
+                    "title" => "Commitments & Targets",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0 // Pending Level where this input is active
+                ],
+                "follow" => [
+                    "title" => "Follow Up Date",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 32, // In pixel
                     "value" => "",
                     "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
                 ]
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
-                $this->Supervisor()->EmployeeID() => false,
-                $this->Manager()->EmployeeID() => false,
-                $this->Head()->EmployeeID() => false
+                $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Agent()->EmployeeID() => null,
+                $this->Supervisor()->EmployeeID() => null
             ]
         ];
     }
@@ -264,7 +300,7 @@ class Session extends Model
                 "follow" => [
                     "title" => "Follow Up Date",
                     "size" => 12, // Bootstrap grid size
-                    "height" => 50, // In pixel
+                    "height" => 32, // In pixel
                     "value" => "",
                     "for" => $this->Agent()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0 // Pending Level where this input is active
@@ -272,6 +308,10 @@ class Session extends Model
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
                 $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Agent()->EmployeeID() => null,
+                $this->Supervisor()->EmployeeID() => null
             ]
         ];
     }
@@ -296,6 +336,7 @@ class Session extends Model
                     "value" => "",
                     "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
                     "pending" => 0, // Pending Level where this input is active
+                    "placeholder" => "Optional", // Add placeholder 'Optional' for the input
                     "instant" => true // If the input is instantly saved after onchange event without signing
                 ],
                 "action" => [
@@ -317,14 +358,17 @@ class Session extends Model
             ], "signatures" => [
                 $this->Agent()->EmployeeID() => false,
                 $this->Supervisor()->EmployeeID() => false,
-                $this->SeniorOM()->EmployeeID() => false,
                 $this->Manager()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Agent()->EmployeeID() => null,
+                $this->Supervisor()->EmployeeID() => null,
+                $this->Manager()->EmployeeID() => null
             ], "altRoles" => [
                 // HARD-CODED Senior OM Alternate Role!
                 // Alternative title to be displayed on the session views on signees section
                 null,
-                null,
-                "Senior OM",
+                "Operations Manager/Senior OM",
                 null
             ]
         ];

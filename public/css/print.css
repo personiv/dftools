@@ -6,7 +6,7 @@ body, html {
 /* For coaching table */
 table th, table td {
     white-space: pre-line !important;
-    line-height: 18px;
+    padding: 8px;
 }
 
 /* 1st row styling */
@@ -68,7 +68,7 @@ table th, table td {
 }
 
 .session-field {
-    height: 100px !important;
+    height: 100px;
 }
 
 @media print {

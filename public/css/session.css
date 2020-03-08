@@ -1,7 +1,7 @@
 /* For coaching table */
 .dboard-wrapper table th, .dboard-wrapper table td {
     white-space: pre-line;
-    line-height: 24px;
+    padding: 8px;
 }
 
 /* Session title */
@@ -75,7 +75,6 @@
     text-transform: uppercase;
     letter-spacing: .5px;
     font-weight: 400;
-    padding: 15px;
 }
 
 /* Table headings and data aligned to center except column 3 */
@@ -202,4 +201,8 @@ label {
 .signi-btn:hover, .signi-btn:focus, .signi-btn:active  {
     background-color: #4898b0;
     box-shadow: 0 0 0 0.2rem rgba(72, 152, 176,.25);
-} 
+}
+
+.sign-date-wrapper {
+    display: block;
+}

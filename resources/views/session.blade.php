@@ -12,6 +12,7 @@
     $scorecardGoal = $data["scorecardGoal"] ?? [];
     $fields = $data["fields"] ?? [];
     $signees = $data["signatures"] ?? [];
+    $signDates = $data["signDates"] ?? [];
     $altRoles = $data["altRoles"] ?? [];
     $pendingLevel = $session->PendingLevel();
     $s = 0;
@@ -72,7 +73,7 @@ function updateFieldValue(e) {
     <div class="col">
         <div class="fields-name">
             <span class="mr-2">Facilitator:</span> <!-- Field type -->
-            <span></span>
+            <span>{{ $agent->TeamLeader()->FullName() }} </span>
         </div>
         <div class="fields-name">
             <span class="mr-2">Participant/s:</span> <!-- Field type -->
@@ -86,33 +87,38 @@ function updateFieldValue(e) {
 <div class="container-fluid pt-4">
     <div class="row">
         <div class="col-lg">
-            <div class="table-responsive session-container">
-                <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
-                    <thead class="thead-custom">
-                        <tr>
-                            <th scope="col">Measure Classification</th>
-                            <th scope="col">Item</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Goal</th>
-                            <th scope="col">Weight</th>
-                            <th scope="col">Actual</th>
-                            <th scope="col">Overall Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    @for ($i = 0; $i < count($scorecard); $i++)
-                        <tr>
-                            <td>{{ $scorecard[$i]['score_item_class'] }}</td>
-                            <td>{{ $scorecard[$i]['score_item_name'] }}</td>
-                            <td>{{ $scorecard[$i]['score_item_desc'] }}</td>
-                            <td>{{ $scorecard[$i]['score_item_goal'] }}</td>
-                            <td>{{ $scorecard[$i]['score_item_weight'] }}%</td>
-                            <td>{{ $scorecard[$i]['score_item_actual'] }}%</td>
-                            <td>{{ $scorecard[$i]['score_item_overall'] }}%</td>
-                        </tr>
-                    @endfor
-                    </tbody>
-                </table>
+            <div class="card mb-4">
+                <div class="card-header bg-dark text-white">Strengths & Opportunities</div>
+                <div class="card-body">
+                    <div class="table-responsive session-container">
+                        <table id="scorecard" class="table table-bordered" style="visibility: hidden;">
+                            <thead class="thead-custom">
+                                <tr>
+                                    <th scope="col">Measure Classification</th>
+                                    <th scope="col">Item</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Goal</th>
+                                    <th scope="col">Weight</th>
+                                    <th scope="col">Actual</th>
+                                    <th scope="col">Overall Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @for ($i = 0; $i < count($scorecard); $i++)
+                                <tr>
+                                    <td>{{ $scorecard[$i]['score_item_class'] }}</td>
+                                    <td>{{ $scorecard[$i]['score_item_name'] }}</td>
+                                    <td>{{ $scorecard[$i]['score_item_desc'] }}</td>
+                                    <td>{{ $scorecard[$i]['score_item_goal'] }}</td>
+                                    <td>{{ $scorecard[$i]['score_item_weight'] }}%</td>
+                                    <td>{{ $scorecard[$i]['score_item_actual'] }}%</td>
+                                    <td>{{ $scorecard[$i]['score_item_overall'] }}%</td>
+                                </tr>
+                            @endfor
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -150,7 +156,7 @@ function updateFieldValue(e) {
 </div>
 @endif
 
-@if (!empty($scorecard) || !empty($scorecardGoal))
+@if (!empty($scorecardGoal))
 <!-- Target, Score Tiering -->
 <div class="container-fluid pt-4">
     <div class="row">
@@ -252,11 +258,16 @@ function updateFieldValue(e) {
         }
         $field_for = $fieldProperties["for"];
         $field_pending = $fieldProperties["pending"];
+        if (!array_key_exists("placeholder", $fieldProperties)) {
+            $customPlaceholder = "placeholder='* Required'";
+        } else {
+            $field_placeholder = $fieldProperties['placeholder'];
+            $customPlaceholder = "placeholder='$field_placeholder'";
+        }
         if (!array_key_exists("height", $fieldProperties)) {
             $customHeight = "";
         } else {
-            $field_height = $fieldProperties['height'];
-            $customHeight = "style='height: " . $field_height . "px;'";
+            $customHeight = "style='height: " . $fieldProperties['height'] . "px;'";
         }
     ?>
         <div class="col-{{ $field_size }}">
@@ -265,9 +276,9 @@ function updateFieldValue(e) {
                 <div class="card-body">
                     @if ($field_for == $user->EmployeeID() && $field_pending == $pendingLevel)
                         @if (array_key_exists('instant', $fieldProperties) && $fieldProperties['instant'])
-                            <textarea class="session-field" id="session-{{ $fieldName }}" placeholder="* Required" onchange="updateFieldValue(this)" <?= $customHeight ?>>{{ $field_value }}</textarea>
+                            <textarea class="session-field" id="session-{{ $fieldName }}" onchange="updateFieldValue(this)" <?= $customHeight ?> <?= $customPlaceholder ?>>{{ $field_value }}</textarea>
                         @else
-                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" placeholder="* Required" <?= $customHeight ?> required>{{ $field_value }}</textarea>
+                            <textarea form="session-form" class="session-field" id="session-{{ $fieldName }}" name="session-{{ $fieldName }}" <?= $customHeight ?> <?= $customPlaceholder ?> required>{{ $field_value }}</textarea>
                         @endif
                     @else
                         <div class="session-field" <?= $customHeight ?>>{{ $field_value }}</div>
@@ -324,11 +335,13 @@ function updateFieldValue(e) {
                         </form>
                     @elseif ($pendingLevel > $s)
                         <label>{{ $session::SIGNEDVERBIAGE }}</label>
+                        <span class="sign-date-wrapper">Date Signed: {{ $signDates[$employeeID] }}</span>
                     @else
                         <label>{{ $session::PENDINGVERBIAGE }}</label>
                     @endif
                 @elseif ($pendingLevel > $s)
                     <label>{{ $session::SIGNEDVERBIAGE }}</label>
+                    <span class="sign-date-wrapper">Date Signed: {{ $signDates[$employeeID] }}</span>
                 @else
                     <label>{{ $session::UNSIGNEDVERBIAGE }}</label>
                 @endif
