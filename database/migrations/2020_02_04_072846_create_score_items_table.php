@@ -44,7 +44,7 @@ class CreateScoreItemsTable extends Migration
         function addBonus($role, $cell = "AF") {
             addItem($role, "Qualitative Measure (5%)",
                 "Bonus",
-                "1. Admin task assignments (1st & 2nd assistants only)\n2. Commendation from the client\n3. Issue identifier (client-approved)\n4. Issue resolver (client-approved)\n5. Innovation ideas implemented on a Personiv (approved by Paulo) and/or DexYP level (approved by client).\n6. OM Initiated (core-team approved)", "Bonus",
+                "", "Bonus",
                 "Met 1",
                 5, $cell);
         }
