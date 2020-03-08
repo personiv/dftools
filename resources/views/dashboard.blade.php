@@ -72,7 +72,8 @@
         createCircle("ovTotal3", "#5bc0de", "#5bc0de", {{ $exceptions->count() }}, {{ App\Credential::HeadCount($user) }});
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")
-                lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+                var escapedId = CSS.escape("pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
+                lazyFill("#" + escapedId, {{ perc($topResource["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
             @else
                 lazyFillBonus("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
             @endif
@@ -84,7 +85,8 @@
     @else
         @foreach ($scoreItem as $item)
             @if ($item->getAttribute('score_item_title') != "Bonus")
-                lazyFill("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}", {{ perc($agentSummary["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
+                var escapedId = CSS.escape("pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
+                lazyFill("#" + escapedId, {{ perc($agentSummary["data"][App\Session::IndexOfCell($item->getAttribute('score_item_cell'))]) }});
             @else
                 lazyFillBonus("#pb-{{ strtolower(str_replace(' ', '-', $item->getAttribute('score_item_title'))) }}");
             @endif
