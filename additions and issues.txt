@@ -15,6 +15,7 @@ Facilitator = Supervisor
 Triad: Areas of Improvement is optional field
 Add Signature Date
 Unlimited [Coaching] session
+Complete Scorecard Items
 
 FOR NEXT PHASE
 Selectable week for viewing summary

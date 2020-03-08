@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Exception;
+use App\Tag;
 
 class Credential extends Model
 {
@@ -47,6 +48,8 @@ class Credential extends Model
     function ImagePath() { return asset($this->getAttribute("credential_img")); }
     function IsAdmin() { return $this->getAttribute("credential_type") == "ADMIN"; }
     function IsLeader() { return $this->TeamMembers()->count() > 0; }
+    function AssociatedCellName() { return Tag::where("tag_name", $this->AccountType())->first()->CellName(); }
+    function AssociatedSheetName() { return Tag::where("tag_name", $this->AccountType())->first()->SheetName(); }
 
     function JobPosition() {
         $employeeTypes = Tag::EmployeeTypes();
@@ -74,7 +77,7 @@ class Credential extends Model
 
     // Agent Methods
     function ScorecardSummary() {
-        return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetRowData(date("Y"), date("M"), $this->EmployeeID(), 'C', "RESOURCES") ];
+        return [ "agent" => self::GetCredential($this->EmployeeID()), "data" => Session::GetRowData(date("Y"), date("M"), $this->EmployeeID(), $this->AssociatedCellName(), $this->AssociatedSheetName()) ];
     }
 
     function MySessionsThisWeek() {
@@ -222,7 +225,7 @@ class Credential extends Model
         $teamMembers = $this->TeamMembers();
 
         foreach ($teamMembers as $teamMember) {
-            $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), 'C', "RESOURCES");
+            $actualData = Session::GetRowData(date("Y"), date("M"), $teamMember->EmployeeID(), $this->AssociatedCellName(), $this->AssociatedSheetName());
             array_push($data, [ "agent" => self::GetCredential($teamMember->EmployeeID()), "data" => $actualData ]);
         }
         if (count($data) > 0) {

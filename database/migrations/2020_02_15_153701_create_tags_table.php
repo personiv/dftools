@@ -18,14 +18,20 @@ class CreateTagsTable extends Migration
             $table->string('tag_name', 8);
             $table->string('tag_type', 8);
             $table->string('tag_desc', 64);
+            // For dynamic data binding between system and excel files
+            $table->string('tag_cell', 8);
+            $table->string('tag_sheet', 64);
+            // -------------------------------------------------------
             $table->timestamps();
         });
 
-        function addTag($type, $name, $desc) {
+        function addTag($type, $name, $desc, $cell = "C", $sheet = "RESOURCES") {
             DB::table('tags')->insert(array(
                 'tag_type' => $type,
                 'tag_name' => $name,
-                'tag_desc' => $desc
+                'tag_desc' => $desc,
+                'tag_cell' => $cell,
+                'tag_sheet' => $sheet
             ));
         }
 
@@ -37,7 +43,7 @@ class CreateTagsTable extends Migration
         addTag("AGENT", "PR", "Website Proofreader");
         addTag("AGENT", "WML", "Web Mods Line");
         addTag("AGENT", "VQA", "Voice Quality Assurance");
-        addTag("AGENT", "LGSTCS", "Logistics Executive");
+        addTag("AGENT", "LGSTCS", "Logistic Executive", "B", "Logistics Executives");
         addTag("AGENT", "DBA", "DBA");
 
         // Team Leaders

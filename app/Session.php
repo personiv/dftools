@@ -179,7 +179,7 @@ class Session extends Model
                 }
                 break;
             case 'actual':
-                $agentvalues = self::GetRowData($year, $month, $this->AgentID(), 'C', "RESOURCES");
+                $agentvalues = self::GetRowData($year, $month, $this->AgentID(), $this->Agent()->AssociatedCellName(), $this->Agent()->AssociatedSheetName());
                 for ($i = 0; $i < $scorecard->count(); $i++) {
                     if (!empty($agentvalues)) {
                         $actual = $agentvalues[self::IndexOfCell($scorecard[$i]["score_item_cell"])];
