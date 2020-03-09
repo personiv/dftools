@@ -1,7 +1,6 @@
 IN PROGRESS
 Add All Session Type (even if no function yet) — TODO: dynamically hides the unwanted inputs on Create Session dialog
 Add View button in completed sessions
-Manual Template
 
 DONE
 Print overlapping
@@ -12,6 +11,7 @@ Triad: Areas of Improvement is optional field
 Add Signature Date
 Unlimited [Coaching] session
 Complete Scorecard Items
+Manual Template
 
 FOR NEXT PHASE
 Completed to count only the headcount of team minus exception
