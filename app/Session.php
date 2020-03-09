@@ -81,6 +81,9 @@ class Session extends Model
     }
 
     function PendingLevel() {
+        $data = $this->Data();
+        if (!array_key_exists("signatures", $data)) return 0;
+
         $level = 0;
         $signatures = $this->Data()["signatures"];
         foreach ($signatures as $employeeID => $signed) {
@@ -374,6 +377,154 @@ class Session extends Model
         ];
     }
 
+    // For Display Purposes only for now
+    function GenerateMeetingData() {
+        return [
+            "fields" => [
+                "participants" => [
+                    "title" => "Participants",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 64, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "discussed" => [
+                    "title" => "Items Discussed",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 400, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ]
+            ],
+            
+            // THIS SESSION TYPE MUST HAVE NO SIGNEES
+            // TODO: Remove signee and make the input fields available to creator
+            "signatures" => [
+                $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Supervisor()->EmployeeID() => null
+            ]
+        ];
+    }
+
+    // For Display Purposes only for now
+    function GenerateFloorwalkData() {
+        return [
+            "fields" => [
+                "obsfeed" => [
+                    "title" => "Observations / Feedback",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "action" => [
+                    "title" => "Action Plan/s",
+                    "size" => 12, // Bootstrap grid size
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "commit" => [
+                    "title" => "Commitments & Targets",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "next" => [
+                    "title" => "Next Temp Check",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 32, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ]
+            ],
+            
+            // THIS SESSION TYPE MUST HAVE NO SIGNEES
+            // TODO: Remove signee and make the input fields available to creator
+            "signatures" => [
+                $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Supervisor()->EmployeeID() => null
+            ]
+        ];
+    }
+
+    // For Display Purposes only for now
+    function GenerateHeartbeatData() {
+        return [
+            "fields" => [
+                "participants" => [
+                    "title" => "Participants",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 64, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "discussedopportunity" => [
+                    "title" => "Items Discussed / Opportunity Areas",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 200, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "action" => [
+                    "title" => "Action Plan/s",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "commit" => [
+                    "title" => "Commitments & Targets",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 100, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ],
+                "next" => [
+                    "title" => "Next Pulse Check",
+                    "size" => 12, // Bootstrap grid size
+                    "height" => 32, // In pixel
+                    "value" => "",
+                    "for" => $this->Supervisor()->EmployeeID(), // Employee who can edit the input
+                    "pending" => 0, // Pending Level where this input is active
+                    "instant" => true // If the input is instantly saved after onchange event without signing
+                ]
+            ],
+            
+            // THIS SESSION TYPE MUST HAVE NO SIGNEES
+            // TODO: Remove signee and make the input fields available to creator
+            "signatures" => [
+                $this->Supervisor()->EmployeeID() => false
+            ], "signDates" => [
+                // Date signed to be displayed beside signature
+                $this->Supervisor()->EmployeeID() => null
+            ]
+        ];
+    }
+
     function GenerateData() {
         $data = array();
         switch ($this->Type()) {
@@ -391,6 +542,15 @@ class Session extends Model
                 break;
             case 'TRIAD':
                 $data = $this->GenerateTriadData();
+                break;
+            case 'MEET':
+                $data = $this->GenerateMeetingData();
+                break;
+            case 'WALK':
+                $data = $this->GenerateFloorwalkData();
+                break;
+            case 'BEAT':
+                $data = $this->GenerateHeartbeatData();
                 break;
             default:
                 $data = [
