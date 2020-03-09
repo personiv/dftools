@@ -239,7 +239,7 @@
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                             <td><span class="stats-completed">Completed</span></td>
-                                            <td></td>
+                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a></td>
                                         </tr>
                                     @endif
                                 @endfor
@@ -292,7 +292,7 @@
                                         <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                         <td>{{ $summaryItems[$i]["sentBy"] }}</td>
                                         <td><span class="stats-completed">Completed</span></td>
-                                        <td></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a></td>
                                     </tr>
                                 @endif
                             @endfor
@@ -640,7 +640,7 @@
                                                     <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
                                                     @endif
                                                     <td><span class="stats-completed">Completed</span></td>
-                                                    <td></td>
+                                                    <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a></td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -699,7 +699,7 @@
                                         <td>{{ $summaryItems[$i]->Agent()->FullName() }}</td>
                                         <td>{{ $summaryItems[$i]->TypeDescription() }}</td>
                                         <td><span class="stats-completed">Completed</span></td>
-                                        <td></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]->SessionID()]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a></td>
                                     </tr>
                                 @endif
                             @endfor
@@ -978,7 +978,7 @@
                                         <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                         <td>{{ $summaryItems[$i]["sentBy"] }}</td>
                                         <td><span class="stats-completed">Completed</span></td>
-                                        <td></td>
+                                        <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span class="action-btn-view mr-2"><i class="far fa-eye mr-2"></i>View</span></a></td>
                                     </tr>
                                 @endif
                             @endfor

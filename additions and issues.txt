@@ -1,7 +1,3 @@
-IN PROGRESS
-Add All Session Type (even if no function yet) — TODO: dynamically hides the unwanted inputs on Create Session dialog
-Add View button in completed sessions
-
 DONE
 Print overlapping
 One view for scorecard and coaching
@@ -12,11 +8,14 @@ Add Signature Date
 Unlimited [Coaching] session
 Complete Scorecard Items
 Manual Template
+Add View button in completed sessions
 
 FOR NEXT PHASE
+Complete All Session Type (for new three types) — TODO: dynamically hides the unwanted inputs on Create Session dialog and revise session model
 Completed to count only the headcount of team minus exception
 Pending to count all pending session plus for coaching agents minus exception
 Add percentage to Completed
 Add total for Completed and Pending
 Selectable week for viewing summary
 Feedback view
+Fix Teams Sessions for OM and OH not displaying any sessions (because the signee is up to supervisor only for new format)

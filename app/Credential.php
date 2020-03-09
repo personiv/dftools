@@ -105,7 +105,8 @@ class Credential extends Model
                     array_push($sessions["Completed"], [
                         "sessionDate" => $session->DateCreated(),
                         "sessionType" => $session->TypeDescription(),
-                        "sentBy" => $this->TeamLeader()->FullName()
+                        "sentBy" => $this->TeamLeader()->FullName(),
+                        "sessionID" => $session->SessionID()
                     ]);
                 }
             }
@@ -197,7 +198,8 @@ class Credential extends Model
                             "sessionType" => $weekSession->TypeDescription(),
                             "employeeID" => $agent->EmployeeID(),
                             "fullName" => $agent->FullName(),
-                            "jobPosition" => $agent->JobPosition()
+                            "jobPosition" => $agent->JobPosition(),
+                            "sessionID" => $weekSession->SessionID()
                         ]);
                     }
                 }
