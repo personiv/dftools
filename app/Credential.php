@@ -133,6 +133,9 @@ class Credential extends Model
                 array_push($sessions, $historysessions[$i]);
             }
         }
+        foreach ($this->TeamMembers() as $member) {
+            $sessions = array_unique(array_merge($sessions, $member->HistorySessions($start, $end)));
+        }
         return $sessions;
     }
 
