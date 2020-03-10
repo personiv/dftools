@@ -147,5 +147,18 @@
     $(".slogan-greeting").html(slogan);
 
 </script>
+
+<script>
+
+// presentation only log
+console.log("Operations Head: 10072397");
+console.log("Operations Manager (Daryl): 7010609");
+console.log("Operations Manager (Carlo): 10072003");
+console.log("Operations Manager (Ryan): 10071937");
+console.log("Supervisor: 10071309");
+console.log("Agent: 10072444");
+
+</script>
+
 </body>
 </html>
