@@ -18,4 +18,7 @@ Add percentage to Completed
 Add total for Completed and Pending
 Selectable week for viewing summary
 Feedback view
-Fix Teams Sessions for OM and OH not displaying any sessions (because the signee is up to supervisor only for new format)
+Revise Teams Sessions for OM and OH not displaying any sessions (because the signee is up to supervisor only for new format)
+Revise and optimize dashboard load speed
+Fix Teams Sessions for OH not displaying at all (caused by the new format update)
+Fix History not showing sessions of agents in OM and OH view (caused by the new format update)
