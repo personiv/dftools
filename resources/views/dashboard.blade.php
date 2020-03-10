@@ -19,30 +19,70 @@
         $overallLocation = $topResource["agent"]->AssociatedTotalCellName();
         $scoreItem = App\ScoreItem::where("score_item_role", $topResource["agent"]->AccountType())->get();
         $totalCoaching = $user->TotalOfCoachingSummaryThisWeek() + count($mySessions["Pending"]) + count($mySessions["Completed"]);
-    } else if ($user->AccountType() == "MANGR" || $user->AccountType() == "HEAD") {
+    } else if ($user->AccountType() == "MANGR") {
         $exceptionCount = 0;
         foreach ($user->TeamMembers() as $leader) {
             $exceptionCount += $leader->ExceptionsThisWeek()->count();
         }
+
+        // Populate Teams Summary
         $coachingSummary = array("Pending" => [], "Completed" => []);
-        $supervisorSummary = array("Pending" => [], "Completed" => []);
-        foreach ($user->SessionsThisWeek() as $weekSession) {
-            if ($weekSession->Type() != "TRIAD") {
-                if (!$weekSession->IsSigned($user->EmployeeID())) {
+        foreach ($userTeam as $leader) {
+            foreach ($leader->SessionsThisWeek() as $weekSession) {
+                if ($weekSession->Type() == "TRIAD") continue;
+
+                if (!$weekSession->IsSigned($leader->EmployeeID())) {
                     array_push($coachingSummary["Pending"], $weekSession);
                 } else {
                     array_push($coachingSummary["Completed"], $weekSession);
                 }
+            }
+        }
+
+        // Populate Triad Summary
+        $supervisorSummary = array("Pending" => [], "Completed" => []);
+        foreach ($user->SessionsThisWeek() as $weekSession) {
+            if (!$weekSession->IsSigned($user->EmployeeID())) {
+                array_push($supervisorSummary["Pending"], $weekSession);
             } else {
-                if (!$weekSession->IsSigned($user->EmployeeID())) {
-                    array_push($supervisorSummary["Pending"], $weekSession);
-                } else {
-                    array_push($supervisorSummary["Completed"], $weekSession);
-                }
+                array_push($supervisorSummary["Completed"], $weekSession);
             }
         }
         $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]) + count($supervisorSummary["Pending"]) + count($supervisorSummary["Completed"]);
-        $prefix = $user->AccountType() == "MANGR" ? "Team " : ($user->AccountType() == "HEAD" ? "Cluster " : "");
+        $prefix = "Team ";
+    } else if ($user->AccountType() == "HEAD") {
+        $exceptionCount = 0;
+        foreach ($user->TeamMembers() as $leader) {
+            $exceptionCount += $leader->ExceptionsThisWeek()->count();
+        }
+
+        // Populate Teams Summary
+        $coachingSummary = array("Pending" => [], "Completed" => []);
+        foreach ($userTeam as $manager) {
+            foreach ($manager->TeamMembers() as $leader) {
+                foreach ($leader->SessionsThisWeek() as $weekSession) {
+                    if ($weekSession->Type() == "TRIAD") continue;
+
+                    if (!$weekSession->IsSigned($leader->EmployeeID())) {
+                        array_push($coachingSummary["Pending"], $weekSession);
+                    } else {
+                        array_push($coachingSummary["Completed"], $weekSession);
+                    }
+                }
+            }
+        }
+
+        // Populate Triad Summary
+        $supervisorSummary = array("Pending" => [], "Completed" => []);
+        foreach ($user->SessionsThisWeek() as $weekSession) {
+            if (!$weekSession->IsSigned($user->EmployeeID())) {
+                array_push($supervisorSummary["Pending"], $weekSession);
+            } else {
+                array_push($supervisorSummary["Completed"], $weekSession);
+            }
+        }
+        $totalCoaching = count($coachingSummary["Pending"]) + count($coachingSummary["Completed"]) + count($supervisorSummary["Pending"]) + count($supervisorSummary["Completed"]);
+        $prefix = "Cluster ";
     } else {
         $overallLocation = $user->AssociatedTotalCellName();
 
@@ -224,13 +264,18 @@
                                             </td>
                                         </tr>
                                     @elseif ($summaryStatus == "Pending")
+                                    <?php $summarySession = App\Session::where("session_id", $summaryItems[$i]['sessionID'])->first(); ?>
                                         <tr>
                                             <td>{{ $summaryItems[$i]["employeeID"] }}</td>
                                             <td>{{ $summaryItems[$i]["fullName"] }}</td>
                                             <td>{{ $summaryItems[$i]["jobPosition"] }}</td>
                                             <td>{{ $summaryItems[$i]["sessionType"] }}</td>
                                             <td><span class="stats-pending">Pending</span></td>
-                                            <td><a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                            <td>
+                                            @if ($summarySession->SigneeLevel($user->EmployeeID()) > 0 && $summarySession->PendingLevel() >= $summarySession->SigneeLevel($user->EmployeeID()))
+                                                <a href="{{ route('session', [$summaryItems[$i]['sessionID']]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a>
+                                            @endif
+                                            </td>
                                         </tr>
                                     @elseif ($summaryStatus == "Completed")
                                         <tr>
@@ -581,10 +626,10 @@
                             @endif
                         <?php $l++; ?>
                         @endforeach
-                                <!-- triad coaching button
-                                <div class="excp-btn d-flex justify-content-end align-items-center ml-auto">
-                                    <span id="triad-btn" class="triad-btn-view"><i class="fas fa-pager mr-2"></i>Triad Coaching Summary</span>
-                                </div> -->
+                        <!-- triad coaching button
+                        <div class="excp-btn d-flex justify-content-end align-items-center ml-auto">
+                            <span id="triad-btn" class="triad-btn-view"><i class="fas fa-pager mr-2"></i>Triad Coaching Summary</span>
+                        </div> -->
                     </div>
                 </nav>
 
@@ -625,7 +670,11 @@
                                                     <td>{{ $weekSession->Agent()->TeamLeader()->FullName() }}</td>
                                                     @endif
                                                     <td><span class="stats-pending">Pending</span></td>
-                                                    <td><a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                                    <td>
+                                                    @if ($weekSession->SigneeLevel($user->EmployeeID()) > 0 && $weekSession->PendingLevel() >= $weekSession->SigneeLevel($user->EmployeeID()))
+                                                        <a href="{{ route('session', [$weekSession->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a>
+                                                    @endif
+                                                    </td>
                                                 </tr>
                                             @endif
                                         @endforeach
@@ -691,7 +740,11 @@
                                         <td>{{ $summaryItems[$i]->Agent()->FullName() }}</td>
                                         <td>{{ $summaryItems[$i]->TypeDescription() }}</td>
                                         <td><span class="stats-pending">Pending</span></td>
-                                        <td><a href="{{ route('session', [$summaryItems[$i]->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a></td>
+                                        <td>
+                                        @if ($summaryItems[$i]->SigneeLevel($user->EmployeeID()) > 0 && $summaryItems[$i]->PendingLevel() >= $summaryItems[$i]->SigneeLevel($user->EmployeeID()))
+                                            <a href="{{ route('session', [$summaryItems[$i]->SessionID()]) }}"><span id="action-btn" class="action-btn-psession"><i class="fa fa-check mr-2"></i>Confirm Session</span></a>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @elseif ($summaryStatus == "Completed")
                                     <tr>
